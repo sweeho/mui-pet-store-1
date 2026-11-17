@@ -42,14 +42,31 @@ test("SWHM2-C-0234 admin login, home and failed sign-in pages", async ({ page })
   await expect(page.getByLabel(/^password$/i)).toBeVisible();
 
   await signIn(page, "definitely-wrong-password");
-  const back = page.getByRole("link", { name: /sign in|log ?in|try again/i }).first();
+  // The failure page shows an error and its own link back to the admin sign-in.
+  await expect(
+    page
+      .getByText(/invalid|incorrect|failed|failure|error|wrong|denied|not (?:valid|recognized)/i)
+      .first(),
+  ).toBeVisible();
+  // Select by target (the admin login), not by text: the shell's own "Sign In" link goes to the storefront.
+  const back = page.locator('a[href*="/admin/login"]').first();
   await expect(back).toBeVisible();
   await back.click();
   await expect(page).toHaveURL(/\/admin\/login/);
+  await expect(page.getByLabel(/^user id$/i)).toBeVisible();
 
   await signIn(page);
-  await expect(page.getByText(/launch rich client/i).first()).toBeVisible();
-  await expect(page.getByText(/log ?out/i).first()).toBeVisible();
+  // Home offers Launch Rich Client and logout as actionable controls, not just text.
+  const launch = page
+    .getByRole("link", { name: /launch rich client/i })
+    .or(page.getByRole("button", { name: /launch rich client/i }));
+  await expect(launch.first()).toBeVisible();
+  const logout = page
+    .getByRole("link", { name: /log ?out/i })
+    .or(page.getByRole("button", { name: /log ?out/i }));
+  await expect(logout.first()).toBeVisible();
+  // The login form is gone: we are on the home page, not back at sign-in.
+  await expect(page.getByLabel(/^password$/i)).toHaveCount(0);
 });
 
 // case: SWHM2-C-0241@v1
