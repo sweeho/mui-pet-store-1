@@ -1,0 +1,11 @@
+capability_key,name,summary
+catalog-browsing,Catalog browsing and search,Categories products items and search in the storefront and catalog data population
+customer-accounts,Customer accounts and sign-on,Account creation profile editing sign-on sign-off and duplicate account handling
+shopping-cart,Shopping cart,Cart contents quantities and empty-cart order rules
+checkout-and-payment,Checkout and payment details,Order entry billing shipping address and credit card capture and validation
+order-approval,Order approval,Region limits (US 500 JP 50000) deciding automatic approval versus admin approval and denial
+order-fulfilment,Order fulfilment and invoicing,Supplier purchase orders inventory shipping invoices and order status lifecycle
+order-notifications,Order notifications,Confirmation approval and completed-order mail and async messaging
+admin-order-management,Administration of orders,Admin web and client screens for viewing and approving or denying orders
+internationalisation,Localisation,English Japanese and Chinese screens and locale switching
+batch-operations,Batch operations and retention,Scheduled extract purge aging inventory catalog check and backup jobs

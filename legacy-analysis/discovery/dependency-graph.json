@@ -1,0 +1,33 @@
+{
+ "nodes":["apps/petstore","apps/opc","apps/supplier","apps/admin","waf","components/catalog","components/signon","components/customer","components/cart","components/purchaseorder","components/lineitem","components/creditcard","components/contactinfo","components/address","components/processmanager","components/supplierpo","components/mailer","components/asyncsender","components/xmldocuments","components/uidgen","components/servicelocator","db/schema","batch"],
+ "edges":[
+  {"from":"apps/petstore","to":"waf","kind":"framework"},
+  {"from":"apps/petstore","to":"components/catalog","kind":"call"},
+  {"from":"apps/petstore","to":"components/signon","kind":"call"},
+  {"from":"apps/petstore","to":"components/customer","kind":"call"},
+  {"from":"apps/petstore","to":"components/cart","kind":"call"},
+  {"from":"apps/petstore","to":"apps/opc","kind":"jms","note":"purchase order queue"},
+  {"from":"apps/opc","to":"components/purchaseorder","kind":"call"},
+  {"from":"apps/opc","to":"components/processmanager","kind":"call"},
+  {"from":"apps/opc","to":"components/mailer","kind":"jms"},
+  {"from":"apps/opc","to":"components/xmldocuments","kind":"call"},
+  {"from":"apps/opc","to":"apps/supplier","kind":"jms","note":"supplier order"},
+  {"from":"apps/supplier","to":"components/supplierpo","kind":"call"},
+  {"from":"apps/supplier","to":"apps/opc","kind":"jms","note":"invoice"},
+  {"from":"apps/admin","to":"apps/opc","kind":"call","note":"approve/deny"},
+  {"from":"components/purchaseorder","to":"components/lineitem","kind":"call"},
+  {"from":"components/purchaseorder","to":"components/creditcard","kind":"call"},
+  {"from":"components/purchaseorder","to":"components/contactinfo","kind":"call"},
+  {"from":"components/contactinfo","to":"components/address","kind":"call"},
+  {"from":"components/customer","to":"components/contactinfo","kind":"call"},
+  {"from":"components/customer","to":"components/creditcard","kind":"call"},
+  {"from":"components/mailer","to":"components/asyncsender","kind":"call"},
+  {"from":"components/purchaseorder","to":"components/uidgen","kind":"call"},
+  {"from":"components/purchaseorder","to":"components/servicelocator","kind":"lookup"},
+  {"from":"components/purchaseorder","to":"db/schema","kind":"data"},
+  {"from":"components/processmanager","to":"db/schema","kind":"data"},
+  {"from":"components/supplierpo","to":"db/schema","kind":"data"},
+  {"from":"batch","to":"db/schema","kind":"data"}
+ ],
+ "note":"Edges inferred from README flow, directory layout and JNDI name usage; not verified call by call."
+}
