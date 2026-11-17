@@ -1,0 +1,217 @@
+records:
+  - record_key: ORDAPP-INT-0001
+    kind: integration
+    capability_key: order-approval
+    requirement: >
+      The system SHALL represent an order-approval decision message as an OrderApproval document containing one or more Order entries, each carrying exactly an OrderId and an OrderStatus, and SHALL reject an incoming document whose root is not OrderApproval.
+    confidence: high
+    confidence_basis: >
+      Stated by the DTD and enforced by Java deserialisation (root element check, validating parse by default); two places in this module. Which approval flow uses it is outside this module.
+    risk_class: operational
+    basis: DTD declares OrderApproval (Order+) and Order (OrderId, OrderStatus); fromDOM throws when the root tag differs; VALIDATING is true by default.
+    plain_text: >
+      Decisions on orders (approved or denied) are exchanged with other parts of the system as a standard message listing one or more orders and the status given to each.
+    technical_note: >
+      OrderApproval/ChangedOrder serialise to DOM/XML with a public DTD id; fromXML validates against OrderApproval.dtd by default. Consumed by the OPC approval queue per the runbook (outside this module).
+    interface: true
+    stack_metadata:
+      framework: JAXP DOM
+      jms.queue: jms/opc/OrderApprovalQueue
+    traces:
+      - path: legacy-source/app/src/components/xmldocuments/src/rsrc/schemas/OrderApproval.dtd
+        line_start: 38
+        line_end: 45
+        excerpt: |
+          <!ELEMENT OrderApproval (Order+)>
+          <!ELEMENT Order (OrderId, OrderStatus)>
+          <!ELEMENT OrderId (#PCDATA)>
+          <!ELEMENT OrderStatus (#PCDATA)>
+      - path: legacy-source/app/src/components/xmldocuments/src/com/sun/j2ee/blueprints/xmldocuments/OrderApproval.java
+        line_start: 156
+        line_end: 169
+        excerpt: |
+          throw new XMLDocumentException(XML_ORDERAPPROVAL + " element expected.");
+      - path: legacy-analysis/sources/pdf/petstore-operations-runbook/extracted.md
+        anchor: p1
+        excerpt: "jms/opc/OrderQueue, jms/opc/OrderApprovalQueue"
+  - record_key: ORDFUL-INT-0001
+    kind: integration
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL produce a supplier order document containing the order id, order date (yyyy-MM-dd), a shipping address (first name, last name, street, city, state, country, zip code, email, phone) and line items.
+    confidence: medium
+    confidence_basis: >
+      Builder code and schemas are clear, but the callers (the supplier flow) are outside this module and not read here.
+    risk_class: operational
+    basis: TPASupplierOrderXDE builds the document in a fixed element order; the schema files describe it.
+    plain_text: >
+      When goods must be ordered from a supplier, a standard order document is produced with the order number, date, delivery address and contact details, and the items wanted.
+    technical_note: >
+      TPASupplierOrderXDE (namespace tpaso) with DTD or XSD output chosen by constructor flag. Element order is fixed in copyDocument. A separate legacy SupplierOrder.dtd uses lowercase element names and omits email/phone.
+    interface: true
+    stack_metadata:
+      framework: JAXP DOM
+      jms.queue: jms/supplier/PurchaseOrderQueue
+    traces:
+      - path: legacy-source/app/src/components/xmldocuments/src/com/sun/j2ee/blueprints/xmldocuments/tpa/TPASupplierOrderXDE.java
+        line_start: 119
+        line_end: 173
+        excerpt: |
+          supplierOrderElement.appendChild(orderIdElement);
+          supplierOrderElement.appendChild(orderDateElement);
+          supplierOrderElement.appendChild(shippingAddressElement);
+          supplierOrderElement.appendChild(lineItemsElement);
+  - record_key: ORDFUL-INT-0002
+    kind: integration
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL produce an invoice document containing order id, user id, order date and shipping date (both yyyy-MM-dd) and line items.
+    confidence: medium
+    confidence_basis: >
+      One builder class plus schema; callers not seen in this module.
+    risk_class: financial
+    basis: TPAInvoiceXDE.copyDocument appends OrderId, UserId, OrderDate, ShippingDate, LineItems in that order.
+    plain_text: >
+      An invoice message is produced for each shipped order showing who ordered, when it was ordered and shipped, and the items.
+    technical_note: >
+      TPAInvoiceXDE (namespace tpai). Invoice.dtd (legacy) also has a locale attribute defaulting to en_US; the TPA builder does not set one. Published on jms/opc/InvoiceTopic per runbook.
+    interface: true
+    stack_metadata:
+      framework: JAXP DOM
+      jms.queue: jms/opc/InvoiceTopic
+    traces:
+      - path: legacy-source/app/src/components/xmldocuments/src/com/sun/j2ee/blueprints/xmldocuments/tpa/TPAInvoiceXDE.java
+        line_start: 113
+        line_end: 126
+        excerpt: |
+          invoiceElement.appendChild(orderIdElement);
+          invoiceElement.appendChild(userIdElement);
+          invoiceElement.appendChild(orderDateElement);
+          invoiceElement.appendChild(shippingDateElement);
+          invoiceElement.appendChild(lineItemsElement);
+      - path: legacy-analysis/sources/pdf/petstore-operations-runbook/extracted.md
+        anchor: p1
+        excerpt: "jms/opc/InvoiceTopic"
+  - record_key: ORDFUL-BR-0003
+    kind: business-rule
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL write each line item with category id, product id, item id, line number, quantity (integer) and unit price (decimal), and GIVEN a null value for an element WHEN building a document THEN the system SHALL refuse with an error.
+    confidence: medium
+    confidence_basis: >
+      Shared line item builder and createElement null check seen; null check applies to element helper, attribute setters are not guarded.
+    risk_class: financial
+    basis: TPALineItemUtils writes six attributes; XMLDocumentUtils.createElement throws IllegalArgumentException on null.
+    plain_text: >
+      Every item line in supplier orders and invoices states what was ordered, how many and at what unit price; a document cannot be built with a missing mandatory value.
+    technical_note: >
+      Price written with Float.toString (single-precision float). Quantity via Long.toString of int.
+    interface: true
+    stack_metadata:
+      framework: JAXP DOM
+    traces:
+      - path: legacy-source/app/src/components/xmldocuments/src/com/sun/j2ee/blueprints/xmldocuments/tpa/TPALineItemUtils.java
+        line_start: 64
+        line_end: 77
+        excerpt: |
+          lineItemElement.setAttributeNS(XML_NAMESPACE, XML_QUANTITY, Long.toString(quantity));
+          lineItemElement.setAttributeNS(XML_NAMESPACE, XML_UNITPRICE, Float.toString(unitPrice));
+      - path: legacy-source/app/src/components/xmldocuments/src/com/sun/j2ee/blueprints/xmldocuments/XMLDocumentUtils.java
+        line_start: 274
+        line_end: 281
+        excerpt: |
+          throw new IllegalArgumentException("XMLDocumentUtils.createElement: value of " + name + " element can't be null.");
+  - record_key: ORDNOT-INT-0001
+    kind: integration
+    capability_key: order-notifications
+    requirement: >
+      The system SHALL represent a mail message as a Mail document with an Address, a Subject and a Content, in that order.
+    confidence: medium
+    confidence_basis: >
+      DTD only in this module; no Java class here builds it, so usage is not confirmed.
+    risk_class: operational
+    basis: Mail.dtd declares Mail (Address, Subject, Content).
+    plain_text: >
+      Notification e-mails are exchanged as a message with a recipient address, a subject and the body text.
+    technical_note: >
+      Mail.dtd in rsrc/schemas; consumers are in other modules.
+    interface: true
+    stack_metadata:
+      framework: DTD
+    traces:
+      - path: legacy-source/app/src/components/xmldocuments/src/rsrc/schemas/Mail.dtd
+        line_start: 38
+        line_end: 41
+        excerpt: |
+          <!ELEMENT Mail (Address, Subject, Content)>
+  - record_key: CHKOUT-INT-0001
+    kind: integration
+    capability_key: checkout-and-payment
+    requirement: >
+      The system SHALL carry a purchase order as a document with user id, email, order date, ship and bill addresses, total price, credit card (number, expiry date, card type) and one or more line items.
+    confidence: medium
+    confidence_basis: >
+      Read from one DTD (legacy PurchaseOrder.dtd); its element grouping line was only partly viewed and no Java builder exists here.
+    risk_class: regulated
+    basis: PurchaseOrder.dtd declares CreditCard, ShipAddress, BillAddress, TotalPrice elements.
+    plain_text: >
+      A customer order is passed between systems with the customer, delivery and billing addresses, the total, the payment card details and the items.
+    technical_note: >
+      Card number and expiry travel as plain text elements in the document.
+    interface: true
+    stack_metadata:
+      framework: DTD
+    traces:
+      - path: legacy-source/app/src/components/xmldocuments/src/rsrc/schemas/PurchaseOrder.dtd
+        line_start: 38
+        line_end: 84
+        excerpt: |
+          <!ELEMENT CreditCard (CardNumber, ExpiryDate, CardType)>
+          <!ELEMENT TotalPrice (#PCDATA)>
+  - record_key: ORDFUL-BR-0004
+    kind: business-rule
+    capability_key: order-fulfilment
+    requirement: >
+      WHEN reading a document the system SHALL parse with validation by default and, for DTD-based documents, SHALL reject a document whose declared type differs from the expected public id.
+    confidence: medium
+    confidence_basis: >
+      Seen in XMLDocumentUtils.deserialize and OrderApproval.VALIDATING; callers can pass validating=false.
+    risk_class: operational
+    basis: deserialize throws "Document not of type" when the DOCTYPE does not match.
+    plain_text: >
+      Incoming messages are checked against their agreed format and rejected if they are of the wrong kind.
+    technical_note: >
+      Errors wrapped in XMLDocumentException; OrderApproval.fromXML(String) also prints the root cause to stderr.
+    interface: true
+    stack_metadata:
+      framework: JAXP
+    traces:
+      - path: legacy-source/app/src/components/xmldocuments/src/com/sun/j2ee/blueprints/xmldocuments/XMLDocumentUtils.java
+        line_start: 424
+        line_end: 440
+        excerpt: |
+          throw new XMLDocumentException("Document not of type: " + dtdPublicId);
+suspected_defects:
+  - capability_key: order-fulfilment
+    record_keys: [ORDFUL-BR-0003]
+    severity: low
+    category: inconsistent-rounding
+    title: Unit price serialised as a single-precision float
+    description: >
+      Prices go through Float.toString, so some decimal prices can lose precision or print with unexpected digits.
+    traces:
+      - path: legacy-source/app/src/components/xmldocuments/src/com/sun/j2ee/blueprints/xmldocuments/tpa/TPALineItemUtils.java
+        line_start: 74
+        line_end: 74
+  - capability_key: order-approval
+    record_keys: [ORDAPP-INT-0001]
+    severity: low
+    category: error-swallowed
+    title: Parse errors printed to stderr then rethrown wrapped
+    description: >
+      OrderApproval.fromXML(String) prints the root cause to standard error before rethrowing; the original is wrapped.
+    traces:
+      - path: legacy-source/app/src/components/xmldocuments/src/com/sun/j2ee/blueprints/xmldocuments/OrderApproval.java
+        line_start: 130
+        line_end: 138
+findings: []
