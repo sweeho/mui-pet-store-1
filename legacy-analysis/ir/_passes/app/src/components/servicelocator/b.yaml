@@ -1,0 +1,146 @@
+records:
+  - record_key: ORDN-REQ-0001
+    kind: requirement
+    capability_key: order-notifications
+    requirement: >
+      The system SHALL provide a central lookup facility that resolves named
+      resources (EJB local homes, EJB remote homes, JMS queue and topic
+      connection factories, queues, topics, data sources, URL, boolean and
+      string environment entries) from the naming service by name.
+    confidence: high
+    confidence_basis: >
+      Implemented identically in two classes (web and ejb tiers). No document or test describes it.
+    risk_class: operational
+    basis: >
+      Each getter performs a naming lookup and casts to the expected type.
+    plain_text: >
+      Other parts of the application find shared resources such as message queues, databases and settings through one common lookup service.
+    technical_note: >
+      Service Locator pattern over InitialContext.lookup; remote homes are narrowed with PortableRemoteObject.narrow. Resource names are supplied by callers; no names are hard-coded here. Capability key is the closest fit (queues and the SEND_CONFIRMATION_MAIL flag are used by notification code); the component is shared infrastructure.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/servicelocator/src/com/sun/j2ee/blueprints/servicelocator/ejb/ServiceLocator.java
+        line_start: 83
+        line_end: 243
+        excerpt: |
+          public EJBLocalHome getLocalHome(String jndiHomeName) throws ServiceLocatorException {
+          ...
+          public String getString(String envName) throws ServiceLocatorException {
+      - path: legacy-source/app/src/components/servicelocator/src/com/sun/j2ee/blueprints/servicelocator/web/ServiceLocator.java
+        line_start: 106
+        line_end: 304
+        excerpt: |
+          public EJBLocalHome getLocalHome(String jndiHomeName) throws ServiceLocatorException {
+    stack_metadata:
+      framework: J2EE JNDI
+      ejb.bean: n/a
+  - record_key: ORDN-BR-0002
+    kind: business-rule
+    capability_key: order-notifications
+    requirement: >
+      GIVEN the web-tier locator, WHEN a home, connection factory, queue, topic or data source is requested a second time by the same name, THEN the system SHALL return the previously resolved instance without a new lookup; URL, boolean and string entries SHALL be looked up every time.
+    confidence: high
+    confidence_basis: >
+      Cache logic visible in each web-tier getter and class comment says caching strategy; the ejb-tier class has no cache (comparison within code).
+    risk_class: operational
+    basis: >
+      web ServiceLocator keeps a synchronized map keyed by name; ejb variant does not cache.
+    plain_text: >
+      On the web side, shared resources are looked up once and reused; settings values are re-read each time.
+    technical_note: >
+      Collections.synchronizedMap(HashMap) cache; containsKey/get then put is not atomic, so concurrent first lookups may both hit JNDI (harmless). Cache key is the name only, so one name used for two types would return a wrong cast.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/servicelocator/src/com/sun/j2ee/blueprints/servicelocator/web/ServiceLocator.java
+        line_start: 106
+        line_end: 121
+        excerpt: |
+          if (cache.containsKey(jndiHomeName)) {
+              home = (EJBLocalHome) cache.get(jndiHomeName);
+          } else {
+              home = (EJBLocalHome) ic.lookup(jndiHomeName);
+              cache.put(jndiHomeName, home);
+          }
+      - path: legacy-source/app/src/components/servicelocator/src/com/sun/j2ee/blueprints/servicelocator/web/ServiceLocator.java
+        line_start: 261
+        line_end: 271
+        excerpt: |
+          url = (URL)ic.lookup(envName);
+    stack_metadata:
+      framework: J2EE JNDI
+      session.scope: application singleton
+  - record_key: ORDN-BR-0003
+    kind: business-rule
+    capability_key: order-notifications
+    requirement: >
+      GIVEN any lookup failure, WHEN a naming or other exception occurs, THEN the system SHALL raise a single lookup exception wrapping the original cause to the caller.
+    confidence: high
+    confidence_basis: >
+      Same catch-and-wrap structure in every method of both classes.
+    risk_class: operational
+    basis: >
+      Every getter catches NamingException and Exception and throws ServiceLocatorException(cause).
+    plain_text: >
+      If a needed resource or setting cannot be found, the caller is told with one kind of error that carries the original reason.
+    technical_note: >
+      A wrong-typed value surfaces as wrapped ClassCastException. getBoolean on a missing entry fails inside the try (NamingException) so no NPE escapes.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/servicelocator/src/com/sun/j2ee/blueprints/servicelocator/ejb/ServiceLocator.java
+        line_start: 217
+        line_end: 227
+        excerpt: |
+          bool = (Boolean)ic.lookup(envName);
+          } catch (NamingException ne) {
+                throw new ServiceLocatorException(ne);
+          } catch (Exception e) {
+                throw new ServiceLocatorException(e);
+          }
+          return bool.booleanValue();
+    stack_metadata:
+      framework: J2EE JNDI
+  - record_key: ORDN-BR-0004
+    kind: business-rule
+    capability_key: order-notifications
+    requirement: >
+      The system SHALL give the web tier one shared locator instance created at class load, and GIVEN that creation fails, the system SHALL only print the error to standard error, leaving the shared instance absent.
+    confidence: medium
+    confidence_basis: >
+      One clear place (static initializer); consequence for callers is inferred.
+    risk_class: operational
+    basis: >
+      Static block catches ServiceLocatorException and prints it; getInstance returns null afterwards.
+    plain_text: >
+      The web side uses a single shared lookup service; if it cannot start, the problem is only logged and later callers will fail.
+    technical_note: >
+      Static init swallows exception; getInstance() then returns null and callers would hit NullPointerException. The ejb-tier class has a public constructor and is instantiated by callers instead.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/servicelocator/src/com/sun/j2ee/blueprints/servicelocator/web/ServiceLocator.java
+        line_start: 74
+        line_end: 96
+        excerpt: |
+          static {
+            try {
+              me = new ServiceLocator();
+            } catch(ServiceLocatorException se) {
+              System.err.println(se);
+              se.printStackTrace(System.err);
+            }
+          }
+    stack_metadata:
+      framework: J2EE JNDI
+      session.scope: application singleton
+findings: []
+suspected_defects:
+  - capability_key: order-notifications
+    record_keys: [ORDN-BR-0004]
+    severity: low
+    category: error-swallowed
+    title: Locator initialisation failure is only logged
+    description: >
+      If the web-tier locator cannot be created, the error goes to standard error and getInstance returns nothing, so every later caller fails with a null reference.
+    traces:
+      - path: legacy-source/app/src/components/servicelocator/src/com/sun/j2ee/blueprints/servicelocator/web/ServiceLocator.java
+        line_start: 74
+        line_end: 81
