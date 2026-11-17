@@ -1,0 +1,96 @@
+recommendations:
+  - record_key: ONOT-REQ-0005
+    recommendation: accept
+    confidence: high
+    reason: >
+      Pass B code and statement agree: mailer sends whatever it receives, gating is upstream.
+  - record_key: ORDN-INT-0006
+    recommendation: accept
+    confidence: high
+    reason: >
+      Mail XML structure is confirmed by the DTD.
+  - record_key: NOTIF-REQ-0001
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Petstore submission behaviour read from code; confirm return values.
+  - record_key: OF-REQ-0003
+    recommendation: edit
+    confidence: low
+    reason: >
+      Pass file under this key describes supplier screen security; consolidated text describes invoice topic publication. Goes to Intent for the Business Owner; verify source.
+    edited_requirement: >
+      Keep the consolidated text only after the SME confirms which source statement is true.
+  - record_key: ONOT-RULE-0002
+    recommendation: accept
+    confidence: high
+    reason: >
+      Mailer code matches every detail.
+  - record_key: ORDN-BR-0002
+    recommendation: edit
+    confidence: low
+    reason: >
+      Pass-file record under this key is about locator caching; consolidated text is OrderApproval validation. Conflict goes to Intent.
+    edited_requirement: >
+      Keep the consolidated text only after the SME confirms which source statement is true.
+  - record_key: ORDN-BR-0004
+    recommendation: edit
+    confidence: low
+    reason: >
+      Pass files say log to stderr and discard; consolidated text says raise an error. Confirm what the code does; Business Owner decides.
+    edited_requirement: >
+      Keep the consolidated text only after the SME confirms which source statement is true.
+  - record_key: ORDN-INT-0001
+    recommendation: edit
+    confidence: low
+    reason: >
+      Pass files say mail queue consumption; consolidated text says OrderApproval. Conflict goes to Intent.
+    edited_requirement: >
+      Keep the consolidated text only after the SME confirms which source statement is true.
+  - record_key: ORDN-REQ-0002
+    recommendation: accept
+    confidence: high
+    reason: >
+      Locator code caches by name; passes agree.
+  - record_key: ORDNOT-BUSINESS-RULE-0003
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Transaction attribute read from descriptor.
+  - record_key: ORDNOT-WORKFLOW-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Async sender code is direct.
+  - record_key: order-notifications-REQ-0003
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Opc code; partial shipment exclusion confirmed in one pass only.
+  - record_key: order-notifications-RULE-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Defaults in configuration read directly.
+  - record_key: order-notifications-RULE-0002
+    recommendation: accept
+    confidence: high
+    reason: >
+      Subjects are literals in code.
+  - record_key: ONOT-ENT-0004
+    recommendation: accept
+    confidence: high
+    reason: >
+      DTD and class agree.
+  - record_key: ORDN-BR-0003
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Silent discard confirmed; legacy logs to stderr, which is a suspected defect to confirm.
+  - record_key: ORDN-REQ-0003
+    recommendation: edit
+    confidence: low
+    reason: >
+      Pass files describe HTML mail sending; consolidated text is locator error wrapping. Conflict goes to Intent.
+    edited_requirement: >
+      Keep the consolidated text only after the SME confirms which source statement is true.
