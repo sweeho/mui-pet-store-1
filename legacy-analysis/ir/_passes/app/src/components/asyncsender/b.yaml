@@ -1,0 +1,113 @@
+records:
+  - record_key: ORDNOT-WORKFLOW-0001
+    kind: workflow
+    capability_key: order-notifications
+    requirement: >
+      The system SHALL accept a text message from a calling component and place it, as a single text message, on the asynchronous sender queue for later processing by a separate consumer.
+    confidence: high
+    confidence_basis: >
+      Enforced in the bean code (create sender, set text, send) and corroborated by the deployment descriptor resource references; no documents mention this module.
+    risk_class: operational
+    basis: The sendAMessage operation opens a queue connection, creates a session and sender, wraps the string in a text message and sends it.
+    plain_text: >
+      Other parts of the shop can hand over a message and have it queued for later delivery, so the customer-facing step does not wait for the work to be done.
+    technical_note: >
+      AsyncSenderEJB.sendAMessage(String) creates a QueueConnection, a transacted QueueSession, a QueueSender on jms/AsyncSenderQueue, a TextMessage, and sends it. Connection closed in finally.
+    interface: true
+    traces:
+      - path: legacy-source/app/src/components/asyncsender/src/com/sun/j2ee/blueprints/asyncsender/ejb/AsyncSenderEJB.java
+        line_start: 68
+        line_end: 90
+        excerpt: |
+          qConnect = qFactory.createQueueConnection();
+          session = qConnect.createQueueSession(true,0);
+          qSender = session.createSender(q);
+          TextMessage jmsMsg = session.createTextMessage();
+          jmsMsg.setText(msg);
+          qSender.send(jmsMsg);
+    stack_metadata:
+      framework: EJB 2.0
+      ejb.bean: AsyncSenderEJB
+      jms.queue: jms/AsyncSenderQueue
+  - record_key: ORDNOT-BUSINESS-RULE-0002
+    kind: business-rule
+    capability_key: order-notifications
+    requirement: >
+      GIVEN the queue cannot be reached or the send fails WHEN a message is submitted THEN the system SHALL report failure to the caller by raising an error and SHALL NOT silently drop the message.
+    confidence: medium
+    confidence_basis: One clear place (catch block and ejbCreate); no test or doc.
+    risk_class: operational
+    basis: Any exception in sendAMessage is logged and rethrown as an EJBException; ejbCreate also fails if the queue or factory lookup fails.
+    plain_text: >
+      If a message cannot be queued, the requester is told about the failure instead of it being ignored.
+    technical_note: >
+      sendAMessage catches Exception, printStackTrace, throws EJBException (container rolls back). ejbCreate wraps ServiceLocatorException in EJBException. Close failure is swallowed.
+    interface: true
+    traces:
+      - path: legacy-source/app/src/components/asyncsender/src/com/sun/j2ee/blueprints/asyncsender/ejb/AsyncSenderEJB.java
+        line_start: 58
+        line_end: 90
+        excerpt: |
+          }catch  (Exception e) {
+            e.printStackTrace();
+            throw new EJBException("askMDBToSendAMessage: Error!",e);
+          } finally {
+    stack_metadata:
+      ejb.bean: AsyncSenderEJB
+  - record_key: ORDNOT-BUSINESS-RULE-0003
+    kind: business-rule
+    capability_key: order-notifications
+    requirement: >
+      The system SHALL send the message as part of the caller's transaction, so that it is only delivered if the surrounding business transaction commits.
+    confidence: medium
+    confidence_basis: Descriptor declares Required; session is created transacted. Effect on delivery depends on container behaviour not visible here.
+    risk_class: operational
+    basis: Container transaction attribute Required on sendAMessage and transacted queue session.
+    plain_text: >
+      A queued message only goes out if the order step that produced it completes successfully.
+    technical_note: >
+      ejb-jar.xml container-transaction trans-attribute Required for sendAMessage; createQueueSession(true,0).
+    interface: true
+    traces:
+      - path: legacy-source/app/src/components/asyncsender/src/ejb-jar.xml
+        line_start: 122
+        line_end: 132
+        excerpt: |
+          <container-transaction> ... <method-name>sendAMessage</method-name> ... <trans-attribute>Required</trans-attribute>
+    stack_metadata:
+      ejb.transaction: Required
+  - record_key: ORDNOT-REQUIREMENT-0004
+    kind: requirement
+    capability_key: order-notifications
+    requirement: >
+      The system SHALL make the message sending service available to local callers without access restriction.
+    confidence: medium
+    confidence_basis: Method permission unchecked in descriptor; one place.
+    risk_class: operational
+    basis: sendAMessage and create are listed under unchecked method-permission; caller identity is used.
+    plain_text: >
+      Any internal part of the shop may queue a message; no special permission is needed.
+    technical_note: ejb-jar.xml method-permission unchecked, local interface only, use-caller-identity.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/asyncsender/src/ejb-jar.xml
+        line_start: 70
+        line_end: 121
+        excerpt: |
+          <method-permission>
+            <unchecked />
+    stack_metadata:
+      ejb.bean: AsyncSenderEJB
+suspected_defects:
+  - capability_key: order-notifications
+    record_keys: [ORDNOT-BUSINESS-RULE-0002]
+    severity: low
+    category: error-swallowed
+    title: Connection close failure is silently ignored; stack trace printed to stdout
+    description: >
+      Errors closing the queue connection are swallowed, and send errors are printed with printStackTrace rather than logged.
+    traces:
+      - path: legacy-source/app/src/components/asyncsender/src/com/sun/j2ee/blueprints/asyncsender/ejb/AsyncSenderEJB.java
+        line_start: 80
+        line_end: 89
+findings: []
