@@ -1,0 +1,90 @@
+sections:
+  - section: Summary
+    from:
+      - openspec/changes/swhm2-i-0001-bootstrap-landing-page-and/specs/site-shell/spec.md
+      - openspec/changes/swhm2-i-0002-catalog-browsing-and-search/specs/catalog-browsing/spec.md
+      - openspec/changes/swhm2-i-0003-customer-accounts-and-sign/specs/customer-accounts/spec.md
+      - openspec/changes/swhm2-i-0004-shopping-cart/specs/shopping-cart/spec.md
+      - openspec/changes/swhm2-i-0005-checkout-and-payment-detail/specs/checkout-and-payment/spec.md
+      - openspec/changes/swhm2-i-0006-order-approval/specs/order-approval/spec.md
+      - openspec/changes/swhm2-i-0007-order-fulfilment-and-invoic/specs/order-fulfilment/spec.md
+      - openspec/changes/swhm2-i-0008-order-notifications/specs/order-notifications/spec.md
+      - openspec/changes/swhm2-i-0009-administration-of-orders/specs/admin-order-management/spec.md
+      - openspec/changes/swhm2-i-0010-localisation/specs/internationalisation/spec.md
+      - openspec/changes/swhm2-i-0011-batch-operations-and-retent/specs/batch-operations/spec.md
+  - section: Context
+    from:
+      - build/manifest.yaml
+  - section: Goals
+    from:
+      - openspec/changes/swhm2-i-0001-bootstrap-landing-page-and/specs/site-shell/spec.md
+      - openspec/changes/swhm2-i-0002-catalog-browsing-and-search/specs/catalog-browsing/spec.md
+      - openspec/changes/swhm2-i-0003-customer-accounts-and-sign/specs/customer-accounts/spec.md
+      - openspec/changes/swhm2-i-0004-shopping-cart/specs/shopping-cart/spec.md
+      - openspec/changes/swhm2-i-0005-checkout-and-payment-detail/specs/checkout-and-payment/spec.md
+      - openspec/changes/swhm2-i-0006-order-approval/specs/order-approval/spec.md
+      - openspec/changes/swhm2-i-0007-order-fulfilment-and-invoic/specs/order-fulfilment/spec.md
+      - openspec/changes/swhm2-i-0008-order-notifications/specs/order-notifications/spec.md
+      - openspec/changes/swhm2-i-0009-administration-of-orders/specs/admin-order-management/spec.md
+      - openspec/changes/swhm2-i-0010-localisation/specs/internationalisation/spec.md
+      - openspec/changes/swhm2-i-0011-batch-operations-and-retent/specs/batch-operations/spec.md
+  - section: Non-goals
+    from:
+      - build/manifest.yaml
+  - section: Users
+    from:
+      - openspec/changes/swhm2-i-0001-bootstrap-landing-page-and/specs/site-shell/spec.md
+      - openspec/changes/swhm2-i-0002-catalog-browsing-and-search/specs/catalog-browsing/spec.md
+      - openspec/changes/swhm2-i-0003-customer-accounts-and-sign/specs/customer-accounts/spec.md
+      - openspec/changes/swhm2-i-0004-shopping-cart/specs/shopping-cart/spec.md
+      - openspec/changes/swhm2-i-0005-checkout-and-payment-detail/specs/checkout-and-payment/spec.md
+      - openspec/changes/swhm2-i-0006-order-approval/specs/order-approval/spec.md
+      - openspec/changes/swhm2-i-0007-order-fulfilment-and-invoic/specs/order-fulfilment/spec.md
+      - openspec/changes/swhm2-i-0008-order-notifications/specs/order-notifications/spec.md
+      - openspec/changes/swhm2-i-0009-administration-of-orders/specs/admin-order-management/spec.md
+      - openspec/changes/swhm2-i-0010-localisation/specs/internationalisation/spec.md
+      - openspec/changes/swhm2-i-0011-batch-operations-and-retent/specs/batch-operations/spec.md
+  - section: User journeys
+    from:
+      - openspec/changes/swhm2-i-0001-bootstrap-landing-page-and/specs/site-shell/spec.md
+      - openspec/changes/swhm2-i-0002-catalog-browsing-and-search/specs/catalog-browsing/spec.md
+      - openspec/changes/swhm2-i-0003-customer-accounts-and-sign/specs/customer-accounts/spec.md
+      - openspec/changes/swhm2-i-0004-shopping-cart/specs/shopping-cart/spec.md
+      - openspec/changes/swhm2-i-0005-checkout-and-payment-detail/specs/checkout-and-payment/spec.md
+      - openspec/changes/swhm2-i-0006-order-approval/specs/order-approval/spec.md
+      - openspec/changes/swhm2-i-0007-order-fulfilment-and-invoic/specs/order-fulfilment/spec.md
+      - openspec/changes/swhm2-i-0008-order-notifications/specs/order-notifications/spec.md
+      - openspec/changes/swhm2-i-0009-administration-of-orders/specs/admin-order-management/spec.md
+      - openspec/changes/swhm2-i-0010-localisation/specs/internationalisation/spec.md
+      - openspec/changes/swhm2-i-0011-batch-operations-and-retent/specs/batch-operations/spec.md
+  - section: Capability map
+    from:
+      - openspec/changes/swhm2-i-0001-bootstrap-landing-page-and/specs/site-shell/spec.md
+      - openspec/changes/swhm2-i-0002-catalog-browsing-and-search/specs/catalog-browsing/spec.md
+      - openspec/changes/swhm2-i-0003-customer-accounts-and-sign/specs/customer-accounts/spec.md
+      - openspec/changes/swhm2-i-0004-shopping-cart/specs/shopping-cart/spec.md
+      - openspec/changes/swhm2-i-0005-checkout-and-payment-detail/specs/checkout-and-payment/spec.md
+      - openspec/changes/swhm2-i-0006-order-approval/specs/order-approval/spec.md
+      - openspec/changes/swhm2-i-0007-order-fulfilment-and-invoic/specs/order-fulfilment/spec.md
+      - openspec/changes/swhm2-i-0008-order-notifications/specs/order-notifications/spec.md
+      - openspec/changes/swhm2-i-0009-administration-of-orders/specs/admin-order-management/spec.md
+      - openspec/changes/swhm2-i-0010-localisation/specs/internationalisation/spec.md
+      - openspec/changes/swhm2-i-0011-batch-operations-and-retent/specs/batch-operations/spec.md
+  - section: Screens
+    from:
+      - openspec/changes/swhm2-i-0001-bootstrap-landing-page-and/specs/site-shell/spec.md
+      - openspec/changes/swhm2-i-0007-order-fulfilment-and-invoic/specs/order-fulfilment/spec.md
+      - openspec/changes/swhm2-i-0009-administration-of-orders/specs/admin-order-management/spec.md
+      - openspec/changes/swhm2-i-0003-customer-accounts-and-sign/specs/customer-accounts/spec.md
+  - section: Constraints and assumptions
+    from:
+      - openspec/changes/swhm2-i-0010-localisation/specs/internationalisation/spec.md
+      - openspec/changes/swhm2-i-0003-customer-accounts-and-sign/specs/customer-accounts/spec.md
+      - openspec/changes/swhm2-i-0006-order-approval/specs/order-approval/spec.md
+      - openspec/changes/swhm2-i-0009-administration-of-orders/specs/admin-order-management/spec.md
+      - openspec/changes/swhm2-i-0005-checkout-and-payment-detail/specs/checkout-and-payment/spec.md
+  - section: Open questions
+    from:
+      - build/manifest.yaml
+      - openspec/changes/swhm2-i-0001-bootstrap-landing-page-and/specs/site-shell/spec.md
+      - openspec/changes/swhm2-i-0009-administration-of-orders/specs/admin-order-management/spec.md
