@@ -12,14 +12,13 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import Typography from "@mui/material/Typography";
-import { IconLayoutDashboard } from "@tabler/icons-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { APP_NAME } from "@/constants/app";
+import { MENU_ITEMS } from "./menu";
 
-/** The sidebar's menu. Add a page by adding an entry. */
-export const MENU_ITEMS = [{ title: "Home", href: "/", icon: IconLayoutDashboard }];
+export { MENU_ITEMS } from "./menu";
 
 export function SidebarItems() {
   const pathname = usePathname();
@@ -30,27 +29,40 @@ export function SidebarItems() {
           {APP_NAME}
         </Typography>
       </Box>
-      <List
-        component="nav"
-        subheader={
-          <ListSubheader disableSticky sx={{ px: 0, fontWeight: 700, lineHeight: "26px" }}>
-            HOME
-          </ListSubheader>
-        }
-      >
-        {MENU_ITEMS.map((item) => (
-          <ListItemButton
-            key={item.href}
-            component={Link}
-            href={item.href}
-            selected={pathname === item.href}
-            sx={{ borderRadius: "8px", mb: 0.5 }}
-          >
-            <ListItemIcon sx={{ minWidth: 36 }}>
-              <item.icon stroke={1.5} size="1.3rem" />
-            </ListItemIcon>
-            <ListItemText primary={item.title} />
-          </ListItemButton>
+      <List component="nav" aria-label="Primary" disablePadding>
+        {MENU_ITEMS.map(({ group, items }) => (
+          <Box key={group}>
+            <ListSubheader
+              disableSticky
+              sx={{ px: 1, fontWeight: 600, lineHeight: "32px", bgcolor: "transparent" }}
+            >
+              {group}
+            </ListSubheader>
+            <List component="div" disablePadding>
+              {items.map((item) => (
+                <ListItemButton
+                  key={item.href}
+                  component={Link}
+                  href={item.href}
+                  selected={pathname === item.href}
+                  aria-current={pathname === item.href ? "page" : undefined}
+                  sx={{
+                    borderRadius: "8px",
+                    mb: 0.5,
+                    "&.Mui-selected, &.Mui-selected:hover": {
+                      bgcolor: "primary.main",
+                      color: "primary.contrastText",
+                    },
+                  }}
+                >
+                  <ListItemIcon sx={{ minWidth: 36, color: "inherit" }}>
+                    <item.icon stroke={1.5} size="1.3rem" />
+                  </ListItemIcon>
+                  <ListItemText primary={item.title} />
+                </ListItemButton>
+              ))}
+            </List>
+          </Box>
         ))}
       </List>
     </Box>
