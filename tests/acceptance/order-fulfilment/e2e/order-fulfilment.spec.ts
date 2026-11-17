@@ -37,11 +37,18 @@ test("SWHM2-C-0179 inventory screen rows show id, quantity, new-quantity input, 
   page,
 }) => {
   await openInventory(page);
-  const { itemId, row } = await firstRow(page);
-  await expect(row).toContainText(itemId);
-  expect(Number.isNaN(await existing(row))).toBe(false);
-  await expect(row.locator(`input[name="qty_${itemId}"]`)).toBeVisible();
-  await expect(row.locator(`input[type="checkbox"][name="item_${itemId}"]`)).toBeVisible();
+  const quantities = page.locator('input[name^="qty_"]');
+  await expect(quantities.first()).toBeVisible();
+  const count = await quantities.count();
+  for (let i = 0; i < count; i++) {
+    const qty = quantities.nth(i);
+    const itemId = (await qty.getAttribute("name"))!.slice("qty_".length);
+    const row = page.locator("tr", { has: qty });
+    await expect(row).toContainText(itemId);
+    expect(Number.isNaN(await existing(row))).toBe(false);
+    await expect(qty).toBeVisible();
+    await expect(row.locator(`input[type="checkbox"][name="item_${itemId}"]`)).toBeVisible();
+  }
   await expect(submitButton(page).first()).toBeVisible();
 });
 

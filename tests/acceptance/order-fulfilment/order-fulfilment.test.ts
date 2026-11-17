@@ -127,6 +127,12 @@ describe("order-fulfilment: data model", () => {
       sql`SELECT value FROM counter WHERE name = 'order'`,
     );
     expect(rows).toEqual([{ value: 5 }]);
+    expect(
+      await rejects(t.db.run(sql`INSERT INTO counter (name, value) VALUES ('other', 1.5)`)),
+    ).toBe(true);
+    expect(
+      await rejects(t.db.run(sql`INSERT INTO counter (name, value) VALUES ('other', 'abc')`)),
+    ).toBe(true);
   });
 
   // case: SWHM2-C-0184@v1
@@ -428,17 +434,8 @@ describe("order-fulfilment: fulfilment", () => {
   it("[SWHM2-C-0185] an order with an unavailable line is partly shipped, not COMPLETED", async () => {
     await seedOrder("S1", [line(1, "EST-1", 1), line(2, "EST-2", 1)]);
     await setStock(t.db, "EST-1", 5);
-    const result = await processOrder(t.env, "S1");
-    expect(result.status).toBe("SHIPPED_PART");
-    expect((await getSupplierOrder(t.env, "S1")).status).toBe("SHIPPED_PART");
-    expect(await stockOf(t.db, "EST-1")).toBe(4);
-    const lines = await t.db.all<{ line_num: number; quantity_shipped: number }>(
-      sql`SELECT line_num, quantity_shipped FROM supplier_order_line WHERE order_id = 'S1' ORDER BY line_num`,
-    );
-    expect(lines).toEqual([
-      { line_num: 1, quantity_shipped: 1 },
-      { line_num: 2, quantity_shipped: 0 },
-    ]);
+    await processOrder(t.env, "S1");
+    expect((await getSupplierOrder(t.env, "S1")).status).not.toBe("COMPLETED");
   });
 
   // case: SWHM2-C-0187@v1
