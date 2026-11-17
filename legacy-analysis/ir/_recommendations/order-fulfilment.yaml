@@ -1,0 +1,205 @@
+recommendations:
+  - record_key: ORDER-FULFILMENT-BR-0005
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDER-FULFILMENT-BR-0006
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: FULFIL-ENT-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: OF-REQ-0002
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: OF-RULE-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: OF-RULE-0002
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDER-FULFILMENT-ENT-0002
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDER-FULFILMENT-RULE-0001
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDF-ENT-0005
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDF-INT-0004
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDF-REQ-0002
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDF-REQ-0006
+    recommendation: accept
+    confidence: low
+    reason: >
+      Confirm what the code does (no role check); whether it is right is the Business Owner's decision in the defect register.
+  - record_key: ORDFUL-BR-0003
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: order-fulfilment-REQ-0005
+    recommendation: accept
+    confidence: low
+    reason: >
+      Confirm what the code does (no role check); whether it is right is the Business Owner's decision in the defect register.
+  - record_key: FULFIL-RULE-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: FULFIL-RULE-0002
+    recommendation: edit
+    confidence: low
+    reason: >
+      Schema CHECK allows PENDING or COMPLETED while code sets other statuses on the process manager; two sources disagree. Confirm which table the check covers; goes to Intent.
+    edited_requirement: >
+      The system SHALL keep each supplier order in status PENDING or COMPLETED only, and SHALL NOT allow supplier stock for any item to fall below zero.
+  - record_key: OF-RULE-0003
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: OF-RULE-0004
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: OF-RULE-0006
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: OF-RULE-0007
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: OF-RULE-0008
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: OF-RULE-0009
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDER-FULFILMENT-BR-0001
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDER-FULFILMENT-BR-0003
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDER-FULFILMENT-BR-0004
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDER-FULFILMENT-BUSINESS-RULE-0001
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDER-FULFILMENT-INT-0001
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDF-BR-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDF-BR-0005
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Looks like a legacy shortcut (billing mirrored to shipping); confirm what the code does and send the question of intent to the defect register.
+  - record_key: ORDF-ENT-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDF-INT-0003
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDF-REQ-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDF-REQ-0004
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDF-REQ-0005
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDFUL-BR-0004
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Generic parsing behaviour rather than a business rule; accept as an integration constraint.
+  - record_key: order-fulfilment-REQ-0001
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: OF-REQ-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: OF-WF-0001
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
+  - record_key: ORDER-FULFILMENT-BR-0002
+    recommendation: edit
+    confidence: medium
+    reason: >
+      Conflicts with the five-status records read from the process manager; four statuses omits SHIPPED_PART. Conflict goes to Intent.
+    edited_requirement: >
+      The system SHALL recognise the order statuses PENDING, APPROVED, DENIED, SHIPPED_PART and COMPLETED.
+  - record_key: ORDER-FULFILMENT-ENTITY-0001
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Both passes and the cited source agree with the statement; no conflicting document was found.
