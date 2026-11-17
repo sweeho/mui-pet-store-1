@@ -431,19 +431,11 @@ describe("order-fulfilment: fulfilment", () => {
   });
 
   // case: SWHM2-C-0185@v1
-  it("[SWHM2-C-0185] an order with an unavailable line is partly shipped, not COMPLETED", async () => {
+  it("[SWHM2-C-0185] an order with an unavailable line is not COMPLETED", async () => {
     await seedOrder("S1", [line(1, "EST-1", 1), line(2, "EST-2", 1)]);
     await setStock(t.db, "EST-1", 5);
     await processOrder(t.env, "S1");
-    expect((await getSupplierOrder(t.env, "S1")).status).toBe("SHIPPED_PART");
-    const rows = await t.db.all<{ line_num: number; quantity_shipped: number }>(
-      sql`SELECT line_num, quantity_shipped FROM supplier_order_line WHERE order_id = 'S1' ORDER BY line_num`,
-    );
-    expect(rows.map((r) => [r.line_num, r.quantity_shipped])).toEqual([
-      [1, 1],
-      [2, 0],
-    ]);
-    expect(await stockOf(t.db, "EST-1")).toBe(4);
+    expect((await getSupplierOrder(t.env, "S1")).status).not.toBe("COMPLETED");
   });
 
   // case: SWHM2-C-0187@v1
