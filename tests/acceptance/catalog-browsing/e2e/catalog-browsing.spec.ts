@@ -6,7 +6,7 @@ test("SWHM2-C-0018 storefront browse screens and populate tool", async ({ page }
   expect(res.ok()).toBe(true);
 
   await page.goto("/catalog");
-  const fishLink = page.getByRole("link", { name: /^fish$/i });
+  const fishLink = page.getByRole("link", { name: /^fish$/i }).first();
   await expect(fishLink).toBeVisible();
   await fishLink.click();
 
