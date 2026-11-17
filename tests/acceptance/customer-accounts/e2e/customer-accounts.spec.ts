@@ -11,8 +11,8 @@ async function createUser(page: Page, userId: string, password: string) {
 }
 
 async function submitSignOn(page: Page, userId: string, password: string) {
-  await page.getByLabel(/user name/i).fill(userId);
-  await page.getByLabel(/password/i).fill(password);
+  await page.getByLabel(/^user name$/i).fill(userId);
+  await page.getByLabel(/^password$/i).fill(password);
   await page.getByRole("button", { name: /sign on/i }).click();
 }
 
