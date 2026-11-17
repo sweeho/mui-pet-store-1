@@ -1,0 +1,46 @@
+# EXTRACTED FROM LEGACY SOURCE — evidence of what exists, not a build target. Where this disagrees with a capability delta spec, the delta spec wins.
+# Source: web.xml servlet mappings and the storefront requestmappings.xml under legacy-source/app/src/apps/. Only the URL surface is evidenced; parameters and bodies are NOT fully recovered. See the capability delta specs for behaviour.
+openapi: 3.0.3
+info:
+  title: Legacy Java Pet Store HTTP surface (as read)
+  version: legacy-1.3.2
+paths:
+  /main.screen:
+    get: { summary: Storefront home (screen MAIN), tags: [catalog-browsing], responses: { "200": { description: HTML page } } }
+  /category.screen:
+    get: { summary: Category listing screen, tags: [catalog-browsing], responses: { "200": { description: HTML page } } }
+  /product.screen:
+    get: { summary: Product listing screen, tags: [catalog-browsing], responses: { "200": { description: HTML page } } }
+  /productdetails.screen:
+    get: { summary: Item details screen, tags: [catalog-browsing], responses: { "200": { description: HTML page } } }
+  /search.screen:
+    get: { summary: Keyword search screen, tags: [catalog-browsing], responses: { "200": { description: HTML page } } }
+  /verifysignin.do:
+    post: { summary: Sign-on handler, tags: [customer-accounts], responses: { "200": { description: Sign-in outcome page } } }
+  /signout.do:
+    get: { summary: Sign-off handler, tags: [customer-accounts], responses: { "200": { description: Sign-out page } } }
+  /createnewaccount.screen:
+    get: { summary: Account creation form, tags: [customer-accounts], responses: { "200": { description: HTML page } } }
+  /editaccount.screen:
+    get: { summary: Account edit form (requires sign-in), tags: [customer-accounts], responses: { "200": { description: HTML page } } }
+  /language.do:
+    get: { summary: Locale switch handler, tags: [internationalisation], responses: { "200": { description: Main page in the chosen language } } }
+  /checkout.screen:
+    get: { summary: Cart review and checkout entry, tags: [shopping-cart, checkout-and-payment], responses: { "200": { description: HTML page } } }
+  /entershippingaddress.do:
+    post: { summary: Shipping information handler (requires sign-in), tags: [checkout-and-payment], responses: { "200": { description: Next page in the flow } } }
+  /validatebillinginformation.do:
+    post: { summary: Billing information handler (requires sign-in), tags: [checkout-and-payment], responses: { "200": { description: Next page in the flow } } }
+  /placeorder.screen:
+    get: { summary: Order placement screen (requires sign-in), tags: [checkout-and-payment, order-notifications], responses: { "200": { description: HTML page } } }
+  /Populate:
+    get: { summary: Catalog or inventory population servlet (petstore and supplier apps), tags: [batch-operations], responses: { "200": { description: Load result } } }
+  /AdminRequestProcessor:
+    post: { summary: Admin rich-client XML request endpoint (GETORDERS, UPDATESTATUS and others), tags: [admin-order-management, order-approval], security: [{ adminRole: [] }], requestBody: { content: { application/xml: { schema: { type: string } } } }, responses: { "200": { description: XML reply } } }
+  /ApplRequestProcessor:
+    post: { summary: Admin application request endpoint, tags: [admin-order-management], responses: { "200": { description: Reply } } }
+  /RcvrRequestProcessor:
+    post: { summary: Supplier receiver for purchase orders and invoices, tags: [order-fulfilment], requestBody: { content: { application/xml: { schema: { type: string } } } }, responses: { "200": { description: Acknowledgement } } }
+components:
+  securitySchemes:
+    adminRole: { type: http, scheme: basic, description: Container-managed login (j_security_check) in the legacy admin app }
