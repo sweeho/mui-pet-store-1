@@ -107,7 +107,11 @@ test("SWHM2-C-0236 manageorders submission returns the Pet Store Admin descripto
   expect(text).toContain("Pet Store Admin");
   expect(text).toContain(session);
   expect(text).toMatch(/localhost/);
-  expect(text).toMatch(/<argument>[^<]*\d+[^<]*<\/argument>|port/i);
+  const args = [...text.matchAll(/<argument>([^<]*)<\/argument>/g)].map((m) => m[1].trim());
+  expect(args).toHaveLength(3);
+  expect(args[0]).toContain("localhost");
+  expect(args[1]).toMatch(/^\d+$/);
+  expect(args[2]).toBe(session);
 });
 
 // case: SWHM2-C-0237@v1
