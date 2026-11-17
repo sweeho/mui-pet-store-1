@@ -1,0 +1,227 @@
+records:
+  - record_key: CUST-ENT-0001
+    kind: entity
+    capability_key: customer-accounts
+    requirement: The system SHALL store each sign-on account with a unique username and a mandatory password, both up to 50 characters.
+    confidence: medium
+    confidence_basis: One clear definition per dialect (Cloudscape and Oracle) with identical constraints; no code or docs viewed in this pass. The password column is plain varchar with no hashing evidence.
+    risk_class: regulated
+    basis: signon_user has not-null username and password and a primary key on username.
+    plain_text: Every customer account has a unique user name and a password; neither may be blank.
+    technical_note: Table signon_user, PK pk_signon_user on username. Oracle uses varchar2; same lengths.
+    interface: false
+    traces:
+      - kind: db_object
+        path: db/schema/petstore_cloudscape.sql
+        anchor: signon_user
+        line_start: 74
+        line_end: 77
+        excerpt: |
+          CREATE TABLE signon_user (
+            username varchar(50) not null,
+            password varchar(50) not null,
+            constraint pk_signon_user primary key (username));
+      - kind: db_object
+        path: db/schema/petstore_oracle.sql
+        anchor: signon_user
+        line_start: 74
+        line_end: 77
+        excerpt: |
+          CREATE TABLE signon_user (
+            username varchar2(50) not null,
+            password varchar2(50) not null,
+            constraint pk_signon_user primary key (username));
+    stack_metadata:
+      db.object: signon_user
+      db.kind: table
+  - record_key: CUST-ENT-0002
+    kind: entity
+    capability_key: customer-accounts
+    requirement: The system SHALL keep one profile per profile identifier holding a mandatory preferred language, an optional favorite category, and mandatory my-list and banner display preferences.
+    confidence: medium
+    confidence_basis: One clear definition per dialect; column semantics (preference flags) inferred from names only.
+    risk_class: operational
+    basis: profile table with not-null language and preference columns, nullable favorite_category, PK profile_id.
+    plain_text: Each customer has a profile with a preferred language, an optional favorite product category, and settings for showing their list and banner.
+    technical_note: Table profile; my_list_preference and banner_preference are smallint (Cloudscape) / number(1) (Oracle); favorite_category char(10) vs varchar2(10).
+    interface: false
+    traces:
+      - kind: db_object
+        path: db/schema/petstore_cloudscape.sql
+        anchor: profile
+        line_start: 125
+        line_end: 131
+        excerpt: |
+          CREATE TABLE profile (
+            profile_id varchar(40) not null,
+            preferred_language varchar(10) not null,
+            favorite_category char(10),
+            my_list_preference smallint not null,
+            banner_preference smallint not null,
+            constraint pk_profile primary key (profile_id));
+      - kind: db_object
+        path: db/schema/petstore_oracle.sql
+        anchor: profile
+        line_start: 125
+        line_end: 131
+        excerpt: |
+          CREATE TABLE profile (
+            profile_id varchar2(40) not null,
+            preferred_language varchar2(10) not null,
+            favorite_category varchar2(10),
+            my_list_preference number(1) not null,
+            banner_preference number(1) not null,
+            constraint pk_profile primary key (profile_id));
+    stack_metadata:
+      db.object: profile
+      db.kind: table
+  - record_key: CHK-ENT-0001
+    kind: entity
+    capability_key: checkout-and-payment
+    requirement: The system SHALL record each purchase order with a unique id, user, email, date, locale and total value, and SHALL require it to reference an existing contact record and an existing credit card record.
+    confidence: medium
+    confidence_basis: Not-null and foreign-key constraints are explicit in both dialects; the meaning of each column is read from names.
+    risk_class: financial
+    basis: purchase_order has all columns not null, PK po_id, FKs to contact_info and credit_card.
+    plain_text: Every placed order stores who ordered it, when, in which language, the total amount, and must be linked to a billing/shipping contact and a payment card on file.
+    technical_note: Table purchase_order; fk_purchase_order_1 -> contact_info, fk_purchase_order_2 -> credit_card. po_date is bigint/number(19) (epoch).
+    interface: false
+    traces:
+      - kind: db_object
+        path: db/schema/petstore_cloudscape.sql
+        anchor: purchase_order
+        line_start: 146
+        line_end: 157
+        excerpt: |
+          constraint pk_purchase_order primary key (po_id),
+          constraint fk_purchase_order_1 foreign key (contact_id) references contact_info (contact_id),
+          constraint fk_purchase_order_2 foreign key (card_id) references credit_card (card_id));
+      - kind: db_object
+        path: db/schema/petstore_oracle.sql
+        anchor: purchase_order
+        line_start: 146
+        line_end: 157
+        excerpt: |
+          constraint pk_purchase_order primary key (po_id),
+          constraint fk_purchase_order_1 foreign key (contact_id) references contact_info (contact_id),
+          constraint fk_purchase_order_2 foreign key (card_id) references credit_card (card_id));
+    stack_metadata:
+      db.object: purchase_order
+      db.kind: table
+  - record_key: FULF-ENT-0001
+    kind: entity
+    capability_key: order-fulfilment
+    requirement: The system SHALL record each supplier order with a unique id, date, status and an existing contact, and SHALL hold its line items keyed by order id and line number, each with category, product, item, quantity, unit price and quantity shipped.
+    confidence: medium
+    confidence_basis: Constraints are explicit in both dialects; status values are not constrained by the DDL, so lifecycle is not visible here.
+    risk_class: operational
+    basis: supplier_order and supplier_line_item tables with not-null columns, composite PK and FKs.
+    plain_text: Orders sent to suppliers are tracked with a status and a list of lines, each recording how many were ordered and how many have shipped.
+    technical_note: Tables supplier_order and supplier_line_item; line item FK to supplier_order. Money is double in Cloudscape and number(12,2) in Oracle; ids char(10) vs varchar2(10).
+    interface: true
+    traces:
+      - kind: db_object
+        path: db/schema/petstore_cloudscape.sql
+        anchor: supplier_order
+        line_start: 182
+        line_end: 188
+        excerpt: |
+          CREATE TABLE supplier_order (
+            po_id varchar(40) not null,
+            po_date bigint not null,
+            po_status varchar(20) not null,
+            contact_id varchar(40) not null,
+      - kind: db_object
+        path: db/schema/petstore_cloudscape.sql
+        anchor: supplier_line_item
+        line_start: 192
+        line_end: 202
+        excerpt: |
+          constraint pk_supplier_line_item primary key (po_id, line_number),
+          constraint fk_supplier_line_item_1 foreign key (po_id) references supplier_order (po_id));
+      - kind: db_object
+        path: db/schema/petstore_oracle.sql
+        anchor: supplier_order
+        line_start: 182
+        line_end: 188
+        excerpt: |
+          constraint pk_supplier_order primary key (po_id),
+          constraint fk_supplier_order_1 foreign key (contact_id) references contact_info (contact_id));
+      - kind: db_object
+        path: db/schema/petstore_oracle.sql
+        anchor: supplier_line_item
+        line_start: 192
+        line_end: 202
+        excerpt: |
+          unit_price number(12,2) not null,
+          quantity_shipped integer not null,
+    stack_metadata:
+      db.object: supplier_order, supplier_line_item
+      db.kind: table
+  - record_key: FULF-REQ-0001
+    kind: requirement
+    capability_key: order-fulfilment
+    requirement: The system SHALL expose an order status listing joining each purchase order (id, user, date, value) to its order-manager status by order id, omitting purchase orders with no order-manager row.
+    confidence: medium
+    confidence_basis: One clear view definition, identical in both dialects; order_manager is defined outside this unit.
+    risk_class: operational
+    basis: v_order_status inner joins purchase_order to order_manager on order_id = po_id.
+    plain_text: Customers and staff can see each order's current status together with its date and amount; orders without a tracked status do not appear.
+    technical_note: View v_order_status; inner JOIN, so unmatched purchase orders drop out.
+    interface: false
+    traces:
+      - kind: db_object
+        path: db/schema/petstore_cloudscape.sql
+        anchor: v_order_status
+        line_start: 226
+        line_end: 228
+        excerpt: |
+          CREATE VIEW v_order_status AS
+            SELECT p.po_id, p.po_user_id, p.po_date, p.po_value, m.status
+            FROM purchase_order p JOIN order_manager m ON m.order_id = p.po_id;
+      - kind: db_object
+        path: db/schema/petstore_oracle.sql
+        anchor: v_order_status
+        line_start: 226
+        line_end: 228
+        excerpt: |
+          CREATE VIEW v_order_status AS
+            SELECT p.po_id, p.po_user_id, p.po_date, p.po_value, m.status
+            FROM purchase_order p JOIN order_manager m ON m.order_id = p.po_id;
+    stack_metadata:
+      db.object: v_order_status
+      db.kind: view
+      db.reads: purchase_order, order_manager
+findings: []
+suspected_defects:
+  - capability_key: customer-accounts
+    record_keys: [CUST-ENT-0001]
+    severity: high
+    category: data-corruption
+    title: Password column has no sign of protection in the schema
+    description: >
+      signon_user.password is a plain 50-character column; the DDL shows no hashing or encryption. Whether the application stores clear text cannot be settled from DDL alone.
+    traces:
+      - kind: db_object
+        path: db/schema/petstore_cloudscape.sql
+        anchor: signon_user
+        line_start: 74
+        line_end: 77
+  - capability_key: checkout-and-payment
+    record_keys: [CHK-ENT-0001]
+    severity: medium
+    category: inconsistent-rounding
+    title: Order value is floating point in Cloudscape but fixed 2-decimal in Oracle
+    description: >
+      purchase_order.po_value and supplier_line_item.unit_price are double in the Cloudscape schema and number(12,2) in Oracle, so amounts may differ in rounding between deployments.
+    traces:
+      - kind: db_object
+        path: db/schema/petstore_cloudscape.sql
+        anchor: purchase_order
+        line_start: 146
+        line_end: 157
+      - kind: db_object
+        path: db/schema/petstore_oracle.sql
+        anchor: purchase_order
+        line_start: 146
+        line_end: 157
