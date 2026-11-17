@@ -1,0 +1,115 @@
+records:
+  - record_key: CHK-ENT-0001
+    kind: entity
+    capability_key: checkout-and-payment
+    requirement: >
+      The system SHALL represent a postal address as street line 1, street line 2, city, state, zip code and country, each a text value.
+    plain_text: >
+      An address is made up of two street lines, a city, a state, a zip code and a country.
+    technical_note: >
+      Container-managed entity bean AddressEJB with six CMP fields; the value object Address carries the same six fields. No column-level constraints or validation are declared in this component.
+    interface: false
+    confidence: high
+    confidence_basis: >
+      Field list appears in the bean class and in the deployment descriptor (two places). No validation, so nothing about required-ness is read from them.
+    risk_class: operational
+    basis: >
+      CMP field declarations in ejb-jar.xml and abstract accessors in the bean.
+    traces:
+      - path: legacy-source/app/src/components/address/src/com/sun/j2ee/blueprints/address/ejb/AddressEJB.java
+        line_start: 53
+        line_end: 69
+        excerpt: |
+          public abstract String getStreetName1();
+          public abstract void setStreetName1(String streetName1);
+          public abstract String getStreetName2();
+          public abstract void setStreetName2(String streetName2);
+          public abstract String getCity();
+      - path: legacy-source/app/src/components/address/src/ejb-jar.xml
+        line_start: 57
+        line_end: 80
+        excerpt: |
+          <field-name>zipCode</field-name>
+          <field-name>streetName2</field-name>
+          <field-name>state</field-name>
+          <field-name>streetName1</field-name>
+          <field-name>city</field-name>
+          <field-name>country</field-name>
+    stack_metadata:
+      framework: EJB 2.0
+      ejb.bean: AddressEJB
+  - record_key: CHK-REQ-0002
+    kind: requirement
+    capability_key: checkout-and-payment
+    requirement: >
+      The system SHALL store an address exactly as supplied, with no validation or normalisation, whether created from six separate values or copied from an existing address, and SHALL allow an address to be created empty.
+    plain_text: >
+      Addresses are saved as entered. The component does not check or reformat any part of them, and an empty address can be created.
+    technical_note: >
+      Three ejbCreate overloads (six strings, Address value object, no-arg) only copy values into CMP fields; no null/format checks. getData() returns a copy as an Address value object. Any address validation must be elsewhere (checkout screens), not in this component.
+    interface: false
+    confidence: high
+    confidence_basis: >
+      Code is short and unambiguous, and the DTD also marks several elements optional/unconstrained text; but it is absence of rules, hence not graded higher than inferred from entire bean.
+    risk_class: operational
+    basis: >
+      Create methods only assign fields.
+    traces:
+      - path: legacy-source/app/src/components/address/src/com/sun/j2ee/blueprints/address/ejb/AddressEJB.java
+        line_start: 73
+        line_end: 114
+        excerpt: |
+          public Object ejbCreate(String streetName1, String streetName2, String city,
+                                  String state, String zipCode, String country) throws CreateException {
+                                    setStreetName1(streetName1);
+          ...
+          public Object ejbCreate() throws CreateException {
+            return null;
+          }
+    stack_metadata:
+      framework: EJB 2.0
+      ejb.bean: AddressEJB
+  - record_key: CHK-REQ-0003
+    kind: integration
+    capability_key: checkout-and-payment
+    requirement: >
+      The system SHALL accept address data in XML form having one or two street lines, a city, a state and a zip code as mandatory elements and an optional country.
+    plain_text: >
+      Addresses exchanged as XML need a street, city, state and zip code; a second street line and the country are optional.
+    technical_note: >
+      Address.dtd content model (StreetName, StreetName?, City, State, ZipCode, Country?). Which parser uses this DTD is not visible in this component.
+    interface: true
+    confidence: medium
+    confidence_basis: >
+      One clear declaration; no caller seen in this module, so actual use is not confirmed.
+    dispute:
+      reason: unresolved-reachability
+      detail: >
+        No reference to Address.dtd in this module. Settled by finding an XML document type or parser elsewhere (order/purchase-order XML) that includes it.
+    risk_class: operational
+    basis: >
+      DTD element declaration.
+    traces:
+      - path: legacy-source/app/src/components/address/src/com/sun/j2ee/blueprints/address/rsrc/schemas/Address.dtd
+        line_start: 38
+        line_end: 43
+        excerpt: |
+          <!ELEMENT Address (StreetName, StreetName?, City, State, ZipCode, Country?)>
+          <!ELEMENT StreetName (#PCDATA)>
+    stack_metadata:
+      framework: DTD
+findings: []
+suspected_defects:
+  - capability_key: checkout-and-payment
+    record_keys: [CHK-REQ-0002, CHK-REQ-0003]
+    severity: low
+    category: other
+    title: Country optional in XML but not validated anywhere
+    description: >
+      The DTD makes country optional while the entity has a country field that is stored whatever its value; the XML and entity rules are not aligned (the DTD has two street elements while the bean names them StreetName1/2 versus XML StreetName).
+    traces:
+      - path: legacy-source/app/src/components/address/src/com/sun/j2ee/blueprints/address/rsrc/schemas/Address.dtd
+        line_start: 38
+        line_end: 38
+        excerpt: |
+          <!ELEMENT Address (StreetName, StreetName?, City, State, ZipCode, Country?)>
