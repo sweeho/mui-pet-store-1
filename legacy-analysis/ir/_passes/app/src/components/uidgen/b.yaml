@@ -1,0 +1,201 @@
+records:
+  - record_key: ORDF-BR-0001
+    kind: business-rule
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL return, for a given prefix name, a unique identifier formed by the prefix text immediately followed by the decimal value of that prefix's counter after incrementing it by one.
+    plain_text: >
+      Each time a new reference number is requested for a kind of record, the system hands out the kind's prefix followed by the next number in sequence, for example prefix "X" gives X1, then X2.
+    technical_note: >
+      CounterEJB.getNextValue reads the CMP counter, adds 1, stores it, returns name + count. No separator or padding is added.
+    interface: false
+    confidence: high
+    confidence_basis: >
+      The arithmetic is in the entity bean, and the session bean delegates to it (getUniqueId), so two places show the behaviour. No test or doc was found.
+    risk_class: operational
+    basis: >
+      getNextValue concatenates the counter name with the incremented integer; the session bean returns that value unchanged.
+    traces:
+      - path: legacy-source/app/src/components/uidgen/src/com/sun/j2ee/blueprints/uidgen/counter/ejb/CounterEJB.java
+        line_start: 67
+        line_end: 70
+        excerpt: |
+          public String getNextValue() {
+              int count = getCounter() + 1;
+              setCounter(count);
+              return getName() + String.valueOf(count);
+      - path: legacy-source/app/src/components/uidgen/src/com/sun/j2ee/blueprints/uidgen/ejb/UniqueIdGeneratorEJB.java
+        line_start: 67
+        line_end: 69
+        excerpt: |
+          public String getUniqueId(String idPrefix) {
+              return getCounter(idPrefix).getNextValue();
+          }
+    stack_metadata:
+      framework: EJB 2.0
+      ejb.bean: UniqueIdGeneratorEJB, CounterEJB
+      db.object: Counter (abstract schema)
+  - record_key: ORDF-BR-0002
+    kind: business-rule
+    capability_key: order-fulfilment
+    requirement: >
+      GIVEN a prefix for which no counter exists WHEN an identifier is requested THEN the system SHALL create a counter for that prefix starting at 0, so that the first identifier issued carries the number 1.
+    plain_text: >
+      The first time a new kind of reference number is asked for, the system starts a fresh sequence automatically and the first number issued is 1.
+    technical_note: >
+      UniqueIdGeneratorEJB.getCounter calls findByPrimaryKey(name) and on FinderException calls create(name); CounterEJB.ejbCreate sets name and counter=0.
+    interface: false
+    confidence: high
+    confidence_basis: >
+      Create-on-miss in the session bean and the zero initialisation in the entity bean agree; both read directly.
+    risk_class: operational
+    basis: >
+      Finder miss triggers creation; initial value 0 then incremented to 1.
+    traces:
+      - path: legacy-source/app/src/components/uidgen/src/com/sun/j2ee/blueprints/uidgen/ejb/UniqueIdGeneratorEJB.java
+        line_start: 74
+        line_end: 82
+        excerpt: |
+          private CounterLocal getCounter(String name) {
+              try {
+                  CounterLocal counter = null;
+                  try {
+                      counter = clh.findByPrimaryKey(name);
+                  } catch (FinderException fe) {
+                      counter = clh.create(name);
+                  }
+                  return counter;
+      - path: legacy-source/app/src/components/uidgen/src/com/sun/j2ee/blueprints/uidgen/counter/ejb/CounterEJB.java
+        line_start: 58
+        line_end: 62
+        excerpt: |
+          public String ejbCreate(String name) throws CreateException {
+              setName(name);
+              setCounter(0);
+              return null;
+          }
+    stack_metadata:
+      framework: EJB 2.0
+      ejb.bean: UniqueIdGeneratorEJB, CounterEJB
+  - record_key: ORDF-BR-0003
+    kind: business-rule
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL keep exactly one persistent counter per prefix name, keyed by the name, and SHALL run each identifier request and counter creation within a transaction.
+    plain_text: >
+      There is one running count for each kind of reference number, and it is saved so numbers continue after a restart; requests are processed as a single all-or-nothing step.
+    technical_note: >
+      ejb-jar.xml declares CounterEJB as CMP 2.x entity, primkey-field name, non-reentrant, with cmp-fields counter and name; trans-attribute Required on getUniqueId, getNextValue, create and remove. The consuming component does not specify the persistence mechanism beyond the container.
+    interface: false
+    confidence: medium
+    confidence_basis: >
+      Declared in one place (deployment descriptor). Whether concurrent callers are serialised depends on container isolation settings not visible here.
+    risk_class: operational
+    basis: >
+      Primary key is the counter name, so duplicates of one prefix cannot exist; transactions are Required.
+    traces:
+      - path: legacy-source/app/src/components/uidgen/src/ejb-jar.xml
+        line_start: 46
+        line_end: 65
+        excerpt: |
+          <entity>
+            <display-name>CounterEB</display-name>
+            <ejb-name>CounterEJB</ejb-name>
+            ...
+            <persistence-type>Container</persistence-type>
+            <prim-key-class>java.lang.String</prim-key-class>
+            <reentrant>False</reentrant>
+            <cmp-version>2.x</cmp-version>
+            <abstract-schema-name>Counter</abstract-schema-name>
+            ...
+            <primkey-field>name</primkey-field>
+      - path: legacy-source/app/src/components/uidgen/src/ejb-jar.xml
+        line_start: 232
+        line_end: 242
+        excerpt: |
+          <container-transaction>
+            <method>
+              <ejb-name>UniqueIdGeneratorEJB</ejb-name>
+              <method-intf>Local</method-intf>
+              <method-name>getUniqueId</method-name>
+            ...
+            <trans-attribute>Required</trans-attribute>
+    stack_metadata:
+      framework: EJB 2.0
+      ejb.transaction: Required
+      ejb.bean: CounterEJB
+      db.object: Counter
+  - record_key: ORDF-REQ-0004
+    kind: requirement
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL fail an identifier request with an error when a counter for the requested prefix cannot be created.
+    plain_text: >
+      If a new sequence cannot be started, the request fails with a clear error and no number is issued.
+    technical_note: >
+      CreateException is wrapped in EJBException "Could not create counter <name>. Error: ...". Also ejbCreate throws EJBException if the Counter lookup fails with a NamingException.
+    interface: false
+    confidence: medium
+    confidence_basis: >
+      One clear place in code; no caller handling seen in this module.
+    risk_class: operational
+    basis: >
+      Exception translation in getCounter and ejbCreate.
+    traces:
+      - path: legacy-source/app/src/components/uidgen/src/com/sun/j2ee/blueprints/uidgen/ejb/UniqueIdGeneratorEJB.java
+        line_start: 83
+        line_end: 85
+        excerpt: |
+          } catch (CreateException ce) {
+              throw new EJBException("Could not create counter " + name + ". Error: " + ce.getMessage());
+          }
+    stack_metadata:
+      framework: EJB 2.0
+      ejb.bean: UniqueIdGeneratorEJB
+  - record_key: ORDF-REQ-0005
+    kind: requirement
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL make identifier generation available to other components of the same application only, without role-based restriction.
+    plain_text: >
+      Any part of the application may ask for a new reference number; it is not exposed to outside systems and needs no special permission.
+    technical_note: >
+      Only Local/LocalHome interfaces exist; all methods are method-permission unchecked; security-identity uses caller identity.
+    interface: false
+    confidence: medium
+    confidence_basis: >
+      Descriptor only; callers not examined in this shard.
+    risk_class: operational
+    basis: >
+      Unchecked method permissions and local-only interfaces.
+    traces:
+      - path: legacy-source/app/src/components/uidgen/src/ejb-jar.xml
+        line_start: 152
+        line_end: 195
+        excerpt: |
+          <method-permission>
+            <unchecked />
+            <method>
+              <ejb-name>UniqueIdGeneratorEJB</ejb-name>
+              ...
+              <method-name>getUniqueId</method-name>
+    stack_metadata:
+      framework: EJB 2.0
+      ejb.bean: UniqueIdGeneratorEJB
+suspected_defects:
+  - capability_key: order-fulfilment
+    record_keys: [ORDF-BR-0001, ORDF-BR-0002]
+    severity: low
+    category: other
+    title: Counter is a plain int with no overflow guard and no separator
+    description: >
+      The counter is an int incremented without bound or check, and the prefix is concatenated directly to the number, so prefixes ending in digits can produce ambiguous identifiers (prefix "A1" count 1 equals prefix "A" count 11).
+    traces:
+      - path: legacy-source/app/src/components/uidgen/src/com/sun/j2ee/blueprints/uidgen/counter/ejb/CounterEJB.java
+        line_start: 67
+        line_end: 70
+        excerpt: |
+          int count = getCounter() + 1;
+          setCounter(count);
+          return getName() + String.valueOf(count);
+findings: []
