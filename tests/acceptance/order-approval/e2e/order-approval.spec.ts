@@ -58,10 +58,16 @@ test("SWHM2-C-0029 choosing Denied sends nothing before Commit", async ({ page }
   const row = pendingRows(page).first();
   const id = (await row.getAttribute("data-order-id"))!;
   const before = (await sent(page)).length;
-  await row.getByRole("button", { name: /deny/i }).click();
+  const select = row.getByRole("combobox");
+  if ((await select.count()) > 0) {
+    await select.selectOption({ label: "Denied" });
+  } else {
+    await row.getByRole("button", { name: /^denied?$/i }).click();
+  }
   expect((await sent(page)).length).toBe(before);
   const stored = await page.request.get(`/api/admin/orders/${id}`);
-  if (stored.ok()) expect((await stored.json()).status).toBe("PENDING");
+  expect(stored.ok()).toBe(true);
+  expect((await stored.json()).status).toBe("PENDING");
   await page.reload();
   await expect(page.locator(`tr[data-order-id="${id}"]`)).toHaveAttribute("data-status", "PENDING");
 });
