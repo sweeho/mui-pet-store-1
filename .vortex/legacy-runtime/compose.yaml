@@ -1,0 +1,44 @@
+# Legacy Java Pet Store 1.3.2 (J2EE 1.3) on the J2EE 1.3.1 Reference Implementation (RI),
+# with its bundled Cloudscape database. Start: see README.md in this folder.
+# Not in the repository and required: the RI (j2sdkee 1.3.1) in ./ri (or J2EE_RI_DIR).
+services:
+  legacy:
+    build:
+      # The legacy source is the `legacy-source/` folder of branch vortex/legacy-spec/sx-0001.
+      context: ${LEGACY_SOURCE:-../../legacy-source}
+      additional_contexts:
+        ri: ${J2EE_RI_DIR:-./ri}
+      dockerfile_inline: |
+        FROM ${JAVA_IMAGE:-eclipse-temurin:8-jdk}
+        RUN apt-get update && apt-get install -y --no-install-recommends ant curl && rm -rf /var/lib/apt/lists/*
+        COPY --from=ri . /opt/j2sdkee1.3.1
+        COPY app /opt/petstore/app
+        WORKDIR /opt/petstore/app
+        ENV J2EE_HOME=/opt/j2sdkee1.3.1
+        # Build with the project's own Ant files (src/build.xml).
+        RUN echo "j2ee.home=$$J2EE_HOME" > /root/petstore.properties \
+         && cd src && ant -Dj2ee.home=$$J2EE_HOME
+        COPY <<'RUN' /opt/start.sh
+        #!/bin/sh
+        # Start Cloudscape and the RI, create queues, users and databases, deploy the EARs.
+        set -e
+        cd /opt/petstore/app
+        $$J2EE_HOME/bin/cloudscape -start &
+        sleep 15
+        ant -f setup.xml -Dj2ee.home=$$J2EE_HOME core
+        $$J2EE_HOME/bin/j2ee -verbose &
+        sleep 40
+        ./setup.sh deploy
+        wait
+        RUN
+        RUN chmod +x /opt/start.sh
+        EXPOSE 8000
+        CMD ["/opt/start.sh"]
+    ports:
+      - "8000:8000" # storefront: http://localhost:8000/petstore/
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://localhost:8000/petstore/index.jsp"]
+      interval: 15s
+      timeout: 10s
+      retries: 40
+      start_period: 120s
