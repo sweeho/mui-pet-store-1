@@ -1,0 +1,13 @@
+# PIT mutation testing for the legacy Java Pet Store 1.3.2 (FR-IM-56).
+# STATUS: NOT RUN. The authoring workspace has no JDK, no Maven and no Docker daemon, the legacy
+# source is not on dev (branch vortex/legacy-spec/sx-0001, folder legacy-source/), and that source
+# has no unit tests (no JUnit, no *Test.java). No report exists and there is no mutation score.
+# Run it where a JDK 8+, Maven and the Ant-built classes exist, with LEGACY_SOURCE set to the
+# legacy-source folder (see README.md), then check that reportPath is written.
+tool: pit
+command: mvn -f .vortex/legacy-runtime/pom.xml -DlegacySource=${LEGACY_SOURCE} org.pitest:pitest-maven:mutationCoverage
+targetClasses:
+  - "com.sun.j2ee.blueprints.*"
+targetTests:
+  - "com.sun.j2ee.blueprints.*Test"
+reportPath: .vortex/legacy-runtime/target/pit-reports/mutations.xml
