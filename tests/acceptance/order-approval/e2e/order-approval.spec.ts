@@ -26,7 +26,7 @@ test("SWHM2-C-0027 Commit sends only the changed orders", async ({ page }) => {
   const rows = pendingRows(page);
   expect(await rows.count()).toBeGreaterThanOrEqual(3);
   const ids = [0, 1, 2].map(async (i) => (await rows.nth(i).getAttribute("data-order-id"))!);
-  const [a, b] = [await ids[0], await ids[1]];
+  const [a, b, c] = [await ids[0], await ids[1], await ids[2]];
   const before = (await sent(page)).length;
   await rows
     .nth(0)
@@ -36,11 +36,15 @@ test("SWHM2-C-0027 Commit sends only the changed orders", async ({ page }) => {
     .nth(1)
     .getByRole("button", { name: /approve/i })
     .click();
-  await page.getByRole("button", { name: /commit/i }).click();
+  await page
+    .getByRole("button", { name: /commit/i })
+    .first()
+    .click();
   await expect.poll(async () => (await sent(page)).length).toBe(before + 2);
   const messages = (await sent(page)).slice(before);
   expect(messages.map((m) => m.orderId).sort()).toEqual([a, b].sort());
   expect(messages.every((m) => m.status === "APPROVED")).toBe(true);
+  expect(messages.map((m) => m.orderId)).not.toContain(c);
 });
 
 // case: SWHM2-C-0028@v1
