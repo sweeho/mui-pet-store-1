@@ -2,7 +2,7 @@ import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 
 import { databaseUrl, prepareDatabase } from "./prepare";
-import { users } from "./schema";
+import * as schema from "./schema";
 
 // One connection per process, kept across hot reloads in development, and how to close it
 // (the test setup closes it after each test file).
@@ -17,7 +17,30 @@ function connect(url: string) {
     delete closers.appDb;
     client.close();
   };
-  return drizzle({ client, schema: { users } });
+  return surfaceStoreErrors(drizzle({ client, schema }));
+}
+
+/**
+ * Drizzle wraps every store failure in a "Failed query: …" error and keeps the store's own
+ * message (a constraint violation, a refused connection) on `cause`. The raw-statement methods
+ * rethrow it with the store's message first, so a caller sees what the store said.
+ */
+function surfaceStoreErrors<D extends object>(db: D): D {
+  const wrapped = new Set<string | symbol>(["run", "all", "get"]);
+  return new Proxy(db, {
+    get(target, prop, receiver) {
+      const value: unknown = Reflect.get(target, prop, receiver);
+      if (!wrapped.has(prop) || typeof value !== "function") return value;
+      return async (...args: unknown[]) => {
+        try {
+          return await value.apply(target, args);
+        } catch (e) {
+          const cause = e instanceof Error ? e.cause : undefined;
+          throw cause instanceof Error ? new Error(cause.message, { cause: e }) : e;
+        }
+      };
+    },
+  });
 }
 
 type Db = ReturnType<typeof connect>;

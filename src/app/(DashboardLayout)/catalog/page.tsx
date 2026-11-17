@@ -1,10 +1,17 @@
-import { PlaceholderPage } from "@/components/frames/PlaceholderPage";
+import { getDb } from "@/db/client";
+import { listCategories } from "@/catalog/queries";
+import { pageRequest } from "@/catalog/screen";
+import { CategoryListView } from "@/components/catalog/CategoryListView";
 
-export default function Page() {
-  return (
-    <PlaceholderPage
-      title="Catalog & search"
-      description="Browse categories, products and items, or search by keyword."
-    />
-  );
+// Read on every request: the catalog changes when the sample data is loaded.
+export const dynamic = "force-dynamic";
+
+export default async function CatalogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string }>;
+}) {
+  const { pageNumber, offset, request } = pageRequest((await searchParams).page);
+  const page = await listCategories(await getDb(), request);
+  return <CategoryListView page={page} pageNumber={pageNumber} offset={offset} />;
 }

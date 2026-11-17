@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sample catalog loaded by POST /api/catalog/populate. Locale uses the Java Locale.toString() form. -->
+<catalog locale="en_US">
+  <category id="BIRDS" name="Birds">
+    <product id="AV-CB-01" name="Amazon Parrot" image="bird_icon.gif" descn="Great companion for up to 75 years">
+      <item id="EST-19" listPrice="63.50" unitCost="40.00" image="bird_est-19.gif" descn="Adult Male Amazon Parrot" attr1="Adult Male" attr2="Green plumage" attr3="Talks"/>
+    </product>
+    <product id="AV-SB-02" name="Finch" image="bird_icon.gif" descn="Great stress reliever">
+      <item id="EST-21" listPrice="5.50" unitCost="3.00" image="bird_est-21.gif" descn="Adult Male Finch" attr1="Adult Male" attr2="Yellow"/>
+    </product>
+  </category>
+  <category id="CATS" name="Cats">
+    <product id="FL-DSH-01" name="Manx" image="cat_icon.gif" descn="Great for reducing mouse populations">
+      <item id="EST-14" listPrice="58.50" unitCost="35.00" image="cat_est-14.gif" descn="Tailless Manx" attr1="Tailless" attr2="Short hair"/>
+      <item id="EST-15" listPrice="23.50" unitCost="14.00" image="cat_est-15.gif" descn="With tail Manx" attr1="With tail" attr2="Short hair"/>
+    </product>
+    <product id="FL-DLH-02" name="Persian" image="cat_icon.gif" descn="Friendly house cat, doubles as a princess">
+      <item id="EST-16" listPrice="93.50" unitCost="60.00" image="cat_est-16.gif" descn="Adult Female Persian" attr1="Adult Female" attr2="Long hair"/>
+    </product>
+  </category>
+  <category id="DOGS" name="Dogs">
+    <product id="K9-BD-01" name="Bulldog" image="dog_icon.gif" descn="Friendly dog from England">
+      <item id="EST-6" listPrice="18.50" unitCost="11.00" image="dog_est-6.gif" descn="Male Adult Bulldog" attr1="Male Adult"/>
+      <item id="EST-7" listPrice="18.50" unitCost="11.00" image="dog_est-7.gif" descn="Female Puppy Bulldog" attr1="Female Puppy"/>
+    </product>
+    <product id="K9-CW-01" name="Chihuahua" image="dog_icon.gif" descn="Great companion dog">
+      <item id="EST-26" listPrice="125.50" unitCost="80.00" image="dog_est-26.gif" descn="Adult Male Chihuahua" attr1="Adult Male"/>
+      <item id="EST-27" listPrice="155.29" unitCost="100.00" image="dog_est-27.gif" descn="Adult Female Chihuahua" attr1="Adult Female"/>
+    </product>
+    <product id="K9-DL-01" name="Dalmatian" image="dog_icon.gif" descn="Great dog for a fire station">
+      <item id="EST-10" listPrice="18.50" unitCost="11.00" image="dog_est-10.gif" descn="Spotted Adult Female Dalmatian" attr1="Spotted" attr2="Adult Female"/>
+      <item id="EST-11" listPrice="18.50" unitCost="11.00" image="dog_est-11.gif" descn="Spotted Adult Male Dalmatian" attr1="Spotted" attr2="Adult Male"/>
+    </product>
+    <product id="K9-RT-01" name="Golden Retriever" image="dog_icon.gif" descn="Great family dog">
+      <item id="EST-28" listPrice="155.29" unitCost="100.00" image="dog_est-28.gif" descn="Adult Female Golden Retriever" attr1="Adult Female" attr2="Golden coat"/>
+    </product>
+    <product id="K9-RT-02" name="Labrador Retriever" image="dog_icon.gif" descn="Great hunting dog">
+      <item id="EST-22" listPrice="135.50" unitCost="85.00" image="dog_est-22.gif" descn="Adult Male Labrador Retriever" attr1="Adult Male" attr2="Black coat"/>
+      <item id="EST-23" listPrice="145.49" unitCost="90.00" image="dog_est-23.gif" descn="Adult Female Labrador Retriever" attr1="Adult Female" attr2="Yellow coat"/>
+      <item id="EST-24" listPrice="255.50" unitCost="160.00" image="dog_est-24.gif" descn="Male Puppy Labrador Retriever" attr1="Male Puppy" attr2="Chocolate coat" attr3="8 weeks old"/>
+      <item id="EST-25" listPrice="325.29" unitCost="200.00" image="dog_est-25.gif" descn="Female Puppy Labrador Retriever" attr1="Female Puppy" attr2="Black coat"/>
+    </product>
+    <product id="K9-PO-02" name="Poodle" image="dog_icon.gif" descn="Cute dog from France">
+      <item id="EST-8" listPrice="18.50" unitCost="11.00" image="dog_est-8.gif" descn="Male Puppy Poodle" attr1="Male Puppy"/>
+    </product>
+  </category>
+  <category id="FISH" name="Fish">
+    <product id="FI-SW-01" name="Angelfish" image="fish_icon.gif" descn="Salt water fish from Australia">
+      <item id="EST-1" listPrice="16.50" unitCost="10.00" image="fish_est-1.gif" descn="Large Angelfish" attr1="Large" attr2="Salt water"/>
+      <item id="EST-2" listPrice="16.50" unitCost="10.00" image="fish_est-2.gif" descn="Small Angelfish" attr1="Small" attr2="Salt water"/>
+    </product>
+    <product id="FI-SW-02" name="Tiger Shark" image="fish_icon.gif" descn="Salt water fish from Australia">
+      <item id="EST-3" listPrice="18.50" unitCost="11.00" image="fish_est-3.gif" descn="Toothless Tiger Shark" attr1="Toothless" attr2="Salt water"/>
+    </product>
+    <product id="FI-FW-01" name="Koi" image="fish_icon.gif" descn="Fresh water fish from Japan">
+      <item id="EST-4" listPrice="18.50" unitCost="11.00" image="fish_est-4.gif" descn="Spotted Koi" attr1="Spotted" attr2="Fresh water"/>
+      <item id="EST-5" listPrice="18.50" unitCost="11.00" image="fish_est-5.gif" descn="Spotless Koi" attr1="Spotless" attr2="Fresh water"/>
+    </product>
+    <product id="FI-FW-02" name="Goldfish" image="fish_icon.gif" descn="Fresh water fish from China">
+      <item id="EST-20" listPrice="5.50" unitCost="3.00" image="fish_est-20.gif" descn="Adult Goldfish" attr1="Adult" attr2="Fresh water"/>
+    </product>
+  </category>
+  <category id="REPTILES" name="Reptiles">
+    <product id="RP-SN-01" name="Rattlesnake" image="reptile_icon.gif" descn="Doubles as a watch dog">
+      <item id="EST-12" listPrice="18.50" unitCost="11.00" image="reptile_est-12.gif" descn="Venomless Rattlesnake" attr1="Venomless"/>
+      <item id="EST-13" listPrice="18.50" unitCost="11.00" image="reptile_est-13.gif" descn="Rattleless Rattlesnake" attr1="Rattleless"/>
+    </product>
+    <product id="RP-LI-02" name="Iguana" image="reptile_icon.gif" descn="Friendly green friend">
+      <item id="EST-18" listPrice="9.50" unitCost="6.00" image="reptile_est-18.gif" descn="Green Adult Iguana" attr1="Green" attr2="Adult"/>
+    </product>
+  </category>
+</catalog>
