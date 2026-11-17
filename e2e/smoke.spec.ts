@@ -16,7 +16,8 @@ test("home page loads with no console errors", async ({ page }) => {
   const response = await page.goto("/");
 
   expect(response?.ok()).toBe(true);
-  await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Welcome to Pet Store"); // landing page
+  await expect(page.getByRole("main")).toBeVisible();
   expect(consoleErrors).toEqual([]);
 });
 

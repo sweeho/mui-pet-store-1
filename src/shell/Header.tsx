@@ -7,13 +7,18 @@
 
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import { styled } from "@mui/material/styles";
-import { IconMenu } from "@tabler/icons-react";
+import { IconLanguage, IconMenu } from "@tabler/icons-react";
+import Link from "next/link";
 
 const AppBarStyled = styled(AppBar)(({ theme }) => ({
   boxShadow: "none",
+  borderBottom: `1px solid ${theme.palette.divider}`,
   background: theme.palette.background.paper,
   justifyContent: "center",
   backdropFilter: "blur(4px)",
@@ -41,6 +46,42 @@ export function Header({ toggleMobileSidebar }: { toggleMobileSidebar: () => voi
           <IconMenu width="20" height="20" />
         </IconButton>
         <Box flexGrow={1} />
+        {/* Inert placeholders: language switching and accounts belong to later capabilities. */}
+        <Box
+          role="group"
+          aria-label="Language"
+          sx={{ display: { xs: "none", sm: "inline-flex" }, alignItems: "center", gap: 0.5, mr: 1 }}
+        >
+          <IconLanguage size={16} aria-hidden />
+          <ToggleButtonGroup size="small" exclusive value="en" aria-label="Language">
+            <ToggleButton value="en" lang="en">
+              English
+            </ToggleButton>
+            <ToggleButton value="ja" lang="ja">
+              日本語
+            </ToggleButton>
+            <ToggleButton value="zh" lang="zh">
+              中文
+            </ToggleButton>
+          </ToggleButtonGroup>
+        </Box>
+        <Button
+          variant="outlined"
+          color="inherit"
+          size="small"
+          component={Link}
+          href="/signon"
+          sx={{ textTransform: "none" }}
+        >
+          Sign on
+        </Button>
+        <Button
+          variant="contained"
+          size="small"
+          sx={{ textTransform: "none", display: { xs: "none", sm: "inline-flex" } }}
+        >
+          Create account
+        </Button>
       </ToolbarStyled>
     </AppBarStyled>
   );

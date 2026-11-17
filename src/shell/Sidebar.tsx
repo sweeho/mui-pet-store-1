@@ -7,12 +7,10 @@
 
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import type { Theme } from "@mui/material/styles";
 
 import { SidebarItems } from "./SidebarItems";
 
-const SIDEBAR_WIDTH = "270px";
+const SIDEBAR_WIDTH = "240px";
 
 const scrollbarStyles = {
   "&::-webkit-scrollbar": { width: "7px" },
@@ -27,11 +25,10 @@ export function Sidebar({
   isMobileSidebarOpen: boolean;
   onSidebarClose: () => void;
 }) {
-  const lgUp = useMediaQuery((theme: Theme) => theme.breakpoints.up("lg"));
-
-  if (lgUp) {
-    return (
-      <Box sx={{ width: SIDEBAR_WIDTH, flexShrink: 0 }}>
+  // Both are rendered by breakpoint in CSS, so the navigation is in the server's HTML.
+  return (
+    <>
+      <Box sx={{ width: SIDEBAR_WIDTH, flexShrink: 0, display: { xs: "none", lg: "block" } }}>
         <Drawer
           anchor="left"
           open
@@ -43,22 +40,24 @@ export function Sidebar({
           <SidebarItems />
         </Drawer>
       </Box>
-    );
-  }
-
-  return (
-    <Drawer
-      anchor="left"
-      open={isMobileSidebarOpen}
-      onClose={onSidebarClose}
-      variant="temporary"
-      slotProps={{
-        paper: {
-          sx: { width: SIDEBAR_WIDTH, boxShadow: (theme) => theme.shadows[8], ...scrollbarStyles },
-        },
-      }}
-    >
-      <SidebarItems />
-    </Drawer>
+      <Drawer
+        anchor="left"
+        open={isMobileSidebarOpen}
+        onClose={onSidebarClose}
+        variant="temporary"
+        sx={{ display: { xs: "block", lg: "none" } }}
+        slotProps={{
+          paper: {
+            sx: {
+              width: SIDEBAR_WIDTH,
+              boxShadow: (theme) => theme.shadows[8],
+              ...scrollbarStyles,
+            },
+          },
+        }}
+      >
+        <SidebarItems />
+      </Drawer>
+    </>
   );
 }
