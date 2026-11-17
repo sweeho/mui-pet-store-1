@@ -45,7 +45,8 @@ Jest coverage (from `npm test -- --coverage`): All files 87.5% statements, 62.06
 ## Issues Found
 
 - D1 (fixed in place): `npm run build` / `npm run typecheck` failed with TS errors in locked acceptance tests of later capabilities (missing `@/cart`, `@/fulfilment` etc. modules). Fix: `tsconfig.json` exclude `tests/acceptance`. After: typecheck exit 0, build exit 0. See `integration-defects-resolution.md`.
-- W1 (warning, not fixed): `npm run lint` fails on 2 warnings in locked tests (`checkout-and-payment.test.ts`, `order-notifications.test.ts`). Acceptance tests are locked.
+- D2 (fixed in place): handoff CI was red on lint and format. Fix: ignore locked `tests/acceptance` in eslint and prettier, and intake files (`api/`, `build/`, `design/prd/`) in prettier. Lint, format:check and typecheck now exit 0.
+- W1 (superseded by D2; was: lint warnings in locked tests): `npm run lint` fails on 2 warnings in locked tests (`checkout-and-payment.test.ts`, `order-notifications.test.ts`). Acceptance tests are locked.
 - W2 (warning, not fixed): `npm run format:check` flags `api/openapi.yaml`, `build/manifest.yaml`, `design/prd/PRD.md`, `tests/acceptance/shopping-cart/e2e/shopping-cart.spec.ts`; none belong to this sprint's code.
 
 ## Recommendation

@@ -15,5 +15,7 @@ export default defineConfig([
     ".stryker-tmp/**",
     "playwright-report/**",
     "test-results/**",
+    // Locked acceptance tests: nobody on a sprint may edit them, so a lint warning in one cannot be fixed.
+    "tests/acceptance/**",
   ]),
 ]);

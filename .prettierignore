@@ -11,3 +11,9 @@ artifacts/
 # The skills Vortex writes into an agent's clone. Git excludes them through .git/info/exclude,
 # which Prettier does not read, so `verify` in the agent's own clone would check them.
 .claude/skills/
+
+# Intake files and locked acceptance tests that no sprint agent may reformat.
+api/
+build/
+design/prd/
+tests/acceptance/
