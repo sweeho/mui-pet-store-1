@@ -42,7 +42,7 @@ test("SWHM2-C-0179 inventory screen rows show id, quantity, new-quantity input, 
   expect(Number.isNaN(await existing(row))).toBe(false);
   await expect(row.locator(`input[name="qty_${itemId}"]`)).toBeVisible();
   await expect(row.locator(`input[type="checkbox"][name="item_${itemId}"]`)).toBeVisible();
-  await expect(submitButton(page)).toBeVisible();
+  await expect(submitButton(page).first()).toBeVisible();
 });
 
 // case: SWHM2-C-0195@v1
@@ -53,7 +53,7 @@ test("SWHM2-C-0195 an unticked item keeps its stock when the form is submitted",
   const { itemId, row, qty } = await firstRow(page);
   const before = await existing(row);
   await qty.fill(String(before + 15));
-  await submitButton(page).click();
+  await submitButton(page).first().click();
   await page.goto("/admin/inventory");
   const again = page.locator("tr", { has: page.locator(`input[name="qty_${itemId}"]`) });
   expect(await existing(again)).toBe(before);
@@ -70,7 +70,7 @@ test("SWHM2-C-0211 a clerk update sets the quantity and reprocesses pending orde
     const qty = page.locator(`input[name="qty_${itemId}"]`);
     await qty.fill(String(value));
     await page.locator(`input[name="item_${itemId}"]`).check();
-    await submitButton(page).click();
+    await submitButton(page).first().click();
     await page.goto("/admin/inventory");
   };
   await set(0);

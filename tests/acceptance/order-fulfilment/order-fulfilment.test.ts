@@ -377,6 +377,13 @@ describe("order-fulfilment: orders and statuses", () => {
     expect(items).toHaveLength(1);
     expect(Object.getPrototypeOf(items[0])).toBe(Object.prototype);
     expect(JSON.parse(JSON.stringify(items[0]))).toMatchObject({ itemId: "EST-1", quantity: 2 });
+    // the transaction has ended: deleting the rows afterwards must not affect the returned data
+    await purgeSupplierOrders(t.env, ["S1"]);
+    expect(
+      await t.db.all(sql`SELECT * FROM supplier_order_line WHERE order_id = 'S1'`),
+    ).toHaveLength(0);
+    expect(items).toHaveLength(1);
+    expect(items[0]).toMatchObject({ itemId: "EST-1", quantity: 2 });
   });
 
   // case: SWHM2-C-0218@v1
