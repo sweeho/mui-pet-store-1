@@ -1,0 +1,91 @@
+recommendations:
+  - record_key: CHK-REQ-0006
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source. The placeholder card looks like a legacy defect or demo shortcut; confirm what the code does, and the Business Owner decides in the defect register whether the rebuild keeps it.
+  - record_key: CHK-BR-0002
+    recommendation: accept
+    confidence: high
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source.
+  - record_key: CHK-BR-0004
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source. Absence of validation is a gap, not a rule; the order form validation lives elsewhere.
+  - record_key: CHECKOUT-AND-PAYMENT-ENT-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source.
+  - record_key: CHK-BR-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source.
+  - record_key: CHK-ENT-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source.
+  - record_key: CHK-REQ-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source.
+  - record_key: CHK-REQ-0002
+    recommendation: accept
+    confidence: high
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source.
+  - record_key: CHKOUT-INT-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source.
+  - record_key: CUS-ENT-0005
+    recommendation: accept
+    confidence: high
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source.
+  - record_key: PAY-ENT-0001
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source. Unencrypted card number storage is a regulated-data risk; confirm the DDL and decide in the defect register whether the rebuild must encrypt.
+  - record_key: CHK-ENT-0003
+    recommendation: accept
+    confidence: high
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source.
+  - record_key: CHK-INT-0003
+    recommendation: accept
+    confidence: high
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source.
+  - record_key: CHK-REQ-0003
+    recommendation: accept
+    confidence: high
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source.
+  - record_key: CHK-REQ-0004
+    recommendation: accept
+    confidence: high
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source.
+  - record_key: CHK-REQ-0005
+    recommendation: accept
+    confidence: high
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source.
+  - record_key: CHK-RULE-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source.
+  - record_key: CHK-RULE-0002
+    recommendation: accept
+    confidence: high
+    reason: >
+      Statement matches the component code and descriptor read directly in legacy-source.
