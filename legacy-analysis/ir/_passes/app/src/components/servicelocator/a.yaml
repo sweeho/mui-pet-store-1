@@ -1,0 +1,136 @@
+records:
+  - record_key: ORDN-INT-0001
+    kind: integration
+    capability_key: order-notifications
+    requirement: >
+      The system SHALL resolve named infrastructure resources (local and remote component homes, message queues and queue connection factories, topics and topic connection factories, data sources, URLs, boolean and string settings) by name from the container's naming service on request.
+    confidence: medium
+    confidence_basis: >
+      One clear place (two classes implementing the same lookup methods); no tests or config in this module show callers or names looked up.
+    risk_class: operational
+    basis: >
+      The module has no business rules; it is the lookup utility used to reach JMS destinations (used for async order mail) and other resources. No listed capability fits exactly, so it is filed under order-notifications as the closest (async messaging).
+    plain_text: >
+      The application finds the shared services it depends on, such as message queues, databases and configuration values, by their configured names.
+    technical_note: >
+      ejb/ServiceLocator.java and web/ServiceLocator.java wrap javax.naming.InitialContext.lookup with a cast per resource type.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/servicelocator/src/com/sun/j2ee/blueprints/servicelocator/ejb/ServiceLocator.java
+        line_start: 83
+        line_end: 93
+        excerpt: |
+          public EJBLocalHome getLocalHome(String jndiHomeName) throws ServiceLocatorException {
+            EJBLocalHome home = null;
+            try {
+                home = (EJBLocalHome) ic.lookup(jndiHomeName);
+      - path: legacy-source/app/src/components/servicelocator/src/com/sun/j2ee/blueprints/servicelocator/ejb/ServiceLocator.java
+        line_start: 136
+        line_end: 146
+        excerpt: |
+          public  Queue getQueue(String queueName) throws ServiceLocatorException {
+            Queue queue = null;
+            try {
+              queue =(Queue)ic.lookup(queueName);
+    stack_metadata:
+      framework: J2EE service locator pattern
+      ejb.bean: none
+      jms.queue: looked up by caller-supplied name
+  - record_key: ORDN-REQ-0002
+    kind: requirement
+    capability_key: order-notifications
+    requirement: >
+      The system SHALL, on the web tier, provide a single shared locator instance that caches resolved homes, queues, queue and topic connection factories, topics and data sources by name so each name is looked up only once.
+    confidence: high
+    confidence_basis: >
+      Singleton and cache logic appear repeatedly in the web class and its class comment states the strategy; contrasts with the uncached ejb class.
+    risk_class: operational
+    basis: >
+      web/ServiceLocator caches in a synchronized map keyed by name; the EJB-tier variant does not cache.
+    plain_text: >
+      On the web side, once a shared service has been found it is remembered and reused rather than looked up again.
+    technical_note: >
+      Static singleton created in a static initialiser; Collections.synchronizedMap(HashMap). URL, boolean and string lookups bypass the cache.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/servicelocator/src/com/sun/j2ee/blueprints/servicelocator/web/ServiceLocator.java
+        line_start: 59
+        line_end: 96
+        excerpt: |
+          * This implementation uses the "singleton" strategy and also the "caching"
+          * strategy.
+          * This implementation is intended to be used on the web tier and
+          * not on the ejb tier.
+      - path: legacy-source/app/src/components/servicelocator/src/com/sun/j2ee/blueprints/servicelocator/web/ServiceLocator.java
+        line_start: 175
+        line_end: 191
+        excerpt: |
+          public  Queue getQueue(String queueName) throws ServiceLocatorException {
+            Queue queue = null;
+            try {
+              if (cache.containsKey(queueName)) {
+                  queue = (Queue) cache.get(queueName);
+              } else {
+                  queue =(Queue)ic.lookup(queueName);
+                  cache.put(queueName, queue);
+    stack_metadata:
+      framework: J2EE service locator pattern
+      session.scope: application (static singleton)
+  - record_key: ORDN-REQ-0003
+    kind: requirement
+    capability_key: order-notifications
+    requirement: >
+      GIVEN a lookup fails for any reason WHEN the locator is asked for a resource THEN the system SHALL raise a single locator error that wraps the underlying cause and can report its root cause.
+    confidence: high
+    confidence_basis: >
+      Every lookup method wraps exceptions, and the exception class implements wrapping and root-cause retrieval.
+    risk_class: operational
+    basis: >
+      All methods catch NamingException and Exception and rethrow ServiceLocatorException.
+    plain_text: >
+      When a shared service cannot be found, callers get one consistent error that carries the original reason.
+    technical_note: >
+      ServiceLocatorException has getException() and recursive getRootCause().
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/servicelocator/src/com/sun/j2ee/blueprints/servicelocator/ServiceLocatorException.java
+        line_start: 73
+        line_end: 97
+        excerpt: |
+          public ServiceLocatorException(Exception exception) {
+            this(null, exception);
+          ...
+          public Exception getRootCause() {
+            if (exception instanceof ServiceLocatorException) {
+      - path: legacy-source/app/src/components/servicelocator/src/com/sun/j2ee/blueprints/servicelocator/ejb/ServiceLocator.java
+        line_start: 217
+        line_end: 227
+        excerpt: |
+          public boolean getBoolean(String envName) throws ServiceLocatorException {
+            Boolean bool = null;
+            try {
+              bool = (Boolean)ic.lookup(envName);
+    stack_metadata:
+      framework: J2EE service locator pattern
+suspected_defects:
+  - capability_key: order-notifications
+    record_keys: [ORDN-REQ-0002]
+    severity: medium
+    category: error-swallowed
+    title: Web locator initialisation failure is only printed, leaving no instance
+    description: >
+      If creating the singleton fails, the error is printed to the error stream and swallowed; getInstance() then returns null and callers would fail with a null reference rather than a locator error.
+    traces:
+      - path: legacy-source/app/src/components/servicelocator/src/com/sun/j2ee/blueprints/servicelocator/web/ServiceLocator.java
+        line_start: 74
+        line_end: 81
+        excerpt: |
+          static {
+            try {
+              me = new ServiceLocator();
+            } catch(ServiceLocatorException se) {
+              System.err.println(se);
+              se.printStackTrace(System.err);
+            }
+          }
+findings: []
