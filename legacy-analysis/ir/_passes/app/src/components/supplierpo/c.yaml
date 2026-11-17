@@ -1,0 +1,206 @@
+records:
+  - record_key: ORDER-FULFILMENT-ENTITY-0001
+    kind: entity
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL keep a supplier purchase order identified by a purchase order id, holding an order date, a status, one shipping contact and one or more line items.
+    confidence: high
+    confidence_basis: >
+      Declared in the deployment descriptor (CMP fields, primary key, relationships) and in the entity bean accessors and the message DTD; two independent places.
+    risk_class: operational
+    basis: CMP fields poId (primary key), poDate, poStatus plus relationships to contact info and line items.
+    plain_text: >
+      A supplier order records its order number, date, status, who it ships to and the items ordered.
+    technical_note: >
+      SupplierOrderEJB is an abstract CMP 2.x entity bean; poDate is stored as epoch milliseconds (long). The DTD requires at least one LineItem (LineItem+).
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/supplierpo/src/ejb-jar.xml
+        line_start: 58
+        line_end: 69
+        excerpt: |
+          <cmp-version>2.x</cmp-version>
+          <abstract-schema-name>SupplierOrder</abstract-schema-name>
+          <cmp-field>
+            <field-name>poId</field-name>
+          </cmp-field>
+      - path: legacy-source/app/src/components/supplierpo/src/com/sun/j2ee/blueprints/supplierpo/rsrc/schemas/SupplierOrder.dtd
+        line_start: 38
+        line_end: 38
+        excerpt: |
+          <!ELEMENT SupplierOrder (OrderId, OrderDate, ShippingInfo, LineItem+)>
+    stack_metadata:
+      framework: EJB 2.x CMP
+      ejb.bean: SupplierOrderEJB
+      db.object: SupplierOrder (container-generated table)
+  - record_key: ORDER-FULFILMENT-REQ-0001
+    kind: requirement
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL create each new supplier purchase order with the status PENDING, taking the order id and order date from the incoming order.
+    confidence: medium
+    confidence_basis: >
+      One clear place (ejbCreate); no test or config corroborates it.
+    risk_class: operational
+    basis: ejbCreate sets status unconditionally to PENDING.
+    plain_text: >
+      Every new supplier order starts as pending.
+    technical_note: >
+      ejbCreate copies orderId and orderDate.getTime(), sets OrderStatusNames.PENDING. Nothing in this module ever changes the status afterwards.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/supplierpo/src/com/sun/j2ee/blueprints/supplierpo/ejb/SupplierOrderEJB.java
+        line_start: 151
+        line_end: 156
+        excerpt: |
+          public String ejbCreate(SupplierOrder supplierOrder) throws CreateException {
+            setPoId(supplierOrder.getOrderId());
+            setPoDate(supplierOrder.getOrderDate().getTime());
+            setPoStatus(OrderStatusNames.PENDING);
+            return null;
+          }
+    stack_metadata:
+      ejb.bean: SupplierOrderEJB
+  - record_key: ORDER-FULFILMENT-REQ-0002
+    kind: requirement
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL, on creating a supplier purchase order, also create a stored shipping contact from the order's shipping information and one stored line item for each line item received, with the shipped quantity initialised to 0, and attach them to the order.
+    confidence: medium
+    confidence_basis: >
+      One clear place (ejbPostCreate); the meaning of the literal 0 argument is inferred from the line item component, which was not read in this pass.
+    risk_class: operational
+    basis: ejbPostCreate creates contact info and iterates the line items calling create(li, 0).
+    plain_text: >
+      When a supplier order is placed, its delivery contact and each ordered item are saved with it, and no item is marked as shipped yet.
+    technical_note: >
+      Done in ejbPostCreate via ServiceLocator local homes (ContactInfoEJB, LineItemEJB). Any ServiceLocatorException is rethrown as CreateException, rolling back creation. The second argument 0 is assumed to be the initial shipped quantity (inferred).
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/supplierpo/src/com/sun/j2ee/blueprints/supplierpo/ejb/SupplierOrderEJB.java
+        line_start: 162
+        line_end: 184
+        excerpt: |
+          ContactInfoLocal cinfoloc = (ContactInfoLocal)
+                          cinforef.create(supplierOrder.getShippingInfo());
+          setContactInfo(cinfoloc);
+          ...
+            LineItemLocal lineItemloc = (LineItemLocal) lineItemref.create(li, 0);
+            addLineItem(lineItemloc);
+    stack_metadata:
+      ejb.bean: SupplierOrderEJB
+      ejb.transaction: container-managed (default; not stated in this bean's descriptor excerpt)
+  - record_key: ORDER-FULFILMENT-REQ-0003
+    kind: requirement
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL recognise the supplier order statuses PENDING, APPROVED, DENIED and COMPLETED, and SHALL allow retrieving all supplier orders having a given status.
+    confidence: high
+    confidence_basis: >
+      Status constants and the finder query in the descriptor, plus the user guide status table; only the finder is enforced in this module.
+    risk_class: operational
+    basis: OrderStatusNames constants; findOrdersByStatus EJB-QL query.
+    plain_text: >
+      Orders move through the states pending, approved, denied and completed, and staff can list orders in any one state.
+    technical_note: >
+      Finder findOrdersByStatus(String) = SELECT DISTINCT OBJECT(a) FROM SupplierOrder a WHERE a.poStatus = ?1. The status values are not validated on set; this module has no code that transitions status.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/supplierpo/src/ejb-jar.xml
+        line_start: 95
+        line_end: 104
+        excerpt: |
+          <method-name>findOrdersByStatus</method-name>
+          ...
+          <ejb-ql>SELECT DISTINCT OBJECT(a) FROM SupplierOrder a WHERE a.poStatus = ?1</ejb-ql>
+      - path: legacy-source/app/src/components/supplierpo/src/com/sun/j2ee/blueprints/supplierpo/ejb/OrderStatusNames.java
+        line_start: 50
+        line_end: 60
+        excerpt: |
+          public static final String PENDING = "PENDING";
+          public  static final String APPROVED = "APPROVED";
+          public  static final String DENIED = "DENIED";
+          public  static final String COMPLETED = "COMPLETED";
+      - path: legacy-analysis/sources/pdf/petstore-user-guide/extracted.md
+        kind: document
+        anchor: "Order statuses (PENDING / APPROVED / DENIED / COMPLETED table)"
+        excerpt: |
+          PENDINGWaiting for the administrator to approve or deny
+          APPROVEDApproved and sent to the Supplier, not yet fully invoiced
+    stack_metadata:
+      ejb.bean: SupplierOrderEJB
+  - record_key: ORDER-FULFILMENT-REQ-0004
+    kind: requirement
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL delete a supplier order's shipping contact, and that contact's address, together with the supplier order.
+    confidence: medium
+    confidence_basis: >
+      Cascade-delete declared in the descriptor relationships; the runbook purge text corroborates deleting supplier orders and contact data, but the cascade for line items was not confirmed here.
+    risk_class: regulated
+    basis: cascade-delete on the contact-info role and on the contact-to-address relationship.
+    plain_text: >
+      When a supplier order is removed, the delivery contact and address stored with it are removed too.
+    technical_note: >
+      ejb-jar relationships SupplierOrder-ContactInfo and ContactInfo-Address carry cascade-delete. The weekly purge batch deletes supplier orders for completed or denied orders older than 180 days (runbook).
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/supplierpo/src/ejb-jar.xml
+        line_start: 234
+        line_end: 283
+        excerpt: |
+          <ejb-relation-name>SupplierOrder-ContactInfo</ejb-relation-name>
+          ...
+          <cascade-delete />
+      - path: legacy-analysis/sources/pdf/petstore-operations-runbook/extracted.md
+        kind: document
+        anchor: "3.5 PS_ORDER_PURGE"
+        excerpt: |
+          Deletes COMPLETED and DENIED orders older than 180 days, with their order lines, supplier orders,
+          contact information, addresses and payment cards.
+    stack_metadata:
+      ejb.bean: SupplierOrderEJB
+  - record_key: ORDER-FULFILMENT-INT-0001
+    kind: integration
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL accept a supplier purchase order made up of an order id, an order date, shipping contact information and at least one line item.
+    confidence: medium
+    confidence_basis: >
+      DTD states the structure; the queue transport (PurchaseOrderQueue) is documented in the runbook but the sender and receiver are outside this module.
+    risk_class: operational
+    basis: SupplierOrder.dtd and runbook data flow.
+    plain_text: >
+      Approved orders are sent to the supplier as a purchase order with an order number, date, delivery contact and at least one item.
+    technical_note: >
+      DTD defines the XML document exchanged; per the runbook it travels over jms/supplier/PurchaseOrderQueue. Module itself only holds the DTD and the entity.
+    interface: true
+    traces:
+      - path: legacy-source/app/src/components/supplierpo/src/com/sun/j2ee/blueprints/supplierpo/rsrc/schemas/SupplierOrder.dtd
+        line_start: 38
+        line_end: 44
+        excerpt: |
+          <!ELEMENT SupplierOrder (OrderId, OrderDate, ShippingInfo, LineItem+)>
+          <!ELEMENT ShippingInfo (ContactInfo)>
+      - path: legacy-analysis/sources/pdf/petstore-operations-runbook/extracted.md
+        kind: document
+        anchor: "Architecture / order flow (APPROVED --> Supplier (PurchaseOrderQueue))"
+        excerpt: |
+          APPROVED --> Supplier (PurchaseOrderQueue) --> ships from INVENTORY --> InvoiceTopic --> OPC
+    stack_metadata:
+      jms.queue: jms/supplier/PurchaseOrderQueue
+suspected_defects:
+  - capability_key: order-fulfilment
+    record_keys: [ORDER-FULFILMENT-ENTITY-0001]
+    severity: medium
+    category: data-corruption
+    title: getData returns shipping info from an empty copy, not from the stored contact
+    description: >
+      getData builds a new SupplierOrder and sets its shipping info to that new object's own (null) shipping info, so the stored contact is never returned; status is also not copied. Callers reading a supplier order through getData lose the shipping contact and status.
+    traces:
+      - path: legacy-source/app/src/components/supplierpo/src/com/sun/j2ee/blueprints/supplierpo/ejb/SupplierOrderEJB.java
+        line_start: 205
+        line_end: 216
+        excerpt: |
+          supplierOrder.setShippingInfo(supplierOrder.getShippingInfo());
+findings: []
