@@ -7,6 +7,7 @@ Recovered from: ONOT-REQ-0005
 The system SHALL NOT send status e-mail when notifications are not enabled by the administrator, and the mailer itself SHALL send whatever it is given.
 
 #### Scenario: Notifications disabled
+ID: SWHM2-R-0189.01
 - **GIVEN** notifications are not enabled
 - **WHEN** an order changes status
 - **THEN** no status e-mail is sent
@@ -18,6 +19,7 @@ Recovered from: ORDN-INT-0006
 The system SHALL represent a notification mail as a Mail XML document with an Address, a Subject and a Content, all text.
 
 #### Scenario: Mail document built
+ID: SWHM2-R-0190.01
 - **GIVEN** a notification to send
 - **WHEN** the mail document is produced
 - **THEN** it carries Address, Subject and Content as text
@@ -29,6 +31,7 @@ Recovered from: NOTIF-REQ-0001
 The system SHALL send a completed purchase order, as an XML message, asynchronously to the order processing center, and SHALL empty the shopping cart and return the billing email and order id to the shopper afterwards.
 
 #### Scenario: Order submitted
+ID: SWHM2-R-0102.01
 - **GIVEN** a completed purchase order
 - **WHEN** it is submitted
 - **THEN** the XML message is sent asynchronously, the cart is emptied, and billing e-mail and order id are returned
@@ -40,6 +43,7 @@ Recovered from: OF-REQ-0003
 The system SHALL publish each generated invoice document to the invoice topic so the order processing centre can mark the order fulfilled.
 
 #### Scenario: Invoice generated
+ID: SWHM2-R-0103.01
 - **GIVEN** a generated invoice document
 - **WHEN** it is issued
 - **THEN** it is published to the invoice topic
@@ -51,6 +55,7 @@ Recovered from: ONOT-RULE-0002
 The system SHALL send the mail body as HTML, with the sender taken from the mail session default, recipients parsed from the address field non-strictly so several addresses are allowed, the subject as given, the current date as sent date and an X-Mailer header of "JavaMailer".
 
 #### Scenario: Mail with several recipients
+ID: SWHM2-R-0104.01
 - **GIVEN** a mail request whose address lists two recipients
 - **WHEN** the mailer sends it
 - **THEN** an HTML message goes to both with the default sender, current sent date and X-Mailer "JavaMailer"
@@ -62,6 +67,7 @@ Recovered from: ORDN-BR-0002
 The system SHALL reject an incoming OrderApproval document, parsed with validation enabled, whose document type is not the OrderApproval 1.0 type or which is otherwise invalid.
 
 #### Scenario: Wrong document type
+ID: SWHM2-R-0105.01
 - **GIVEN** validation is enabled
 - **WHEN** a document of another type is parsed
 - **THEN** it is rejected with an error
@@ -73,6 +79,7 @@ Recovered from: ORDN-BR-0004
 The system SHALL raise an error when a queued mail request is not a valid mail document or cannot be read.
 
 #### Scenario: Malformed mail request
+ID: SWHM2-R-0106.01
 - **GIVEN** a queued message that is not a valid mail document
 - **WHEN** the mailer processes it
 - **THEN** an error is raised
@@ -84,6 +91,7 @@ Recovered from: ORDN-INT-0001
 The system SHALL exchange order approval outcomes as an OrderApproval XML document containing one or more Order entries, each with an order identifier and its approval outcome.
 
 #### Scenario: Approval outcomes exchanged
+ID: SWHM2-R-0107.01
 - **GIVEN** several approved or rejected orders
 - **WHEN** outcomes are sent
 - **THEN** one OrderApproval document with one Order entry per order is produced
@@ -95,6 +103,7 @@ Recovered from: ORDN-REQ-0002
 The system SHALL, on the web tier, provide a single shared locator instance that caches resolved homes, queues, queue and topic connection factories, topics and data sources by name so each name is looked up only once.
 
 #### Scenario: Repeated lookup
+ID: SWHM2-R-0108.01
 - **GIVEN** a queue already resolved by name
 - **WHEN** it is requested again
 - **THEN** the cached instance is returned without a new lookup
@@ -106,6 +115,7 @@ Recovered from: ORDNOT-BUSINESS-RULE-0003
 The system SHALL send the message as part of the caller's transaction, so that it is only delivered if the surrounding business transaction commits.
 
 #### Scenario: Transaction rolls back
+ID: SWHM2-R-0109.01
 - **GIVEN** a message sent inside a business transaction
 - **WHEN** the transaction rolls back
 - **THEN** the message is not delivered
@@ -117,6 +127,7 @@ Recovered from: ORDNOT-WORKFLOW-0001
 The system SHALL accept a text message from a calling component and place it, as a single text message, on the asynchronous sender queue for later processing by a separate consumer.
 
 #### Scenario: Message queued
+ID: SWHM2-R-0110.01
 - **GIVEN** a calling component with a text message
 - **WHEN** it sends the message
 - **THEN** one text message is placed on the queue
@@ -128,11 +139,13 @@ Recovered from: order-notifications-REQ-0003
 The system SHALL, when an invoice completes an order, send the order id to the completed-order mail queue, and partially shipped orders SHALL NOT trigger that message.
 
 #### Scenario: Order completed
+ID: SWHM2-R-0111.01
 - **GIVEN** an invoice that completes the order
 - **WHEN** it is processed
 - **THEN** the order id is sent to the completed-order mail queue
 
 #### Scenario: Partial shipment
+ID: SWHM2-R-0111.02
 - **GIVEN** an invoice for a partially shipped order
 - **WHEN** it is processed
 - **THEN** no completed-order message is sent
@@ -144,6 +157,7 @@ Recovered from: order-notifications-RULE-0001
 The system SHALL send each of the three order e-mails (status change, shipment invoice, order completed) only when its own switch is enabled, and all three switches SHALL default to disabled.
 
 #### Scenario: Default configuration
+ID: SWHM2-R-0112.01
 - **GIVEN** no switch has been changed
 - **WHEN** an order changes status
 - **THEN** no e-mail is sent
@@ -155,6 +169,7 @@ Recovered from: order-notifications-RULE-0002
 The system SHALL address each order e-mail to the e-mail address on the purchase order, render its body in the locale on the purchase order, and use the subject "Java Pet Store Order Status: <order id>" for status changes, "Java Pet Store Order Shipped: <order id>" for invoices and "Java Pet Store Order COMPLETED: <order id>" for completion.
 
 #### Scenario: Status change e-mail
+ID: SWHM2-R-0113.01
 - **GIVEN** the status switch is enabled and order 42 has a stored address and locale
 - **WHEN** its status changes
 - **THEN** an e-mail with subject "Java Pet Store Order Status: 42" goes to that address in that locale
@@ -166,6 +181,7 @@ Recovered from: ONOT-ENT-0004
 The system SHALL represent a mail request as a document with exactly three text parts in order: address, subject, content, and SHALL validate incoming requests against that structure.
 
 #### Scenario: Wrong structure
+ID: SWHM2-R-0135.01
 - **GIVEN** a request with parts out of order or missing
 - **WHEN** it is validated
 - **THEN** it is rejected
@@ -177,6 +193,7 @@ Recovered from: ORDN-BR-0003
 The system SHALL discard a mail request that cannot be delivered (mail server missing or send failure) silently, without retry and without failing the order flow.
 
 #### Scenario: Send failure
+ID: SWHM2-R-0136.01
 - **GIVEN** the mail server is unreachable
 - **WHEN** the mailer processes a request
 - **THEN** the request is discarded, not retried, and the order flow is unaffected
@@ -188,6 +205,7 @@ Recovered from: ORDN-REQ-0003
 The system SHALL, when a lookup fails for any reason, raise a single locator error that wraps the underlying cause.
 
 #### Scenario: Lookup fails
+ID: SWHM2-R-0137.01
 - **GIVEN** a name that cannot be resolved
 - **WHEN** the locator is asked for it
 - **THEN** a locator error wrapping the cause is raised
