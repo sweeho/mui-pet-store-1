@@ -1,0 +1,127 @@
+records:
+  - record_key: CHK-RULE-0001
+    kind: business-rule
+    capability_key: checkout-and-payment
+    requirement: >
+      The system SHALL produce a unique identifier for a named sequence by incrementing that sequence's counter by one and returning the sequence name followed by the new counter value as text (for example prefix "1001" and count 1 gives "10011").
+    confidence: high
+    confidence_basis: >
+      Enforced in the counter entity business method and invoked by the generator session bean; the runbook confirms order numbers come from the 1001 counter.
+    risk_class: operational
+    basis: >
+      CounterEJB.getNextValue adds 1 to the stored counter and returns name + count with no separator or padding.
+    plain_text: >
+      Every new order number is the next number in a running sequence, written as the sequence name immediately followed by the count.
+    technical_note: >
+      UniqueIdGeneratorEJB.getUniqueId(prefix) delegates to CounterEJB.getNextValue(); string concatenation without separator. Order entry calls it with prefix "1001".
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/uidgen/src/com/sun/j2ee/blueprints/uidgen/counter/ejb/CounterEJB.java
+        line_start: 159
+        line_end: 163
+        excerpt: |
+          public String getNextValue() {
+              int count = getCounter() + 1;
+              setCounter(count);
+              return getName() + String.valueOf(count);
+          }
+      - path: legacy-source/app/src/components/uidgen/src/com/sun/j2ee/blueprints/uidgen/ejb/UniqueIdGeneratorEJB.java
+        line_start: 67
+        line_end: 69
+        excerpt: |
+          public String getUniqueId(String idPrefix) {
+              return getCounter(idPrefix).getNextValue();
+          }
+      - path: legacy-source/app/src/apps/petstore/src/com/sun/j2ee/blueprints/petstore/controller/ejb/actions/OrderEJBAction.java
+        line_start: 110
+        line_end: 110
+        excerpt: |
+          orderIdString = uidgen.getUniqueId("1001");
+      - kind: document
+        path: legacy-analysis/sources/pdf/petstore-operations-runbook/extracted.md
+        anchor: p1
+        excerpt: "po_id Order number, from the 1001 counter"
+    stack_metadata:
+      framework: EJB 2.0
+      ejb.bean: UniqueIdGeneratorEJB, CounterEJB
+  - record_key: CHK-RULE-0002
+    kind: business-rule
+    capability_key: checkout-and-payment
+    requirement: >
+      GIVEN an identifier is requested for a sequence name that has no counter yet, WHEN the request is processed, THEN the system SHALL create a counter for that name starting at 0 and return the first identifier (count 1).
+    confidence: high
+    confidence_basis: >
+      Create-on-miss logic in the session bean plus the counter's create method initialising to 0; two places agree.
+    risk_class: operational
+    basis: >
+      getCounter catches FinderException and creates the counter; ejbCreate sets counter to 0.
+    plain_text: >
+      The first time a new numbering sequence is used it starts automatically and the first number issued is 1.
+    technical_note: >
+      Find-or-create inside UniqueIdGeneratorEJB.getCounter; CreateException becomes EJBException. Both calls run in one container transaction (Required) on getUniqueId, which serialises concurrent increments via the container.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/uidgen/src/com/sun/j2ee/blueprints/uidgen/ejb/UniqueIdGeneratorEJB.java
+        line_start: 74
+        line_end: 86
+        excerpt: |
+          try {
+              counter = clh.findByPrimaryKey(name);
+          } catch (FinderException fe) {
+              counter = clh.create(name);
+          }
+      - path: legacy-source/app/src/components/uidgen/src/com/sun/j2ee/blueprints/uidgen/counter/ejb/CounterEJB.java
+        line_start: 150
+        line_end: 154
+        excerpt: |
+          public String ejbCreate(String name) throws CreateException {
+              setName(name);
+              setCounter(0);
+              return null;
+          }
+    stack_metadata:
+      framework: EJB 2.0
+      ejb.transaction: Required
+  - record_key: CHK-ENT-0003
+    kind: entity
+    capability_key: checkout-and-payment
+    requirement: >
+      The system SHALL persist each identifier sequence as a record keyed by a unique name holding an integer counter.
+    confidence: medium
+    confidence_basis: >
+      Declared once in the deployment descriptor (CMP fields); no DDL seen in this module.
+    risk_class: operational
+    basis: >
+      Container-managed entity "Counter" with fields counter and name, primary key name.
+    plain_text: >
+      The system remembers, for each numbering sequence, the last number it handed out.
+    technical_note: >
+      ejb-jar.xml entity CounterEJB, abstract schema Counter, cmp-version 2.x, primkey-field name, non-reentrant.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/uidgen/src/ejb-jar.xml
+        line_start: 46
+        line_end: 70
+        excerpt: |
+          <persistence-type>Container</persistence-type>
+          <prim-key-class>java.lang.String</prim-key-class>
+          <abstract-schema-name>Counter</abstract-schema-name>
+          <cmp-field><field-name>counter</field-name></cmp-field>
+          <cmp-field><field-name>name</field-name></cmp-field>
+          <primkey-field>name</primkey-field>
+    stack_metadata:
+      framework: EJB 2.0
+      db.object: Counter
+suspected_defects:
+  - capability_key: checkout-and-payment
+    record_keys: [CHK-RULE-0001]
+    severity: low
+    category: other
+    title: Identifier has no separator, so prefix and count can collide
+    description: >
+      The id is prefix plus count with no delimiter and no padding; prefix "1001" count 11 gives "100111", the same as prefix "10011" count 1. Only one prefix is used today so no collision occurs in practice. Counter is a 32-bit int with no overflow handling.
+    traces:
+      - path: legacy-source/app/src/components/uidgen/src/com/sun/j2ee/blueprints/uidgen/counter/ejb/CounterEJB.java
+        line_start: 159
+        line_end: 163
+findings: []
