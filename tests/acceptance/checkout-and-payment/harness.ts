@@ -66,7 +66,18 @@ export const CONTACT_XML =
   "<Address><Street1>1 Main St</Street1><City>Springfield</City><State>CA</State><Zip>90000</Zip><Country>US</Country></Address>" +
   "</ContactInfo>";
 
+/** Names of the direct children of the root element, in order (no DOM in the node environment). */
 export function childNames(xml: string): string[] {
-  const doc = new DOMParser().parseFromString(xml, "application/xml");
-  return Array.from(doc.documentElement.children).map((c) => c.tagName);
+  const body = xml.replace(/<\?xml[^>]*\?>/, "").trim();
+  const inner = body.slice(body.indexOf(">") + 1, body.lastIndexOf("</"));
+  const names: string[] = [];
+  let depth = 0;
+  for (const m of inner.matchAll(/<(\/?)([A-Za-z][\w.-]*)[^>]*?(\/?)>/g)) {
+    if (m[1]) depth -= 1;
+    else {
+      if (depth === 0) names.push(m[2]);
+      if (!m[3]) depth += 1;
+    }
+  }
+  return names;
 }
