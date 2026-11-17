@@ -31,5 +31,5 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts"
   ],
-  "exclude": ["node_modules", ".stryker-tmp", "reports"]
+  "exclude": ["node_modules", ".stryker-tmp", "reports", "tests/acceptance"]
 }
