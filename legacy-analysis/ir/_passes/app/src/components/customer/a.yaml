@@ -1,0 +1,155 @@
+records:
+  - record_key: CUSTOMER-ACCOUNTS-ENTITY-0001
+    kind: entity
+    capability_key: customer-accounts
+    requirement: The system SHALL identify each customer by a single user identifier that is the primary key of the customer record.
+    confidence: high
+    confidence_basis: Declared as primkey-field in the deployment descriptor and implemented as the sole stored field in the bean.
+    risk_class: operational
+    basis: Customer bean has only userId as persistent field; descriptor names it primary key.
+    plain_text: Every customer is identified by a unique user ID.
+    technical_note: CustomerEJB CMP entity; userId is primkey-field in ejb-jar.xml.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/customer/src/ejb-jar.xml
+        line_start: 57
+        line_end: 61
+        excerpt: |
+                <cmp-field>
+                  <description>no description</description>
+                  <field-name>userId</field-name>
+                </cmp-field>
+                <primkey-field>userId</primkey-field>
+      - path: legacy-source/app/src/components/customer/src/com/sun/j2ee/blueprints/customer/ejb/CustomerEJB.java
+        line_start: 57
+        line_end: 58
+        excerpt: |
+          public abstract String getUserId();
+          public abstract void setUserId(String userId);
+    stack_metadata:
+      ejb.bean: CustomerEJB
+      framework: EJB 2.x CMP
+  - record_key: CUSTOMER-ACCOUNTS-WORKFLOW-0001
+    kind: workflow
+    capability_key: customer-accounts
+    requirement: GIVEN a new customer is created WHEN creation completes THEN the system SHALL attach an account with status "active" and a profile holding default preferences.
+    confidence: medium
+    confidence_basis: One clear place (post-create hook); no test or document seen.
+    risk_class: operational
+    basis: Post-create hook creates account (Active) and profile with defaults.
+    plain_text: A newly registered customer automatically gets an active account and a default profile.
+    technical_note: CustomerEJB.ejbPostCreate looks up Account and Profile local homes via JNDI and creates them; a naming failure raises CreateException.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/customer/src/com/sun/j2ee/blueprints/customer/ejb/CustomerEJB.java
+        line_start: 74
+        line_end: 89
+        excerpt: |
+              public void ejbPostCreate(String userId) throws CreateException {
+                  try {
+                  InitialContext ic = new InitialContext();
+                  AccountLocalHome alh = (AccountLocalHome) ic.lookup("java:comp/env/ejb/Account");
+                  AccountLocal account = alh.create(AccountLocalHome.Active);
+                  setAccount(account);
+          
+                  ProfileLocalHome plh = (ProfileLocalHome) ic.lookup("java:comp/env/ejb/Profile");
+                  ProfileLocal profile = plh.create(ProfileLocalHome.DefaultPreferredLanguage,
+                  ProfileLocalHome.DefaultFavoriteCategory, ProfileLocalHome.DefaultMyListPreference,
+                  ProfileLocalHome.DefaultBannerPreference);
+                  setProfile(profile);
+                  } catch (NamingException ne) {
+                      throw new CreateException ("could not lookup ejb. Exception is " + ne.getMessage());
+                  }
+              }
+    stack_metadata:
+      ejb.bean: CustomerEJB
+  - record_key: CUSTOMER-ACCOUNTS-BUSINESS-RULE-0001
+    kind: business-rule
+    capability_key: customer-accounts
+    requirement: The system SHALL support account statuses "active" and "disabled", and SHALL create new accounts as "active".
+    confidence: medium
+    confidence_basis: Constants in home interface and usage at creation; no code in this module enforces behaviour of "disabled" (sign-on checks may be elsewhere).
+    risk_class: operational
+    basis: Status constants Active/Disabled.
+    plain_text: An account is either active or disabled; new accounts start active.
+    technical_note: AccountLocalHome constants; AccountEJB stores status string.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/customer/src/com/sun/j2ee/blueprints/customer/account/ejb/AccountLocalHome.java
+        line_start: 48
+        line_end: 49
+        excerpt: |
+          public static final String Active = "active";
+          public static final String Disabled = "disabled";
+    stack_metadata:
+      ejb.bean: AccountEJB
+  - record_key: CUSTOMER-ACCOUNTS-ENTITY-0002
+    kind: entity
+    capability_key: customer-accounts
+    requirement: The system SHALL keep for each account its status, one contact-information record and one credit card record, created empty when the account is created without them.
+    confidence: medium
+    confidence_basis: One clear place (AccountEJB post-create); related beans live in other modules.
+    risk_class: regulated
+    basis: Account creates empty ContactInfo and CreditCard when created by status only.
+    plain_text: Each account holds contact details and payment card details, initially blank.
+    technical_note: AccountEJB.ejbPostCreate(status) creates ContactInfo and CreditCard via JNDI; the overloaded create accepts existing ones. Cascade-delete from customer to account in ejb-jar.xml relationships.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/customer/src/com/sun/j2ee/blueprints/customer/account/ejb/AccountEJB.java
+        line_start: 182
+        line_end: 201
+        excerpt: |
+
+    stack_metadata:
+      ejb.bean: AccountEJB
+  - record_key: CUSTOMER-ACCOUNTS-BUSINESS-RULE-0002
+    kind: business-rule
+    capability_key: customer-accounts
+    requirement: The system SHALL give every new profile the defaults language en_US, no favourite category, my-list preference on and banner preference on.
+    confidence: high
+    confidence_basis: Literal constants plus use in creation hook (code in two places).
+    risk_class: presentational
+    basis: ProfileLocalHome defaults used by CustomerEJB.
+    plain_text: New customers start with English (US), no favourite category, and the my-list and banner options switched on.
+    technical_note: ProfileLocalHome.Default* constants; ProfileEJB stores preferredLanguage, favoriteCategory, myListPreference, bannerPreference.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/customer/src/com/sun/j2ee/blueprints/customer/profile/ejb/ProfileLocalHome.java
+        line_start: 44
+        line_end: 47
+        excerpt: |
+              public static final String DefaultPreferredLanguage = "en_US";
+              public static final String DefaultFavoriteCategory = null;
+              public static final boolean DefaultMyListPreference = true;
+              public static final boolean DefaultBannerPreference = true;
+      - path: legacy-source/app/src/components/customer/src/com/sun/j2ee/blueprints/customer/ejb/CustomerEJB.java
+        line_start: 82
+        line_end: 84
+        excerpt: |
+                  ProfileLocal profile = plh.create(ProfileLocalHome.DefaultPreferredLanguage,
+                  ProfileLocalHome.DefaultFavoriteCategory, ProfileLocalHome.DefaultMyListPreference,
+                  ProfileLocalHome.DefaultBannerPreference);
+    stack_metadata:
+      ejb.bean: ProfileEJB
+  - record_key: CUSTOMER-ACCOUNTS-REQUIREMENT-0001
+    kind: requirement
+    capability_key: internationalisation
+    requirement: The system SHALL store a preferred language per customer profile.
+    confidence: medium
+    confidence_basis: One clear place (profile persistent field); filed under internationalisation as closest fit, though it is part of the profile.
+    risk_class: presentational
+    basis: preferredLanguage CMP field.
+    plain_text: Each customer's preferred language is remembered.
+    technical_note: ProfileEJB.preferredLanguage.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/customer/src/com/sun/j2ee/blueprints/customer/profile/ejb/ProfileEJB.java
+        line_start: 269
+        line_end: 270
+        excerpt: |
+          public abstract String getPreferredLanguage();
+          public abstract void setPreferredLanguage(String preferredLanguage);
+    stack_metadata:
+      ejb.bean: ProfileEJB
+findings: []
+suspected_defects: []
