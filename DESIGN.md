@@ -22,7 +22,7 @@ renders inside it:
 - **Navigation** (left): entries grouped by job (Shop, Account, Operations, Admin), each area
   once, the current page filled in. Fixed on a large screen; on a small screen it folds behind a
   menu button in the header. Add an area by adding an entry to `MENU_ITEMS` in
-  `src/shell/SidebarItems.tsx`; the landing page's tiles are drawn from the same list.
+  `src/shell/menu.ts`; the landing page's tiles are drawn from the same list.
 - **Header** (top): controls on the right only (language, and Sign on / Create account when
   signed out). Header controls stay visible on a small screen.
 - **Footer** (bottom): the copyright line and nothing else.
