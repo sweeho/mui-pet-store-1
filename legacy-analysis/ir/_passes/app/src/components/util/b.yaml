@@ -1,0 +1,52 @@
+records:
+  - record_key: BATCH-REQ-0001
+    kind: requirement
+    capability_key: batch-operations
+    requirement: >
+      The system SHALL provide a diagnostic output helper that emits debug messages and exception details only when a build-time debugging switch is on, and SHALL emit nothing when the switch is off; the switch ships off.
+    confidence: medium
+    confidence_basis: >
+      One clear place (the Debug class, a constant false flag); no test, config or document mentions it. Not high because it is enforced in a single file.
+    risk_class: operational
+    basis: >
+      Helper class guards every print method with the constant debuggingOn, which is false. No listed capability fits; filed under the closest (operations) one.
+    plain_text: >
+      Internal troubleshooting messages are produced only when a developer switches debugging on; in the delivered system it is off, so no such messages appear.
+    technical_note: >
+      Debug.debuggingOn is a compile-time constant (false); changing it needs a rebuild. print/println write to stderr (println prefixes ">>"); print(Throwable,msg) writes the message and trace to stdout/stderr as shown in the code.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/util/tracer/src/com/sun/j2ee/blueprints/util/tracer/Debug.java
+        line_start: 44
+        line_end: 79
+        excerpt: |
+          public final class Debug {
+
+              public static final boolean debuggingOn = false;
+
+              public static void print(String msg) {
+                  if (debuggingOn) {
+                      System.err.print(msg);
+                  }
+              }
+
+              public static void println(String msg) {
+                  if (debuggingOn) {
+                      System.err.println(">>" + msg);
+                  }
+              }
+    stack_metadata:
+      framework: plain-java
+findings: []
+suspected_defects:
+  - capability_key: batch-operations
+    record_keys: [BATCH-REQ-0001]
+    severity: low
+    category: other
+    title: Throwable diagnostics split across stdout and stderr
+    description: >
+      When debugging is on, print(Throwable,msg) writes the message line and optional msg to System.out but the stack trace to System.err, while the other helpers write to System.err only. Output streams are inconsistent. Also, the flag is a constant, so the output is unreachable without a rebuild.
+    traces:
+      - path: legacy-source/app/src/components/util/tracer/src/com/sun/j2ee/blueprints/util/tracer/Debug.java
+        line_start: 68
+        line_end: 75
