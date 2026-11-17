@@ -1,0 +1,175 @@
+records:
+  - record_key: shopping-cart-REQ-0001
+    kind: requirement
+    capability_key: shopping-cart
+    requirement: The system SHALL hold, per shopper session, a cart mapping each item identifier to a single quantity, so that adding an item already in the cart replaces its quantity rather than accumulating.
+    confidence: medium
+    confidence_basis: One clear place (put on a map keyed by item id); no test or document describes replace-vs-accumulate.
+    risk_class: operational
+    basis: addItem uses HashMap.put, which overwrites any existing quantity; the no-quantity overload sets quantity 1.
+    plain_text: Each product in the cart appears once with one quantity; adding it again sets the quantity instead of adding to it. Adding without a quantity means one.
+    technical_note: ShoppingCartLocalEJB (stateful session bean) keeps HashMap cart of itemId to Integer.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/cart/src/com/sun/j2ee/blueprints/cart/ejb/ShoppingCartLocalEJB.java
+        line_start: 111
+        line_end: 117
+        excerpt: |
+          cart.put(itemID, new Integer(1));
+          cart.put(itemID, new Integer(qty));
+    stack_metadata:
+      framework: EJB
+      ejb.bean: ShoppingCartLocalEJB
+      session.scope: Stateful
+  - record_key: shopping-cart-BR-0001
+    kind: business-rule
+    capability_key: shopping-cart
+    requirement: GIVEN an item in the cart WHEN its quantity is updated to zero or less THEN the system SHALL remove the item from the cart; WHEN updated to a positive value THEN the system SHALL set that quantity.
+    confidence: medium
+    confidence_basis: One clear place with an explanatory comment; no test.
+    risk_class: operational
+    basis: updateItemQuantity removes then re-adds only if newQty > 0. Note an update for an item not previously in the cart adds it.
+    plain_text: Setting a quantity of zero or below takes the item out of the cart; any positive number sets the new quantity.
+    technical_note: updateItemQuantity in ShoppingCartLocalEJB.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/cart/src/com/sun/j2ee/blueprints/cart/ejb/ShoppingCartLocalEJB.java
+        line_start: 122
+        line_end: 127
+        excerpt: |
+          cart.remove(itemID);
+          // remove item if it is less than or equal to 0
+          if (newQty > 0) cart.put(itemID, new Integer(newQty));
+    stack_metadata:
+      ejb.bean: ShoppingCartLocalEJB
+  - record_key: shopping-cart-REQ-0002
+    kind: requirement
+    capability_key: shopping-cart
+    requirement: The system SHALL allow removing a single item from the cart, emptying the cart entirely, and reporting the number of distinct items in the cart.
+    confidence: medium
+    confidence_basis: One clear place; simple operations.
+    risk_class: operational
+    basis: deleteItem, empty and getCount operate on the map; count is distinct lines, not total units.
+    plain_text: Shoppers can remove one product, clear the whole cart, and see how many different products are in it.
+    technical_note: deleteItem/empty/getCount in ShoppingCartLocalEJB.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/cart/src/com/sun/j2ee/blueprints/cart/ejb/ShoppingCartLocalEJB.java
+        line_start: 119
+        line_end: 131
+        excerpt: |
+          cart.remove(itemID);
+          return new Integer(cart.size());
+    stack_metadata:
+      ejb.bean: ShoppingCartLocalEJB
+  - record_key: shopping-cart-REQ-0003
+    kind: requirement
+    capability_key: shopping-cart
+    requirement: The system SHALL present each cart line with item, product, category, product name, attribute, quantity and unit cost, where the name, attribute and unit cost come from the catalog in the shopper's locale (default US English), and the unit cost is the catalog list cost.
+    confidence: medium
+    confidence_basis: One clear place; catalog lookup behaviour is in another module.
+    risk_class: financial
+    basis: getItems resolves each cart id via CatalogHelper.getItem(key, locale) and builds CartItem with getListCost.
+    plain_text: Cart lines show current catalog details and list price in the shopper's language.
+    technical_note: Prices are not stored in the cart; they are looked up on each read.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/cart/src/com/sun/j2ee/blueprints/cart/ejb/ShoppingCartLocalEJB.java
+        line_start: 85
+        line_end: 109
+        excerpt: |
+          item = catalog.getItem(key, locale);
+          CartItem ci = new CartItem(item.getItemId(), ... value.intValue(), item.getListCost());
+    stack_metadata:
+      ejb.bean: ShoppingCartLocalEJB
+  - record_key: shopping-cart-BR-0002
+    kind: business-rule
+    capability_key: shopping-cart
+    requirement: The system SHALL compute a line total as quantity times unit cost and the cart subtotal as the sum of line totals, without rounding.
+    confidence: high
+    confidence_basis: Implemented in three places (CartItem, ShoppingCartModel, bean getSubTotal), all consistent.
+    risk_class: financial
+    basis: Double-precision arithmetic, no rounding or discount or tax.
+    plain_text: Subtotal is the sum of price times quantity for every line.
+    technical_note: Uses double; rounding left to the presentation layer if any.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/cart/src/com/sun/j2ee/blueprints/cart/model/CartItem.java
+        line_start: 95
+        line_end: 97
+        excerpt: |
+          public double getTotalCost() {
+              return quantity * unitCost;
+      - path: legacy-source/app/src/components/cart/src/com/sun/j2ee/blueprints/cart/ejb/ShoppingCartLocalEJB.java
+        line_start: 134
+        line_end: 143
+        excerpt: |
+          ret += (i.getUnitCost() * i.getQuantity()) ;
+      - path: legacy-source/app/src/components/cart/src/com/sun/j2ee/blueprints/cart/model/ShoppingCartModel.java
+        line_start: 79
+        line_end: 85
+        excerpt: |
+          total += item.getTotalCost();
+    stack_metadata:
+      ejb.bean: ShoppingCartLocalEJB
+  - record_key: shopping-cart-BR-0003
+    kind: business-rule
+    capability_key: shopping-cart
+    requirement: GIVEN a cart item whose catalog lookup fails WHEN the cart is listed THEN the system SHALL omit that item from the list and subtotal and continue.
+    confidence: medium
+    confidence_basis: One place; behaviour is clear but intent unknown.
+    risk_class: financial
+    basis: CatalogException is caught and printed to stdout; item skipped.
+    plain_text: A product that can no longer be found is silently left out of the cart view and total.
+    technical_note: Exception logged only via System.out.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/cart/src/com/sun/j2ee/blueprints/cart/ejb/ShoppingCartLocalEJB.java
+        line_start: 104
+        line_end: 106
+        excerpt: |
+          } catch (CatalogException cce) {
+              System.out.println("ShoppingCartEJB caught: " + cce);
+    stack_metadata:
+      ejb.bean: ShoppingCartLocalEJB
+  - record_key: shopping-cart-REQ-0004
+    kind: requirement
+    capability_key: shopping-cart
+    requirement: The system SHALL let a shopper add an item to the cart from the catalog and proceed to check out.
+    confidence: low
+    confidence_basis: Only the user guide describes it; no code in this module.
+    risk_class: presentational
+    basis: User guide walkthrough of Add to Cart then Check Out.
+    plain_text: A shopper adds a product to the cart and then checks out.
+    technical_note: Screens are outside this module.
+    traces:
+      - path: legacy-analysis/sources/pdf/petstore-user-guide/extracted.md
+        kind: document
+        anchor: To buy a bulldog
+        excerpt: |
+          2. Click Add to Cart in the row of the Male Adult Bulldog.
+          3. Click Check Out.
+suspected_defects:
+  - capability_key: shopping-cart
+    record_keys: [shopping-cart-BR-0003]
+    severity: medium
+    category: error-swallowed
+    title: Missing catalog items are silently dropped from cart and subtotal
+    description: >
+      A catalog failure is printed to stdout and the item vanishes from the cart and total with no signal to the shopper.
+    traces:
+      - path: legacy-source/app/src/components/cart/src/com/sun/j2ee/blueprints/cart/ejb/ShoppingCartLocalEJB.java
+        line_start: 104
+        line_end: 106
+  - capability_key: shopping-cart
+    record_keys: [shopping-cart-BR-0001]
+    severity: low
+    category: other
+    title: Update for an absent item adds it; add with qty 0 or negative is stored
+    description: >
+      addItem(id, qty) does not validate qty, so zero or negative quantities can be stored, unlike updateItemQuantity.
+    traces:
+      - path: legacy-source/app/src/components/cart/src/com/sun/j2ee/blueprints/cart/ejb/ShoppingCartLocalEJB.java
+        line_start: 115
+        line_end: 117
+findings: []
