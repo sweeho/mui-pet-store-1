@@ -1,0 +1,91 @@
+recommendations:
+  - record_key: ACCT-REQ-0005
+    recommendation: accept
+    confidence: high
+    reason: >
+      Timeout is declared in the deployment descriptor; both passes agree.
+  - record_key: ACCT-REQ-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      DDL not-null constraints and both passes agree.
+  - record_key: ACCT-RULE-0001
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Code and DDL agree on plain text storage. Whether this is right is the Business Owner's decision in the defect register; confirm the code does it.
+  - record_key: CUST-REQ-0001
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Filter behaviour is clear, but the protected URL list is in a configuration file not analysed; Intent should supply it.
+  - record_key: CUST-REQ-0002
+    recommendation: accept
+    confidence: high
+    reason: >
+      Session bean and entity bean agree; plain text comparison noted as a defect.
+  - record_key: CUST-REQ-0003
+    recommendation: accept
+    confidence: high
+    reason: >
+      Sign-on handler code is explicit for both outcomes.
+  - record_key: CUST-REQ-0005
+    recommendation: accept
+    confidence: high
+    reason: >
+      Explicit validation in code.
+  - record_key: CUST-REQ-0006
+    recommendation: accept
+    confidence: high
+    reason: >
+      Duplicate key failure redirects to the error page in code.
+  - record_key: CUSTOMER-ACCOUNTS-ENTITY-0002
+    recommendation: accept
+    confidence: high
+    reason: >
+      Entity code and schema agree; both passes state it.
+  - record_key: ACCT-ENT-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Foreign keys in the DDL confirm the chain.
+  - record_key: ACCT-REQ-0002
+    recommendation: accept
+    confidence: high
+    reason: >
+      Profile columns in DDL confirm.
+  - record_key: ACCT-REQ-0003
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Pass B reads the form handling; unchecked options become off. One source.
+  - record_key: ACCT-REQ-0004
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Single code source; matches the profile language.
+  - record_key: CUST-REQ-0004
+    recommendation: accept
+    confidence: high
+    reason: >
+      Cookie age is a literal in code; the value is unambiguous.
+  - record_key: CUSTOMER-ACCOUNTS-BUSINESS-RULE-0001
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Only the active status is created in code; the disabled status is stated but its use was not seen.
+  - record_key: CUSTOMER-ACCOUNTS-ENTITY-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Primary key in DDL and entity agree.
+  - record_key: CUSTOMER-ACCOUNTS-WORKFLOW-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Creation code attaches account and profile; both passes agree.
+  - record_key: CUSTOMER-ACCOUNTS-BUSINESS-RULE-0002
+    recommendation: accept
+    confidence: high
+    reason: >
+      Defaults are literals in the creation code and agree across passes.
