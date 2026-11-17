@@ -1,0 +1,286 @@
+records:
+  - record_key: ORDN-INT-0001
+    kind: integration
+    capability_key: order-notifications
+    requirement: >
+      The system SHALL consume messages from a mail queue, each carrying an XML Mail document with an address, a subject and a content body, and SHALL send one e-mail per message.
+    plain_text: >
+      Other parts of the store hand off e-mails to a mail service through a queue; the service sends each one to the address it names.
+    technical_note: >
+      MailerMDB is a container-transaction message-driven bean on a JMS queue; onMessage casts to TextMessage, parses it with Mail.fromXML and calls MailHelper. The queue's JNDI name is not set in this ejb-jar (no destination name), so it is bound at deployment.
+    interface: true
+    confidence: high
+    confidence_basis: >
+      Bean class, ejb-jar descriptor and DTD all agree. Queue name binding is not visible in this module, but the behaviour is clear.
+    risk_class: operational
+    basis: >
+      onMessage reads the text, deserialises Mail and sends it; the descriptor declares a message-driven bean on javax.jms.Queue.
+    traces:
+      - path: legacy-source/app/src/components/mailer/src/com/sun/j2ee/blueprints/mailer/ejb/MailerMDB.java
+        line_start: 74
+        line_end: 82
+        excerpt: |
+          public void onMessage(Message recvMsg) {
+            TextMessage textMessage = null;
+            String xmlMailMessage = null;
+            Mail recMail = null;
+            try {
+              textMessage = (TextMessage)recvMsg;
+              xmlMailMessage = textMessage.getText();
+              recMail = Mail.fromXML(xmlMailMessage);
+              sendMail(recMail.getAddress(), recMail.getSubject(), recMail.getContent(),  Locale.getDefault());
+      - path: legacy-source/app/src/components/mailer/src/ejb-jar.xml
+        line_start: 48
+        line_end: 56
+        excerpt: |
+          <message-driven>
+            <description>opc node to process PurchaseOrders from the Java Pet Store</description>
+            <display-name>MailerMDB</display-name>
+            <ejb-name>MailerMDB</ejb-name>
+            <ejb-class>com.sun.j2ee.blueprints.mailer.ejb.MailerMDB</ejb-class>
+            <transaction-type>Container</transaction-type>
+            <message-driven-destination>
+              <destination-type>javax.jms.Queue</destination-type>
+            </message-driven-destination>
+      - path: legacy-analysis/sources/pdf/petstore-operations-runbook/extracted.md
+        anchor: p1
+        excerpt: "jms/supplier/PurchaseOrderQueue, jms/opc/InvoiceTopic, mail queues"
+    stack_metadata:
+      framework: EJB 2.0 MDB
+      ejb.bean: MailerMDB
+      ejb.transaction: Required (onMessage)
+      jms.queue: mail queue (name bound at deployment)
+
+  - record_key: ORDN-INT-0002
+    kind: integration
+    capability_key: order-notifications
+    requirement: >
+      The system SHALL accept a queued mail message only if it is an XML document validated against the Mail DTD with exactly the elements Address, Subject and Content in that order.
+    plain_text: >
+      A queued e-mail request must have an address, a subject and a body, in a fixed layout; anything else is not accepted.
+    technical_note: >
+      Mail.fromXML validates (VALIDATING = true) against Mail.dtd; fromDOM requires root element Mail and reads Address, Subject, Content as consecutive siblings. Fields are not otherwise checked (no email format or non-empty check here).
+    interface: true
+    confidence: high
+    confidence_basis: >
+      DTD declaration plus programmatic sibling-order check in fromDOM, two places.
+    risk_class: operational
+    basis: >
+      DTD content model and fromDOM enforce the same structure.
+    traces:
+      - path: legacy-source/app/src/components/mailer/src/com/sun/j2ee/blueprints/mailer/rsrc/schemas/Mail.dtd
+        line_start: 38
+        line_end: 41
+        excerpt: |
+          <!ELEMENT Mail (Address, Subject, Content)>
+          <!ELEMENT Address (#PCDATA)>
+          <!ELEMENT Subject (#PCDATA)>
+          <!ELEMENT Content (#PCDATA)>
+      - path: legacy-source/app/src/components/mailer/src/com/sun/j2ee/blueprints/mailer/ejb/Mail.java
+        line_start: 154
+        line_end: 164
+        excerpt: |
+          if (node.getNodeType() == Node.ELEMENT_NODE && (element = ((Element) node)).getTagName().equals(XML_MAIL)) {
+            Element child;
+            Mail mail = new Mail();
+            mail.address = XMLDocumentUtils.getContentAsString(child = XMLDocumentUtils.getFirstChild(element, XML_ADDRESS, false), false);
+            mail.subject = XMLDocumentUtils.getContentAsString(child = XMLDocumentUtils.getNextSibling(child, XML_SUBJECT, false), false);
+            mail.content = XMLDocumentUtils.getContentAsString(child = XMLDocumentUtils.getNextSibling(child, XML_CONTENT, false), false);
+    stack_metadata:
+      framework: EJB 2.0 / JAXP
+      db.object: Mail.dtd
+
+  - record_key: ORDN-REQ-0003
+    kind: requirement
+    capability_key: order-notifications
+    requirement: >
+      The system SHALL send each mail as an HTML message to the recipient addresses named in the request, with the subject and body exactly as supplied (no formatting or localisation applied by the mailer), a default From address from the mail session, an X-Mailer header of "JavaMailer" and the current date as sent date.
+    plain_text: >
+      E-mails go out as HTML pages to the named recipient, with the text prepared by whoever asked for the mail; the mailer does not rewrite or translate it.
+    technical_note: >
+      MailHelper.createAndSendMail builds a MimeMessage from the container mail session (java:comp/env/mail/MailSession, resource-ref in ejb-jar), setFrom() default, recipients parsed leniently (InternetAddress.parse strict=false, so several comma-separated addresses are allowed), content type text/html. The Locale argument is passed (Locale.getDefault()) but unused.
+    interface: true
+    confidence: high
+    confidence_basis: >
+      Hard-coded in the helper, corroborated by the mailer comment saying content is pre-formatted and by the resource-ref and JNDI constant.
+    risk_class: operational
+    basis: >
+      Straight-line code in createAndSendMail; MDB comment states messages are already formatted for presentation.
+    traces:
+      - path: legacy-source/app/src/components/mailer/src/com/sun/j2ee/blueprints/mailer/ejb/MailHelper.java
+        line_start: 72
+        line_end: 85
+        excerpt: |
+          InitialContext ic = new InitialContext();
+          Session session = (Session) ic.lookup(JNDINames.MAIL_SESSION);
+          Message msg = new MimeMessage(session);
+          msg.setFrom();
+          msg.setRecipients(Message.RecipientType.TO,
+                   InternetAddress.parse(emailAddress, false));
+          msg.setSubject(subject);
+          String contentType = "text/html";
+          msg.setHeader("X-Mailer", "JavaMailer");
+          msg.setSentDate(new Date());
+          Transport.send(msg);
+      - path: legacy-source/app/src/components/mailer/src/com/sun/j2ee/blueprints/mailer/ejb/MailerMDB.java
+        line_start: 67
+        line_end: 73
+        excerpt: |
+          It is assumed that the message
+          is already formatted for any presentation since this mailer service
+          simly just sends the mails.
+      - path: legacy-source/app/src/components/mailer/src/com/sun/j2ee/blueprints/mailer/util/JNDINames.java
+        line_start: 133
+        line_end: 134
+        excerpt: |
+          public static final String MAIL_SESSION =
+                "java:comp/env/mail/MailSession";
+      - path: legacy-analysis/sources/pdf/petstore-admin-guide/extracted.md
+        anchor: p1
+        excerpt: "Then set the mail service ... mail-from (From: address), mail-host (mail server) and name (user name on the mail server)."
+    stack_metadata:
+      framework: JavaMail
+      ejb.bean: MailerMDB
+      session.scope: mail/MailSession resource-ref (Container auth, Shareable)
+
+  - record_key: ORDN-BR-0004
+    kind: business-rule
+    capability_key: order-notifications
+    requirement: >
+      GIVEN a mail cannot be sent (no mail session, unreachable mail server or rejected message), WHEN the mailer handles it, THEN the system SHALL log the failure to standard error and discard the message without retry and without failing the queue delivery.
+    plain_text: >
+      If an e-mail cannot be sent, nothing is retried and no one is told; the message is simply dropped, so order processing carries on.
+    technical_note: >
+      createAndSendMail catches every Exception, prints it and throws MailerAppException; MailerMDB catches MailerAppException with an empty handler (comment: user probably forgot to set up mail server), so the transaction commits and the JMS message is consumed.
+    interface: true
+    confidence: high
+    confidence_basis: >
+      Two coordinated places (throw in helper, deliberate swallow with comment in MDB).
+    risk_class: operational
+    basis: >
+      Explicit empty catch with comment.
+    traces:
+      - path: legacy-source/app/src/components/mailer/src/com/sun/j2ee/blueprints/mailer/ejb/MailerMDB.java
+        line_start: 83
+        line_end: 86
+        excerpt: |
+          } catch (MailerAppException me) {
+            //throw new EJBException("MailerMDB.onMessage" + me);
+            //ignore since user probably forgot to set up mail server
+          } catch (XMLDocumentException xde) {
+      - path: legacy-source/app/src/components/mailer/src/com/sun/j2ee/blueprints/mailer/ejb/MailHelper.java
+        line_start: 86
+        line_end: 89
+        excerpt: |
+          } catch (Exception e) {
+              System.err.print("createAndSendMail exception : " + e);
+              throw new MailerAppException("Failure while sending mail");
+          }
+    stack_metadata:
+      framework: EJB 2.0 MDB
+      ejb.transaction: Required
+
+  - record_key: ORDN-BR-0005
+    kind: business-rule
+    capability_key: order-notifications
+    requirement: >
+      GIVEN a queued message is not a readable, valid Mail document or cannot be read from the queue, WHEN the mailer processes it, THEN the system SHALL raise a system error so that the message is not treated as delivered.
+    plain_text: >
+      A malformed e-mail request is treated as a fault rather than silently ignored.
+    technical_note: >
+      XMLDocumentException and JMSException are rethrown as EJBException from onMessage; with container-managed transaction Required this rolls back and the container may redeliver (redelivery policy is a deployment setting not visible here). A ClassCastException for a non-text message is not caught and also propagates.
+    interface: true
+    confidence: medium
+    confidence_basis: >
+      Throw is clear in one place; redelivery outcome depends on container configuration not in this module.
+    risk_class: operational
+    basis: >
+      Contrast with the swallowed send failure.
+    traces:
+      - path: legacy-source/app/src/components/mailer/src/com/sun/j2ee/blueprints/mailer/ejb/MailerMDB.java
+        line_start: 86
+        line_end: 90
+        excerpt: |
+          } catch (XMLDocumentException xde) {
+            throw new EJBException("MailerMDB.onMessage" + xde);
+          } catch(JMSException je) {
+            throw new EJBException("MailerMDB.onMessage" + je);
+          }
+    stack_metadata:
+      framework: EJB 2.0 MDB
+      ejb.transaction: Required
+
+  - record_key: ORDN-BR-0006
+    kind: business-rule
+    capability_key: order-notifications
+    requirement: >
+      The system SHALL send order-status e-mails only when notifications have been enabled by the administrator; the mailer itself performs no such check and sends every message it receives.
+    plain_text: >
+      Order e-mails are off unless the administrator turns them on; the decision is made by the senders, not by the mail service.
+    technical_note: >
+      The switch is not in this module: the admin guide places it in the OPC bean env-entries (SendApprovalMail, SendConfirmationMail, SendCompletedOrderMail). The mailer has no flag, so gating lives in the notifying beans in another module.
+    interface: false
+    confidence: low
+    confidence_basis: >
+      Evidence is the document only; the gating code is outside this module and was not read here. Recorded to show the mailer has no gate.
+    dispute:
+      reason: unresolved-reachability
+      detail: >
+        Confirm the env-entry gating in the OPC notification beans (other shard) is what prevents sends; nothing in the mailer enforces it.
+    risk_class: operational
+    basis: >
+      Absence of any flag in MailerMDB/MailHelper, plus admin guide and user guide statements.
+    traces:
+      - path: legacy-analysis/sources/pdf/petstore-admin-guide/extracted.md
+        anchor: p1
+        excerpt: "Notifications about order status are disabled by default."
+      - path: legacy-analysis/sources/pdf/petstore-user-guide/extracted.md
+        anchor: p1
+        excerpt: "An e-mail about the order status is sent only if the administrator has enabled notifications"
+      - path: legacy-source/app/src/components/mailer/src/com/sun/j2ee/blueprints/mailer/ejb/MailerMDB.java
+        line_start: 74
+        line_end: 82
+        excerpt: |
+          public void onMessage(Message recvMsg) {
+            TextMessage textMessage = null;
+            String xmlMailMessage = null;
+            Mail recMail = null;
+            try {
+              textMessage = (TextMessage)recvMsg;
+              xmlMailMessage = textMessage.getText();
+              recMail = Mail.fromXML(xmlMailMessage);
+              sendMail(recMail.getAddress(), recMail.getSubject(), recMail.getContent(),  Locale.getDefault());
+    stack_metadata:
+      framework: EJB 2.0 MDB
+
+suspected_defects:
+  - capability_key: order-notifications
+    record_keys: [ORDN-BR-0004]
+    severity: medium
+    category: error-swallowed
+    title: Mail send failures are silently discarded
+    description: >
+      Any failure to send (including a mis-set mail server) is logged to standard error only and the message is dropped, with no retry or alert; the throw of EJBException is commented out.
+    traces:
+      - path: legacy-source/app/src/components/mailer/src/com/sun/j2ee/blueprints/mailer/ejb/MailerMDB.java
+        line_start: 83
+        line_end: 86
+        excerpt: |
+          } catch (MailerAppException me) {
+            //throw new EJBException("MailerMDB.onMessage" + me);
+            //ignore since user probably forgot to set up mail server
+  - capability_key: order-notifications
+    record_keys: [ORDN-REQ-0003]
+    severity: low
+    category: other
+    title: Locale parameter is accepted but ignored
+    description: >
+      The mailer passes the server default locale to the helper, which never uses it, so mails are not localised by the mailer (and the locale is the server's, not the customer's).
+    traces:
+      - path: legacy-source/app/src/components/mailer/src/com/sun/j2ee/blueprints/mailer/ejb/MailHelper.java
+        line_start: 70
+        line_end: 70
+        excerpt: |
+          public void createAndSendMail(String emailAddress, String subject, String mailContent, Locale locale) throws MailerAppException {
+
+findings: []
