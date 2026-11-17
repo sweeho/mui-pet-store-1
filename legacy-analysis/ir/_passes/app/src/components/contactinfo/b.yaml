@@ -1,0 +1,250 @@
+records:
+  - record_key: CHK-ENT-0001
+    kind: entity
+    capability_key: checkout-and-payment
+    requirement: >
+      The system SHALL hold a contact record made of given name, family name, telephone, email and exactly one associated postal address.
+    confidence: high
+    confidence_basis: >
+      Stated in the bean's field accessors, the deployment descriptor's persistent fields and the DTD content model; three places agree on the four text fields.
+    risk_class: operational
+    basis: >
+      Abstract CMP accessors for four text fields plus a relationship to an address; descriptor lists the same four fields and a local reference to the Address bean; DTD lists FamilyName, GivenName, Address, Email, Phone.
+    plain_text: >
+      A contact consists of a given name, a family name, a phone number, an email address and one postal address.
+    technical_note: >
+      Container-managed entity bean ContactInfoEJB (CMP 2.x) with a container-managed relationship to AddressEJB. No length, format or mandatory constraints are declared anywhere in this module.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/ejb/ContactInfoEJB.java
+        line_start: 59
+        line_end: 73
+        excerpt: |
+          public abstract String getFamilyName();
+          public abstract void setFamilyName(String familyName);
+
+          public abstract String getGivenName();
+          public abstract void setGivenName(String givenName);
+
+          public abstract String getTelephone();
+          public abstract void setTelephone(String telephone);
+
+          public abstract String getEmail();
+          public abstract void setEmail(String email);
+
+          // CMR fields
+          public abstract AddressLocal getAddress();
+          public abstract void setAddress(AddressLocal address);
+      - path: legacy-source/app/src/components/contactinfo/src/ejb-jar.xml
+        line_start: 57
+        line_end: 79
+        excerpt: |
+          <cmp-field>
+            <description>no description</description>
+            <field-name>telephone</field-name>
+          </cmp-field>
+          <cmp-field>
+            <description>no description</description>
+            <field-name>familyName</field-name>
+          </cmp-field>
+    stack_metadata:
+      framework: EJB 2.x CMP
+      ejb.bean: ContactInfoEJB
+  - record_key: CHK-REQ-0001
+    kind: requirement
+    capability_key: checkout-and-payment
+    requirement: >
+      The system SHALL, when a contact is created from supplied given name, family name, telephone, email and address, store those values and link the supplied address to the contact.
+    confidence: medium
+    confidence_basis: >
+      One clear place (the parameterised create method pair); no caller in this module was examined, so how often the path is used is not known.
+    risk_class: operational
+    basis: >
+      ejbCreate copies four fields; ejbPostCreate attaches the passed AddressLocal.
+    plain_text: >
+      A contact can be created from a name, phone, email and an already existing address, and it keeps that address.
+    technical_note: >
+      ejbCreate(givenName, familyName, telephone, email, address) / ejbPostCreate with same signature. Note the address is linked by reference, not copied.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/ejb/ContactInfoEJB.java
+        line_start: 93
+        line_end: 106
+        excerpt: |
+          public Object ejbCreate(String givenName, String familyName,
+                                  String telephone, String email, AddressLocal address)
+                                  throws CreateException {
+            setGivenName(givenName);
+            setFamilyName(familyName);
+            setTelephone(telephone);
+            setEmail(email);
+            return null;
+          }
+
+          public void ejbPostCreate(String givenName, String familyName,
+                                    String telephone, String email,
+                                    AddressLocal address) throws CreateException {
+            setAddress(address);
+          }
+    stack_metadata:
+      framework: EJB 2.x CMP
+      ejb.bean: ContactInfoEJB
+  - record_key: CHK-REQ-0002
+    kind: requirement
+    capability_key: checkout-and-payment
+    requirement: >
+      The system SHALL, when a contact is created from a contact data object, store its given name, family name, phone and email and create a new address record from the data object's address.
+    confidence: medium
+    confidence_basis: >
+      One clear place; the copy-in behaviour is plain in code with no second source.
+    risk_class: operational
+    basis: >
+      ejbCreate(ContactInfo) copies four fields; ejbPostCreate(ContactInfo) creates a new Address via the address home from contactInfo.getAddress().
+    plain_text: >
+      A contact can be created from a bundle of contact details, and a fresh address record is made from the address inside it.
+    technical_note: >
+      Address home looked up through ServiceLocator with JNDI name JNDINames.ADDR_EJB. Data-object phone maps to the telephone field.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/ejb/ContactInfoEJB.java
+        line_start: 109
+        line_end: 126
+        excerpt: |
+          public Object ejbCreate(ContactInfo contactInfo) throws CreateException {
+            setGivenName(contactInfo.getGivenName());
+            setFamilyName(contactInfo.getFamilyName());
+            setTelephone(contactInfo.getPhone());
+            setEmail(contactInfo.getEmail());
+            return null;
+          }
+
+          public void ejbPostCreate(ContactInfo contactInfo) throws CreateException {
+            try {
+              ServiceLocator serviceLocator = new ServiceLocator();
+              AddressLocalHome adh = (AddressLocalHome)
+                  serviceLocator.getLocalHome(JNDINames.ADDR_EJB);
+              AddressLocal address = adh.create(contactInfo.getAddress());
+              setAddress(address);
+    stack_metadata:
+      framework: EJB 2.x CMP
+      ejb.bean: ContactInfoEJB
+  - record_key: CHK-REQ-0003
+    kind: requirement
+    capability_key: checkout-and-payment
+    requirement: >
+      The system SHALL, when a contact is created with no data, create it with an empty address record attached.
+    confidence: medium
+    confidence_basis: >
+      One clear place; reachability of the no-argument create was not checked.
+    risk_class: operational
+    basis: >
+      No-argument ejbCreate does nothing; ejbPostCreate() creates a blank address and attaches it.
+    plain_text: >
+      A blank contact can be created; it automatically gets an empty address to be filled in later.
+    technical_note: >
+      ejbPostCreate() calls adh.create() on the address home.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/ejb/ContactInfoEJB.java
+        line_start: 77
+        line_end: 89
+        excerpt: |
+          public Object ejbCreate () throws CreateException {
+            return null;
+          }
+
+          public void ejbPostCreate () throws CreateException {
+            try {
+              ServiceLocator serviceLocator = new ServiceLocator();
+              AddressLocalHome adh = (AddressLocalHome)
+                  serviceLocator.getLocalHome(JNDINames.ADDR_EJB);
+              AddressLocal address = adh.create();
+              setAddress(address);
+    stack_metadata:
+      framework: EJB 2.x CMP
+      ejb.bean: ContactInfoEJB
+  - record_key: CHK-BR-0001
+    kind: business-rule
+    capability_key: checkout-and-payment
+    requirement: >
+      GIVEN the address service cannot be located WHEN a contact is created without a supplied address THEN the system SHALL fail the creation with an error stating that the address lookup failed.
+    confidence: medium
+    confidence_basis: >
+      One clear place (two identical catch blocks); the error text is the only statement of the rule.
+    risk_class: operational
+    basis: >
+      ServiceLocatorException is converted to CreateException "ContactInfoEJB error: ServiceLocator exception looking up address" in both address-creating post-create methods.
+    plain_text: >
+      If the address facility is unavailable when a contact is being created, the contact is not created and an error is reported.
+    technical_note: >
+      Catch block in ejbPostCreate() and ejbPostCreate(ContactInfo); transaction rolls back via CreateException.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/ejb/ContactInfoEJB.java
+        line_start: 89
+        line_end: 91
+        excerpt: |
+          } catch (ServiceLocatorException ne) {
+            throw new CreateException("ContactInfoEJB error: ServiceLocator exception looking up address");
+          }
+    stack_metadata:
+      framework: EJB 2.x CMP
+  - record_key: CHK-REQ-0004
+    kind: requirement
+    capability_key: checkout-and-payment
+    requirement: >
+      The system SHALL return a contact's given name, family name, phone, email and address details as a single data object on request.
+    confidence: medium
+    confidence_basis: >
+      One clear place; the DTD gives a second, XML-form view of the same shape but is not itself enforcement.
+    risk_class: operational
+    basis: >
+      getData() builds a ContactInfo from the stored fields and the address's own data. The DTD defines an XML form with FamilyName, GivenName, Address, Email, Phone.
+    plain_text: >
+      Other parts of the system can read a contact's full details, including its address, in one piece.
+    technical_note: >
+      getData() on ContactInfoEJB; getAddress().getData() would throw a null pointer if no address were attached. The DTD is a separate XML interchange form.
+    interface: true
+    traces:
+      - path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/ejb/ContactInfoEJB.java
+        line_start: 129
+        line_end: 136
+        excerpt: |
+          public ContactInfo getData() {
+            ContactInfo contactInfo = new ContactInfo();
+            contactInfo.setGivenName(getGivenName());
+            contactInfo.setFamilyName(getFamilyName());
+            contactInfo.setPhone(getTelephone());
+            contactInfo.setEmail(getEmail());
+            contactInfo.setAddress(getAddress().getData());
+            return contactInfo;
+          }
+      - path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/rsrc/schemas/ContactInfo.dtd
+        line_start: 41
+        line_end: 43
+        excerpt: |
+          <!ELEMENT ContactInfo (FamilyName, GivenName, Address, Email, Phone)>
+          <!ELEMENT FamilyName (#PCDATA)>
+          <!ELEMENT GivenName (#PCDATA)>
+    stack_metadata:
+      framework: EJB 2.x CMP
+      ejb.bean: ContactInfoEJB
+findings:
+  - kind: ambiguity
+    path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/ejb/ContactInfoEJB.java
+    description: >
+      No validation of any contact field (format of email or phone, mandatory values) exists in this module; whether such rules live in the web tier was not examined here. No document in legacy-analysis/sources mentions this module. Capability filed as checkout-and-payment (billing/shipping contact) as closest fit; customer accounts may also use it.
+suspected_defects:
+  - capability_key: checkout-and-payment
+    record_keys: [CHK-REQ-0004]
+    severity: low
+    category: other
+    title: Reading a contact with no address fails
+    description: >
+      getData() dereferences the address without a null check; a contact whose address link is absent would raise a null pointer error instead of returning partial data.
+    traces:
+      - path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/ejb/ContactInfoEJB.java
+        line_start: 135
+        line_end: 135
+        excerpt: |
+          contactInfo.setAddress(getAddress().getData());
