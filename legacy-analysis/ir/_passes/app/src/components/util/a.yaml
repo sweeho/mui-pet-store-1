@@ -1,13 +1,88 @@
-records: []
-findings:
-  - kind: ambiguity
-    path: legacy-source/app/src/components/util/tracer/src/com/sun/j2ee/blueprints/util/tracer/Debug.java
+records:
+  - record_key: BATCH-REQ-0001
+    kind: requirement
+    capability_key: batch-operations
+    requirement: >
+      The system SHALL suppress all diagnostic trace output (messages, exceptions and
+      stack traces) by default, emitting none unless diagnostic tracing is switched on.
+    plain_text: >
+      Internal diagnostic messages are switched off in normal operation and produce no output.
+    technical_note: >
+      Debug.debuggingOn is a compile-time constant false; every print/println overload is
+      guarded by it. Changing it requires recompiling. Callers exist in catalog, cart and web framework code.
+    interface: false
+    confidence: medium
+    confidence_basis: >
+      One clear place (the constant and its guards); no test, config or document mentions it.
+    risk_class: operational
+    basis: >
+      Utility class whose only behaviour is gated by a hard-coded false flag. It fits no listed
+      capability; filed under batch-operations as the closest operational home.
+    traces:
+      - path: legacy-source/app/src/components/util/tracer/src/com/sun/j2ee/blueprints/util/tracer/Debug.java
+        line_start: 46
+        line_end: 58
+        excerpt: |
+          public static final boolean debuggingOn = false;
+
+          public static void print(String msg) {
+              if (debuggingOn) {
+                  System.err.print(msg);
+              }
+          }
+
+          public static void println(String msg) {
+              if (debuggingOn) {
+                  System.err.println(">>" + msg);
+              }
+          }
+    stack_metadata:
+      framework: plain-java-utility
+  - record_key: BATCH-REQ-0002
+    kind: requirement
+    capability_key: batch-operations
+    requirement: >
+      GIVEN diagnostic tracing is on, WHEN a throwable is reported, the system SHALL write its
+      message, then any supplied note, then its stack trace.
+    plain_text: >
+      When diagnostics are enabled, a reported error shows its message, an optional note and full technical detail.
+    technical_note: >
+      Debug.print(Throwable,String) writes to System.out (not System.err as the string overloads do);
+      Exception overloads delegate to the Throwable one. Unreachable today since debuggingOn is false.
+    interface: false
+    confidence: low
+    confidence_basis: >
+      Read from one method; the branch is dead under the shipped constant, so inferred behaviour only.
+    risk_class: presentational
+    basis: >
+      Throwable print overloads; only live if the constant is changed.
+    traces:
+      - path: legacy-source/app/src/components/util/tracer/src/com/sun/j2ee/blueprints/util/tracer/Debug.java
+        line_start: 68
+        line_end: 75
+        excerpt: |
+          public static void print(Throwable t, String msg) {
+              if (debuggingOn) {
+                  System.out.println("Received throwable with Message: "+t.getMessage());
+                  if (msg != null)
+                      System.out.print(msg);
+                  t.printStackTrace();
+              }
+          }
+    dispute:
+      reason: unresolved-reachability
+      detail: >
+        Branch is unreachable while debuggingOn is false. A human should confirm no build variant flips it.
+suspected_defects:
+  - capability_key: batch-operations
+    record_keys: [BATCH-REQ-0002]
+    severity: low
+    category: other
+    title: Trace output split across stdout and stderr
     description: >
-      The module holds only a diagnostic print helper (Debug) and its build.xml. The
-      helper writes to stderr/stdout only when the compile-time constant debuggingOn
-      (line 46, false) is true, so it is silent in the shipped build. It enforces no
-      business rule, data, screen, workflow or integration, and no capability in
-      capabilities.csv fits it. No record was emitted rather than force a technical
-      utility into a business capability. A human may confirm this is out of scope
-      for the specification (candidate for non-functional/logging only).
-suspected_defects: []
+      String traces go to System.err but throwable traces go to System.out, so output streams are inconsistent when enabled.
+    traces:
+      - path: legacy-source/app/src/components/util/tracer/src/com/sun/j2ee/blueprints/util/tracer/Debug.java
+        line_start: 50
+        line_end: 70
+findings: []
