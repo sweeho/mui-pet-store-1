@@ -1,0 +1,77 @@
+recommendations:
+  - record_key: BO-REQ-0001
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Population loader read in full; trigger and data file not read.
+  - record_key: BATCH-BRULE-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      SQL, env, scheduler and runbook agree. Extract-coverage gap goes to the Business Owner as a defect.
+  - record_key: BATCH-BRULE-0002
+    recommendation: edit
+    confidence: medium
+    reason: >
+      Enforced only by scheduler conditions; purge does not check that all aged orders were ever extracted. Conflict with the SQL comment goes to Intent.
+    edited_requirement: The system SHALL NOT purge any order unless that day's order extract has completed successfully, and SHOULD record any aged order never extracted.
+  - record_key: BATCH-REQ-0002
+    recommendation: accept
+    confidence: high
+    reason: >
+      SQL, script and runbook agree.
+  - record_key: BATCH-REQ-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Script, scheduler and runbook agree; hard-coded destination is a defect to confirm.
+  - record_key: BATCH-REQ-0003
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Failure behaviour stated by scheduler and runbook, not by the extract script itself.
+  - record_key: BATCH-REQ-0004
+    recommendation: accept
+    confidence: high
+    reason: >
+      SQL, script and runbook agree.
+  - record_key: BATCH-REQ-0005
+    recommendation: accept
+    confidence: high
+    reason: >
+      SQL, env and runbook agree; omission of items without English description is a suspected defect.
+  - record_key: BATCH-REQ-0006
+    recommendation: accept
+    confidence: high
+    reason: >
+      Five checks agree across sources; C4 locale comment/query mismatch goes to the Business Owner.
+  - record_key: BATCH-REQ-0007
+    recommendation: accept
+    confidence: high
+    reason: >
+      Script and runbook agree; host default differs (psl-app01 vs ps-app01), goes to Intent.
+  - record_key: BATCH-REQ-0008
+    recommendation: accept
+    confidence: high
+    reason: >
+      Script, cyclic definition and runbook agree.
+  - record_key: BATCH-REQ-0009
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Codes visible per script and in runbook; no shared definition in code.
+  - record_key: BATCH-RULE-0001
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Indexes appear in DDL; only partial independent corroboration.
+  - record_key: BATCH-WORKFLOW-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      Scheduler definitions and runbook agree; ordering is scheduler-only.
+  - record_key: OF-REQ-0004
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Code read in full; trigger servlet and data file not read. Overlaps BO-REQ-0001.
