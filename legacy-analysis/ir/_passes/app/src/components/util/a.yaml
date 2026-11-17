@@ -1,0 +1,13 @@
+records: []
+findings:
+  - kind: ambiguity
+    path: legacy-source/app/src/components/util/tracer/src/com/sun/j2ee/blueprints/util/tracer/Debug.java
+    description: >
+      The module holds only a diagnostic print helper (Debug) and its build.xml. The
+      helper writes to stderr/stdout only when the compile-time constant debuggingOn
+      (line 46, false) is true, so it is silent in the shipped build. It enforces no
+      business rule, data, screen, workflow or integration, and no capability in
+      capabilities.csv fits it. No record was emitted rather than force a technical
+      utility into a business capability. A human may confirm this is out of scope
+      for the specification (candidate for non-functional/logging only).
+suspected_defects: []
