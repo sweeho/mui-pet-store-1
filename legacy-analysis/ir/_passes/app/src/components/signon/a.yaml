@@ -1,0 +1,190 @@
+records:
+  - record_key: CUST-REQ-0001
+    kind: requirement
+    capability_key: customer-accounts
+    requirement: The system SHALL intercept a request for a protected page from a user who is not signed on and present the sign-on page instead, remembering the originally requested page.
+    confidence: medium
+    confidence_basis: One clear place (the filter); protected URL list lives in a signon-config file not present in this module, so the exact protected pages are unseen.
+    risk_class: regulated
+    basis: Filter forwards to sign-on page on exact match of target URL with a protected pattern and stores the original URL in the session; other requests pass through.
+    plain_text: Pages that require an account send visitors who have not signed in to the sign-in page, and bring them back to the page they wanted afterwards.
+    technical_note: SignOnFilter.doFilter matches by exact string equality (no wildcard) against patterns read by SignOnDAO from /WEB-INF/signon-config.xml.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/signon/src/com/sun/j2ee/blueprints/signon/web/SignOnFilter.java
+        line_start: 124
+        line_end: 154
+        excerpt: |
+          if (signedOn) {
+                  chain.doFilter(request,response);
+                  return;
+          }
+          ...
+              if (urlPattern.equals(targetURL)) {
+                  hreq.getSession().setAttribute(ORIGINAL_URL,  targetURL);
+                  config.getServletContext().getRequestDispatcher("/" + signOnPage).forward(request, response);
+    stack_metadata:
+      framework: servlet-filter
+      session.scope: HttpSession
+  - record_key: CUST-REQ-0002
+    kind: requirement
+    capability_key: customer-accounts
+    requirement: The system SHALL authenticate a sign-on attempt by looking up the user by name and comparing the supplied password to the stored password for exact equality; an unknown user name SHALL fail authentication.
+    confidence: high
+    confidence_basis: Enforced in the session bean and entity bean, and the user guide describes sample users with a password.
+    risk_class: regulated
+    basis: authenticate returns false on FinderException; matchPassword uses String.equals.
+    plain_text: A visitor signs in with a user name and password; sign-in fails if the user does not exist or the password differs.
+    technical_note: SignOnEJB.authenticate -> UserEJB.matchPassword. Passwords are stored and compared as plain text (see defect).
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/signon/src/com/sun/j2ee/blueprints/signon/ejb/SignOnEJB.java
+        line_start: 72
+        line_end: 77
+        excerpt: |
+          UserLocal user = ulh.findByPrimaryKey(userName);
+          return user.matchPassword(password);
+          } catch (FinderException fe) {
+              return false; // User not found, so authentication failed.
+      - path: legacy-source/app/src/components/signon/src/com/sun/j2ee/blueprints/signon/user/ejb/UserEJB.java
+        line_start: 88
+        line_end: 89
+        excerpt: |
+          public boolean matchPassword(String password) {
+              return password.equals(getPassword());
+    stack_metadata:
+      ejb.bean: SignOnEJB, UserEJB
+      ejb.transaction: Required
+  - record_key: CUST-REQ-0003
+    kind: workflow
+    capability_key: customer-accounts
+    requirement: GIVEN a successful sign-on WHEN authentication succeeds THEN the system SHALL mark the session as signed on, record the user name in the session and redirect to the originally requested page; GIVEN a failed sign-on THEN the system SHALL redirect to the configured sign-on error page.
+    confidence: medium
+    confidence_basis: One clear place; redirect target is the session original URL which may be null if sign-on is submitted directly.
+    risk_class: regulated
+    basis: validateSignOn sets session flags then redirects.
+    plain_text: After signing in, the visitor returns to the page they originally wanted; a wrong sign-in shows the sign-in error page.
+    technical_note: SignOnFilter.validateSignOn, triggered by request to j_signon_check.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/signon/src/com/sun/j2ee/blueprints/signon/web/SignOnFilter.java
+        line_start: 188
+        line_end: 209
+        excerpt: |
+          boolean authenticated = signOn.authenticate(userName, password);
+          if (authenticated) {
+          ...
+              hres.sendRedirect(targetURL);
+          } else {
+              hres.sendRedirect(signOnErrorPage);
+    stack_metadata:
+      framework: servlet-filter
+      session.scope: HttpSession
+  - record_key: CUST-REQ-0004
+    kind: business-rule
+    capability_key: customer-accounts
+    requirement: GIVEN the user ticks "remember user name" at sign-on THEN the system SHALL store the user name in a cookie lasting 2678400 seconds (31 days); OTHERWISE any existing remember-me cookie SHALL be expired.
+    confidence: medium
+    confidence_basis: One clear place; the literal 2678400 has a comment saying one month. The cookie is set before authentication outcome is known.
+    risk_class: operational
+    basis: Cookie bp_signon set with max age, or cleared with max age 0.
+    plain_text: If the visitor asks to be remembered, their user name is kept for about a month; if not, any saved name is removed.
+    technical_note: Cookie is written regardless of whether authentication succeeds.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/signon/src/com/sun/j2ee/blueprints/signon/web/SignOnFilter.java
+        line_start: 166
+        line_end: 186
+        excerpt: |
+          if (rememberUserName != null) {
+            Cookie userNameCookie = new Cookie(COOKIE_NAME, userName);
+            // set cookie to last for one month
+            userNameCookie.setMaxAge(2678400);
+    stack_metadata:
+      framework: servlet-filter
+  - record_key: CUST-REQ-0005
+    kind: business-rule
+    capability_key: customer-accounts
+    requirement: The system SHALL reject creation of a user whose user ID exceeds 25 characters, whose password exceeds the maximum password length, or whose user ID contains '%' or '*'.
+    confidence: medium
+    confidence_basis: Enforced in one place. The password maximum constant value was redacted in the source and is not visible, so it is not stated.
+    risk_class: regulated
+    basis: ejbCreate throws CreateException for each violation.
+    plain_text: A new account cannot be created if the user ID is longer than 25 characters, the password is too long, or the user ID contains the characters % or *.
+    technical_note: UserEJB.ejbCreate with constants in UserLocal (MAX_USERID_LENGTH=25).
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/signon/src/com/sun/j2ee/blueprints/signon/user/ejb/UserEJB.java
+        line_start: 64
+        line_end: 75
+        excerpt: |
+          if(userName.length() > UserLocal.MAX_USERID_LENGTH) {
+          ...
+          if( (userName.indexOf('%') != -1) ||
+          (userName.indexOf('*') != -1) ) {
+      - path: legacy-source/app/src/components/signon/src/com/sun/j2ee/blueprints/signon/user/ejb/UserLocal.java
+        line_start: 46
+        line_end: 47
+        excerpt: |
+          public static final int MAX_USERID_LENGTH = 25;
+    stack_metadata:
+      ejb.bean: UserEJB
+  - record_key: CUST-REQ-0006
+    kind: requirement
+    capability_key: customer-accounts
+    requirement: GIVEN a duplicate user name or a failed creation WHEN account creation fails THEN the system SHALL redirect to the user creation error page; the user name is the unique identifier of an account.
+    confidence: medium
+    confidence_basis: Primary key on user name implies uniqueness; the servlet's success path line is partly unreadable in this pass.
+    risk_class: regulated
+    basis: CMP primkey is userName; servlet catches CreateException and redirects.
+    plain_text: Each account has a unique user name; if account creation fails the visitor sees an account-creation error page.
+    technical_note: CreateUserServlet.doPost catches CreateException; DuplicateKeyException is a subtype raised by the container for a repeated key.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/signon/src/com/sun/j2ee/blueprints/signon/web/CreateUserServlet.java
+        line_start: 71
+        line_end: 74
+        excerpt: |
+          } catch (CreateException ce) {
+              ...
+              response.sendRedirect("user_creation_error.jsp");
+      - path: legacy-source/app/src/components/signon/src/ejb-jar.xml
+        line_start: 65
+        line_end: 65
+        excerpt: |
+          <primkey-field>userName</primkey-field>
+    stack_metadata:
+      ejb.bean: UserEJB
+      struts.action: CreateUserServlet
+suspected_defects:
+  - capability_key: customer-accounts
+    record_keys: [CUST-REQ-0002]
+    severity: high
+    category: other
+    title: Passwords stored and compared in plain text
+    description: Password is persisted as supplied and compared with String.equals; no hashing.
+    traces:
+      - path: legacy-source/app/src/components/signon/src/com/sun/j2ee/blueprints/signon/user/ejb/UserEJB.java
+        line_start: 88
+        line_end: 89
+  - capability_key: customer-accounts
+    record_keys: [CUST-REQ-0006]
+    severity: medium
+    category: other
+    title: Creation servlet logs user name and password to standard output
+    description: CreateUserServlet prints the submitted user name and password to the console.
+    traces:
+      - path: legacy-source/app/src/components/signon/src/com/sun/j2ee/blueprints/signon/web/CreateUserServlet.java
+        line_start: 68
+        line_end: 69
+  - capability_key: customer-accounts
+    record_keys: [CUST-REQ-0004]
+    severity: low
+    category: other
+    title: Remember-me cookie written before authentication result
+    description: The cookie holding the user name is issued even when the sign-on then fails.
+    traces:
+      - path: legacy-source/app/src/components/signon/src/com/sun/j2ee/blueprints/signon/web/SignOnFilter.java
+        line_start: 168
+        line_end: 190
+findings: []
