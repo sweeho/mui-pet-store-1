@@ -1,0 +1,45 @@
+recommendations:
+  - record_key: INTL-REQ-0007
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Single clear conversion routine; the Shift-JIS/JIS inputs matter only if the rebuild receives such legacy encodings, which the Business Owner should confirm.
+  - record_key: ADM-REQ-0005
+    recommendation: accept
+    confidence: high
+    reason: >
+      Resource bundles with default and German variants are declared in the admin client; Intent should confirm the admin client is in scope.
+  - record_key: CB-REQ-0005
+    recommendation: edit
+    confidence: medium
+    reason: >
+      The parser is hand-written and partly dead; confirm what the code does for three-part locales before approving.
+    edited_requirement: The system SHALL interpret a locale given as text of the form language_country, and the word "default" as the server default locale; text without an underscore is not a valid locale.
+  - record_key: CUSTOMER-ACCOUNTS-REQUIREMENT-0001
+    recommendation: accept
+    confidence: high
+    reason: The profile persists a language field; the schema and code agree.
+  - record_key: I18N-REQ-0001
+    recommendation: accept
+    confidence: high
+    reason: Passes agree across screen definitions, page folders and the user guide.
+  - record_key: INTL-BR-0002
+    recommendation: accept
+    confidence: medium
+    reason: The throw on a null parse result is explicit; three-part locale behaviour was inferred, not executed.
+  - record_key: INTL-REQ-0001
+    recommendation: accept
+    confidence: high
+    reason: Action reads the parameter, stores to session and raises the event; mapping confirms the route.
+  - record_key: CATB-REQ-0008
+    recommendation: accept
+    confidence: high
+    reason: The catalog DAO SQL keys detail rows by locale.
+  - record_key: INTL-BR-0003
+    recommendation: accept
+    confidence: medium
+    reason: Code sets en_US default; the user guide claims browser-language detection, which the code does not do. Conflict goes to Intent for the Business Owner.
+  - record_key: INTL-BR-0004
+    recommendation: accept
+    confidence: high
+    reason: Resolution order and the two-level fallback are explicit in code with comments.
