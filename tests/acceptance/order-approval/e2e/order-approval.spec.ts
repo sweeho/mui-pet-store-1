@@ -28,18 +28,14 @@ test("SWHM2-C-0027 Commit sends only the changed orders", async ({ page }) => {
   const ids = [0, 1, 2].map(async (i) => (await rows.nth(i).getAttribute("data-order-id"))!);
   const [a, b, c] = [await ids[0], await ids[1], await ids[2]];
   const before = (await sent(page)).length;
-  await rows
-    .nth(0)
+  const rowById = (id: string) => page.locator(`tr[data-order-id="${id}"]`);
+  await rowById(a)
     .getByRole("button", { name: /approve/i })
     .click();
-  await rows
-    .nth(1)
+  await rowById(b)
     .getByRole("button", { name: /approve/i })
     .click();
-  await page
-    .getByRole("button", { name: /commit/i })
-    .first()
-    .click();
+  await page.getByRole("button", { name: /^commit( changes)?$/i }).click();
   await expect.poll(async () => (await sent(page)).length).toBe(before + 2);
   const messages = (await sent(page)).slice(before);
   expect(messages.map((m) => m.orderId).sort()).toEqual([a, b].sort());
