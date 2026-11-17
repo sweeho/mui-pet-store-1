@@ -1,0 +1,135 @@
+records:
+  - record_key: CA-REQ-0001
+    kind: requirement
+    capability_key: customer-accounts
+    requirement: The system SHALL identify each customer by a unique user id that serves as the customer's primary key.
+    confidence: medium
+    confidence_basis: Declared once as CMP field and primkey-field in ejb-jar.xml, set in ejbCreate; no DDL seen.
+    risk_class: operational
+    basis: CustomerEJB has userId as primary key field.
+    plain_text: Every customer is identified by a unique user name.
+    technical_note: CustomerEJB CMP entity, primkey-field userId.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/customer/src/ejb-jar.xml
+        line_start: 57
+        line_end: 61
+        excerpt: |
+          <cmp-field>
+            <description>no description</description>
+            <field-name>userId</field-name>
+          </cmp-field>
+          <primkey-field>userId</primkey-field>
+    stack_metadata:
+      framework: EJB 2.0 CMP
+      ejb.bean: CustomerEJB
+  - record_key: CA-WF-0001
+    kind: workflow
+    capability_key: customer-accounts
+    requirement: WHEN a customer is created, the system SHALL create an associated account with status "active" and an associated profile with default preferences.
+    confidence: high
+    confidence_basis: Enforced in CustomerEJB.ejbPostCreate and constants in the two home interfaces; consistent across them.
+    risk_class: operational
+    basis: ejbPostCreate creates Account (Active) and Profile (defaults) and links them.
+    plain_text: A new customer automatically gets an active account and a profile with default preferences.
+    technical_note: CustomerEJB.ejbPostCreate looks up ejb/Account and ejb/Profile and creates them; a naming failure raises CreateException.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/customer/src/com/sun/j2ee/blueprints/customer/ejb/CustomerEJB.java
+        line_start: 74
+        line_end: 89
+        excerpt: |
+          public void ejbPostCreate(String userId) throws CreateException {
+              try {
+              InitialContext ic = new InitialContext();
+              AccountLocalHome alh = (AccountLocalHome) ic.lookup("java:comp/env/ejb/Account");
+              AccountLocal account = alh.create(AccountLocalHome.Active);
+              setAccount(account);
+      - path: legacy-source/app/src/components/customer/src/com/sun/j2ee/blueprints/customer/account/ejb/AccountLocalHome.java
+        line_start: 48
+        line_end: 48
+        excerpt: |
+          public static final String Active = "active";
+    stack_metadata:
+      ejb.bean: CustomerEJB
+  - record_key: CA-REQ-0002
+    kind: requirement
+    capability_key: customer-accounts
+    requirement: The system SHALL give a new profile the defaults preferred language en_US, no favourite category, my-list enabled and banner enabled.
+    confidence: high
+    confidence_basis: Constants in ProfileLocalHome used by CustomerEJB; code plus declared CMP fields.
+    risk_class: presentational
+    basis: Default constants.
+    plain_text: New customers start with English (US), no favourite category, and the pet list and banner turned on.
+    technical_note: ProfileLocalHome.Default* constants.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/customer/src/com/sun/j2ee/blueprints/customer/profile/ejb/ProfileLocalHome.java
+        line_start: 44
+        line_end: 47
+        excerpt: |
+          public static final String DefaultPreferredLanguage = "en_US";
+          public static final String DefaultFavoriteCategory = null;
+          public static final boolean DefaultMyListPreference = true;
+          public static final boolean DefaultBannerPreference = true;
+    stack_metadata:
+      ejb.bean: ProfileEJB
+  - record_key: CA-ENT-0001
+    kind: entity
+    capability_key: customer-accounts
+    requirement: The system SHALL hold per customer an account (status, contact information, credit card) and a profile (preferred language, favourite category, my-list preference, banner preference).
+    confidence: high
+    confidence_basis: Declared in ejb-jar.xml and the bean classes.
+    risk_class: operational
+    basis: Account and Profile CMP fields and relationships.
+    plain_text: Each customer has an account with a status, contact details and a payment card, and a profile of display preferences.
+    technical_note: AccountEJB (status, CMR contactInfo, creditCard); ProfileEJB (4 CMP fields).
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/customer/src/com/sun/j2ee/blueprints/customer/account/ejb/AccountEJB.java
+        line_start: 159
+        line_end: 168
+        excerpt: |
+          public abstract String getStatus();
+          public abstract void setStatus(String status);
+          public abstract ContactInfoLocal getContactInfo();
+          public abstract CreditCardLocal getCreditCard();
+      - path: legacy-source/app/src/components/customer/src/com/sun/j2ee/blueprints/customer/profile/ejb/ProfileEJB.java
+        line_start: 269
+        line_end: 279
+        excerpt: |
+          public abstract String getPreferredLanguage();
+          public abstract String getFavoriteCategory();
+          public abstract boolean getMyListPreference();
+    stack_metadata:
+      ejb.bean: AccountEJB
+  - record_key: CA-WF-0002
+    kind: workflow
+    capability_key: customer-accounts
+    requirement: WHEN an account is created without supplied contact info and credit card, the system SHALL create empty contact info and credit card records for it.
+    confidence: medium
+    confidence_basis: One clear place (AccountEJB.ejbPostCreate); the alternate create form links supplied objects.
+    risk_class: operational
+    basis: Two create variants in AccountEJB.
+    plain_text: A new account starts with blank contact details and a blank payment card unless they are supplied.
+    technical_note: AccountEJB.ejbPostCreate(String) creates via ejb/ContactInfo and ejb/CreditCard.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/customer/src/com/sun/j2ee/blueprints/customer/account/ejb/AccountEJB.java
+        line_start: 182
+        line_end: 201
+        excerpt: |
+          public void ejbPostCreate(String status) throws CreateException {
+              setStatus(status);
+              ...
+              ContactInfoLocal contactInfo = cih.create();
+              ...
+              CreditCardLocal creditCard = cch.create();
+    stack_metadata:
+      ejb.bean: AccountEJB
+findings:
+  - kind: ambiguity
+    path: legacy-source/app/src/components/customer/src/com/sun/j2ee/blueprints/customer/ejb/CustomerEJB.java
+    description: >
+      No duplicate-user-id or sign-on rule exists in this module; uniqueness relies on the primary key. The user guide (legacy-analysis/sources/pdf/petstore-user-guide/extracted.md, anchor p1) only says to fill the sign-up form. Sign-on and duplicate handling live elsewhere.
+suspected_defects: []
