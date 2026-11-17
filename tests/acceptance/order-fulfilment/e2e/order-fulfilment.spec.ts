@@ -20,6 +20,13 @@ async function firstRow(page: Page) {
   return { itemId, row, qty };
 }
 
+/** The inventory form's own submit control, scoped to the form holding the quantity inputs. */
+function submitButton(page: Page) {
+  return page
+    .locator("form", { has: page.locator('input[name^="qty_"]') })
+    .locator('button[type="submit"], input[type="submit"]');
+}
+
 async function existing(row: ReturnType<Page["locator"]>): Promise<number> {
   const text = await row.locator("td").nth(1).innerText();
   return Number.parseInt(text.trim(), 10);
@@ -35,7 +42,7 @@ test("SWHM2-C-0179 inventory screen rows show id, quantity, new-quantity input, 
   expect(Number.isNaN(await existing(row))).toBe(false);
   await expect(row.locator(`input[name="qty_${itemId}"]`)).toBeVisible();
   await expect(row.locator(`input[type="checkbox"][name="item_${itemId}"]`)).toBeVisible();
-  await expect(page.getByRole("button", { name: /submit|update/i })).toBeVisible();
+  await expect(submitButton(page)).toBeVisible();
 });
 
 // case: SWHM2-C-0195@v1
@@ -46,7 +53,7 @@ test("SWHM2-C-0195 an unticked item keeps its stock when the form is submitted",
   const { itemId, row, qty } = await firstRow(page);
   const before = await existing(row);
   await qty.fill(String(before + 15));
-  await page.getByRole("button", { name: /submit|update/i }).click();
+  await submitButton(page).click();
   await page.goto("/admin/inventory");
   const again = page.locator("tr", { has: page.locator(`input[name="qty_${itemId}"]`) });
   expect(await existing(again)).toBe(before);
@@ -63,7 +70,7 @@ test("SWHM2-C-0211 a clerk update sets the quantity and reprocesses pending orde
     const qty = page.locator(`input[name="qty_${itemId}"]`);
     await qty.fill(String(value));
     await page.locator(`input[name="item_${itemId}"]`).check();
-    await page.getByRole("button", { name: /submit|update/i }).click();
+    await submitButton(page).click();
     await page.goto("/admin/inventory");
   };
   await set(0);

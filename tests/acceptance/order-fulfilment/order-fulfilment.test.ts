@@ -359,13 +359,15 @@ describe("order-fulfilment: orders and statuses", () => {
   });
 
   // case: SWHM2-C-0213@v1
-  it("[SWHM2-C-0213] the retention purge removes the supplier order, its contact and addresses", async () => {
+  it("[SWHM2-C-0213] the retention purge removes the supplier order, its lines and its contact (the address holder)", async () => {
     await seedOrder("S1", [line(1, "EST-1", 2)]);
     await purgeSupplierOrders(t.env, ["S1"]);
     const o = await t.db.all(sql`SELECT * FROM supplier_order WHERE order_id = 'S1'`);
     const l = await t.db.all(sql`SELECT * FROM supplier_order_line WHERE order_id = 'S1'`);
     const c = await t.db.all(sql`SELECT * FROM contact_info`);
     expect([o.length, l.length, c.length]).toEqual([0, 0, 0]);
+    const orphans = await t.db.all(sql`SELECT * FROM contact_info WHERE order_id = 'S1'`);
+    expect(orphans).toHaveLength(0);
   });
 
   // case: SWHM2-C-0205@v1
@@ -416,11 +418,20 @@ describe("order-fulfilment: fulfilment", () => {
   });
 
   // case: SWHM2-C-0185@v1
-  it("[SWHM2-C-0185] an order with an unavailable line is not COMPLETED", async () => {
+  it("[SWHM2-C-0185] an order with an unavailable line is partly shipped, not COMPLETED", async () => {
     await seedOrder("S1", [line(1, "EST-1", 1), line(2, "EST-2", 1)]);
     await setStock(t.db, "EST-1", 5);
-    await processOrder(t.env, "S1");
-    expect((await getSupplierOrder(t.env, "S1")).status).not.toBe("COMPLETED");
+    const result = await processOrder(t.env, "S1");
+    expect(result.status).toBe("SHIPPED_PART");
+    expect((await getSupplierOrder(t.env, "S1")).status).toBe("SHIPPED_PART");
+    expect(await stockOf(t.db, "EST-1")).toBe(4);
+    const lines = await t.db.all<{ line_num: number; quantity_shipped: number }>(
+      sql`SELECT line_num, quantity_shipped FROM supplier_order_line WHERE order_id = 'S1' ORDER BY line_num`,
+    );
+    expect(lines).toEqual([
+      { line_num: 1, quantity_shipped: 1 },
+      { line_num: 2, quantity_shipped: 0 },
+    ]);
   });
 
   // case: SWHM2-C-0187@v1
@@ -453,9 +464,9 @@ describe("order-fulfilment: fulfilment", () => {
     await seedOrder("S1", [line(1, "EST-1", 1)]);
     await setStock(t.db, "EST-1", 5);
     t.invoiceGeneration.fail = true;
-    const result = await processOrder(t.env, "S1").catch(() => ({ invoice: null }));
+    const result = await processOrder(t.env, "S1");
     expect(result.invoice).toBeNull();
-    expect((await getSupplierOrder(t.env, "S1")).status).not.toBe("COMPLETED");
+    expect((await getSupplierOrder(t.env, "S1")).status).toBe("PENDING");
     expect(t.completed).toEqual([]);
   });
 
