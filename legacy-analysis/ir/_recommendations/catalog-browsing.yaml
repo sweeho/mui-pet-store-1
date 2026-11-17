@@ -1,0 +1,65 @@
+recommendations:
+  - record_key: CAT-REQ-0001
+    recommendation: edit
+    confidence: low
+    reason: >
+      Only file names and an admin-guide were seen; a second pass states two-row paging and a member price, which conflicts. Confirm against the running storefront; conflict goes to Intent.
+    edited_requirement: >
+      The system SHALL provide storefront screens for categories, products, items and search, and a populate tool that loads sample data from XML.
+  - record_key: CATALOG-RULE-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      DDL NOT NULL constraints and absence of a CHECK agree across passes; the missing price check is a business-owner question.
+  - record_key: CB-BR-0005
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Item fields match the SQL select list in both DAO variants.
+  - record_key: CATB-BR-0007
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes read the same paging code.
+  - record_key: CATB-BR-0010
+    recommendation: accept
+    confidence: high
+    reason: >
+      DAO exception wrapping is consistent across methods.
+  - record_key: CATB-REQ-0001
+    recommendation: accept
+    confidence: high
+    reason: >
+      SQL ordering and DAO paging agree.
+  - record_key: CATB-REQ-0002
+    recommendation: accept
+    confidence: high
+    reason: >
+      SQL ordering and DAO paging agree.
+  - record_key: CATB-REQ-0003
+    recommendation: accept
+    confidence: medium
+    reason: >
+      Item order is undefined in SQL; confirm with the Business Owner whether an order is required.
+  - record_key: CATB-REQ-0004
+    recommendation: accept
+    confidence: high
+    reason: >
+      Null-on-miss pattern is consistent in three methods.
+  - record_key: CATB-REQ-0005
+    recommendation: edit
+    confidence: medium
+    reason: >
+      Pass B says the generic DAO does not lower-case keywords, a suspected defect; confirm what the code does and the Business Owner decides whether case-insensitivity is intended.
+    edited_requirement: >
+      The system SHALL match an item when ANY whitespace-separated keyword is contained in its product name, category id or description in the customer's locale; case handling to be confirmed.
+  - record_key: CATB-REQ-0006
+    recommendation: accept
+    confidence: high
+    reason: >
+      Both passes read the early return.
+  - record_key: INTL-REQ-0006
+    recommendation: reject
+    confidence: low
+    reason: >
+      Catalog search tokenises on whitespace; locale-aware splitting is in a different component and conflicts with the catalog record. Decide in Intent which is true in production.
