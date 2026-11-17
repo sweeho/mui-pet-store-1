@@ -1,0 +1,219 @@
+records:
+  - record_key: INTL-REQ-0001
+    kind: requirement
+    capability_key: internationalisation
+    requirement: >
+      The system SHALL let a user switch the display language by submitting a locale code, store the chosen locale for the rest of the user's session, and raise a change-locale event for the back end.
+    confidence: medium
+    confidence_basis: >
+      One clear place (the change-locale action plus its URL mapping). The sample page lists the options but is a framework demo, so no second enforcement point was seen.
+    risk_class: presentational
+    basis: >
+      The action reads the "locale" parameter, converts it, saves it to the session and returns a ChangeLocaleEvent; the URL mapping routes changelocale.do to a success screen.
+    plain_text: >
+      A shopper can choose a language, and the store then shows its pages in that language for the rest of the visit.
+    technical_note: >
+      ChangeLocaleHTMLAction.perform stores the Locale in the session attribute com.sun.j2ee.blueprints.waf.LOCALE. mappings.xml maps changelocale.do to locale_change_success.screen.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/waf/src/controller/com/sun/j2ee/blueprints/waf/controller/web/action/actions/ChangeLocaleHTMLAction.java
+        line_start: 73
+        line_end: 83
+        excerpt: |
+          String localeString = request.getParameter("locale");
+          Locale locale = I18nUtil.getLocaleFromString(localeString);
+          ...
+          session.setAttribute(LOCALE,locale);
+          return new ChangeLocaleEvent(locale);
+      - path: legacy-source/app/src/waf/src/docroot/WEB-INF/mappings.xml
+        line_start: 52
+        line_end: 54
+        excerpt: |
+          <url-mapping url="changelocale.do" screen="locale_change_success.screen" >
+    stack_metadata:
+      framework: WAF (Sun Java Pet Store web application framework)
+      struts.action: ChangeLocaleHTMLAction
+
+  - record_key: INTL-RULE-0002
+    kind: business-rule
+    capability_key: internationalisation
+    requirement: >
+      GIVEN a locale code that cannot be parsed, WHEN a user requests a language change, THEN the system SHALL refuse the change and report an error naming the unusable value, leaving the session locale unchanged.
+    confidence: medium
+    confidence_basis: >
+      Read in the action and in the parser; the parser has odd logic (see defect) so the exact set of accepted codes is inferred.
+    risk_class: presentational
+    basis: >
+      The parser returns null when the code is null or has no underscore; the action throws HTMLActionException when the result is null.
+    plain_text: >
+      If the language choice is not recognised, the language stays as it was and an error is shown.
+    technical_note: >
+      I18nUtil.getLocaleFromString accepts "default" (JVM default locale) or language_COUNTRY. A variant part is never applied.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/waf/src/controller/com/sun/j2ee/blueprints/waf/controller/web/action/actions/ChangeLocaleHTMLAction.java
+        line_start: 78
+        line_end: 83
+        excerpt: |
+          if (locale != null) {
+              session.setAttribute(LOCALE,locale);
+          ...
+              throw new HTMLActionException("ChangeLocaleAction: Unable to change language to " + localeString);
+      - path: legacy-source/app/src/waf/src/controller/com/sun/j2ee/blueprints/waf/util/I18nUtil.java
+        line_start: 168
+        line_end: 172
+        excerpt: |
+          public static Locale getLocaleFromString(String localeString) {
+              if (localeString == null) return null;
+              if (localeString.toLowerCase().equals("default")) return Locale.getDefault();
+              int languageIndex = localeString.indexOf('_');
+              if (languageIndex  == -1) return null;
+    stack_metadata:
+      framework: WAF
+
+  - record_key: INTL-REQ-0003
+    kind: requirement
+    capability_key: internationalisation
+    requirement: >
+      The system SHALL give every new session a default locale (configured as en_US) when the session has none.
+    confidence: high
+    confidence_basis: >
+      Enforced in the main controller and configured in web.xml (two places).
+    risk_class: presentational
+    basis: >
+      MainServlet sets the session locale to the configured default if absent; web.xml supplies default_locale en_US.
+    plain_text: >
+      A visitor who has not chosen a language sees the store in US English.
+    technical_note: >
+      MainServlet.doProcess; init-param default_locale in web.xml for MainServlet and TemplateServlet.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/waf/src/controller/com/sun/j2ee/blueprints/waf/controller/web/MainServlet.java
+        line_start: 110
+        line_end: 113
+        excerpt: |
+          // set the locale of the user to default if not set
+          if (request.getSession().getAttribute(WebKeys.LOCALE) == null) {
+              request.getSession().setAttribute(WebKeys.LOCALE, defaultLocale);
+          }
+      - path: legacy-source/app/src/waf/src/docroot/WEB-INF/web.xml
+        line_start: 58
+        line_end: 59
+        excerpt: |
+          <param-name>default_locale</param-name>
+          <param-value>en_US</param-value>
+    stack_metadata:
+      framework: WAF
+      session.scope: session
+
+  - record_key: INTL-RULE-0004
+    kind: business-rule
+    capability_key: internationalisation
+    requirement: >
+      The system SHALL choose the screen language as follows: a locale given on the request overrides the session locale; if no screen definitions exist for the chosen locale, the default locale is used; if a screen is missing in the chosen locale, it SHALL be taken from the default locale.
+    confidence: high
+    confidence_basis: >
+      Several branches in one servlet plus the admin guide describing per-locale screen definition files.
+    risk_class: presentational
+    basis: >
+      TemplateServlet picks locale from the "locale" parameter, else the session; falls back to defaultLocale; logs "Screen not Found loading default".
+    plain_text: >
+      Pages appear in the language the shopper asked for. Anything not translated appears in the store's default language.
+    technical_note: >
+      Only locales listed in the TemplateServlet "locales" init-param get screen definitions loaded; web.xml lists only en_US, so only en_US screens load as shipped.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/waf/src/view/template/com/sun/j2ee/blueprints/waf/view/template/TemplateServlet.java
+        line_start: 157
+        line_end: 166
+        excerpt: |
+          String languageParam = request.getParameter("locale");
+          // The language when specified as a parameter overrides the language set in the session
+          if (languageParam != null) {
+              localeString = languageParam;
+          } else if (request.getSession().getAttribute(WebKeys.LOCALE) != null) {
+          ...
+          if (allScreens.get(localeString) == null) {
+             localeString = defaultLocale;
+      - path: legacy-source/app/src/waf/src/view/template/com/sun/j2ee/blueprints/waf/view/template/TemplateServlet.java
+        line_start: 236
+        line_end: 240
+        excerpt: |
+          System.err.println("Screen not Found loading default from " + defaultLocale);
+          localeScreens = (Screens)allScreens.get(defaultLocale);
+          screen = (Screen)localeScreens.getScreen(screenName);
+      - path: legacy-analysis/sources/pdf/petstore-admin-guide/extracted.md
+        line_start: 38
+        line_end: 43
+        excerpt: |
+          3.2 Adding a localization
+          The Storefront is internationalised and comes with the English (en) and Japanese (ja) localizations.
+    stack_metadata:
+      framework: WAF
+      jsp.page: TemplateServlet screen definitions
+
+  - record_key: INTL-REQ-0005
+    kind: requirement
+    capability_key: internationalisation
+    requirement: >
+      The system SHALL format currency amounts and numbers according to the user's locale.
+    confidence: medium
+    confidence_basis: >
+      One utility class; callers in this module were not traced.
+    risk_class: presentational
+    basis: >
+      I18nUtil.formatCurrency and formatNumber use locale-specific NumberFormat instances.
+    plain_text: >
+      Prices and numbers are written the way the shopper's language and country expect.
+    technical_note: >
+      I18nUtil.formatCurrency/formatNumber (lines 80-110).
+    interface: false
+    traces:
+      - path: legacy-source/app/src/waf/src/controller/com/sun/j2ee/blueprints/waf/util/I18nUtil.java
+        line_start: 100
+        line_end: 105
+        excerpt: |
+          public static String formatCurrency(double amount, int precision, Locale locale){
+              NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
+    stack_metadata:
+      framework: WAF
+
+suspected_defects:
+  - capability_key: internationalisation
+    record_keys: [INTL-RULE-0002]
+    severity: low
+    category: unreachable-branch
+    title: Locale variant parsing never applies a variant
+    description: >
+      variantIndex is initialised to -1 and never reassigned (countryIndex is reassigned instead), so the variant branch is dead and codes with three parts are parsed with a country containing the underscore remainder or ignored.
+    traces:
+      - path: legacy-source/app/src/waf/src/controller/com/sun/j2ee/blueprints/waf/util/I18nUtil.java
+        line_start: 182
+        line_end: 190
+        excerpt: |
+          int variantIndex = -1;
+          if (countryIndex != -1) countryIndex = localeString.indexOf('_', countryIndex +1);
+  - capability_key: internationalisation
+    record_keys: [INTL-RULE-0004]
+    severity: medium
+    category: contradicts-document
+    title: Only en_US screens are configured though Japanese and Chinese are documented
+    description: >
+      web.xml lists only en_US in the "locales" parameter and only screendefinitions_en_US.xml exists in this module, while the guides describe English, Japanese and Chinese localisations. The change-locale demo page also offers German, which has no screens.
+    traces:
+      - path: legacy-source/app/src/waf/src/docroot/WEB-INF/web.xml
+        line_start: 69
+        line_end: 71
+        excerpt: |
+          <param-name>locales</param-name>
+          <param-value>en_US</param-value>
+      - path: legacy-analysis/sources/pdf/petstore-admin-guide/extracted.md
+        anchor: p1
+        excerpt: |
+          comes with the English (en) and Japanese (ja) localizations
+
+findings:
+  - kind: ambiguity
+    path: legacy-source/app/src/waf/src/controller/com/sun/j2ee/blueprints/waf/controller/ejb/StateMachine.java
+    description: >
+      The rest of the module is generic framework plumbing (request dispatch, screen templating, form tags, EJB state machine) with no business rules. StateMachine swallows action-loading errors by printing to stderr and returning a null response. Whether that matters depends on the application modules that use it; a human should decide whether framework behaviour needs a requirement.
