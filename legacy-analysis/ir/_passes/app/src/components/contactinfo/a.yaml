@@ -1,0 +1,137 @@
+records:
+  - record_key: CHK-ENT-0001
+    kind: entity
+    capability_key: checkout-and-payment
+    requirement: >
+      The system SHALL hold a contact record for an order consisting of given name, family name, telephone, email and exactly one associated postal address.
+    confidence: high
+    confidence_basis: >
+      Fields declared in the entity descriptor, the abstract bean accessors, the value object and the XML DTD; four places agree.
+    risk_class: regulated
+    basis: Persistent fields and the one-to-one address relationship are declared in the descriptor and mirrored in the value class and DTD.
+    plain_text: >
+      Each order carries contact details: first name, last name, phone number, email address and one postal address.
+    technical_note: >
+      CMP entity ContactInfoEJB with cmp-fields telephone, familyName, email, givenName and a CMR field address (multiplicity One) to AddressEJB. Value class ContactInfo maps telephone to phone.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/contactinfo/src/ejb-jar.xml
+        line_start: 56
+        line_end: 72
+        excerpt: |
+          <abstract-schema-name>ContactInfo</abstract-schema-name>
+          <cmp-field> ... telephone ... familyName ... email ... givenName
+      - path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/ejb/ContactInfoEJB.java
+        line_start: 59
+        line_end: 73
+        excerpt: |
+          public abstract String getFamilyName();
+          public abstract AddressLocal getAddress();
+      - path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/rsrc/schemas/ContactInfo.dtd
+        line_start: 38
+        line_end: 42
+        excerpt: |
+          <!ELEMENT ContactInfo (FamilyName, GivenName, Address, Email, Phone)>
+    stack_metadata:
+      framework: EJB 2.x CMP
+      ejb.bean: ContactInfoEJB
+  - record_key: CHK-BR-0002
+    kind: business-rule
+    capability_key: checkout-and-payment
+    requirement: >
+      WHEN a contact record is created, the system SHALL also create its address record (a blank one if none is supplied, a copy of the supplied address data otherwise), and SHALL fail the creation if the address service cannot be reached.
+    confidence: medium
+    confidence_basis: One clear place (post-create hooks); no test or document corroboration.
+    risk_class: operational
+    basis: ejbPostCreate variants create an address through the address home; lookup failure raises CreateException.
+    plain_text: >
+      Saving contact details always saves an address with them; if the address cannot be saved, the contact is not saved either.
+    technical_note: >
+      ejbPostCreate() creates empty AddressLocal; ejbPostCreate(ContactInfo) creates it from contactInfo.getAddress(); ejbPostCreate(...,AddressLocal) links the supplied one. ServiceLocatorException becomes CreateException.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/ejb/ContactInfoEJB.java
+        line_start: 81
+        line_end: 127
+        excerpt: |
+          AddressLocal address = adh.create(contactInfo.getAddress());
+          setAddress(address);
+          throw new CreateException("ContactInfoEJB error: ServiceLocator exception looking up address");
+    stack_metadata:
+      ejb.bean: ContactInfoEJB
+  - record_key: CHK-INT-0003
+    kind: integration
+    capability_key: checkout-and-payment
+    requirement: >
+      The system SHALL exchange contact information as an XML element ContactInfo with children FamilyName, GivenName, Address, Email, Phone in that order, and SHALL reject a document whose root is not ContactInfo.
+    confidence: high
+    confidence_basis: DTD and serialiser/parser code agree on element names and order.
+    risk_class: operational
+    basis: toDOM writes the children in DTD order; fromDOM requires them in order and throws when the root element differs.
+    plain_text: >
+      Contact details are passed to other parts of the system in a fixed document layout; a document in a different layout is refused.
+    technical_note: >
+      ContactInfo.toDOM/fromDOM with DTD public id ContactInfo 1.1; Address DTD is imported.
+    interface: true
+    traces:
+      - path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/ejb/ContactInfo.java
+        line_start: 132
+        line_end: 158
+        excerpt: |
+          throw new XMLDocumentException(XML_CONTACTINFO + " element expected.");
+      - path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/rsrc/schemas/ContactInfo.dtd
+        line_start: 38
+        line_end: 46
+        excerpt: |
+          <!ELEMENT ContactInfo (FamilyName, GivenName, Address, Email, Phone)>
+    stack_metadata:
+      framework: DOM/DTD
+  - record_key: CHK-BR-0004
+    kind: business-rule
+    capability_key: checkout-and-payment
+    requirement: >
+      The system SHALL NOT apply any validation to name, telephone or email values in the contact component; the email element alone is read with the empty-content-allowed flag.
+    confidence: low
+    confidence_basis: Inferred from absence of validation code; the commented-out /*false*/ suggests an intentional relaxation but no source states why.
+    risk_class: regulated
+    basis: Setters assign directly; fromDOM passes true for email and false for others.
+    plain_text: >
+      This component does not check phone or email formats; any checks happen elsewhere, and a blank email is tolerated when reading a contact document.
+    technical_note: >
+      getContentAsString(child, true /*false*/) on Email only.
+    interface: false
+    traces:
+      - path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/ejb/ContactInfo.java
+        line_start: 150
+        line_end: 151
+        excerpt: |
+          contactInfo.email = XMLDocumentUtils.getContentAsString(child, true /*false*/);
+    stack_metadata:
+      framework: DOM
+  - record_key: BAT-REQ-0005
+    kind: requirement
+    capability_key: batch-operations
+    requirement: >
+      The system SHALL delete contact information together with the parent order when that order is purged by the weekly purge.
+    confidence: medium
+    confidence_basis: Stated in the runbook; the deletion itself is outside this module, whose ejbRemove is empty.
+    risk_class: regulated
+    basis: Runbook states purge removes contact information; the module places no restriction on removal.
+    plain_text: >
+      When old completed or denied orders are purged, the customer contact details on them are deleted too.
+    technical_note: >
+      Runbook job PS_ORDER_PURGE; ContactInfoEJB.ejbRemove is a no-op.
+    interface: false
+    traces:
+      - path: legacy-analysis/sources/pdf/petstore-operations-runbook/extracted.md
+        anchor: 3.5 PS_ORDER_PURGE
+        excerpt: |
+          Deletes COMPLETED and DENIED orders older than 180 days, with their order lines, supplier orders, contact information, addresses and payment cards.
+      - path: legacy-source/app/src/components/contactinfo/src/com/sun/j2ee/blueprints/contactinfo/ejb/ContactInfoEJB.java
+        line_start: 147
+        line_end: 148
+        excerpt: |
+          public void ejbRemove() throws RemoveException {
+          }
+findings: []
+suspected_defects: []
