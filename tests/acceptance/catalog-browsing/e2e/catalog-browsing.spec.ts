@@ -6,11 +6,11 @@ test("SWHM2-C-0018 storefront browse screens and populate tool", async ({ page }
   expect(res.ok()).toBe(true);
 
   await page.goto("/catalog");
-  const fishLink = page.getByRole("link", { name: /^fish$/i }).first();
+  const fishLink = page.getByRole("main").getByRole("link", { name: /^fish$/i });
   await expect(fishLink).toBeVisible();
   await fishLink.click();
 
-  const angelfishLink = page.getByRole("link", { name: /^angelfish$/i }).first();
+  const angelfishLink = page.getByRole("main").getByRole("link", { name: /^angelfish$/i });
   await expect(angelfishLink).toBeVisible();
   await angelfishLink.click();
 
