@@ -5,8 +5,8 @@ const PASSWORD = process.env.ADMIN_PASSWORD ?? "j2ee";
 
 async function signIn(page: Page, password = PASSWORD): Promise<void> {
   await page.goto("/admin/login");
-  await page.getByLabel(/user id/i).fill(USER);
-  await page.getByLabel(/password/i).fill(password);
+  await page.getByLabel(/^user id$/i).fill(USER);
+  await page.getByLabel(/^password$/i).fill(password);
   await page.getByRole("button", { name: /sign in|log ?in|submit/i }).click();
 }
 
@@ -32,8 +32,8 @@ test("SWHM2-C-0232 refresh with uncommitted changes warns first", async ({ page 
 // case: SWHM2-C-0234@v1
 test("SWHM2-C-0234 admin login, home and failed sign-in pages", async ({ page }) => {
   await page.goto("/admin/login");
-  await expect(page.getByLabel(/user id/i)).toBeVisible();
-  await expect(page.getByLabel(/password/i)).toBeVisible();
+  await expect(page.getByLabel(/^user id$/i)).toBeVisible();
+  await expect(page.getByLabel(/^password$/i)).toBeVisible();
 
   await signIn(page, "definitely-wrong-password");
   const back = page.getByRole("link", { name: /sign in|log ?in|try again/i });
@@ -50,7 +50,7 @@ test("SWHM2-C-0234 admin login, home and failed sign-in pages", async ({ page })
 test("SWHM2-C-0241 a visitor without the administrator role is sent to login", async ({ page }) => {
   await page.goto("/admin");
   await expect(page).toHaveURL(/\/admin\/login/);
-  await expect(page.getByLabel(/user id/i)).toBeVisible();
+  await expect(page.getByLabel(/^user id$/i)).toBeVisible();
   await page.goto("/admin/orders");
   await expect(page).toHaveURL(/\/admin\/login/);
 });
