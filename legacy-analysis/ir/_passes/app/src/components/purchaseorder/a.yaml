@@ -1,0 +1,235 @@
+records:
+  - record_key: ORDF-ENT-0001
+    kind: entity
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL persist each placed order as a purchase order record holding order id, user id,
+      e-mail address, order date (epoch milliseconds), locale, and total value.
+    plain_text: >
+      Every placed order is stored with its order number, the customer's user name and e-mail, when it was
+      placed, the language/region of the order, and the order total.
+    technical_note: >
+      PurchaseOrderEJB is a CMP entity bean (abstract schema PurchaseOrder); ejbCreate copies the fields from the
+      PurchaseOrder value object. Locale is stored as its string form; total as float.
+    interface: false
+    confidence: high
+    confidence_basis: >
+      Field set is declared in the bean accessors and copied in ejbCreate; the runbook's order extract lists the same
+      columns (po_id, po_user_id, po_date, po_locale, po_value).
+    risk_class: financial
+    basis: Abstract accessors and ejbCreate in the entity bean; extract column list in the runbook.
+    traces:
+      - path: legacy-source/app/src/components/purchaseorder/src/com/sun/j2ee/blueprints/purchaseorder/ejb/PurchaseOrderEJB.java
+        line_start: 197
+        line_end: 205
+        excerpt: |
+          public String ejbCreate(PurchaseOrder purchaseOrder) throws CreateException {
+                setPoId(purchaseOrder.getOrderId());
+                setPoUserId(purchaseOrder.getUserId());
+                setPoEmailId(purchaseOrder.getEmailId());
+                setPoDate(purchaseOrder.getOrderDate().getTime());
+                setPoLocale(purchaseOrder.getLocale().toString());
+                setPoValue(purchaseOrder.getTotalPrice());
+                return null;
+          }
+      - path: legacy-analysis/sources/pdf/petstore-operations-runbook/extracted.md
+        anchor: "3.2 PS_ORDER_EXTRACT"
+        excerpt: |
+          1 po_idOrder number, from the 1001 counter
+    stack_metadata:
+      framework: EJB 2.x CMP
+      ejb.bean: PurchaseOrderEJB
+      ejb.transaction: Required
+  - record_key: ORDF-REQ-0002
+    kind: requirement
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL, when a purchase order is created, also create and associate one contact-information
+      record (from the order's shipping info), one credit-card record, and one line-item record per order line.
+    plain_text: >
+      Placing an order also saves the customer's contact and address details, the payment card, and every
+      item line of the order together with it.
+    technical_note: >
+      ejbPostCreate looks up ContactInfo, CreditCard and LineItem local homes via ServiceLocator and creates
+      each; relationships are one-to-one (contact info, card) and one-to-many (line items) in ejb-jar.xml.
+      A lookup failure is rethrown as CreateException, failing the order creation.
+    interface: false
+    confidence: high
+    confidence_basis: Enforced in bean code and in the container-managed relationship declarations in ejb-jar.xml.
+    risk_class: financial
+    basis: ejbPostCreate plus ejb-relation entries.
+    traces:
+      - path: legacy-source/app/src/components/purchaseorder/src/com/sun/j2ee/blueprints/purchaseorder/ejb/PurchaseOrderEJB.java
+        line_start: 211
+        line_end: 237
+        excerpt: |
+          public void ejbPostCreate(PurchaseOrder purchaseOrder)
+                                                 throws CreateException {
+              try {
+                  ServiceLocator serviceLocator = new ServiceLocator();
+                  ContactInfoLocalHome cinforef = (ContactInfoLocalHome)
+                      serviceLocator.getLocalHome(JNDINames.CINFO_EJB);
+                  ContactInfoLocal cinfoloc = (ContactInfoLocal)
+                      cinforef.create(purchaseOrder.getShippingInfo());
+                  setContactInfo(cinfoloc);
+      - path: legacy-source/app/src/components/purchaseorder/src/ejb-jar.xml
+        line_start: 369
+        line_end: 375
+        excerpt: |
+          ONE-TO-MANY Relationship between PurchaseOrder and line items.
+    stack_metadata:
+      framework: EJB 2.x CMP
+      ejb.bean: PurchaseOrderEJB
+  - record_key: ORDF-REQ-0003
+    kind: requirement
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL allow retrieval of the purchase orders whose order date lies between two given
+      epoch-millisecond instants (inclusive).
+    plain_text: >
+      Orders placed within a given time window can be looked up, for example to produce the daily order
+      export for Finance.
+    technical_note: >
+      Finder findPOBetweenDates(long,long) defined by EJB-QL "BETWEEN ?1 AND ?2" on poDate. The runbook's
+      PS_ORDER_EXTRACT uses a 00:00-24:00 window (via SQL in db/batch, outside this module); the finder's own caller was not seen in this module.
+    interface: true
+    confidence: medium
+    confidence_basis: One clear query declaration plus runbook description of date-window extract; the caller was not seen.
+    risk_class: operational
+    basis: ejb-jar.xml query and the local home finder.
+    traces:
+      - path: legacy-source/app/src/components/purchaseorder/src/ejb-jar.xml
+        line_start: 126
+        line_end: 126
+        excerpt: |
+          <ejb-ql>SELECT OBJECT(a) From PurchaseOrder a WHERE a.poDate BETWEEN ?1 AND ?2</ejb-ql>
+      - path: legacy-source/app/src/components/purchaseorder/src/com/sun/j2ee/blueprints/purchaseorder/ejb/PurchaseOrderLocalHome.java
+        line_start: 57
+        line_end: 57
+        excerpt: |
+          public Collection findPOBetweenDates(long begin, long end) throws FinderException;
+      - path: legacy-analysis/sources/pdf/petstore-operations-runbook/extracted.md
+        anchor: "3.2 PS_ORDER_EXTRACT"
+        excerpt: |
+          Exports yesterday's purchase orders (00:00 to 24:00 server time)
+    stack_metadata:
+      framework: EJB 2.x CMP
+      ejb.bean: PurchaseOrderEJB
+  - record_key: ORDF-REQ-0004
+    kind: requirement
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL return a stored purchase order, on read, as a complete order value containing
+      id, user, e-mail, date, locale, total, billing info, credit card and all line items.
+    plain_text: >
+      When an order is opened, the system presents all of its stored details including every item line.
+    technical_note: >
+      getData() rebuilds the PurchaseOrder value object; getAllItems() returns line items as value objects
+      because managed objects cannot be used outside the transaction.
+    interface: false
+    confidence: medium
+    confidence_basis: One clear place (getData / getAllItems).
+    risk_class: operational
+    basis: Value-object assembly methods.
+    traces:
+      - path: legacy-source/app/src/components/purchaseorder/src/com/sun/j2ee/blueprints/purchaseorder/ejb/PurchaseOrderEJB.java
+        line_start: 259
+        line_end: 276
+        excerpt: |
+          public PurchaseOrder getData() {
+            PurchaseOrder purchaseOrder = new PurchaseOrder();
+            purchaseOrder.setOrderId(getPoId());
+    stack_metadata:
+      framework: EJB 2.x CMP
+      ejb.bean: PurchaseOrderEJB
+  - record_key: ORDF-BR-0005
+    kind: business-rule
+    capability_key: order-fulfilment
+    requirement: >
+      GIVEN a stored purchase order WHEN it is read back THEN the system SHALL present its shipping
+      address as identical to its billing address.
+    plain_text: >
+      A re-opened order always shows the shipping address the same as the billing address.
+    technical_note: >
+      getData() sets shippingInfo = billingInfo, marked "XXX". Only one contact record is persisted
+      (created from shipping info), so the distinct billing address is not stored by this bean.
+    interface: false
+    confidence: medium
+    confidence_basis: One clear place; the XXX comment suggests a known shortcut, intent not documented.
+    risk_class: operational
+    basis: getData assignment.
+    traces:
+      - path: legacy-source/app/src/components/purchaseorder/src/com/sun/j2ee/blueprints/purchaseorder/ejb/PurchaseOrderEJB.java
+        line_start: 267
+        line_end: 268
+        excerpt: |
+          purchaseOrder.setBillingInfo(getContactInfo().getData());
+          purchaseOrder.setShippingInfo(purchaseOrder.getBillingInfo()); // XXX
+    stack_metadata:
+      framework: EJB 2.x CMP
+      ejb.bean: PurchaseOrderEJB
+  - record_key: ORDF-REQ-0006
+    kind: requirement
+    capability_key: order-fulfilment
+    requirement: >
+      The system SHALL give callers unrestricted access to purchase order operations, with no role check
+      at the component level.
+    plain_text: >
+      The stored-order component itself does not restrict who may call it; access control is applied elsewhere.
+    technical_note: >
+      ejb-jar.xml method-permission is unchecked for PurchaseOrderEJB.* (and its contact, address, card,
+      line-item beans); security-identity uses caller identity. Local interface only, no remote interface.
+    interface: false
+    confidence: medium
+    confidence_basis: Single declarative place; effective restriction depends on callers outside this module.
+    risk_class: regulated
+    basis: assembly-descriptor method-permission.
+    traces:
+      - path: legacy-source/app/src/components/purchaseorder/src/ejb-jar.xml
+        line_start: 402
+        line_end: 408
+        excerpt: |
+          <method-permission>
+            <unchecked />
+            <method>
+              <ejb-name>PurchaseOrderEJB</ejb-name>
+              <method-name>*</method-name>
+            </method>
+          </method-permission>
+    stack_metadata:
+      framework: EJB 2.x CMP
+      ejb.bean: PurchaseOrderEJB
+suspected_defects:
+  - capability_key: order-fulfilment
+    record_keys: [ORDF-BR-0005]
+    severity: medium
+    category: data-corruption
+    title: Shipping address is replaced by billing address on read
+    description: >
+      Only one contact record is stored (built from the shipping info), and on read it is returned as both
+      billing and shipping. A distinct billing address supplied at order time is not persisted by this component.
+    traces:
+      - path: legacy-source/app/src/components/purchaseorder/src/com/sun/j2ee/blueprints/purchaseorder/ejb/PurchaseOrderEJB.java
+        line_start: 218
+        line_end: 218
+        excerpt: |
+              cinforef.create(purchaseOrder.getShippingInfo());
+      - path: legacy-source/app/src/components/purchaseorder/src/com/sun/j2ee/blueprints/purchaseorder/ejb/PurchaseOrderEJB.java
+        line_start: 268
+        line_end: 268
+        excerpt: |
+          purchaseOrder.setShippingInfo(purchaseOrder.getBillingInfo()); // XXX
+  - capability_key: order-fulfilment
+    record_keys: [ORDF-ENT-0001]
+    severity: low
+    category: inconsistent-rounding
+    title: Order total stored as binary floating point
+    description: >
+      The order value is a float, which cannot represent decimal currency amounts exactly.
+    traces:
+      - path: legacy-source/app/src/components/purchaseorder/src/com/sun/j2ee/blueprints/purchaseorder/ejb/PurchaseOrderEJB.java
+        line_start: 139
+        line_end: 139
+        excerpt: |
+          public abstract float getPoValue();
+findings: []
