@@ -17,7 +17,7 @@ records:
     interface: false
     traces:
       - kind: db_object
-        path: legacy-source/db/schema/petstore_cloudscape.sql
+        path: db/schema/petstore_cloudscape.sql
         anchor: product
         line_start: 30
         line_end: 34
@@ -28,7 +28,7 @@ records:
             constraint pk_product primary key (productid),
             constraint fk_product_1 foreign key (catid) references category (catid));
       - kind: db_object
-        path: legacy-source/db/schema/petstore_oracle.sql
+        path: db/schema/petstore_oracle.sql
         anchor: product
         line_start: 30
         line_end: 34
@@ -59,7 +59,7 @@ records:
     interface: false
     traces:
       - kind: db_object
-        path: legacy-source/db/schema/petstore_cloudscape.sql
+        path: db/schema/petstore_cloudscape.sql
         anchor: product_details
         line_start: 38
         line_end: 45
@@ -73,7 +73,7 @@ records:
             constraint pk_product_details primary key (productid, locale),
             constraint fk_product_details_1 foreign key (productid) references product (productid));
       - kind: db_object
-        path: legacy-source/db/schema/petstore_oracle.sql
+        path: db/schema/petstore_oracle.sql
         anchor: product_details
         line_start: 38
         line_end: 45
@@ -107,7 +107,7 @@ records:
     interface: false
     traces:
       - kind: db_object
-        path: legacy-source/db/schema/petstore_cloudscape.sql
+        path: db/schema/petstore_cloudscape.sql
         anchor: item_details
         line_start: 57
         line_end: 70
@@ -123,7 +123,7 @@ records:
             constraint pk_item_details primary key (itemid, locale),
             constraint fk_item_details_1 foreign key (itemid) references item (itemid));
       - kind: db_object
-        path: legacy-source/db/schema/petstore_oracle.sql
+        path: db/schema/petstore_oracle.sql
         anchor: item_details
         line_start: 57
         line_end: 70
@@ -159,7 +159,7 @@ records:
     interface: false
     traces:
       - kind: db_object
-        path: legacy-source/db/schema/petstore_cloudscape.sql
+        path: db/schema/petstore_cloudscape.sql
         anchor: po_line_item
         line_start: 161
         line_end: 171
@@ -176,7 +176,7 @@ records:
             constraint pk_po_line_item primary key (po_id, line_number),
             constraint fk_po_line_item_1 foreign key (po_id) references purchase_order (po_id));
       - kind: db_object
-        path: legacy-source/db/schema/petstore_oracle.sql
+        path: db/schema/petstore_oracle.sql
         anchor: po_line_item
         line_start: 161
         line_end: 171
@@ -213,7 +213,7 @@ records:
     interface: false
     traces:
       - kind: db_object
-        path: legacy-source/db/schema/petstore_cloudscape.sql
+        path: db/schema/petstore_cloudscape.sql
         anchor: order_manager
         line_start: 175
         line_end: 178
@@ -223,7 +223,7 @@ records:
             status varchar(20) not null,
             constraint pk_order_manager primary key (order_id));
       - kind: db_object
-        path: legacy-source/db/schema/petstore_oracle.sql
+        path: db/schema/petstore_oracle.sql
         anchor: order_manager
         line_start: 175
         line_end: 178
@@ -253,14 +253,14 @@ records:
     interface: false
     traces:
       - kind: db_object
-        path: legacy-source/db/schema/petstore_cloudscape.sql
+        path: db/schema/petstore_cloudscape.sql
         anchor: ix_product_catid
         line_start: 219
         line_end: 219
         excerpt: |
           CREATE INDEX ix_product_catid ON product (catid);
       - kind: db_object
-        path: legacy-source/db/schema/petstore_oracle.sql
+        path: db/schema/petstore_oracle.sql
         anchor: ix_product_catid
         line_start: 219
         line_end: 219
@@ -288,14 +288,14 @@ records:
     interface: false
     traces:
       - kind: db_object
-        path: legacy-source/db/schema/petstore_cloudscape.sql
+        path: db/schema/petstore_cloudscape.sql
         anchor: ix_item_productid
         line_start: 220
         line_end: 220
         excerpt: |
           CREATE INDEX ix_item_productid ON item (productid);
       - kind: db_object
-        path: legacy-source/db/schema/petstore_oracle.sql
+        path: db/schema/petstore_oracle.sql
         anchor: ix_item_productid
         line_start: 220
         line_end: 220
@@ -323,14 +323,14 @@ records:
     interface: false
     traces:
       - kind: db_object
-        path: legacy-source/db/schema/petstore_cloudscape.sql
+        path: db/schema/petstore_cloudscape.sql
         anchor: ix_po_user
         line_start: 221
         line_end: 221
         excerpt: |
           CREATE INDEX ix_po_user ON purchase_order (po_user_id);
       - kind: db_object
-        path: legacy-source/db/schema/petstore_oracle.sql
+        path: db/schema/petstore_oracle.sql
         anchor: ix_po_user
         line_start: 221
         line_end: 221
@@ -358,14 +358,14 @@ records:
     interface: false
     traces:
       - kind: db_object
-        path: legacy-source/db/schema/petstore_cloudscape.sql
+        path: db/schema/petstore_cloudscape.sql
         anchor: ix_po_date
         line_start: 222
         line_end: 222
         excerpt: |
           CREATE INDEX ix_po_date ON purchase_order (po_date);
       - kind: db_object
-        path: legacy-source/db/schema/petstore_oracle.sql
+        path: db/schema/petstore_oracle.sql
         anchor: ix_po_date
         line_start: 222
         line_end: 222
@@ -393,14 +393,14 @@ records:
     interface: false
     traces:
       - kind: db_object
-        path: legacy-source/db/schema/petstore_cloudscape.sql
+        path: db/schema/petstore_cloudscape.sql
         anchor: ix_order_manager_status
         line_start: 223
         line_end: 223
         excerpt: |
           CREATE INDEX ix_order_manager_status ON order_manager (status);
       - kind: db_object
-        path: legacy-source/db/schema/petstore_oracle.sql
+        path: db/schema/petstore_oracle.sql
         anchor: ix_order_manager_status
         line_start: 223
         line_end: 223
@@ -421,14 +421,14 @@ suspected_defects:
       unit_price is a binary floating-point double in the Cloudscape script but a fixed number(12,2) in the Oracle script, so amounts may carry rounding error on one database and not the other.
     traces:
       - kind: db_object
-        path: legacy-source/db/schema/petstore_cloudscape.sql
+        path: db/schema/petstore_cloudscape.sql
         anchor: po_line_item
         line_start: 161
         line_end: 171
         excerpt: |
           unit_price double not null,
       - kind: db_object
-        path: legacy-source/db/schema/petstore_oracle.sql
+        path: db/schema/petstore_oracle.sql
         anchor: po_line_item
         line_start: 161
         line_end: 171
