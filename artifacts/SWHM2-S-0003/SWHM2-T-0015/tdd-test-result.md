@@ -14,8 +14,8 @@ cases: C-0134, C-0135, C-0136, C-0137, C-0140). Extra tests that carry no case k
 
 ## Red run
 
-Platform run `2bbf3d3d-6f7e-4c77-a871-993d9cdc124d` at `7c3e410` `[tdd:red]`: valid. Every case failed, 38 on the stub
-and 8 on an assertion (C-0105, C-0107, C-0125, C-0129, C-0134, C-0135, C-0136, C-0137, C-0140 on the missing pages and
+Platform run `2bbf3d3d-6f7e-4c77-a871-993d9cdc124d` at `7c3e410` `[tdd:red]`: valid. Every case failed, 37 on the stub
+and 9 on an assertion (C-0105, C-0107, C-0125, C-0129, C-0134, C-0135, C-0136, C-0137, C-0140 on the missing pages and
 tables). An earlier red run was refused because `types.ts` and a test helper were not stubs; the types moved into the stub
 `store.ts` and the helper into the test file.
 
