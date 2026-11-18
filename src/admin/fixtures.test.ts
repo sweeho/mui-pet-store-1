@@ -51,3 +51,7 @@ export async function addItem(
         VALUES (${i.id}, 'en_US', ${i.price}, 1, 'x.png', 'd')`,
   );
 }
+
+test("fixtures module loads", () => {
+  expect(typeof addItem).toBe("function");
+});

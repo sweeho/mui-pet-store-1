@@ -1,7 +1,7 @@
 /** @jest-environment node */
 import { useIsolatedDatabase } from "@/db/isolated";
 
-import { addItem, addOrder, clearOrders } from "./fixtures";
+import { addItem, addOrder, clearOrders } from "./fixtures.test";
 import { getChartInfo, salesReport } from "./reports";
 
 let db: Awaited<ReturnType<typeof useIsolatedDatabase>>;

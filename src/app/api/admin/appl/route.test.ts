@@ -1,5 +1,5 @@
 /** @jest-environment node */
-import { addOrder, clearOrders } from "@/admin/fixtures";
+import { addOrder, clearOrders } from "@/admin/fixtures.test";
 import { createAdminSession } from "@/admin/session";
 import { useIsolatedDatabase } from "@/db/isolated";
 

@@ -83,6 +83,12 @@ test("[SWHM2-C-0029] choosing Denied sends nothing before Commit", () => {
   expect(screen.getByRole("button", { name: /^commit$/i })).toBeDisabled();
 });
 
+const refreshButton = () => {
+  const b = screen.queryByRole("button", { name: /^refresh$/i });
+  expect(b).not.toBeNull();
+  return b as HTMLElement;
+};
+
 describe("Refresh", () => {
   const confirmMock = jest.fn();
   beforeEach(() => {
@@ -92,7 +98,7 @@ describe("Refresh", () => {
 
   test("[SWHM2-C-0232] with no held changes Refresh reloads without asking", () => {
     render(<OrderApprovalView orders={orders} />);
-    fireEvent.click(screen.getByRole("button", { name: /^refresh$/i }));
+    fireEvent.click(refreshButton());
     expect(confirmMock).not.toHaveBeenCalled();
     expect(refresh).toHaveBeenCalledTimes(1);
   });
@@ -101,7 +107,7 @@ describe("Refresh", () => {
     confirmMock.mockReturnValue(false);
     render(<OrderApprovalView orders={orders} />);
     fireEvent.click(within(row("1001")).getByRole("button", { name: /^approved$/i }));
-    fireEvent.click(screen.getByRole("button", { name: /^refresh$/i }));
+    fireEvent.click(refreshButton());
     expect(confirmMock).toHaveBeenCalledTimes(1);
     expect(confirmMock.mock.calls[0][0]).toMatch(/uncommitted|discard/i);
     expect(refresh).not.toHaveBeenCalled();
@@ -112,7 +118,7 @@ describe("Refresh", () => {
     confirmMock.mockReturnValue(true);
     render(<OrderApprovalView orders={orders} />);
     fireEvent.click(within(row("1001")).getByRole("button", { name: /^approved$/i }));
-    fireEvent.click(screen.getByRole("button", { name: /^refresh$/i }));
+    fireEvent.click(refreshButton());
     expect(refresh).toHaveBeenCalledTimes(1);
     expect(screen.getByText("No unsent changes")).toBeInTheDocument();
   });
