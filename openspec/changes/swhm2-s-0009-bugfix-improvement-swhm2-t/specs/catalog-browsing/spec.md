@@ -1,34 +1,40 @@
 ## MODIFIED Requirements
 
 ### Requirement: Storefront screens and populate tool
+ID: SWHM2-R-0147
 
 The system SHALL provide storefront screens for categories, products, items and search, and a populate tool that loads catalog and customer sample data from XML into the database. In a production configuration the populate tool SHALL load data only for a caller with an administrator session.
 
 #### Scenario: Storefront screens and populate tool
+ID: SWHM2-R-0147.01
 
 - **GIVEN** the storefront
 - **WHEN** a shopper browses
 - **THEN** screens exist for categories, products, items and search; and the populate tool loads sample data from XML
 
 #### Scenario: An anonymous caller is refused in production
+ID: SWHM2-R-0147.02
 
 - **GIVEN** the application runs in a production configuration
 - **WHEN** a caller with no administrator session posts to the populate endpoint
 - **THEN** the response is 401 and no catalog row is written
 
 #### Scenario: An administrator loads the sample data in production
+ID: SWHM2-R-0147.03
 
 - **GIVEN** the application runs in a production configuration
 - **WHEN** a caller with an administrator session posts to the populate endpoint
 - **THEN** the sample catalog is loaded and the response reports the loaded counts
 
 #### Scenario: Any caller loads the sample data outside production
+ID: SWHM2-R-0147.04
 
 - **GIVEN** the application runs in a development or test configuration
 - **WHEN** a caller with no administrator session posts to the populate endpoint
 - **THEN** the sample catalog is loaded and the response reports the loaded counts
 
 #### Scenario: The empty catalog does not advertise the endpoint
+ID: SWHM2-R-0147.05
 
 - **GIVEN** the catalog holds no categories
 - **WHEN** a user opens `/catalog`

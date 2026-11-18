@@ -1,7 +1,7 @@
 ## 1. Shell breadcrumb (SWHM2-T-0010)
 
-- [ ] 1.1 Hide the shell trail on catalog pages, and render a non-last crumb as a link only when its path is a known page route (SWHM2-T-0010; Shell breadcrumb trail)
-- [ ] 1.2 Add a component test covering the catalog detail, catalog search, `/checkout/orders/<id>` and `/admin/orders` trails, and a check that every known route has a page; existing shell tests keep passing (SWHM2-T-0010; Shell breadcrumb trail)
+- [ ] 1.1 Hide the shell trail on catalog pages, and render a non-last crumb as a link only when its path is a known page route (SWHM2-T-0010; SWHM2-R-0198)
+- [ ] 1.2 Add a component test covering the catalog detail, catalog search, `/checkout/orders/<id>` and `/admin/orders` trails, and a check that every known route has a page; existing shell tests keep passing (SWHM2-T-0010; SWHM2-R-0198)
 
 ## 2. Populate endpoint access (SWHM2-T-0009)
 
