@@ -1,4 +1,5 @@
 /** @jest-environment node */
+import { useIsolatedDatabase } from "@/db/isolated";
 import { sql } from "drizzle-orm";
 
 import { createSupplierOrder, approveOrder, getSupplierOrder } from "./orders";
@@ -23,6 +24,10 @@ import {
 } from "../../tests/acceptance/order-fulfilment/harness";
 
 let t: TestEnv;
+
+beforeAll(async () => {
+  await useIsolatedDatabase();
+});
 
 beforeEach(async () => {
   t = await makeEnv();

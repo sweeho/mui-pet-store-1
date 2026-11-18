@@ -26,6 +26,17 @@ export type FulfilEnv = {
 /** The same, on a transaction. */
 export type TxEnv = Omit<FulfilEnv, "db"> & { db: Exec };
 
-export function newFulfilEnv(_db: Db): FulfilEnv {
-  throw new Error("VortexNotImplemented");
+export function newFulfilEnv(db: Db): FulfilEnv {
+  return {
+    db,
+    now: () => new Date(),
+    supplierQueue: [],
+    completedOrderQueue: [],
+    invoiceQueue: [],
+  };
+}
+
+/** Run `fn` in one transaction: it is all kept, or none of it (e.g. when an invoice fails). */
+export function inTransaction<T>(env: FulfilEnv, fn: (tx: TxEnv) => Promise<T>): Promise<T> {
+  return env.db.transaction((tx) => fn({ ...env, db: tx }));
 }

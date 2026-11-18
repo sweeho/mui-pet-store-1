@@ -1,9 +1,14 @@
 /** @jest-environment node */
+import { useIsolatedDatabase } from "@/db/isolated";
 import { nextId } from "./uidgen";
 
 import { makeEnv, resetData, type TestEnv } from "../../tests/acceptance/order-fulfilment/harness";
 
 let t: TestEnv;
+
+beforeAll(async () => {
+  await useIsolatedDatabase();
+});
 
 beforeEach(async () => {
   t = await makeEnv();

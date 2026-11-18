@@ -7,8 +7,7 @@ const items = [
   { itemId: "EST-2", quantity: 0 },
 ];
 
-const rowOf = (itemId: string) =>
-  screen.getByDisplayValue("", { selector: `[name="qty_${itemId}"]` }).closest("tr")!;
+const rowOf = (itemId: string) => document.querySelector(`[name="qty_${itemId}"]`)!.closest("tr")!;
 
 describe("InventoryView", () => {
   it("[SWHM2-C-0179] each row shows item id, existing quantity, a new-quantity input and a checkbox, with a submit control", () => {

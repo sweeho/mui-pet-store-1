@@ -1,6 +1,4 @@
 /** @jest-environment node */
-import { sql } from "drizzle-orm";
-
 import { buildInvoiceXml, buildSupplierOrderXml, parseDocument, toLineItem } from "./documents";
 
 import { NOW, SHIPPING, line } from "../../tests/acceptance/order-fulfilment/harness";
