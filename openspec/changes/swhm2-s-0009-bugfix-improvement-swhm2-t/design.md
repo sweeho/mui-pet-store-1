@@ -34,10 +34,14 @@ Code read:
 - Chosen: **Option A**. Case SWHM2-C-0169 ("Name, description and image come from the zh_CN row") is satisfied by the catalog's real tables. The item name is `product_details.name` of the item's product for that locale, the description is `item_details.descn`, and the image is `item_details.image`. The locked test is amended to seed `category`/`product`/`product_details`/`item`/`item_details` rows (en_US and zh_CN) instead of inserting into `item_detail`. The `getCatalogItem(db, itemId, locale) => { name, description, image }` contract is unchanged.
 - Rejected: **Option B** (a read-only `item_detail` view). It adds a second name for the same data that can drift from the catalog, and the catalog's NOT NULL price columns make a writable view impossible anyway: the test INSERTs into the table.
 - The test is amended by the Test Author through the amendment flow. SWHM2-T-0008 files the `target: "test"` dispute on SWHM2-C-0169 that requests it. Nobody edits the locked file directly.
-- Batch-operations harness: unaffected by this choice. It defines and drops its own `item_detail` (and differently-named catalog columns) in its own DDL. Its conflict with the real catalog schema is out of scope (see the sprint's follow-ups).
+- Batch-operations harness: unaffected by this choice. It defines and drops its own `item_detail` (and differently-named catalog columns) in its own DDL. Its conflict with the real catalog schema is out of scope (see Follow-ups / out of scope).
 - SWHM2-I-0010 planning must read this decision; it is promoted to `ARCHITECTURE.md ## Key Decisions` because it binds that later change.
 
 ## Risks
 
 - D1: a future intermediate page added without updating the route list renders as text, not a dead link. The failure is safe.
 - D2: a deployment that runs `next start` with a different `NODE_ENV` is treated as production. That is intended.
+
+## Follow-ups / out of scope
+
+- **F1 — batch-operations harness vs. the catalog schema (for SWHM2-I-0011).** `tests/acceptance/batch-operations/harness.ts` writes `category(category_id)`, `product(product_id, category_id)`, `item(item_id, product_id, list_price, unit_cost)` and `item_detail(...)`. The real catalog uses `catid`, `productid` and `itemid`, and keeps prices in `item_details` (`drizzle/0001_free_boom_boom.sql`). `dropCatalogTables` also drops the real catalog tables and recreates them in the harness's own shape. These inserts fail against the migrated schema unless the harness has dropped the tables first. SWHM2-I-0011 planning must reconcile this through the amendment flow. It is not filed here because planning has no defect-creation authority.
