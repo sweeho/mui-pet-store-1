@@ -184,3 +184,46 @@ export const shoppingCart = sqliteTable("shopping_cart", {
   contents: text("contents").notNull(),
   lastAccess: integer("last_access").notNull(),
 });
+
+// Checkout (SWHM2-I-0005, design.md P2). An order keeps a snapshot of its contact, addresses and
+// card and has no foreign keys into address, contact or credit_card.
+export const paymentCard = sqliteTable("payment_card", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  cardNumber: text("card_number").notNull(),
+  cardType: text("card_type").notNull(),
+  expiryDate: text("expiry_date").notNull(),
+});
+
+export const sequence = sqliteTable("sequence", {
+  name: text("name").primaryKey(),
+  counter: integer("counter").notNull(),
+});
+
+export const checkoutOrder = sqliteTable("checkout_order", {
+  orderId: text("order_id").primaryKey(),
+  userId: text("user_id").notNull(),
+  emailAddress: text("email_address").notNull(),
+  orderDate: integer("order_date").notNull(),
+  locale: text("locale").notNull(),
+  totalPrice: real("total_price").notNull(),
+  shipTo: text("ship_to").notNull(),
+  billTo: text("bill_to").notNull(),
+  cardNumber: text("card_number").notNull(),
+  cardType: text("card_type").notNull(),
+  expiryDate: text("expiry_date").notNull(),
+  enteredCardId: integer("entered_card_id").references(() => paymentCard.id),
+});
+
+export const checkoutOrderLine = sqliteTable(
+  "checkout_order_line",
+  {
+    orderId: text("order_id")
+      .notNull()
+      .references(() => checkoutOrder.orderId, { onDelete: "cascade" }),
+    lineNo: integer("line_no").notNull(),
+    itemId: text("item_id").notNull(),
+    quantity: integer("quantity").notNull(),
+    unitPrice: real("unit_price").notNull(),
+  },
+  (t) => [primaryKey({ columns: [t.orderId, t.lineNo] })],
+);

@@ -8,7 +8,9 @@ const createJestConfig = nextJest({ dir: "./" });
 /** @type {import("jest").Config} */
 const config = {
   testEnvironment: "jsdom",
-  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  // setupFilesAfterEnv runs jest.setup.ts first (it closes the connection after each file), then
+  // gives each file its own copy of the database (src/db/acceptance-setup.ts).
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts", "<rootDir>/src/db/acceptance-setup.ts"],
   moduleNameMapper: { "^@/(.*)$": "<rootDir>/src/$1" },
   // The build's standalone output has a copy of package.json.
   modulePathIgnorePatterns: ["<rootDir>/.next/"],
