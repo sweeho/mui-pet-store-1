@@ -135,6 +135,20 @@ export function OrderApprovalView({ orders, filter = "ALL", counts = {} }: Order
     setSelected(new Set());
   };
 
+  const refreshData = () => {
+    if (
+      changed.length > 0 &&
+      !window.confirm(
+        `You have ${changed.length} uncommitted ${changed.length === 1 ? "change" : "changes"}. ` +
+          "Refreshing discards them. Refresh anyway?",
+      )
+    ) {
+      return;
+    }
+    discard();
+    router.refresh();
+  };
+
   const commit = async () => {
     if (changed.length === 0 || busy) return;
     setBusy(true);
@@ -204,6 +218,9 @@ export function OrderApprovalView({ orders, filter = "ALL", counts = {} }: Order
             },
           }}
         >
+          <Button variant="outlined" color="inherit" onClick={refreshData}>
+            Refresh
+          </Button>
           <Button
             variant="outlined"
             color="inherit"

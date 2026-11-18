@@ -50,3 +50,9 @@ export async function requireAdmin(): Promise<void> {
   const id = (await cookies()).get(ADMIN_COOKIE)?.value;
   if (!(await isAdminSession(await getDb(), id))) redirect("/admin/login");
 }
+
+/** End an administrator session: its row is deleted. */
+export async function endAdminSession(db: Exec, id: string | undefined): Promise<void> {
+  if (!id) return;
+  await db.run(sql`DELETE FROM admin_session WHERE session_id = ${id}`);
+}

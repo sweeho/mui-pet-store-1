@@ -44,14 +44,14 @@ const form = (fields: Record<string, string>) =>
     body: new URLSearchParams(fields),
   });
 
-test("login answers 303 to the orders screen with a session cookie, or back with an error", async () => {
+test("[SWHM2-C-0234] login answers 303 to the admin home with a session cookie, or to the error page", async () => {
   const ok = await login(form({ userId: "j2ee", password: "j2ee" }));
   expect(ok.status).toBe(303);
-  expect(ok.headers.get("location")).toMatch(/\/admin\/orders$/);
+  expect(ok.headers.get("location")).toMatch(/\/admin$/);
   expect(ok.headers.get("set-cookie")).toMatch(/^admin_session=.+HttpOnly/);
   const bad = await login(form({ userId: "j2ee", password: "wrong" }));
   expect(bad.status).toBe(303);
-  expect(bad.headers.get("location")).toMatch(/\/admin\/login\?error=1$/);
+  expect(bad.headers.get("location")).toMatch(/\/admin\/login\/error$/);
   expect(bad.headers.get("set-cookie")).toBeNull();
 });
 

@@ -28,3 +28,14 @@ test("credentials default to j2ee and come from the environment when set", () =>
   delete process.env.ADMIN_USER;
   delete process.env.ADMIN_PASSWORD;
 });
+
+test("[SWHM2-C-0242] endAdminSession removes the session and leaves others", async () => {
+  const { getDb } = await import("@/db/client");
+  const { endAdminSession } = await import("./session");
+  const a = await createAdminSession();
+  const b = await createAdminSession();
+  await endAdminSession(await getDb(), a);
+  expect(await hasAdminSession(req(`admin_session=${a}`))).toBe(false);
+  expect(await hasAdminSession(req(`admin_session=${b}`))).toBe(true);
+  await endAdminSession(await getDb(), undefined);
+});

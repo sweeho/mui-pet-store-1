@@ -3,6 +3,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import Typography from "@mui/material/Typography";
+import Link from "next/link";
 
 import { FieldLabel } from "@/components/accounts/parts";
 import { PageHeading } from "@/components/frames/PageHeading";
@@ -16,8 +18,13 @@ export default async function Page({
 }) {
   const { error } = await searchParams;
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 3, maxWidth: 480 }}>
-      <PageHeading title="Admin sign in" description="Sign in to approve or deny orders." />
+    <Box
+      sx={{ display: "flex", flexDirection: "column", gap: 3, maxWidth: 334, mx: "auto", mt: 6 }}
+    >
+      <PageHeading
+        title="Sign in to Pet Store Admin"
+        description="Orders and sales reports are for administrators only."
+      />
       {error ? <Alert severity="error">The user ID or password is not correct.</Alert> : null}
       <Card variant="outlined" sx={{ p: 3 }}>
         <form method="post" action={withBasePath("/api/admin/login")}>
@@ -49,6 +56,12 @@ export default async function Page({
           </Button>
         </form>
       </Card>
+      <Typography sx={{ fontSize: 12, color: "text.secondary" }}>
+        Not an administrator?{" "}
+        <Link href="/" style={{ color: "inherit", fontWeight: 600 }}>
+          Back to the store
+        </Link>
+      </Typography>
     </Box>
   );
 }

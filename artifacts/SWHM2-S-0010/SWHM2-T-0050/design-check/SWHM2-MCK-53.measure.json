@@ -1,0 +1,396 @@
+{
+  "key": "SWHM2-MCK-53",
+  "mockup": "artifacts/SWHM2-S-0010/design/mockup-admin-sign-in-error.html",
+  "url": "http://localhost:3300/admin/login/error",
+  "width": 1440,
+  "at": "2026-11-18T13:08:15.250Z",
+  "pixelDifference": 0.0392,
+  "pageHeights": {
+    "mockup": 900,
+    "built": 900
+  },
+  "fonts": {
+    "mockup": {
+      "Inter": "loaded",
+      "JetBrains Mono": "loaded"
+    },
+    "built": {
+      "Inter Variable": "loaded"
+    },
+    "builtNotLoaded": []
+  },
+  "differences": [
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "21px"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "weight",
+      "mockup": "700",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(79, 70, 229)"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "box",
+      "mockup": "239x64",
+      "built": "92x26"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "position",
+      "mockup": "0,0",
+      "built": "24,22"
+    },
+    {
+      "kind": "style",
+      "text": "Shop",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Shop",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Shop",
+      "prop": "position",
+      "mockup": "12,72",
+      "built": "24,70"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "8px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "box",
+      "mockup": "215x40",
+      "built": "191x41"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "position",
+      "mockup": "12,107",
+      "built": "24,102"
+    },
+    {
+      "kind": "missing",
+      "text": "Catalog",
+      "mockup": "a at 12,149"
+    },
+    {
+      "kind": "missing",
+      "text": "Search",
+      "mockup": "a at 12,191"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart 0",
+      "mockup": "a at 12,233"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "box",
+      "mockup": "28x17",
+      "built": "191x41"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "position",
+      "mockup": "54,245",
+      "built": "24,192"
+    },
+    {
+      "kind": "missing",
+      "text": "0",
+      "mockup": "span at 208,245"
+    },
+    {
+      "kind": "style",
+      "text": "Account",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Account",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Account",
+      "prop": "position",
+      "mockup": "12,275",
+      "built": "24,237"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "8px"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "box",
+      "mockup": "215x40",
+      "built": "191x41"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "position",
+      "mockup": "12,310",
+      "built": "24,269"
+    },
+    {
+      "kind": "style",
+      "text": "Operations",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Operations",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Operations",
+      "prop": "position",
+      "mockup": "12,352",
+      "built": "24,314"
+    },
+    {
+      "kind": "missing",
+      "text": "Inventory",
+      "mockup": "a at 12,387"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "position",
+      "mockup": "12,429",
+      "built": "24,408"
+    },
+    {
+      "kind": "missing",
+      "text": "Orders",
+      "mockup": "a at 12,464"
+    },
+    {
+      "kind": "missing",
+      "text": "Sales reports",
+      "mockup": "a at 12,506"
+    },
+    {
+      "kind": "missing",
+      "text": "Signed out · Sign on",
+      "mockup": "div at 0,860"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "background",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgba(15, 23, 42, 0.08)"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "box",
+      "mockup": "121x36",
+      "built": "61x39"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "position",
+      "mockup": "1021,14",
+      "built": "1038,15"
+    },
+    {
+      "kind": "style",
+      "text": "Create account",
+      "prop": "box",
+      "mockup": "139x36",
+      "built": "118x31"
+    },
+    {
+      "kind": "style",
+      "text": "Create account",
+      "prop": "position",
+      "mockup": "1154,14",
+      "built": "1202,19"
+    },
+    {
+      "kind": "missing",
+      "text": "Sign-in failed",
+      "mockup": "span at 366,88"
+    },
+    {
+      "kind": "style",
+      "text": "We couldn’t sign you in",
+      "prop": "box",
+      "mockup": "374x26",
+      "built": "324x30"
+    },
+    {
+      "kind": "style",
+      "text": "We couldn’t sign you in",
+      "prop": "position",
+      "mockup": "629,274",
+      "built": "678,182"
+    },
+    {
+      "kind": "style",
+      "text": "The user ID or password is wrong, or the account doesn’t have the administrator role.",
+      "prop": "box",
+      "mockup": "374x42",
+      "built": "324x42"
+    },
+    {
+      "kind": "style",
+      "text": "The user ID or password is wrong, or the account doesn’t have the administrator role.",
+      "prop": "position",
+      "mockup": "629,308",
+      "built": "678,220"
+    },
+    {
+      "kind": "style",
+      "text": "Back to sign in",
+      "prop": "position",
+      "mockup": "748,374",
+      "built": "678,286"
+    },
+    {
+      "kind": "style",
+      "text": "Go to the store home page",
+      "prop": "position",
+      "mockup": "742,426",
+      "built": "678,338"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "box",
+      "mockup": "99x15",
+      "built": "900x15"
+    },
+    {
+      "kind": "missing",
+      "text": "Prices in US$",
+      "mockup": "span at 1087,869"
+    },
+    {
+      "kind": "extra",
+      "text": "Catalog & search",
+      "built": "a at 24,147"
+    },
+    {
+      "kind": "extra",
+      "text": "Order fulfilment and invoicing",
+      "built": "a at 24,346"
+    },
+    {
+      "kind": "extra",
+      "text": "Administration of orders",
+      "built": "a at 24,440"
+    },
+    {
+      "kind": "extra",
+      "text": "日本語",
+      "built": "button at 1098,15"
+    },
+    {
+      "kind": "extra",
+      "text": "中文",
+      "built": "button at 1152,15"
+    },
+    {
+      "kind": "extra",
+      "text": "Login",
+      "built": "a at 474,94"
+    },
+    {
+      "kind": "extra",
+      "text": "Error",
+      "built": "p at 525,94"
+    }
+  ]
+}
