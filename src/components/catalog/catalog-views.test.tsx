@@ -48,9 +48,11 @@ describe("CategoryListView", () => {
     expect(screen.getByRole("button", { name: /next/i })).toBeDisabled();
   });
 
-  it("shows the empty frame when nothing is loaded", () => {
+  it("[SWHM2-C-0248] shows the empty frame without naming the populate endpoint", () => {
     render(<CategoryListView page={{ entries: [], hasNext: false }} pageNumber={1} offset={0} />);
-    expect(screen.getByTestId("empty-frame")).toHaveTextContent("catalog is empty");
+    const frame = screen.getByTestId("empty-frame");
+    expect(frame).toHaveTextContent("The catalog is empty");
+    expect(frame.textContent).not.toMatch(/populate|\/api\/catalog/i);
   });
 
   it("links Next when another page exists", () => {
