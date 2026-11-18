@@ -26,7 +26,9 @@ renders inside it:
 - **Navigation** (left): entries grouped by job (Shop, Account, Operations, Admin), each area
   once, the current page filled in. Fixed on a large screen; on a small screen it folds behind a
   menu button in the header. Add an area by adding an entry to `MENU_ITEMS` in
-  `src/shell/menu.ts`; the landing page's tiles are drawn from the same list.
+  `src/shell/menu.ts`; the landing page's tiles are drawn from the same list. An entry may carry
+  a small count at its right edge (Cart shows its number of distinct lines when above zero); the
+  layout reads it on the server and passes it down, like the session.
 - **Header** (top): controls on the right only. Signed out: the language control, a
   "Signed out" status, and Sign on / Create account. Signed on: the language control, the user
   name, and Sign off. The layout reads the session on the server and hands it to the header as a
