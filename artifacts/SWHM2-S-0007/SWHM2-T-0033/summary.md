@@ -31,7 +31,9 @@ AC-1 to AC-50 map to cases C-0175 to C-0224; each has a test titled with its key
 - `npm run test:e2e`: 21 passed.
 - `npm run test:acceptance`: order-fulfilment passes; four suites fail to load for modules of later capabilities (`admin/launch`, `batch/jobs`, `i18n/format`, `notifications/sender`), as before this ticket.
 - `npx playwright test --config playwright.acceptance.config.ts tests/acceptance/order-fulfilment`: C-0195 and C-0211 pass; C-0179 fails in the locked spec (strict-mode: `has: quantities.nth(i)` matches every row); disputed, finding 20b504f5.
-- `CODE-REVIEW: sub-agent — fixed: stock taken only for the unshipped remainder after a partial invoice, no processing of non-waiting orders, status re-read inside the run's transaction, double XML decode, outbox dispatch in a `finally`; rejected: invoice input validation (the CHECK constraints reject over-shipping) and an atomic duplicate-POST check (rare race; a duplicate is dropped, not stored twice).`
+
+CODE-REVIEW: sub-agent — fixed: stock taken only for the unshipped remainder after a partial invoice, no processing of non-waiting orders, status re-read inside the run's transaction, double XML decode, outbox dispatch in a `finally`; rejected: invoice input validation (the CHECK constraints reject over-shipping) and an atomic duplicate-POST check (rare race; a duplicate is dropped, not stored twice).
+
 - Design check: `design-check.md` (both mockups measured).
 
 ## Notes
