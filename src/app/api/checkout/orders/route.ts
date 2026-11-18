@@ -8,6 +8,9 @@ import { type Address, createContact } from "@/checkout/contact";
 import { nextIdentifier } from "@/checkout/ids";
 import { recordOrder, storePaymentCard } from "@/checkout/store";
 import { ANONYMOUS, ORDER_SEQUENCE, type SubmitLine, buildOrder } from "@/checkout/submit";
+import { dispatchApprovals } from "@/approval/dispatch";
+import { newEnv } from "@/approval/env";
+import { receivePurchaseOrder } from "@/approval/receive";
 import { getDb } from "@/db/client";
 
 import { parseCookies, seeOther } from "../../accounts/redirects";
@@ -60,9 +63,13 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   const lines: SubmitLine[] = [];
+  const catalog = new Map<string, { categoryId: string; productId: string }>();
   for (const [itemId, quantity] of Object.entries(items)) {
     const item = await getItem(db, itemId, STOREFRONT_LOCALE);
-    if (item && quantity > 0) lines.push({ itemId, quantity, unitPrice: item.listPrice });
+    if (item && quantity > 0) {
+      lines.push({ itemId, quantity, unitPrice: item.listPrice });
+      catalog.set(itemId, { categoryId: item.categoryId, productId: item.productId });
+    }
   }
   if (lines.length === 0) return bad("an order needs at least one item");
 
@@ -96,10 +103,36 @@ export async function POST(request: Request): Promise<Response> {
   }
 
   const orderId = await nextIdentifier(db, ORDER_SEQUENCE);
-  await recordOrder(
-    db,
-    buildOrder({ orderId, userId, locale, contact, billTo, lines, now: Date.now(), enteredCardId }),
-  );
+  const order = buildOrder({
+    orderId,
+    userId,
+    locale,
+    contact,
+    billTo,
+    lines,
+    now: Date.now(),
+    enteredCardId,
+  });
+  await recordOrder(db, order);
+
+  // Hand the placed order to approval (design.md P4): a qualifying order is APPROVED before the
+  // confirmation page renders.
+  const env = newEnv(db);
+  await receivePurchaseOrder(env, {
+    orderId,
+    userName: userId,
+    locale,
+    total: order.totalPrice,
+    lines: lines.map((l, i) => ({
+      lineNum: i + 1,
+      categoryId: catalog.get(l.itemId)?.categoryId ?? null,
+      productId: catalog.get(l.itemId)?.productId ?? null,
+      itemId: l.itemId,
+      quantity: l.quantity,
+      unitPrice: l.unitPrice,
+    })),
+  });
+  await dispatchApprovals(env);
 
   if (!form) return Response.json({ orderId });
   const cartId = cookies[CART_COOKIE];

@@ -12,9 +12,9 @@
       "dark": "#23afdb"
     },
     "success": {
-      "main": "#13DEB9",
-      "light": "#E6FFFA",
-      "dark": "#02b3a9",
+      "main": "#16a34a",
+      "light": "#f0fdf4",
+      "dark": "#15803d",
       "contrastText": "#ffffff"
     },
     "info": {
@@ -30,9 +30,9 @@
       "contrastText": "#ffffff"
     },
     "warning": {
-      "main": "#FFAE1F",
-      "light": "#FEF5E5",
-      "dark": "#ae8e59",
+      "main": "#d97706",
+      "light": "#fffbeb",
+      "dark": "#b45309",
       "contrastText": "#ffffff"
     },
     "grey": {

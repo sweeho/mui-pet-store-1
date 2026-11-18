@@ -82,6 +82,31 @@ describe("/api/checkout/orders", () => {
     expect(order.totalPrice).toBe(16.5);
   });
 
+  it("a small en_US order is handed to approval: APPROVED, with a supplier order in the outbox", async () => {
+    const { orderId } = (await (await postJson({ items: ["EST-1"] })).json()) as {
+      orderId: string;
+    };
+    const status = await db.all(sql`SELECT status FROM purchase_order WHERE order_id = ${orderId}`);
+    expect(status).toEqual([{ status: "APPROVED" }]);
+    const queues = (await db.all(
+      sql`SELECT queue FROM message_outbox WHERE order_id = ${orderId} ORDER BY id`,
+    )) as { queue: string }[];
+    expect(queues.map((q) => q.queue)).toEqual([
+      "order-approval",
+      "supplier-purchase-order",
+      "customer-notification",
+    ]);
+  });
+
+  it("a large order stays PENDING and sends nothing", async () => {
+    const items = Array<string>(40).fill("EST-1");
+    const { orderId } = (await (await postJson({ items })).json()) as { orderId: string };
+    const status = await db.all(sql`SELECT status FROM purchase_order WHERE order_id = ${orderId}`);
+    expect(status).toEqual([{ status: "PENDING" }]);
+    const outbox = await db.all(sql`SELECT 1 FROM message_outbox WHERE order_id = ${orderId}`);
+    expect(outbox).toHaveLength(0);
+  });
+
   it("the same item listed twice is quantity 2, and an unreadable body is a 400", async () => {
     const { orderId } = (await (await postJson({ items: ["EST-1", "EST-1"] })).json()) as {
       orderId: string;
