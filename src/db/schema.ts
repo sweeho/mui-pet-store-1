@@ -1,6 +1,7 @@
 import { sql } from "drizzle-orm";
 import {
   check,
+  customType,
   index,
   integer,
   primaryKey,
@@ -227,3 +228,56 @@ export const checkoutOrderLine = sqliteTable(
   },
   (t) => [primaryKey({ columns: [t.orderId, t.lineNo] })],
 );
+
+// Order approval (SWHM2-I-0006, design.md P1). Ids are text so checkout's `10011` and integer
+// inserts compare equal; `order_manager` has no key (one latest row per order is read).
+// NUMERIC affinity on purpose: a numeric id bound as a number (the locked harnesses insert 304,
+// which the driver sends as 304.0) and the same id as text ("304") must compare equal.
+const orderIdColumn = customType<{ data: string; driverData: string | number }>({
+  dataType: () => "numeric",
+});
+
+export const purchaseOrder = sqliteTable("purchase_order", {
+  orderId: orderIdColumn("order_id").primaryKey(),
+  userName: text("user_name").notNull(),
+  orderTime: integer("order_time").notNull(),
+  locale: text("locale").notNull(),
+  totalPrice: real("total_price").notNull(),
+  status: text("status").notNull(),
+});
+
+export const orderManager = sqliteTable("order_manager", {
+  orderId: orderIdColumn("order_id").notNull(),
+  status: text("status").notNull(),
+});
+
+export const orderLine = sqliteTable(
+  "order_line",
+  {
+    orderId: orderIdColumn("order_id").notNull(),
+    lineNum: integer("line_num").notNull(),
+    categoryId: text("category_id"),
+    productId: text("product_id"),
+    itemId: text("item_id").notNull(),
+    quantity: integer("quantity").notNull(),
+    unitPrice: real("unit_price"),
+  },
+  (t) => [primaryKey({ columns: [t.orderId, t.lineNum] })],
+);
+
+// The persisted queues (design.md P3): approval messages, supplier purchase orders and
+// customer notifications.
+export const messageOutbox = sqliteTable("message_outbox", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  queue: text("queue").notNull(),
+  origin: text("origin").notNull(),
+  orderId: orderIdColumn("order_id").notNull(),
+  body: text("body").notNull(),
+  createdAt: integer("created_at").notNull(),
+});
+
+export const adminSession = sqliteTable("admin_session", {
+  sessionId: text("session_id").primaryKey(),
+  userName: text("user_name").notNull(),
+  createdAt: integer("created_at").notNull(),
+});

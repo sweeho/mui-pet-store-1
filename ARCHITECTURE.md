@@ -57,6 +57,17 @@ The schema is `src/db/schema.ts`; migrations are generated into `drizzle/`.
   kept separately in `payment_card`. `sequence` holds named counters; order ids are the sequence
   name followed by its count. Behaviour: `openspec/specs/checkout-and-payment/` once change
   `swhm2-i-0005-checkout-and-payment-detail` is archived.
+- **Order processing**: `purchase_order` (one row per order handed to approval: id, user, time,
+  locale, total, latest status), `order_line` (its lines, keyed by order and line number) and
+  `order_manager` (the process-manager status: PENDING, APPROVED, DENIED or COMPLETED, checked in
+  code). Checkout writes the same order id here after `checkout_order`. Approval, fulfilment,
+  administration and batch jobs all read these tables. Behaviour: `openspec/specs/order-approval/`
+  once change `swhm2-i-0006-order-approval` is archived.
+- **Message outbox**: `message_outbox` holds every message one stage hands to the next (queues
+  `order-approval`, `supplier-purchase-order`, `customer-notification`), with its origin and
+  order id.
+- **Admin sessions**: `admin_session` holds one row per administrator sign-in; the
+  `admin_session` cookie carries only its id.
 - **Demo users**: the template's `users` table. Customers do not use it; it stays only for the
   template's `/api/users` routes.
 
@@ -68,11 +79,22 @@ ended on its next request. A page that needs a customer calls `requireSignOn(pat
 `/signon?returnTo=<path>`. After sign-on the visitor returns to that path, which must be on this
 site. Forms post to route handlers, which set cookies and answer with redirects.
 
+Admin pages (`/admin/**` other than `/admin/login`) call `requireAdmin()` from
+`src/admin/session.ts`, which redirects to `/admin/login` on the server. Admin API routes answer
+401 without an admin session. Protected pages are not added to the navigation, because the shell's
+locked navigation check visits every entry.
+
 ## Integration points
 
 - **Sample data**: `POST /api/catalog/populate` loads `data/catalog/sample-catalog.xml` into the
   catalog tables, idempotently. It is the catalog's only write path until batch operations ships an
   inventory load.
+
+- **Order queues**: stages hand work on through queues, not direct calls. A library function
+  pushes onto an array on its env (`ApprovalEnv`), and `dispatchApprovals` (`src/approval/`)
+  consumes the order-approval queue in-process and writes everything it produced to
+  `message_outbox`. Checkout and the admin Commit route both go through it. Fulfilment and
+  notifications read their queues from the outbox.
 
 ## Deployment
 
@@ -126,3 +148,13 @@ does.
   `credit_card`, and customer-accounts calls it. Rationale: both locked suites fix those
   functions there, and checkout extends them. Authored in change
   `swhm2-i-0003-customer-accounts-and-sign` (design.md, P3).
+- **Stages talk through queues persisted in one outbox.** Each stage's library takes an env of
+  in-memory queues; a dispatcher drains them and writes `message_outbox`. Rationale: the locked
+  suites inspect the queues directly, and later stages (fulfilment, notifications) consume a
+  durable record instead of being called. Authored in change `swhm2-i-0006-order-approval`
+  (design.md, P3).
+- **One set of order-processing tables.** `purchase_order`, `order_line` and `order_manager` are
+  shared by approval, fulfilment, administration and batch operations; each capability adds only
+  the columns and indexes it reads, and `order_manager` has no unique key. Rationale: four locked
+  suites insert into the same tables with different column subsets. Authored in change
+  `swhm2-i-0006-order-approval` (design.md, P1).

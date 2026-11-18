@@ -1,0 +1,701 @@
+{
+  "key": "SWHM2-MCK-48",
+  "mockup": "artifacts/SWHM2-S-0006/design/mockup-order-approval-after-commit-mobile.html",
+  "url": "http://localhost:3200/admin/orders",
+  "width": 390,
+  "at": "2026-11-18T04:57:36.855Z",
+  "pixelDifference": 0.1755,
+  "pageHeights": {
+    "mockup": 1269,
+    "built": 1143
+  },
+  "fonts": {
+    "mockup": {
+      "Inter": "loaded",
+      "JetBrains Mono": "loaded",
+      "Arial": "loaded"
+    },
+    "built": {
+      "Arial": "loaded",
+      "Inter Variable": "loaded",
+      "JetBrains Mono Variable": "loaded"
+    },
+    "builtNotLoaded": []
+  },
+  "differences": [
+    {
+      "kind": "missing",
+      "text": "Pet Store",
+      "mockup": "span at -264,14"
+    },
+    {
+      "kind": "missing",
+      "text": "Close menu",
+      "mockup": "button at -52,6"
+    },
+    {
+      "kind": "missing",
+      "text": "Shop",
+      "mockup": "div at -268,64"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "34x15"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "position",
+      "mockup": "-268,99",
+      "built": "16,81"
+    },
+    {
+      "kind": "missing",
+      "text": "Catalog",
+      "mockup": "a at -268,147"
+    },
+    {
+      "kind": "missing",
+      "text": "Search",
+      "mockup": "a at -268,195"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart",
+      "mockup": "a at -268,243"
+    },
+    {
+      "kind": "missing",
+      "text": "Operations",
+      "mockup": "div at -268,291"
+    },
+    {
+      "kind": "missing",
+      "text": "Inventory",
+      "mockup": "a at -268,326"
+    },
+    {
+      "kind": "missing",
+      "text": "Admin",
+      "mockup": "div at -268,374"
+    },
+    {
+      "kind": "style",
+      "text": "Orders",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Orders",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Orders",
+      "prop": "color",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Orders",
+      "prop": "background",
+      "mockup": "rgb(79, 70, 229)",
+      "built": "rgb(255, 255, 255)"
+    },
+    {
+      "kind": "style",
+      "text": "Orders",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "Orders",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "39x15"
+    },
+    {
+      "kind": "style",
+      "text": "Orders",
+      "prop": "position",
+      "mockup": "-268,409",
+      "built": "226,81"
+    },
+    {
+      "kind": "missing",
+      "text": "Sales reports",
+      "mockup": "a at -268,457"
+    },
+    {
+      "kind": "missing",
+      "text": "Log out",
+      "mockup": "a at -268,505"
+    },
+    {
+      "kind": "missing",
+      "text": "Open menu",
+      "mockup": "button at 4,6"
+    },
+    {
+      "kind": "missing",
+      "text": "Language: English",
+      "mockup": "button at 290,6"
+    },
+    {
+      "kind": "missing",
+      "text": "Signed in as admin",
+      "mockup": "button at 338,6"
+    },
+    {
+      "kind": "style",
+      "text": "/",
+      "prop": "position",
+      "mockup": "58,72",
+      "built": "58,81"
+    },
+    {
+      "kind": "missing",
+      "text": "Approve",
+      "mockup": "span at 123,72"
+    },
+    {
+      "kind": "style",
+      "text": "Approve orders",
+      "prop": "size",
+      "mockup": "22px",
+      "built": "24px"
+    },
+    {
+      "kind": "style",
+      "text": "Approve orders",
+      "prop": "box",
+      "mockup": "358x26",
+      "built": "358x32"
+    },
+    {
+      "kind": "style",
+      "text": "Approve orders",
+      "prop": "position",
+      "mockup": "16,95",
+      "built": "16,104"
+    },
+    {
+      "kind": "style",
+      "text": "Set each pending order to Approved or Denied, then commit.",
+      "prop": "position",
+      "mockup": "16,125",
+      "built": "16,139"
+    },
+    {
+      "kind": "missing",
+      "text": "3 changes sent. Approved 1001, 1012; denied 1004. Customers are notified of the new status. View approved orders",
+      "mockup": "div at 59,188"
+    },
+    {
+      "kind": "style",
+      "text": "3 changes sent.",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(96, 101, 97)"
+    },
+    {
+      "kind": "style",
+      "text": "3 changes sent.",
+      "prop": "position",
+      "mockup": "59,188",
+      "built": "67,204"
+    },
+    {
+      "kind": "missing",
+      "text": "1001",
+      "mockup": "span at 228,188"
+    },
+    {
+      "kind": "missing",
+      "text": "1012",
+      "mockup": "span at 268,188"
+    },
+    {
+      "kind": "missing",
+      "text": "1004",
+      "mockup": "span at 106,205"
+    },
+    {
+      "kind": "style",
+      "text": "View approved orders",
+      "prop": "color",
+      "mockup": "rgb(79, 70, 229)",
+      "built": "rgb(96, 101, 97)"
+    },
+    {
+      "kind": "style",
+      "text": "View approved orders",
+      "prop": "position",
+      "mockup": "59,242",
+      "built": "67,336"
+    },
+    {
+      "kind": "missing",
+      "text": "Dismiss",
+      "mockup": "button at 329,188"
+    },
+    {
+      "kind": "style",
+      "text": "Pending",
+      "prop": "color",
+      "mockup": "rgb(79, 70, 229)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Pending",
+      "prop": "position",
+      "mockup": "16,283",
+      "built": "106,458"
+    },
+    {
+      "kind": "style",
+      "text": "Approved",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Approved",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(96, 101, 97)"
+    },
+    {
+      "kind": "style",
+      "text": "Approved",
+      "prop": "radius",
+      "mockup": "0px",
+      "built": "3996px"
+    },
+    {
+      "kind": "style",
+      "text": "Approved",
+      "prop": "box",
+      "mockup": "90x44",
+      "built": "86x22"
+    },
+    {
+      "kind": "style",
+      "text": "Approved",
+      "prop": "position",
+      "mockup": "101,283",
+      "built": "67,260"
+    },
+    {
+      "kind": "style",
+      "text": "Denied",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Denied",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(96, 101, 97)"
+    },
+    {
+      "kind": "style",
+      "text": "Denied",
+      "prop": "radius",
+      "mockup": "0px",
+      "built": "3996px"
+    },
+    {
+      "kind": "style",
+      "text": "Denied",
+      "prop": "box",
+      "mockup": "71x44",
+      "built": "70x22"
+    },
+    {
+      "kind": "style",
+      "text": "Denied",
+      "prop": "position",
+      "mockup": "195,283",
+      "built": "67,298"
+    },
+    {
+      "kind": "style",
+      "text": "Completed",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Completed",
+      "prop": "position",
+      "mockup": "270,283",
+      "built": "386,458"
+    },
+    {
+      "kind": "missing",
+      "text": "5 pending",
+      "mockup": "span at 16,339"
+    },
+    {
+      "kind": "missing",
+      "text": "5",
+      "mockup": "b at 16,339"
+    },
+    {
+      "kind": "style",
+      "text": "No unsent changes",
+      "prop": "weight",
+      "mockup": "400",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "No unsent changes",
+      "prop": "position",
+      "mockup": "252,339",
+      "built": "138,523"
+    },
+    {
+      "kind": "style",
+      "text": "on",
+      "prop": "position",
+      "mockup": "33,383",
+      "built": "29,808"
+    },
+    {
+      "kind": "missing",
+      "text": "1007",
+      "mockup": "span at 68,384"
+    },
+    {
+      "kind": "missing",
+      "text": "US$ 508.00",
+      "mockup": "span at 281,384"
+    },
+    {
+      "kind": "missing",
+      "text": "kmlee",
+      "mockup": "span at 57,414"
+    },
+    {
+      "kind": "missing",
+      "text": "11/14/2026",
+      "mockup": "span at 281,414"
+    },
+    {
+      "kind": "missing",
+      "text": "1013",
+      "mockup": "span at 68,531"
+    },
+    {
+      "kind": "missing",
+      "text": "US$ 845.00",
+      "mockup": "span at 281,531"
+    },
+    {
+      "kind": "missing",
+      "text": "sjones",
+      "mockup": "span at 57,561"
+    },
+    {
+      "kind": "missing",
+      "text": "11/16/2026",
+      "mockup": "span at 281,561"
+    },
+    {
+      "kind": "missing",
+      "text": "1015",
+      "mockup": "span at 68,678"
+    },
+    {
+      "kind": "missing",
+      "text": "US$ 500.00",
+      "mockup": "span at 281,678"
+    },
+    {
+      "kind": "missing",
+      "text": "acid",
+      "mockup": "span at 57,708"
+    },
+    {
+      "kind": "missing",
+      "text": "1018",
+      "mockup": "span at 68,825"
+    },
+    {
+      "kind": "missing",
+      "text": "US$ 730.40",
+      "mockup": "span at 281,825"
+    },
+    {
+      "kind": "missing",
+      "text": "mfrank",
+      "mockup": "span at 57,855"
+    },
+    {
+      "kind": "missing",
+      "text": "11/17/2026",
+      "mockup": "span at 281,855"
+    },
+    {
+      "kind": "missing",
+      "text": "1021",
+      "mockup": "span at 68,972"
+    },
+    {
+      "kind": "missing",
+      "text": "US$ 1,105.90",
+      "mockup": "span at 265,972"
+    },
+    {
+      "kind": "missing",
+      "text": "dbrown",
+      "mockup": "span at 57,1002"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "box",
+      "mockup": "99x15",
+      "built": "90x30"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "position",
+      "mockup": "16,1215",
+      "built": "24,1097"
+    },
+    {
+      "kind": "missing",
+      "text": "Prices in US$",
+      "mockup": "span at 131,1215"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "box",
+      "mockup": "236x15",
+      "built": "236x30"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "position",
+      "mockup": "16,1238",
+      "built": "130,1097"
+    },
+    {
+      "kind": "missing",
+      "text": "Discard",
+      "mockup": "button at 16,788"
+    },
+    {
+      "kind": "style",
+      "text": "Commit",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgba(0, 0, 0, 0.26)"
+    },
+    {
+      "kind": "style",
+      "text": "Commit",
+      "prop": "background",
+      "mockup": "rgb(226, 232, 240)",
+      "built": "rgba(59, 53, 172, 0.36)"
+    },
+    {
+      "kind": "style",
+      "text": "Commit",
+      "prop": "box",
+      "mockup": "175x44",
+      "built": "179x37"
+    },
+    {
+      "kind": "style",
+      "text": "Commit",
+      "prop": "position",
+      "mockup": "199,788",
+      "built": "199,1095"
+    },
+    {
+      "kind": "extra",
+      "text": "Open the menu",
+      "built": "button at 16,305"
+    },
+    {
+      "kind": "extra",
+      "text": "Sign on",
+      "built": "a at 286,312"
+    },
+    {
+      "kind": "extra",
+      "text": "Administration of orders",
+      "built": "a at 70,81"
+    },
+    {
+      "kind": "extra",
+      "text": "Discard changes",
+      "built": "button at 12,1095"
+    },
+    {
+      "kind": "extra",
+      "text": "DEMO-0004",
+      "built": "span at 156,262"
+    },
+    {
+      "kind": "extra",
+      "text": "· DEMO-0001",
+      "built": "span at 219,262"
+    },
+    {
+      "kind": "extra",
+      "text": "DEMO-0001",
+      "built": "span at 228,262"
+    },
+    {
+      "kind": "extra",
+      "text": "DEMO-0003",
+      "built": "span at 140,300"
+    },
+    {
+      "kind": "extra",
+      "text": "Close",
+      "built": "button at 335,201"
+    },
+    {
+      "kind": "extra",
+      "text": "Nothing is sent until you press Commit. Orders left as Pending stay here.",
+      "built": "span at 63,397"
+    },
+    {
+      "kind": "extra",
+      "text": "Nothing is sent until you press Commit.",
+      "built": "b at 63,397"
+    },
+    {
+      "kind": "extra",
+      "text": "All",
+      "built": "a at 16,458"
+    },
+    {
+      "kind": "extra",
+      "text": "1 pending orders",
+      "built": "span at 16,523"
+    },
+    {
+      "kind": "extra",
+      "text": "1",
+      "built": "b at 16,522"
+    },
+    {
+      "kind": "extra",
+      "text": "DEMO-0005",
+      "built": "td at 67,570"
+    },
+    {
+      "kind": "extra",
+      "text": "j2ee",
+      "built": "td at 67,594"
+    },
+    {
+      "kind": "extra",
+      "text": "11/06/2026",
+      "built": "td at 281,594"
+    },
+    {
+      "kind": "extra",
+      "text": "US$ 687.50",
+      "built": "td at 281,570"
+    },
+    {
+      "kind": "extra",
+      "text": "11/05/2026",
+      "built": "td at 281,673"
+    },
+    {
+      "kind": "extra",
+      "text": "US$ 650.00",
+      "built": "td at 281,650"
+    },
+    {
+      "kind": "extra",
+      "text": "11/04/2026",
+      "built": "td at 281,753"
+    },
+    {
+      "kind": "extra",
+      "text": "US$ 612.50",
+      "built": "td at 281,730"
+    },
+    {
+      "kind": "extra",
+      "text": "DEMO-0002",
+      "built": "td at 67,810"
+    },
+    {
+      "kind": "extra",
+      "text": "11/03/2026",
+      "built": "td at 281,833"
+    },
+    {
+      "kind": "extra",
+      "text": "US$ 575.00",
+      "built": "td at 281,810"
+    },
+    {
+      "kind": "extra",
+      "text": "11/02/2026",
+      "built": "td at 281,941"
+    },
+    {
+      "kind": "extra",
+      "text": "US$ 537.50",
+      "built": "td at 281,918"
+    }
+  ]
+}
