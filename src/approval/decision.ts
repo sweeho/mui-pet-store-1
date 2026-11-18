@@ -1,7 +1,11 @@
+import type { ApprovalEnv } from "./env";
+import { buildApprovalXml } from "./documents";
+
+/** Put one order-approval message for the order on the approval queue. */
 export async function forwardDecision(
-  _env: unknown,
-  _orderId: string | number,
-  _status: "APPROVED" | "DENIED",
+  env: ApprovalEnv,
+  orderId: string | number,
+  status: "APPROVED" | "DENIED",
 ): Promise<void> {
-  throw new Error("VortexNotImplemented");
+  env.approvalQueue.push(buildApprovalXml([{ orderId, status }]));
 }

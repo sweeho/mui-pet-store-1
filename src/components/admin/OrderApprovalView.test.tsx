@@ -43,9 +43,10 @@ const row = (id: string) => document.querySelector(`tr[data-order-id="${id}"]`) 
 let fetchMock: jest.Mock;
 beforeEach(() => {
   refresh.mockReset();
-  fetchMock = jest.fn(async () =>
-    Response.json({ sent: 2, approved: ["1001", "1002"], denied: [] }),
-  );
+  fetchMock = jest.fn(async () => ({
+    ok: true,
+    json: async () => ({ sent: 2, approved: ["1001", "1002"], denied: [] }),
+  }));
   global.fetch = fetchMock as unknown as typeof fetch;
 });
 

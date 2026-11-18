@@ -2,12 +2,16 @@ import { sql } from "drizzle-orm";
 
 import { useIsolatedDatabase } from "@/db/isolated";
 
+// Aliased: the react-hooks lint rule reads the "use" prefix as a hook.
+const openIsolatedDatabase = useIsolatedDatabase;
+
 export type ApprovalEnv = {
   db: Awaited<ReturnType<typeof useIsolatedDatabase>>;
   now: () => Date;
   approvalQueue: string[];
   supplierQueue: string[];
   notifyList: string[];
+  origin?: "auto" | "admin";
 };
 
 export type TestEnv = {
@@ -19,7 +23,7 @@ export type TestEnv = {
 
 /** A fresh env on this file's own database, with the order tables emptied. */
 export async function makeEnv(): Promise<TestEnv> {
-  const db = await useIsolatedDatabase();
+  const db = await openIsolatedDatabase();
   for (const t of ["order_manager", "order_line", "purchase_order"]) {
     await db.run(sql.raw(`DELETE FROM ${t}`));
   }

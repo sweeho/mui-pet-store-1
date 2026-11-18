@@ -4,6 +4,8 @@ import { createClient } from "@libsql/client";
 import { drizzle } from "drizzle-orm/libsql";
 import { migrate } from "drizzle-orm/libsql/migrator";
 
+import { seedDemoOrders } from "@/approval/demo";
+
 import { users } from "./schema";
 
 /** The SQLite file's URL: DATABASE_PATH (the Docker image sets one), else sqlite.db at the root. */
@@ -27,6 +29,7 @@ export async function prepareDatabase(url: string): Promise<void> {
         { name: "Jane Smith", email: "jane@example.com" },
       ]);
     }
+    await seedDemoOrders(client);
   } finally {
     client.close();
   }
