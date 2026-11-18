@@ -11,6 +11,13 @@ The tokens follow the approved mockups: an indigo primary, slate text, and the I
 4px corner radius. A typeface named in the tokens must also be loaded: Inter comes from the pinned
 `@fontsource-variable/inter` package, imported once in `src/app/layout.tsx`.
 
+- **Status colours.** Order and record states use the semantic palette, never a colour of their
+  own: `success` (green) for an approved or completed state, `warning` (amber) for a state waiting
+  on someone, `error` for a denied or failed one (first used for order status on `/admin/orders`).
+- **Mono figures.** Identifiers, dates and money totals in tables are set in JetBrains Mono, from
+  the pinned `@fontsource-variable/jetbrains-mono` package, loaded beside Inter in
+  `src/app/layout.tsx`. All other text is Inter.
+
 ## Layout grid
 
 - Global navigation: 240px wide.
