@@ -1,12 +1,12 @@
 /** @jest-environment node */
-import { getDb } from "@/db/client";
+import { useIsolatedDatabase } from "@/db/isolated";
 import { count, resetData } from "@/catalog/fixtures.test";
 
 import { POST } from "./route";
 
 describe("POST /api/catalog/populate", () => {
   it("[SWHM2-C-0018] loads the sample catalog, and again changes nothing", async () => {
-    const db = await getDb();
+    const db = await useIsolatedDatabase();
     await resetData(db);
     const first = await POST();
     expect(first.status).toBe(200);

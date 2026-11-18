@@ -1,0 +1,621 @@
+{
+  "key": "SWHM2-MCK-27",
+  "mockup": "artifacts/SWHM2-S-0003/design/mockup-sign-on.html",
+  "url": "http://localhost:3200/signon?returnTo=%2Faccount",
+  "width": 1440,
+  "at": "2026-11-18T01:19:57.292Z",
+  "pixelDifference": 0.0644,
+  "pageHeights": {
+    "mockup": 900,
+    "built": 900
+  },
+  "fonts": {
+    "mockup": {
+      "Inter": "loaded",
+      "JetBrains Mono": "loaded",
+      "Arial": "loaded"
+    },
+    "built": {
+      "Inter Variable": "loaded",
+      "Arial": "loaded"
+    },
+    "builtNotLoaded": []
+  },
+  "differences": [
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "21px"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "weight",
+      "mockup": "700",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(79, 70, 229)"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "box",
+      "mockup": "239x64",
+      "built": "92x26"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "position",
+      "mockup": "0,0",
+      "built": "24,22"
+    },
+    {
+      "kind": "style",
+      "text": "Shop",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Shop",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Shop",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Shop",
+      "prop": "position",
+      "mockup": "12,72",
+      "built": "24,70"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "8px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "box",
+      "mockup": "215x40",
+      "built": "191x41"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "position",
+      "mockup": "12,107",
+      "built": "24,102"
+    },
+    {
+      "kind": "missing",
+      "text": "Catalog",
+      "mockup": "a at 12,149"
+    },
+    {
+      "kind": "missing",
+      "text": "Search",
+      "mockup": "a at 12,191"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart 2",
+      "mockup": "a at 12,233"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "box",
+      "mockup": "28x17",
+      "built": "191x41"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "position",
+      "mockup": "54,245",
+      "built": "24,192"
+    },
+    {
+      "kind": "missing",
+      "text": "2",
+      "mockup": "span at 208,245"
+    },
+    {
+      "kind": "style",
+      "text": "Account",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Account",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Account",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Account",
+      "prop": "position",
+      "mockup": "12,275",
+      "built": "24,237"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "8px"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "box",
+      "mockup": "215x40",
+      "built": "191x41"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "position",
+      "mockup": "12,310",
+      "built": "24,269"
+    },
+    {
+      "kind": "style",
+      "text": "Operations",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Operations",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Operations",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Operations",
+      "prop": "position",
+      "mockup": "12,352",
+      "built": "24,314"
+    },
+    {
+      "kind": "missing",
+      "text": "Inventory",
+      "mockup": "a at 12,387"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "position",
+      "mockup": "12,429",
+      "built": "24,408"
+    },
+    {
+      "kind": "missing",
+      "text": "Orders",
+      "mockup": "a at 12,464"
+    },
+    {
+      "kind": "missing",
+      "text": "Sales reports",
+      "mockup": "a at 12,506"
+    },
+    {
+      "kind": "missing",
+      "text": "Signed out · Sign on",
+      "mockup": "div at 0,860"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "background",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgba(15, 23, 42, 0.08)"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "box",
+      "mockup": "121x36",
+      "built": "61x39"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "position",
+      "mockup": "1021,14",
+      "built": "1038,15"
+    },
+    {
+      "kind": "style",
+      "text": "Create account",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Create account",
+      "prop": "box",
+      "mockup": "139x36",
+      "built": "118x31"
+    },
+    {
+      "kind": "style",
+      "text": "Create account",
+      "prop": "position",
+      "mockup": "1154,14",
+      "built": "1202,19"
+    },
+    {
+      "kind": "missing",
+      "text": "/",
+      "mockup": "span at 304,88"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on with your Pet Store user name and password.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on with your Pet Store user name and password.",
+      "prop": "box",
+      "mockup": "1104x17",
+      "built": "1152x17"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on with your Pet Store user name and password.",
+      "prop": "position",
+      "mockup": "264,144",
+      "built": "264,130"
+    },
+    {
+      "kind": "missing",
+      "text": "Sign on to continue to Checkout",
+      "mockup": "b at 313,198"
+    },
+    {
+      "kind": "missing",
+      "text": "We’ll take you straight back there once you’re signed on.",
+      "mockup": "p at 313,217"
+    },
+    {
+      "kind": "style",
+      "text": "User name",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "User name",
+      "prop": "position",
+      "mockup": "289,296",
+      "built": "289,282"
+    },
+    {
+      "kind": "missing",
+      "text": "jsmith",
+      "mockup": "input at 289,317"
+    },
+    {
+      "kind": "style",
+      "text": "Password",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Password",
+      "prop": "position",
+      "mockup": "289,373",
+      "built": "289,356"
+    },
+    {
+      "kind": "missing",
+      "text": "secret12",
+      "mockup": "input at 289,394"
+    },
+    {
+      "kind": "style",
+      "text": "Show password",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Arial"
+    },
+    {
+      "kind": "style",
+      "text": "Show password",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "18px"
+    },
+    {
+      "kind": "style",
+      "text": "Show password",
+      "prop": "radius",
+      "mockup": "0px",
+      "built": "4px"
+    },
+    {
+      "kind": "style",
+      "text": "Show password",
+      "prop": "position",
+      "mockup": "677,396",
+      "built": "669,377"
+    },
+    {
+      "kind": "style",
+      "text": "on",
+      "prop": "box",
+      "mockup": "16x16",
+      "built": "38x38"
+    },
+    {
+      "kind": "style",
+      "text": "on",
+      "prop": "position",
+      "mockup": "289,452",
+      "built": "289,429"
+    },
+    {
+      "kind": "style",
+      "text": "Remember my user name Saved on this device for 31 days.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Remember my user name Saved on this device for 31 days.",
+      "prop": "position",
+      "mockup": "315,450",
+      "built": "327,428"
+    },
+    {
+      "kind": "style",
+      "text": "Saved on this device for 31 days.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Saved on this device for 31 days.",
+      "prop": "position",
+      "mockup": "315,469",
+      "built": "327,446"
+    },
+    {
+      "kind": "style",
+      "text": "Your preferred language is applied when you sign on.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Your preferred language is applied when you sign on.",
+      "prop": "position",
+      "mockup": "289,560",
+      "built": "289,544"
+    },
+    {
+      "kind": "style",
+      "text": "New to Pet Store?",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "New to Pet Store?",
+      "prop": "position",
+      "mockup": "785,202",
+      "built": "785,188"
+    },
+    {
+      "kind": "style",
+      "text": "Create an account to check out and keep your language and favourite category.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Create an account to check out and keep your language and favourite category.",
+      "prop": "position",
+      "mockup": "785,226",
+      "built": "785,211"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "box",
+      "mockup": "99x15",
+      "built": "900x15"
+    },
+    {
+      "kind": "missing",
+      "text": "Prices in US$",
+      "mockup": "span at 1087,869"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "extra",
+      "text": "Catalog & search",
+      "built": "a at 24,147"
+    },
+    {
+      "kind": "extra",
+      "text": "Order fulfilment and invoicing",
+      "built": "a at 24,346"
+    },
+    {
+      "kind": "extra",
+      "text": "Administration of orders",
+      "built": "a at 24,440"
+    },
+    {
+      "kind": "extra",
+      "text": "日本語",
+      "built": "button at 1098,15"
+    },
+    {
+      "kind": "extra",
+      "text": "中文",
+      "built": "button at 1152,15"
+    },
+    {
+      "kind": "extra",
+      "text": "Sign on to continue to your account We’ll take you straight back there once you’re signed on.",
+      "built": "div at 313,178"
+    },
+    {
+      "kind": "extra",
+      "text": "Sign on to continue to your account",
+      "built": "b at 313,186"
+    }
+  ]
+}
