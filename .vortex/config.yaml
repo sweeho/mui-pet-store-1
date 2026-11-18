@@ -113,7 +113,7 @@ testEvidence:
   acceptance:
     suites:
       - kind: unit
-        command: JEST_JUNIT_OUTPUT_FILE=.vortex-results/acceptance/junit.xml npm run test:acceptance -- --reporters=default --reporters=jest-junit {files}
+        command: JEST_JUNIT_OUTPUT_FILE=.vortex-results/acceptance/junit.xml npm run test:acceptance -- {files} --reporters=default --reporters=jest-junit
         junitPath: .vortex-results/acceptance/junit.xml
         testGlobs: ["tests/acceptance/**/*.test.ts", "tests/acceptance/**/*.test.tsx"]
       - kind: browser
