@@ -28,6 +28,7 @@ AC-1 … AC-46 map to cases C-0098 … C-0143; all pass (see `tdd-test-result.md
   loading it. This restyles the whole app, as the mockup-wins rule requires. See `design-check.md`.
 - `src/db/client.ts`: libsql `timeout: 5000` so parallel workers wait for a lock instead of failing with SQLITE_BUSY (the new
   write-heavy tests exposed it in the catalog and users tests).
+- `jest.setup.ts`: each test file gets its own SQLite file. Parallel files that write and count rows shared one file and saw each other's rows (the merge gate replay failed C-0101, C-0018 and the sign-off route test on that).
 - A JSON registration with no preference fields gets the default profile; a form submission goes through `recordProfile`.
 - Open-redirect guard: `returnTo` must be a same-site path (not `//…` or `/\…`).
 - Passwords are stored as supplied (R-0161, D5). A header "Signed out · Sign on" label from the mockup's sidebar is not built.
