@@ -20,7 +20,7 @@ import { MENU_ITEMS } from "./menu";
 
 export { MENU_ITEMS } from "./menu";
 
-export function SidebarItems() {
+export function SidebarItems({ cartCount = 0 }: { cartCount?: number }) {
   const pathname = usePathname();
   return (
     <Box sx={{ px: 3 }}>
@@ -59,6 +59,15 @@ export function SidebarItems() {
                     <item.icon stroke={1.5} size="1.3rem" />
                   </ListItemIcon>
                   <ListItemText primary={item.title} />
+                  {item.href === "/cart" && cartCount > 0 ? (
+                    <Typography
+                      component="span"
+                      aria-label={`${cartCount} in cart`}
+                      sx={{ ml: "auto", fontSize: 12, fontFamily: "monospace" }}
+                    >
+                      {cartCount}
+                    </Typography>
+                  ) : null}
                 </ListItemButton>
               ))}
             </List>

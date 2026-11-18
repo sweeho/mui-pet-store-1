@@ -5,11 +5,12 @@ import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import Chip from "@mui/material/Chip";
 import Typography from "@mui/material/Typography";
-import { IconArrowLeft } from "@tabler/icons-react";
+import { IconArrowLeft, IconShoppingCartPlus } from "@tabler/icons-react";
 import Link from "next/link";
 import type { ReactNode } from "react";
 
 import type { CatalogItem } from "@/catalog/types";
+import { withBasePath } from "@/lib/paths";
 
 import { attributesOf } from "./ItemListView";
 import { CatalogCrumbs, CatalogHeader, Thumb, formatPrice } from "./parts";
@@ -37,7 +38,7 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
 const link = { color: "inherit", textDecoration: "none", "&:hover": { color: "primary.main" } };
 const mono = { fontFamily: "monospace", fontSize: 12, color: "text.secondary" };
 
-/** `/catalog/items/[id]`: one item with its price, cost and attributes. No cart yet (D6). */
+/** `/catalog/items/[id]`: one item with its price, cost and attributes, and Add to cart. */
 export function ItemDetailView({
   item,
   categoryName,
@@ -98,6 +99,18 @@ export function ItemDetailView({
             <Typography sx={{ fontSize: 28, fontWeight: 700 }}>
               {formatPrice(item.listPrice)}
             </Typography>
+            <Box component="form" method="post" action={withBasePath("/api/cart")} sx={{ mt: 2 }}>
+              <input type="hidden" name="action" value="add" />
+              <input type="hidden" name="itemId" value={item.itemId} />
+              <Button
+                type="submit"
+                variant="contained"
+                startIcon={<IconShoppingCartPlus size={18} />}
+                sx={{ textTransform: "none" }}
+              >
+                Add to cart
+              </Button>
+            </Box>
           </Card>
           <Typography variant="h2" sx={{ fontSize: 16, fontWeight: 600, mb: 1 }}>
             Details

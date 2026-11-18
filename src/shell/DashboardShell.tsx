@@ -33,14 +33,17 @@ const PageWrapper = styled("div")(() => ({
 export function DashboardShell({
   children,
   username = null,
+  cartCount = 0,
 }: {
   children: React.ReactNode;
   username?: string | null;
+  cartCount?: number;
 }) {
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   return (
     <MainWrapper>
       <Sidebar
+        cartCount={cartCount}
         isMobileSidebarOpen={isMobileSidebarOpen}
         onSidebarClose={() => setMobileSidebarOpen(false)}
       />

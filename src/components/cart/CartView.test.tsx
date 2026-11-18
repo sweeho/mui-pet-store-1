@@ -68,7 +68,7 @@ describe("CartView", () => {
   it("[SWHM2-C-0073] an empty cart shows the empty frame with a way to the catalog", () => {
     render(<CartView lines={[]} subtotal={0} itemCount={0} signedOn={false} />);
     expect(screen.getByText("Your cart is empty")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /browse the catalog/i })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: /catalog & search/i })).toHaveAttribute(
       "href",
       "/catalog",
     );
