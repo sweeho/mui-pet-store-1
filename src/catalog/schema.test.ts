@@ -1,5 +1,5 @@
 /** @jest-environment node */
-import { getDb } from "@/db/client";
+import { useIsolatedDatabase } from "@/db/isolated";
 import { sql } from "drizzle-orm";
 
 import type { Db } from "./queries";
@@ -7,7 +7,7 @@ import { addCategory, addItem, addProduct, count, resetData, rows } from "./fixt
 
 let db: Db;
 beforeAll(async () => {
-  db = await getDb();
+  db = await useIsolatedDatabase();
 });
 beforeEach(async () => {
   await resetData(db);

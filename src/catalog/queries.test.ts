@@ -1,5 +1,5 @@
 /** @jest-environment node */
-import { getDb } from "@/db/client";
+import { useIsolatedDatabase } from "@/db/isolated";
 
 import {
   getCategory,
@@ -14,7 +14,7 @@ import { addCategory, addItem, addProduct, resetData } from "./fixtures.test";
 
 let db: Db;
 beforeAll(async () => {
-  db = await getDb();
+  db = await useIsolatedDatabase();
 });
 beforeEach(async () => {
   await resetData(db);

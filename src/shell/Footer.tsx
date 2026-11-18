@@ -8,6 +8,9 @@ export function Footer() {
     <Box
       component="footer"
       sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        gap: 2,
         px: 3,
         py: 2,
         borderTop: 1,
@@ -16,7 +19,10 @@ export function Footer() {
         color: "text.secondary",
       }}
     >
-      © 2026 {APP_NAME}
+      <Box component="span" sx={{ flex: 1 }}>
+        © 2026 {APP_NAME}
+      </Box>
+      <span>Sessions end after 15 minutes of inactivity</span>
     </Box>
   );
 }

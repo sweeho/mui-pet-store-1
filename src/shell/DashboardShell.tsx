@@ -30,7 +30,13 @@ const PageWrapper = styled("div")(() => ({
 }));
 
 /** The sidebar, the header and the page between them. */
-export function DashboardShell({ children }: { children: React.ReactNode }) {
+export function DashboardShell({
+  children,
+  username = null,
+}: {
+  children: React.ReactNode;
+  username?: string | null;
+}) {
   const [isMobileSidebarOpen, setMobileSidebarOpen] = useState(false);
   return (
     <MainWrapper>
@@ -39,7 +45,7 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
         onSidebarClose={() => setMobileSidebarOpen(false)}
       />
       <PageWrapper>
-        <Header toggleMobileSidebar={() => setMobileSidebarOpen(true)} />
+        <Header toggleMobileSidebar={() => setMobileSidebarOpen(true)} username={username} />
         <Container
           sx={{ paddingTop: "24px", paddingBottom: "24px", maxWidth: "1200px", flexGrow: 1 }}
         >

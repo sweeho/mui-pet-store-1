@@ -13,8 +13,10 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import { styled } from "@mui/material/styles";
-import { IconLanguage, IconMenu } from "@tabler/icons-react";
+import { IconLanguage, IconMenu, IconUser } from "@tabler/icons-react";
 import Link from "next/link";
+
+import { withBasePath } from "@/lib/paths";
 
 const AppBarStyled = styled(AppBar)(({ theme }) => ({
   boxShadow: "none",
@@ -33,7 +35,13 @@ const ToolbarStyled = styled(Toolbar)(({ theme }) => ({
 }));
 
 /** The top bar: the menu button that opens the sidebar on a small screen. */
-export function Header({ toggleMobileSidebar }: { toggleMobileSidebar: () => void }) {
+export function Header({
+  toggleMobileSidebar,
+  username = null,
+}: {
+  toggleMobileSidebar: () => void;
+  username?: string | null;
+}) {
   return (
     <AppBarStyled position="sticky" color="default">
       <ToolbarStyled>
@@ -46,7 +54,7 @@ export function Header({ toggleMobileSidebar }: { toggleMobileSidebar: () => voi
           <IconMenu width="20" height="20" />
         </IconButton>
         <Box flexGrow={1} />
-        {/* Inert placeholders: language switching and accounts belong to later capabilities. */}
+        {/* Inert: language switching belongs to a later capability (design.md D4). */}
         <Box
           role="group"
           aria-label="Language"
@@ -65,23 +73,52 @@ export function Header({ toggleMobileSidebar }: { toggleMobileSidebar: () => voi
             </ToggleButton>
           </ToggleButtonGroup>
         </Box>
-        <Button
-          variant="outlined"
-          color="inherit"
-          size="small"
-          component={Link}
-          href="/signon"
-          sx={{ textTransform: "none" }}
-        >
-          Sign on
-        </Button>
-        <Button
-          variant="contained"
-          size="small"
-          sx={{ textTransform: "none", display: { xs: "none", sm: "inline-flex" } }}
-        >
-          Create account
-        </Button>
+        {username ? (
+          <>
+            <Link href="/account" style={{ color: "inherit", marginRight: 12, fontWeight: 600 }}>
+              {username}
+            </Link>
+            <form method="post" action={withBasePath("/api/accounts/signoff")}>
+              <Button
+                type="submit"
+                variant="outlined"
+                color="inherit"
+                size="small"
+                sx={{ textTransform: "none" }}
+              >
+                Sign off
+              </Button>
+            </form>
+          </>
+        ) : (
+          <>
+            <Button
+              variant="outlined"
+              color="inherit"
+              size="small"
+              component={Link}
+              href="/accounts/create"
+              sx={{
+                textTransform: "none",
+                mr: 1,
+                color: "text.primary",
+                display: { xs: "none", sm: "inline-flex" },
+              }}
+            >
+              Create account
+            </Button>
+            <Button
+              variant="contained"
+              size="small"
+              component={Link}
+              href="/signon"
+              startIcon={<IconUser size={16} />}
+              sx={{ textTransform: "none" }}
+            >
+              Sign on
+            </Button>
+          </>
+        )}
       </ToolbarStyled>
     </AppBarStyled>
   );

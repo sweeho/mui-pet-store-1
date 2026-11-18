@@ -12,7 +12,9 @@ const closers = globalThis as unknown as {
 };
 
 function connect(url: string) {
-  const client = createClient({ url });
+  // Wait up to 5 s for a lock another connection holds (parallel test workers and the dev server
+  // share one file) instead of failing at once with SQLITE_BUSY.
+  const client = createClient({ url, timeout: 5000 });
   closers.appDbClose = async () => {
     delete closers.appDb;
     client.close();
