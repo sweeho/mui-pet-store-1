@@ -7,7 +7,6 @@ import Typography from "@mui/material/Typography";
 import { IconCircleCheck } from "@tabler/icons-react";
 import { useState } from "react";
 
-import { PageHeading } from "@/components/frames/PageHeading";
 import { withBasePath } from "@/lib/paths";
 
 export type InventoryRow = { itemId: string; quantity: number };
@@ -98,20 +97,34 @@ export function InventoryView({ items, updated }: InventoryViewProps) {
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 2, maxWidth: 1104 }}>
-      <PageHeading
-        title="Inventory"
-        description="Enter a new quantity and tick Update for each item you want to change. Pending orders are reprocessed when you submit."
-        action={
-          <Button
-            type="submit"
-            form={FORM_ID}
-            variant="contained"
-            sx={{ textTransform: "none", display: { xs: "none", md: "inline-flex" } }}
+      <Box sx={{ display: "flex", alignItems: "flex-end", gap: 2 }}>
+        <Box sx={{ flex: 1, minWidth: 0 }}>
+          <Typography
+            variant="h1"
+            sx={{ fontSize: { xs: 22, md: 24 }, lineHeight: "32px", fontWeight: 600 }}
           >
-            Update inventory
-          </Button>
-        }
-      />
+            Inventory
+          </Typography>
+          <Typography color="text.secondary" sx={{ mt: 0.5 }}>
+            <Box component="span" sx={{ display: { xs: "none", md: "inline" } }}>
+              Enter a new quantity and tick Update for each item you want to change. Pending orders
+              are reprocessed when you submit.
+            </Box>
+            <Box component="span" sx={{ display: { xs: "inline", md: "none" } }}>
+              Enter a new quantity and tick Update for each item to change. Blank or negative values
+              are ignored.
+            </Box>
+          </Typography>
+        </Box>
+        <Button
+          type="submit"
+          form={FORM_ID}
+          variant="contained"
+          sx={{ textTransform: "none", display: { xs: "none", md: "inline-flex" } }}
+        >
+          Update inventory
+        </Button>
+      </Box>
 
       {updated !== undefined && !dismissed ? (
         <Box
@@ -162,7 +175,8 @@ export function InventoryView({ items, updated }: InventoryViewProps) {
               borderCollapse: "collapse",
               tableLayout: { md: "fixed" },
               "@media (max-width: 767px)": {
-                "& thead": { display: "none" },
+                display: "block",
+                "& colgroup, & thead": { display: "none" },
                 "& tbody": { display: "block" },
                 "& tbody tr": {
                   display: "grid",
@@ -212,6 +226,14 @@ export function InventoryView({ items, updated }: InventoryViewProps) {
                 "& tr:last-of-type td": { borderBottom: 0 },
                 "@media (max-width: 767px)": {
                   "& td": { p: 0, border: 0, lineHeight: "44px" },
+                  "& td[data-label]::before": {
+                    content: "attr(data-label)",
+                    display: "block",
+                    fontSize: 12,
+                    lineHeight: "16px",
+                    color: "text.secondary",
+                    mb: 0.5,
+                  },
                   "& tr": { borderBottom: 1, borderColor: "divider" },
                   "& tr:last-of-type": { borderBottom: 0 },
                 },
@@ -226,11 +248,11 @@ export function InventoryView({ items, updated }: InventoryViewProps) {
                     <Box component="td" sx={{ ...mono, fontWeight: 500, gridArea: "id" }}>
                       {itemId}
                     </Box>
-                    <Box component="td" sx={{ gridArea: "ex" }}>
+                    <Box component="td" data-label="Existing" sx={{ gridArea: "ex" }}>
                       <span style={mono}>{quantity}</span>
                       {quantity === 0 ? <OutOfStock /> : null}
                     </Box>
-                    <Box component="td" sx={{ gridArea: "qty" }}>
+                    <Box component="td" data-label="New quantity" sx={{ gridArea: "qty" }}>
                       <Box
                         component="input"
                         name={`qty_${itemId}`}
@@ -284,21 +306,35 @@ export function InventoryView({ items, updated }: InventoryViewProps) {
                       }}
                     >
                       <Box
-                        component="input"
-                        type="checkbox"
-                        name={`item_${itemId}`}
-                        checked={ticked}
-                        aria-label={`Update ${itemId}`}
-                        onChange={(e) => setTicks((t) => ({ ...t, [itemId]: e.target.checked }))}
+                        component="label"
                         sx={{
-                          width: { xs: 22, md: 18 },
-                          height: { xs: 22, md: 18 },
-                          m: 0,
-                          mt: { xs: "11px", md: "7px" },
-                          accentColor: "primary.main",
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: 1,
+                          height: { xs: 44, md: 32 },
+                          fontWeight: 500,
                           cursor: "pointer",
                         }}
-                      />
+                      >
+                        <Box
+                          component="input"
+                          type="checkbox"
+                          name={`item_${itemId}`}
+                          checked={ticked}
+                          aria-label={`Update ${itemId}`}
+                          onChange={(e) => setTicks((t) => ({ ...t, [itemId]: e.target.checked }))}
+                          sx={{
+                            width: { xs: 22, md: 18 },
+                            height: { xs: 22, md: 18 },
+                            m: 0,
+                            accentColor: "primary.main",
+                            cursor: "pointer",
+                          }}
+                        />
+                        <Box component="span" sx={{ display: { xs: "inline", md: "none" } }}>
+                          Update
+                        </Box>
+                      </Box>
                     </Box>
                   </tr>
                 );
