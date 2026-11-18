@@ -46,6 +46,11 @@ The schema is `src/db/schema.ts`; migrations are generated into `drizzle/`.
 - **Web sessions**: `web_session` holds one row per browser session: the signed-on user name, the
   session and cart language, and the last access time. The `pet_session` cookie carries only the
   row's random id.
+- **Shopping carts**: `shopping_cart` holds one row per visit's cart: the item-id→quantity map
+  and the last access time. The `pet_cart` cookie carries only the row's random id, so a cart
+  exists before sign-on and survives it. A cart idle for 15 minutes reads as empty. Rules live in
+  `src/cart/`; behaviour: `openspec/specs/shopping-cart/` once change `swhm2-i-0004-shopping-cart`
+  is archived.
 - **Demo users**: the template's `users` table. Customers do not use it; it stays only for the
   template's `/api/users` routes.
 
@@ -99,6 +104,10 @@ does.
   update a row but not set a cookie, there is no signing secret to manage, and a page cannot be
   left out of a list it does not appear in. Authored in change
   `swhm2-i-0003-customer-accounts-and-sign` (design.md, P6–P7).
+- **The cart is a pure model persisted by id.** `src/cart/cart.ts` owns every cart rule over an
+  in-memory object; storage only loads and saves it in `shopping_cart`, keyed by its own cookie,
+  independent of `web_session`. Rationale: anonymous shoppers have no session row, and checkout
+  reads the same model. Authored in change `swhm2-i-0004-shopping-cart` (design.md, P1–P3).
 - **Address and card storage belong to checkout.** `src/checkout/store.ts` owns `address` and
   `credit_card`, and customer-accounts calls it. Rationale: both locked suites fix those
   functions there, and checkout extends them. Authored in change
