@@ -1,0 +1,377 @@
+{
+  "key": "SWHM2-MCK-56",
+  "mockup": "artifacts/SWHM2-S-0010/design/mockup-admin-home-mobile.html",
+  "url": "http://localhost:3300/admin",
+  "width": 390,
+  "at": "2026-11-18T16:32:12.487Z",
+  "pixelDifference": 0.1843,
+  "pageHeights": {
+    "mockup": 908,
+    "built": 900
+  },
+  "fonts": {
+    "mockup": {
+      "Inter": "loaded",
+      "JetBrains Mono": "loaded"
+    },
+    "built": {
+      "Arial": "loaded",
+      "Inter Variable": "loaded"
+    },
+    "builtNotLoaded": []
+  },
+  "differences": [
+    {
+      "kind": "missing",
+      "text": "Pet Store",
+      "mockup": "a at -280,0"
+    },
+    {
+      "kind": "missing",
+      "text": "Shop",
+      "mockup": "div at -268,72"
+    },
+    {
+      "kind": "missing",
+      "text": "Home",
+      "mockup": "a at -268,107"
+    },
+    {
+      "kind": "missing",
+      "text": "Catalog",
+      "mockup": "a at -268,157"
+    },
+    {
+      "kind": "missing",
+      "text": "Search",
+      "mockup": "a at -268,207"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart 0",
+      "mockup": "a at -268,257"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart",
+      "mockup": "span at -226,273"
+    },
+    {
+      "kind": "missing",
+      "text": "0",
+      "mockup": "span at -31,273"
+    },
+    {
+      "kind": "missing",
+      "text": "Account",
+      "mockup": "div at -268,307"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(255, 255, 255)"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "background",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgb(79, 70, 229)"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "88x31"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "position",
+      "mockup": "-268,342",
+      "built": "286,13"
+    },
+    {
+      "kind": "missing",
+      "text": "Operations",
+      "mockup": "div at -268,392"
+    },
+    {
+      "kind": "missing",
+      "text": "Inventory",
+      "mockup": "a at -268,427"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "24px"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "position",
+      "mockup": "-268,477",
+      "built": "16,81"
+    },
+    {
+      "kind": "missing",
+      "text": "Orders",
+      "mockup": "a at -268,512"
+    },
+    {
+      "kind": "style",
+      "text": "Sales reports",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Sales reports",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "Sales reports",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "292x17"
+    },
+    {
+      "kind": "style",
+      "text": "Sales reports",
+      "prop": "position",
+      "mockup": "-268,562",
+      "built": "65,574"
+    },
+    {
+      "kind": "missing",
+      "text": "Signed in as jps_admin · Log out",
+      "mockup": "div at -280,859"
+    },
+    {
+      "kind": "missing",
+      "text": "jps_admin",
+      "mockup": "b at -193,872"
+    },
+    {
+      "kind": "style",
+      "text": "Log out",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Log out",
+      "prop": "color",
+      "mockup": "rgb(79, 70, 229)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Log out",
+      "prop": "radius",
+      "mockup": "0px",
+      "built": "4px"
+    },
+    {
+      "kind": "style",
+      "text": "Log out",
+      "prop": "box",
+      "mockup": "43x15",
+      "built": "85x37"
+    },
+    {
+      "kind": "style",
+      "text": "Log out",
+      "prop": "position",
+      "mockup": "-121,872",
+      "built": "289,114"
+    },
+    {
+      "kind": "missing",
+      "text": "Open navigation",
+      "mockup": "button at 4,6"
+    },
+    {
+      "kind": "missing",
+      "text": "English",
+      "mockup": "button at 261,10"
+    },
+    {
+      "kind": "missing",
+      "text": "/",
+      "mockup": "span at 56,72"
+    },
+    {
+      "kind": "style",
+      "text": "Manage orders and read sales reports in the rich client.",
+      "prop": "box",
+      "mockup": "358x34",
+      "built": "257x34"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store Admin rich client",
+      "prop": "box",
+      "mockup": "316x20",
+      "built": "244x19"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store Admin rich client",
+      "prop": "position",
+      "mockup": "37,260",
+      "built": "105,200"
+    },
+    {
+      "kind": "style",
+      "text": "Opens against this server with your current session. List orders by status, approve or deny pending orders, and chart sales.",
+      "prop": "box",
+      "mockup": "316x63",
+      "built": "244x84"
+    },
+    {
+      "kind": "style",
+      "text": "Opens against this server with your current session. List orders by status, approve or deny pending orders, and chart sales.",
+      "prop": "position",
+      "mockup": "37,284",
+      "built": "105,223"
+    },
+    {
+      "kind": "style",
+      "text": "Launch Rich Client",
+      "prop": "box",
+      "mockup": "316x44",
+      "built": "181x40"
+    },
+    {
+      "kind": "style",
+      "text": "Launch Rich Client",
+      "prop": "position",
+      "mockup": "37,363",
+      "built": "41,323"
+    },
+    {
+      "kind": "style",
+      "text": "In the rich client",
+      "prop": "position",
+      "mockup": "16,452",
+      "built": "16,412"
+    },
+    {
+      "kind": "style",
+      "text": "Orders by status Pending, approved, denied and completed orders. Approve or deny pending ones on Commit.",
+      "prop": "radius",
+      "mockup": "8px",
+      "built": "4px"
+    },
+    {
+      "kind": "style",
+      "text": "Orders by status Pending, approved, denied and completed orders. Approve or deny pending ones on Commit.",
+      "prop": "position",
+      "mockup": "16,475",
+      "built": "16,435"
+    },
+    {
+      "kind": "style",
+      "text": "Orders by status",
+      "prop": "weight",
+      "mockup": "700",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Orders by status",
+      "prop": "position",
+      "mockup": "65,492",
+      "built": "65,452"
+    },
+    {
+      "kind": "style",
+      "text": "Pending, approved, denied and completed orders. Approve or deny pending ones on Commit.",
+      "prop": "position",
+      "mockup": "65,513",
+      "built": "65,473"
+    },
+    {
+      "kind": "style",
+      "text": "Sales reports Revenue or quantity between two dates, by category or by item, as a pie or bar chart.",
+      "prop": "radius",
+      "mockup": "8px",
+      "built": "4px"
+    },
+    {
+      "kind": "style",
+      "text": "Sales reports Revenue or quantity between two dates, by category or by item, as a pie or bar chart.",
+      "prop": "position",
+      "mockup": "16,597",
+      "built": "16,557"
+    },
+    {
+      "kind": "style",
+      "text": "Revenue or quantity between two dates, by category or by item, as a pie or bar chart.",
+      "prop": "position",
+      "mockup": "65,635",
+      "built": "65,594"
+    },
+    {
+      "kind": "missing",
+      "text": "Signed in as jps_admin. Your session ends after 15 minutes of inactivity.",
+      "mockup": "p at 16,778"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "box",
+      "mockup": "99x15",
+      "built": "90x30"
+    },
+    {
+      "kind": "missing",
+      "text": "Prices in US$",
+      "mockup": "span at 297,854"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "box",
+      "mockup": "236x15",
+      "built": "236x30"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "position",
+      "mockup": "16,877",
+      "built": "130,854"
+    },
+    {
+      "kind": "extra",
+      "text": "Open the menu",
+      "built": "button at 16,6"
+    }
+  ]
+}
