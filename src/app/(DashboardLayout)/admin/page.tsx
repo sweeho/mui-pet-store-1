@@ -1,10 +1,10 @@
-import { PlaceholderPage } from "@/components/frames/PlaceholderPage";
+import { requireAdmin } from "@/admin/session";
+import { AdminHomeView } from "@/components/admin/AdminHomeView";
 
-export default function Page() {
-  return (
-    <PlaceholderPage
-      title="Administration of orders"
-      description="Admin sign-in to approve or deny orders and read sales reports."
-    />
-  );
+export const dynamic = "force-dynamic";
+
+/** `/admin`: the administrator's home (design.md P1, P2). */
+export default async function Page() {
+  await requireAdmin();
+  return <AdminHomeView />;
 }

@@ -52,6 +52,7 @@ export async function requireAdmin(): Promise<void> {
 }
 
 /** End an administrator session: its row is deleted. */
-export async function endAdminSession(_db: Exec, _id: string | undefined): Promise<void> {
-  throw new Error("VortexNotImplemented");
+export async function endAdminSession(db: Exec, id: string | undefined): Promise<void> {
+  if (!id) return;
+  await db.run(sql`DELETE FROM admin_session WHERE session_id = ${id}`);
 }

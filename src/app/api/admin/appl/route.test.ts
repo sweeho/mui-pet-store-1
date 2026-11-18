@@ -40,7 +40,7 @@ test("[SWHM2-C-0231] an unknown Type is a 400 error naming it, escaped", async (
   expect(res.status).toBe(400);
   const text = await res.text();
   expect(text).toMatch(/<Error>.*FOO.*<\/Error>/);
-  expect(await (await call(xml("<b>"), session)).text()).toContain("&lt;b&gt;");
+  expect(await (await call(xml("&lt;b&gt;"), session)).text()).toContain("&lt;b&gt;");
 });
 
 test("[SWHM2-C-0238] GETORDERS returns the matching orders and the count", async () => {

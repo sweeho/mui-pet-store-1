@@ -17,7 +17,10 @@ export default async function Page({
   const { error } = await searchParams;
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 3, maxWidth: 480 }}>
-      <PageHeading title="Admin sign in" description="Sign in to approve or deny orders." />
+      <PageHeading
+        title="Sign in to Pet Store Admin"
+        description="Orders and sales reports are for administrators only."
+      />
       {error ? <Alert severity="error">The user ID or password is not correct.</Alert> : null}
       <Card variant="outlined" sx={{ p: 3 }}>
         <form method="post" action={withBasePath("/api/admin/login")}>

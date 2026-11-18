@@ -15,6 +15,7 @@ export const KNOWN_PAGE_ROUTES = [
   "/account",
   "/accounts",
   "/admin",
+  "/admin/login",
   "/cart",
   "/catalog",
   "/checkout",
