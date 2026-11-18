@@ -18,10 +18,11 @@ test.describe("Landing page", () => {
     await expect(page.getByRole("contentinfo")).toContainText("© 2026 Pet Store");
   });
 
-  test("a placeholder area shows the shared empty frame inside the shell", async ({ page }) => {
+  test("the admin area sends a visitor to the sign-in inside the shell", async ({ page }) => {
     await page.goto("/admin");
 
-    await expect(page.getByTestId("empty-frame")).toContainText("not available yet");
+    await expect(page).toHaveURL(/\/admin\/login$/);
+    await expect(page.getByLabel(/^user id$/i)).toBeVisible();
     await expect(
       page.getByRole("navigation").first().getByRole("link", { name: "Home" }),
     ).toBeVisible();

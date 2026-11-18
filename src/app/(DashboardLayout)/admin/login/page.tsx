@@ -3,6 +3,8 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import OutlinedInput from "@mui/material/OutlinedInput";
+import Typography from "@mui/material/Typography";
+import Link from "next/link";
 
 import { FieldLabel } from "@/components/accounts/parts";
 import { PageHeading } from "@/components/frames/PageHeading";
@@ -16,7 +18,9 @@ export default async function Page({
 }) {
   const { error } = await searchParams;
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 3, maxWidth: 480 }}>
+    <Box
+      sx={{ display: "flex", flexDirection: "column", gap: 3, maxWidth: 334, mx: "auto", mt: 6 }}
+    >
       <PageHeading
         title="Sign in to Pet Store Admin"
         description="Orders and sales reports are for administrators only."
@@ -52,6 +56,12 @@ export default async function Page({
           </Button>
         </form>
       </Card>
+      <Typography sx={{ fontSize: 12, color: "text.secondary" }}>
+        Not an administrator?{" "}
+        <Link href="/" style={{ color: "inherit", fontWeight: 600 }}>
+          Back to the store
+        </Link>
+      </Typography>
     </Box>
   );
 }

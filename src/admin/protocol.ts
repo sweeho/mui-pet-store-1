@@ -49,7 +49,10 @@ async function updateStatus(body: string): Promise<Response> {
     decisions.push({ orderId, status });
   }
   let sent = 0;
+  const seen = new Set<string>();
   for (const d of decisions) {
+    if (seen.has(d.orderId)) continue;
+    seen.add(d.orderId);
     if ((await getOrderStatus(env, d.orderId)) !== "PENDING") continue;
     await forwardDecision(env, d.orderId, d.status);
     sent++;

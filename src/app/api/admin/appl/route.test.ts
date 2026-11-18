@@ -75,3 +75,17 @@ test("[SWHM2-C-0243] ORDERS and REVENUE answer rows and a total", async () => {
   ).text();
   expect(text).toMatch(/<Total>0<\/Total>/);
 });
+
+test("[SWHM2-C-0231] UPDATESTATUS decides each PENDING order once and ignores others", async () => {
+  const session = await createAdminSession();
+  await addOrder(db, { id: 21, statuses: ["PENDING"] });
+  await addOrder(db, { id: 22, statuses: ["APPROVED"] });
+  const order = (id: number, status: string) =>
+    `<Order><OrderId>${id}</OrderId><Status>${status}</Status></Order>`;
+  const res = await call(
+    xml("UPDATESTATUS", order(21, "APPROVED") + order(21, "DENIED") + order(22, "DENIED")),
+    session,
+  );
+  expect(await res.text()).toContain("<Sent>1</Sent>");
+  expect((await call(xml("UPDATESTATUS", order(21, "SHIPPED")), session)).status).toBe(400);
+});

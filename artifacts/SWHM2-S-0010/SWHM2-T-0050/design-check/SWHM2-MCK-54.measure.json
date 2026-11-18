@@ -1,0 +1,289 @@
+{
+  "key": "SWHM2-MCK-54",
+  "mockup": "artifacts/SWHM2-S-0010/design/mockup-admin-sign-in-error-mobile.html",
+  "url": "http://localhost:3300/admin/login/error",
+  "width": 390,
+  "at": "2026-11-18T13:08:16.842Z",
+  "pixelDifference": 0.1132,
+  "pageHeights": {
+    "mockup": 900,
+    "built": 900
+  },
+  "fonts": {
+    "mockup": {
+      "Inter": "loaded",
+      "JetBrains Mono": "loaded"
+    },
+    "built": {
+      "Arial": "loaded",
+      "Inter Variable": "loaded"
+    },
+    "builtNotLoaded": []
+  },
+  "differences": [
+    {
+      "kind": "missing",
+      "text": "Pet Store",
+      "mockup": "a at -280,0"
+    },
+    {
+      "kind": "missing",
+      "text": "Shop",
+      "mockup": "div at -268,72"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "34x15"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "position",
+      "mockup": "-268,107",
+      "built": "16,81"
+    },
+    {
+      "kind": "missing",
+      "text": "Catalog",
+      "mockup": "a at -268,157"
+    },
+    {
+      "kind": "missing",
+      "text": "Search",
+      "mockup": "a at -268,207"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart 0",
+      "mockup": "a at -268,257"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart",
+      "mockup": "span at -226,273"
+    },
+    {
+      "kind": "missing",
+      "text": "0",
+      "mockup": "span at -31,273"
+    },
+    {
+      "kind": "missing",
+      "text": "Account",
+      "mockup": "div at -268,307"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(255, 255, 255)"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "background",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgb(79, 70, 229)"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "88x31"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "position",
+      "mockup": "-268,342",
+      "built": "286,13"
+    },
+    {
+      "kind": "missing",
+      "text": "Operations",
+      "mockup": "div at -268,392"
+    },
+    {
+      "kind": "missing",
+      "text": "Inventory",
+      "mockup": "a at -268,427"
+    },
+    {
+      "kind": "missing",
+      "text": "Admin",
+      "mockup": "div at -268,477"
+    },
+    {
+      "kind": "missing",
+      "text": "Orders",
+      "mockup": "a at -268,512"
+    },
+    {
+      "kind": "missing",
+      "text": "Sales reports",
+      "mockup": "a at -268,562"
+    },
+    {
+      "kind": "missing",
+      "text": "Signed out · Sign on",
+      "mockup": "div at -280,860"
+    },
+    {
+      "kind": "missing",
+      "text": "Open navigation",
+      "mockup": "button at 4,6"
+    },
+    {
+      "kind": "missing",
+      "text": "English",
+      "mockup": "button at 261,10"
+    },
+    {
+      "kind": "style",
+      "text": "/",
+      "prop": "position",
+      "mockup": "56,72",
+      "built": "58,81"
+    },
+    {
+      "kind": "missing",
+      "text": "Sign-in failed",
+      "mockup": "span at 118,72"
+    },
+    {
+      "kind": "style",
+      "text": "We couldn’t sign you in",
+      "prop": "size",
+      "mockup": "20px",
+      "built": "22px"
+    },
+    {
+      "kind": "style",
+      "text": "We couldn’t sign you in",
+      "prop": "box",
+      "mockup": "316x24",
+      "built": "308x30"
+    },
+    {
+      "kind": "style",
+      "text": "We couldn’t sign you in",
+      "prop": "position",
+      "mockup": "37,214",
+      "built": "41,169"
+    },
+    {
+      "kind": "style",
+      "text": "The user ID or password is wrong, or the account doesn’t have the administrator role.",
+      "prop": "position",
+      "mockup": "37,246",
+      "built": "41,207"
+    },
+    {
+      "kind": "style",
+      "text": "Back to sign in",
+      "prop": "box",
+      "mockup": "316x44",
+      "built": "134x37"
+    },
+    {
+      "kind": "style",
+      "text": "Back to sign in",
+      "prop": "position",
+      "mockup": "37,312",
+      "built": "41,273"
+    },
+    {
+      "kind": "style",
+      "text": "Go to the store home page",
+      "prop": "position",
+      "mockup": "121,372",
+      "built": "41,325"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "box",
+      "mockup": "99x15",
+      "built": "90x30"
+    },
+    {
+      "kind": "missing",
+      "text": "Prices in US$",
+      "mockup": "span at 297,846"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "box",
+      "mockup": "236x15",
+      "built": "236x30"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "position",
+      "mockup": "16,869",
+      "built": "130,854"
+    },
+    {
+      "kind": "extra",
+      "text": "Open the menu",
+      "built": "button at 16,6"
+    },
+    {
+      "kind": "extra",
+      "text": "Administration of orders",
+      "built": "a at 70,81"
+    },
+    {
+      "kind": "extra",
+      "text": "Login",
+      "built": "a at 226,81"
+    },
+    {
+      "kind": "extra",
+      "text": "Error",
+      "built": "p at 277,81"
+    }
+  ]
+}
