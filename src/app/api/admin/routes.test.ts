@@ -71,7 +71,7 @@ test("Commit sends one message per decision, changes only PENDING orders, and se
       cookie,
     ),
   );
-  expect(await res.json()).toEqual({ sent: 3, approved: ["600"], denied: ["601", "602"] });
+  expect(await res.json()).toEqual({ sent: 3, approved: ["600"], denied: ["601"] });
   const read = async (id: string) =>
     (
       await (

@@ -13,8 +13,8 @@
     },
     "success": {
       "main": "#16a34a",
-      "light": "#E6FFFA",
-      "dark": "#02b3a9",
+      "light": "#f0fdf4",
+      "dark": "#15803d",
       "contrastText": "#ffffff"
     },
     "info": {
@@ -31,8 +31,8 @@
     },
     "warning": {
       "main": "#d97706",
-      "light": "#FEF5E5",
-      "dark": "#ae8e59",
+      "light": "#fffbeb",
+      "dark": "#b45309",
       "contrastText": "#ffffff"
     },
     "grey": {

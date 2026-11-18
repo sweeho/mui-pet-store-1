@@ -1,3 +1,5 @@
+import { sql } from "drizzle-orm";
+
 import type { ApprovalEnv } from "./env";
 import { parseApprovalXml } from "./documents";
 import { getOrderStatus, recordOrderStatus } from "./orders";
@@ -12,6 +14,12 @@ export async function processApprovalMessage(env: ApprovalEnv, xml: string): Pro
   for (const entry of parseApprovalXml(xml)) {
     if (entry.status !== "APPROVED" && entry.status !== "DENIED") continue;
     if ((await getOrderStatus(env, entry.orderId)) !== "PENDING") continue;
+    // Claim the order with a conditional write so two racing messages cannot both change it.
+    const claimed = await env.db.all(
+      sql`UPDATE order_manager SET status = ${entry.status}
+          WHERE order_id = ${entry.orderId} AND status = 'PENDING' RETURNING order_id`,
+    );
+    if (claimed.length === 0) continue;
     await recordOrderStatus(env, entry.orderId, entry.status);
     env.notifyList.push(entry.orderId);
     if (entry.status === "APPROVED") {

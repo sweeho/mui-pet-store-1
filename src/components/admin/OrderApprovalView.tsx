@@ -16,7 +16,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-import { PageHeading } from "@/components/frames/PageHeading";
 import { withBasePath } from "@/lib/paths";
 
 export type ApprovalOrder = {
@@ -46,7 +45,7 @@ const TABS = [
   ["COMPLETED", "Completed"],
 ] as const;
 
-const mono = { fontFamily: "monospace" };
+const mono = { fontFamily: "'JetBrains Mono Variable', ui-monospace, monospace" };
 const label = (s: string) => s.charAt(0) + s.slice(1).toLowerCase();
 const date = (ms: number) =>
   new Date(ms).toLocaleDateString("en-US", {
@@ -162,39 +161,75 @@ export function OrderApprovalView({ orders, filter = "ALL", counts = {} }: Order
   const allSelected = pending.length > 0 && selectedPending.length === pending.length;
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, maxWidth: 1104 }}>
-      <PageHeading
-        title="Approve orders"
-        description="Choose Approved or Denied for pending orders, singly or in bulk, then commit to send them."
-        action={
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1, flexWrap: "wrap" }}>
-            <Button
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 2,
+        maxWidth: 1104,
+        pb: { xs: 9, md: 0 },
+      }}
+    >
+      <Box sx={{ display: "flex", alignItems: "flex-end", gap: 2, flexWrap: "wrap" }}>
+        <Box sx={{ flex: 1, minWidth: { xs: "100%", md: 0 } }}>
+          <Typography variant="h1" sx={{ fontSize: 24, lineHeight: "32px", fontWeight: 600 }}>
+            Approve orders
+          </Typography>
+          <Typography color="text.secondary" sx={{ mt: 0.5 }}>
+            <Box component="span" sx={{ display: { xs: "none", md: "inline" } }}>
+              Choose Approved or Denied for pending orders, singly or in bulk, then commit to send
+              them.
+            </Box>
+            <Box component="span" sx={{ display: { xs: "inline", md: "none" } }}>
+              Set each pending order to Approved or Denied, then commit.
+            </Box>
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+            "@media (max-width: 767px)": {
+              position: "fixed",
+              left: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: 10,
+              p: 1.5,
+              bgcolor: "background.paper",
+              borderTop: 1,
+              borderColor: "divider",
+              "& > button": { flex: 1 },
+            },
+          }}
+        >
+          <Button
+            variant="outlined"
+            color="inherit"
+            disabled={changed.length === 0}
+            onClick={discard}
+          >
+            Discard changes
+          </Button>
+          <Button
+            variant="contained"
+            startIcon={<IconCheck size={16} />}
+            disabled={changed.length === 0 || busy}
+            onClick={commit}
+          >
+            Commit
+          </Button>
+          {changed.length > 0 ? (
+            <Chip
+              size="small"
+              color="primary"
               variant="outlined"
-              color="inherit"
-              disabled={changed.length === 0}
-              onClick={discard}
-            >
-              Discard changes
-            </Button>
-            <Button
-              variant="contained"
-              startIcon={<IconCheck size={16} />}
-              disabled={changed.length === 0 || busy}
-              onClick={commit}
-            >
-              Commit
-            </Button>
-            {changed.length > 0 ? (
-              <Chip
-                size="small"
-                color="primary"
-                variant="outlined"
-                label={`${changed.length} ${changed.length === 1 ? "change" : "changes"}`}
-              />
-            ) : null}
-          </Box>
-        }
-      />
+              label={`${changed.length} ${changed.length === 1 ? "change" : "changes"}`}
+            />
+          ) : null}
+        </Box>
+      </Box>
 
       {summary ? (
         <Alert
@@ -219,7 +254,12 @@ export function OrderApprovalView({ orders, filter = "ALL", counts = {} }: Order
                 <StatusBadge status="DENIED" /> <IdList ids={summary.denied} />
               </span>
             ) : null}
-            <Link href="/admin/orders?status=APPROVED">View approved orders</Link>
+            <Link
+              href="/admin/orders?status=APPROVED"
+              style={{ color: "inherit", fontWeight: 600, textDecoration: "none" }}
+            >
+              View approved orders
+            </Link>
           </Box>
         </Alert>
       ) : null}
@@ -232,15 +272,28 @@ export function OrderApprovalView({ orders, filter = "ALL", counts = {} }: Order
         icon={<IconInfoCircle size={18} />}
         sx={{ border: 1, borderColor: "divider", bgcolor: "grey.100", color: "text.primary" }}
       >
-        <b>Changes stay on this page until you press Commit.</b> Orders left as Pending are not
-        sent. US orders under US$ 500 and Japan orders under ¥50,000 are approved automatically and
-        never appear here.
+        <Box component="span" sx={{ display: { xs: "none", md: "inline" } }}>
+          <b style={{ fontWeight: 600 }}>Changes stay on this page until you press Commit.</b>{" "}
+          Orders left as Pending are not sent. US orders under US$ 500 and Japan orders under
+          ¥50,000 are approved automatically and never appear here.
+        </Box>
+        <Box component="span" sx={{ display: { xs: "inline", md: "none" } }}>
+          <b style={{ fontWeight: 600 }}>Nothing is sent until you press Commit.</b> Orders left as
+          Pending stay here.
+        </Box>
       </Alert>
 
       <Tabs
         value={filter}
         aria-label="Order status"
-        sx={{ borderBottom: 1, borderColor: "divider" }}
+        variant="scrollable"
+        scrollButtons={false}
+        sx={{
+          width: 0,
+          minWidth: "100%",
+          borderBottom: 1,
+          borderColor: "divider",
+        }}
       >
         {TABS.map(([value, text]) => (
           <Tab
@@ -288,6 +341,7 @@ export function OrderApprovalView({ orders, filter = "ALL", counts = {} }: Order
             color: "common.white",
             borderRadius: 2,
             fontSize: 13,
+            "@media (max-width: 767px)": { "& .bulk-pending": { display: "none" } },
           }}
         >
           <b>{selectedPending.length} selected</b>
@@ -299,6 +353,7 @@ export function OrderApprovalView({ orders, filter = "ALL", counts = {} }: Order
               variant="outlined"
               color="inherit"
               onClick={() => bulk(v)}
+              className={v === "PENDING" ? "bulk-pending" : undefined}
               sx={{ borderColor: "text.secondary" }}
             >
               {label(v)}
@@ -327,23 +382,41 @@ export function OrderApprovalView({ orders, filter = "ALL", counts = {} }: Order
             "& tbody tr:last-of-type td": { borderBottom: 0 },
             "& .num": { textAlign: "right" },
             "& tr.changed td": { bgcolor: "grey.100" },
+            "& td.change": { width: 260 },
             "& tr.changed td:first-of-type": {
               boxShadow: (t) => `inset 3px 0 0 ${t.palette.primary.main}`,
             },
             "@media (max-width: 767px)": {
+              display: "block",
+              "& tbody": { display: "block" },
               "& thead": { display: "none" },
               "& tbody tr": {
                 display: "grid",
-                gridTemplateColumns: "40px 1fr 1fr",
+                gridTemplateColumns: "28px auto 1fr auto",
                 alignItems: "center",
-                gap: 0.5,
+                columnGap: 1.25,
+                rowGap: 0.5,
                 p: 1.5,
                 borderBottom: 1,
                 borderColor: "divider",
               },
-              "& td": { display: "block", height: "auto", border: 0, p: 0 },
-              "& td.num": { textAlign: "left" },
-              "& td.change": { gridColumn: "1 / -1", pt: 1 },
+              "& td": { display: "block", height: "auto", border: 0, p: 0, minWidth: 0 },
+              "& td.cb": { gridColumn: 1, gridRow: 1 },
+              "& td.id": { gridColumn: 2, gridRow: 1 },
+              "& td.status": { gridColumn: 3, gridRow: 1 },
+              "& td.num": { gridColumn: 4, gridRow: 1, textAlign: "right" },
+              "& td.user": { gridColumn: "2 / 4", gridRow: 2, color: "text.secondary" },
+              "& td.date": {
+                gridColumn: 4,
+                gridRow: 2,
+                textAlign: "right",
+                color: "text.secondary",
+              },
+              "& td.change": { gridColumn: "1 / -1", gridRow: 3, pt: 1, width: "100%" },
+              "& td.change .MuiToggleButtonGroup-root": { width: "100%" },
+              "& td.change .MuiToggleButton-root": { flex: 1 },
+              "& tr.changed td": { bgcolor: "transparent" },
+              "& tr.changed": { bgcolor: "grey.100" },
             },
           }}
         >
@@ -389,7 +462,7 @@ export function OrderApprovalView({ orders, filter = "ALL", counts = {} }: Order
                   data-status={o.status}
                   className={isPending && v !== "PENDING" ? "changed" : undefined}
                 >
-                  <td style={{ width: 40 }}>
+                  <td className="cb" style={{ width: 40 }}>
                     {isPending ? (
                       <Checkbox
                         size="small"
@@ -400,16 +473,22 @@ export function OrderApprovalView({ orders, filter = "ALL", counts = {} }: Order
                       />
                     ) : null}
                   </td>
-                  <td style={{ ...mono, fontWeight: 500 }}>{o.orderId}</td>
-                  <td style={mono}>{o.userName}</td>
-                  <td style={mono}>{date(o.orderTime)}</td>
+                  <td className="id" style={{ ...mono, fontWeight: 500 }}>
+                    {o.orderId}
+                  </td>
+                  <td className="user" style={mono}>
+                    {o.userName}
+                  </td>
+                  <td className="date" style={mono}>
+                    {date(o.orderTime)}
+                  </td>
                   <td className="num" style={mono}>
                     {money(o.total)}
                   </td>
-                  <td>
+                  <td className="status">
                     <StatusBadge status={o.status} />
                   </td>
-                  <td className="change" style={{ width: 260 }}>
+                  <td className="change">
                     {isPending ? (
                       <ToggleButtonGroup
                         exclusive

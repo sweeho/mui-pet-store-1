@@ -2,6 +2,7 @@ import { hasAdminSession, unauthorized } from "@/admin/session";
 import { forwardDecision } from "@/approval/decision";
 import { dispatchApprovals } from "@/approval/dispatch";
 import { newEnv } from "@/approval/env";
+import { getOrderStatus } from "@/approval/orders";
 import { getDb } from "@/db/client";
 
 type Decision = { orderId: string; status: "APPROVED" | "DENIED" };
@@ -28,11 +29,20 @@ export async function POST(request: Request): Promise<Response> {
   const decisions = parseDecisions(await request.json().catch(() => null));
   if (!decisions) return Response.json({ error: "decisions must be a list" }, { status: 400 });
   const env = newEnv(await getDb(), "admin");
+  // The summary lists only the orders that are PENDING now, once each: the handler ignores the rest.
+  const changing = new Map<string, Decision["status"]>();
+  for (const d of decisions) {
+    if (!changing.has(d.orderId) && (await getOrderStatus(env, d.orderId)) === "PENDING") {
+      changing.set(d.orderId, d.status);
+    }
+  }
   for (const d of decisions) await forwardDecision(env, d.orderId, d.status);
   await dispatchApprovals(env);
+  const listed = (status: Decision["status"]) =>
+    [...changing].filter(([, s]) => s === status).map(([id]) => id);
   return Response.json({
     sent: decisions.length,
-    approved: decisions.filter((d) => d.status === "APPROVED").map((d) => d.orderId),
-    denied: decisions.filter((d) => d.status === "DENIED").map((d) => d.orderId),
+    approved: listed("APPROVED"),
+    denied: listed("DENIED"),
   });
 }
