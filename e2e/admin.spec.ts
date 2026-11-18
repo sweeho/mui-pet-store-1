@@ -1,4 +1,8 @@
-import { expect, test } from "@playwright/test";
+import { expect as baseExpect, test } from "@playwright/test";
+
+// A first visit compiles each route in the dev server, which can take longer than the 5s default.
+const expect = baseExpect.configure({ timeout: 20_000 });
+test.setTimeout(60_000);
 
 test("[SWHM2-C-0234][SWHM2-C-0242] an administrator signs in, reads a report and logs out", async ({
   page,
