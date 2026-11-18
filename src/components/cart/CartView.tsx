@@ -22,7 +22,7 @@ import {
   IconTrash,
 } from "@tabler/icons-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 
 import type { CartLine } from "@/cart/listing";
 import { EmptyFrame } from "@/components/frames/EmptyFrame";
@@ -70,6 +70,13 @@ export function CartView({
   categoryNames = {},
 }: CartViewProps) {
   const [dirty, setDirty] = useState(false);
+  // Update cart is disabled until a quantity changes, but only once the page is interactive, so
+  // the form still works before (or without) scripts.
+  const hydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
   const [confirming, setConfirming] = useState(false);
   const [emptyAnchor, setEmptyAnchor] = useState<HTMLElement | null>(null);
   const action = withBasePath(CART_ACTION);
@@ -251,7 +258,7 @@ export function CartView({
                   type="submit"
                   variant="outlined"
                   color="inherit"
-                  disabled={!dirty}
+                  disabled={hydrated && !dirty}
                   startIcon={<IconRefresh size={16} />}
                   sx={{ textTransform: "none" }}
                 >
@@ -278,7 +285,12 @@ export function CartView({
               </Box>
             </Card>
           </form>
-          <Popper open={confirming} anchorEl={emptyAnchor} placement="top-end">
+          <Popper
+            open={confirming}
+            anchorEl={emptyAnchor}
+            placement="top-end"
+            sx={{ zIndex: "modal" }}
+          >
             <Paper
               role="dialog"
               aria-label="Empty cart"

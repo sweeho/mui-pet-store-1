@@ -25,10 +25,13 @@ test.describe("Shopping cart", () => {
     page,
   }) => {
     await addEst1(page);
+    // Disabled until a quantity changes: waiting for it also waits for the page to hydrate.
+    await expect(page.getByRole("button", { name: "Update cart" })).toBeDisabled();
     await page.getByLabel("Quantity of Angelfish, Large").fill("3");
     await page.getByRole("button", { name: "Update cart" }).click();
     await expect(page.getByLabel("Quantity of Angelfish, Large")).toHaveValue("3");
     await expect(page.getByText("$49.50").first()).toBeVisible();
+    await expect(page.getByRole("button", { name: "Update cart" })).toBeDisabled();
     await page.getByLabel("Quantity of Angelfish, Large").fill("abc");
     await page.getByRole("button", { name: "Update cart" }).click();
     await expect(page.getByText("Your cart is empty")).toBeVisible();

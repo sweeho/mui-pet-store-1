@@ -1,0 +1,1397 @@
+{
+  "key": "SWHM2-MCK-35",
+  "mockup": "artifacts/SWHM2-S-0004/design/mockup-cart.html",
+  "url": "http://localhost:3300/cart",
+  "width": 1440,
+  "at": "2026-11-18T02:11:40.012Z",
+  "pixelDifference": 0.0679,
+  "pageHeights": {
+    "mockup": 900,
+    "built": 900
+  },
+  "fonts": {
+    "mockup": {
+      "Inter": "loaded",
+      "JetBrains Mono": "loaded"
+    },
+    "built": {
+      "Inter Variable": "loaded",
+      "monospace": "loaded",
+      "Arial": "loaded"
+    },
+    "builtNotLoaded": []
+  },
+  "differences": [
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "21px"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "weight",
+      "mockup": "700",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(79, 70, 229)"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "box",
+      "mockup": "239x64",
+      "built": "92x26"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "position",
+      "mockup": "0,0",
+      "built": "24,22"
+    },
+    {
+      "kind": "style",
+      "text": "Shop",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Shop",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Shop",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Shop",
+      "prop": "position",
+      "mockup": "12,72",
+      "built": "24,70"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "8px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "box",
+      "mockup": "215x40",
+      "built": "191x41"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "position",
+      "mockup": "12,107",
+      "built": "24,102"
+    },
+    {
+      "kind": "style",
+      "text": "Catalog & search",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Catalog & search",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Catalog & search",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "8px"
+    },
+    {
+      "kind": "style",
+      "text": "Catalog & search",
+      "prop": "box",
+      "mockup": "215x40",
+      "built": "191x41"
+    },
+    {
+      "kind": "style",
+      "text": "Catalog & search",
+      "prop": "position",
+      "mockup": "12,149",
+      "built": "24,147"
+    },
+    {
+      "kind": "style",
+      "text": "Cart 4",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Cart 4",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Cart 4",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "8px"
+    },
+    {
+      "kind": "style",
+      "text": "Cart 4",
+      "prop": "box",
+      "mockup": "215x40",
+      "built": "191x41"
+    },
+    {
+      "kind": "style",
+      "text": "Cart 4",
+      "prop": "position",
+      "mockup": "12,191",
+      "built": "24,192"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "box",
+      "mockup": "28x18",
+      "built": "117x17"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "position",
+      "mockup": "54,202",
+      "built": "76,204"
+    },
+    {
+      "kind": "style",
+      "text": "4",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "4",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "4",
+      "prop": "position",
+      "mockup": "208,203",
+      "built": "193,205"
+    },
+    {
+      "kind": "style",
+      "text": "Account",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Account",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Account",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Account",
+      "prop": "position",
+      "mockup": "12,233",
+      "built": "24,237"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "8px"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "box",
+      "mockup": "215x40",
+      "built": "191x41"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "position",
+      "mockup": "12,268",
+      "built": "24,269"
+    },
+    {
+      "kind": "style",
+      "text": "Operations",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Operations",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Operations",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Operations",
+      "prop": "position",
+      "mockup": "12,310",
+      "built": "24,314"
+    },
+    {
+      "kind": "style",
+      "text": "Order fulfilment and invoicing",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Order fulfilment and invoicing",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Order fulfilment and invoicing",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "8px"
+    },
+    {
+      "kind": "style",
+      "text": "Order fulfilment and invoicing",
+      "prop": "box",
+      "mockup": "215x48",
+      "built": "191x58"
+    },
+    {
+      "kind": "style",
+      "text": "Order fulfilment and invoicing",
+      "prop": "position",
+      "mockup": "12,345",
+      "built": "24,346"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "position",
+      "mockup": "12,395",
+      "built": "24,408"
+    },
+    {
+      "kind": "style",
+      "text": "Administration of orders",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Administration of orders",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Administration of orders",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "8px"
+    },
+    {
+      "kind": "style",
+      "text": "Administration of orders",
+      "prop": "box",
+      "mockup": "215x48",
+      "built": "191x58"
+    },
+    {
+      "kind": "style",
+      "text": "Administration of orders",
+      "prop": "position",
+      "mockup": "12,430",
+      "built": "24,440"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "background",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgba(15, 23, 42, 0.08)"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "box",
+      "mockup": "121x36",
+      "built": "61x39"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "position",
+      "mockup": "1021,14",
+      "built": "1038,15"
+    },
+    {
+      "kind": "style",
+      "text": "Create account",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Create account",
+      "prop": "box",
+      "mockup": "139x36",
+      "built": "118x31"
+    },
+    {
+      "kind": "style",
+      "text": "Create account",
+      "prop": "position",
+      "mockup": "1154,14",
+      "built": "1202,19"
+    },
+    {
+      "kind": "style",
+      "text": "4 items in your cart. Change a quantity and choose Update cart, or set it to 0 to remove the item.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "4 items in your cart. Change a quantity and choose Update cart, or set it to 0 to remove the item.",
+      "prop": "position",
+      "mockup": "264,121",
+      "built": "264,130"
+    },
+    {
+      "kind": "missing",
+      "text": "4 items",
+      "mockup": "span at 264,121"
+    },
+    {
+      "kind": "style",
+      "text": "Proceed to checkout",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Item",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Item",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "Item",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Item",
+      "prop": "position",
+      "mockup": "265,163",
+      "built": "265,172"
+    },
+    {
+      "kind": "style",
+      "text": "Product",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Product",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "Product",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Product",
+      "prop": "position",
+      "mockup": "435,163",
+      "built": "431,172"
+    },
+    {
+      "kind": "style",
+      "text": "Category",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Category",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "Category",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Category",
+      "prop": "position",
+      "mockup": "545,163",
+      "built": "536,172"
+    },
+    {
+      "kind": "style",
+      "text": "Quantity",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Quantity",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "Quantity",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Quantity",
+      "prop": "position",
+      "mockup": "644,163",
+      "built": "639,172"
+    },
+    {
+      "kind": "style",
+      "text": "List price",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "List price",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "List price",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "List price",
+      "prop": "position",
+      "mockup": "765,163",
+      "built": "768,172"
+    },
+    {
+      "kind": "style",
+      "text": "Line total",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Line total",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "Line total",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Line total",
+      "prop": "position",
+      "mockup": "866,163",
+      "built": "871,172"
+    },
+    {
+      "kind": "style",
+      "text": "Actions",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Actions",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "Actions",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Actions",
+      "prop": "box",
+      "mockup": "44x15",
+      "built": "43x24"
+    },
+    {
+      "kind": "style",
+      "text": "Actions",
+      "prop": "position",
+      "mockup": "-9032,183",
+      "built": "-9999,192"
+    },
+    {
+      "kind": "style",
+      "text": "Angelfish",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Large · EST-1",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Large · EST-1",
+      "prop": "box",
+      "mockup": "146x16",
+      "built": "142x21"
+    },
+    {
+      "kind": "style",
+      "text": "EST-1",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "FI-SW-01",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "FI-SW-01",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Fish",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Fish",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Fish",
+      "prop": "position",
+      "mockup": "545,203",
+      "built": "536,212"
+    },
+    {
+      "kind": "style",
+      "text": "2",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "2",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "2",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "2",
+      "prop": "box",
+      "mockup": "72x32",
+      "built": "72x37"
+    },
+    {
+      "kind": "style",
+      "text": "$16.50",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "$16.50",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "$16.50",
+      "prop": "position",
+      "mockup": "765,203",
+      "built": "768,212"
+    },
+    {
+      "kind": "style",
+      "text": "$33.00",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "$33.00",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "$33.00",
+      "prop": "position",
+      "mockup": "866,203",
+      "built": "871,212"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Angelfish, Large from cart",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Arial"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Angelfish, Large from cart",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "18px"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Angelfish, Large from cart",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgba(0, 0, 0, 0.54)"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Angelfish, Large from cart",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "50%"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Angelfish, Large from cart",
+      "prop": "box",
+      "mockup": "32x32",
+      "built": "26x26"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Angelfish, Large from cart",
+      "prop": "position",
+      "mockup": "979,215",
+      "built": "985,227"
+    },
+    {
+      "kind": "style",
+      "text": "Bulldog",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Male Adult · EST-6",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Male Adult · EST-6",
+      "prop": "box",
+      "mockup": "146x16",
+      "built": "142x21"
+    },
+    {
+      "kind": "style",
+      "text": "EST-6",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "K9-BD-01",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "K9-BD-01",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Dogs",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Dogs",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Dogs",
+      "prop": "position",
+      "mockup": "545,259",
+      "built": "536,267"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "box",
+      "mockup": "72x32",
+      "built": "72x37"
+    },
+    {
+      "kind": "style",
+      "text": "$18.50",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "$18.50",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Bulldog, Male Adult from cart",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Arial"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Bulldog, Male Adult from cart",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "18px"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Bulldog, Male Adult from cart",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgba(0, 0, 0, 0.54)"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Bulldog, Male Adult from cart",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "50%"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Bulldog, Male Adult from cart",
+      "prop": "box",
+      "mockup": "32x32",
+      "built": "26x26"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Bulldog, Male Adult from cart",
+      "prop": "position",
+      "mockup": "979,271",
+      "built": "985,282"
+    },
+    {
+      "kind": "style",
+      "text": "Manx",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Tailless · EST-14",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Tailless · EST-14",
+      "prop": "box",
+      "mockup": "146x16",
+      "built": "142x21"
+    },
+    {
+      "kind": "style",
+      "text": "EST-14",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "FL-DSH-01",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "FL-DSH-01",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Cats",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Cats",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Cats",
+      "prop": "position",
+      "mockup": "545,315",
+      "built": "536,322"
+    },
+    {
+      "kind": "style",
+      "text": "$58.50",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "$58.50",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Manx, Tailless from cart",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Arial"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Manx, Tailless from cart",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "18px"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Manx, Tailless from cart",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgba(0, 0, 0, 0.54)"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Manx, Tailless from cart",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "50%"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Manx, Tailless from cart",
+      "prop": "box",
+      "mockup": "32x32",
+      "built": "26x26"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Manx, Tailless from cart",
+      "prop": "position",
+      "mockup": "979,327",
+      "built": "985,337"
+    },
+    {
+      "kind": "missing",
+      "text": "Amazon Parrot",
+      "mockup": "a at 277,382"
+    },
+    {
+      "kind": "missing",
+      "text": "Adult Male · EST-18",
+      "mockup": "div at 277,401"
+    },
+    {
+      "kind": "style",
+      "text": "EST-18",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "EST-18",
+      "prop": "position",
+      "mockup": "346,401",
+      "built": "321,404"
+    },
+    {
+      "kind": "missing",
+      "text": "AV-CB-01",
+      "mockup": "a at 447,392"
+    },
+    {
+      "kind": "missing",
+      "text": "Birds",
+      "mockup": "td at 545,371"
+    },
+    {
+      "kind": "missing",
+      "text": "$193.50",
+      "mockup": "td at 765,371"
+    },
+    {
+      "kind": "missing",
+      "text": "Remove Amazon Parrot, Adult Male from cart",
+      "mockup": "button at 979,383"
+    },
+    {
+      "kind": "style",
+      "text": "Update cart",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Update cart",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgba(0, 0, 0, 0.26)"
+    },
+    {
+      "kind": "style",
+      "text": "A quantity that isn't a whole number counts as 0.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "A quantity that isn't a whole number counts as 0.",
+      "prop": "box",
+      "mockup": "294x15",
+      "built": "294x20"
+    },
+    {
+      "kind": "style",
+      "text": "Empty cart",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Empty cart",
+      "prop": "box",
+      "mockup": "132x36",
+      "built": "110x37"
+    },
+    {
+      "kind": "style",
+      "text": "Empty cart",
+      "prop": "position",
+      "mockup": "879,440",
+      "built": "901,444"
+    },
+    {
+      "kind": "style",
+      "text": "Continue shopping",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Summary",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Summary",
+      "prop": "box",
+      "mockup": "286x20",
+      "built": "286x36"
+    },
+    {
+      "kind": "style",
+      "text": "Summary",
+      "prop": "position",
+      "mockup": "1065,179",
+      "built": "1065,188"
+    },
+    {
+      "kind": "style",
+      "text": "Items",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Items",
+      "prop": "position",
+      "mockup": "1065,219",
+      "built": "1065,243"
+    },
+    {
+      "kind": "style",
+      "text": "Subtotal",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Subtotal",
+      "prop": "position",
+      "mockup": "1065,265",
+      "built": "1065,293"
+    },
+    {
+      "kind": "missing",
+      "text": "$303.50",
+      "mockup": "span at 1267,261"
+    },
+    {
+      "kind": "style",
+      "text": "You'll sign on before checkout. Your cart is kept for this visit — it ends after 15 minutes of inactivity.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "You'll sign on before checkout. Your cart is kept for this visit — it ends after 15 minutes of inactivity.",
+      "prop": "position",
+      "mockup": "1087,295",
+      "built": "1087,325"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "box",
+      "mockup": "99x15",
+      "built": "900x15"
+    },
+    {
+      "kind": "extra",
+      "text": "日本語",
+      "built": "button at 1098,15"
+    },
+    {
+      "kind": "extra",
+      "text": "中文",
+      "built": "button at 1152,15"
+    },
+    {
+      "kind": "extra",
+      "text": "Iguana",
+      "built": "a at 277,384"
+    },
+    {
+      "kind": "extra",
+      "text": "Green · EST-18",
+      "built": "div at 277,402"
+    },
+    {
+      "kind": "extra",
+      "text": "RP-LI-02",
+      "built": "a at 443,395"
+    },
+    {
+      "kind": "extra",
+      "text": "Reptiles",
+      "built": "td at 536,377"
+    },
+    {
+      "kind": "extra",
+      "text": "$9.50",
+      "built": "td at 768,377"
+    },
+    {
+      "kind": "extra",
+      "text": "Remove Iguana, Green from cart",
+      "built": "button at 985,391"
+    },
+    {
+      "kind": "extra",
+      "text": "$119.50",
+      "built": "p at 1281,289"
+    },
+    {
+      "kind": "extra",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "built": "span at 1180,869"
+    }
+  ]
+}
