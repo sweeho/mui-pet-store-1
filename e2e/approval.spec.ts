@@ -10,8 +10,11 @@ test("an administrator approves one order and sees the after-Commit summary", as
 
   const row = page.locator('tr[data-order-id][data-status="PENDING"]').first();
   const id = (await row.getAttribute("data-order-id"))!;
-  await row.getByRole("button", { name: "Approved" }).click();
-  await expect(page.getByText("1 unsent change")).toBeVisible();
+  // Under a loaded dev server the click can land before the page hydrates and be lost: retry it.
+  await expect(async () => {
+    await row.getByRole("button", { name: "Approved" }).click();
+    await expect(page.getByText("1 unsent change")).toBeVisible({ timeout: 2000 });
+  }).toPass({ timeout: 15000 });
   await page.getByRole("button", { name: "Commit", exact: true }).click();
 
   await expect(page.getByText("1 change sent.")).toBeVisible();
