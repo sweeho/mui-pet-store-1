@@ -59,6 +59,11 @@ A page never draws its own empty, error or loading state.
   reveal account data.
 - Forms and outcome cards are a single column inside the page's content width, as each
   approved mockup draws them.
+- **Held changes and Commit.** An administrator screen that changes many records at once holds
+  each choice on the page until an explicit **Commit**. A changed row is marked and the change
+  count is shown next to Commit, outside the button's name. Discard changes resets them. Rows
+  that cannot change show their value as text, with no control. After Commit, a summary names
+  what was sent. Only changed rows are sent.
 
 ## Components
 
