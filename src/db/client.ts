@@ -1,5 +1,8 @@
 import { createClient } from "@libsql/client";
+import { sql } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/libsql";
+
+import { populateCatalog } from "@/catalog/populate";
 
 import { databaseUrl, prepareDatabase } from "./prepare";
 import * as schema from "./schema";
@@ -55,6 +58,11 @@ async function open(): Promise<Db> {
   if (!process.env.APP_DATABASE_READY) {
     await prepareDatabase(url);
     process.env.APP_DATABASE_READY = "1";
+    // A new file also gets the sample catalog, so the storefront has items to show and to add to
+    // the cart (the test run's own database is left as it is).
+    const db = connect(url);
+    if ((await db.all(sql`SELECT 1 FROM item LIMIT 1`)).length === 0) await populateCatalog(db);
+    return db;
   }
   return connect(url);
 }

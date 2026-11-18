@@ -21,9 +21,11 @@ const scrollbarStyles = {
 export function Sidebar({
   isMobileSidebarOpen,
   onSidebarClose,
+  cartCount = 0,
 }: {
   isMobileSidebarOpen: boolean;
   onSidebarClose: () => void;
+  cartCount?: number;
 }) {
   // Both are rendered by breakpoint in CSS, so the navigation is in the server's HTML.
   return (
@@ -37,7 +39,7 @@ export function Sidebar({
             paper: { sx: { boxSizing: "border-box", width: SIDEBAR_WIDTH, ...scrollbarStyles } },
           }}
         >
-          <SidebarItems />
+          <SidebarItems cartCount={cartCount} />
         </Drawer>
       </Box>
       <Drawer
@@ -56,7 +58,7 @@ export function Sidebar({
           },
         }}
       >
-        <SidebarItems />
+        <SidebarItems cartCount={cartCount} />
       </Drawer>
     </>
   );
