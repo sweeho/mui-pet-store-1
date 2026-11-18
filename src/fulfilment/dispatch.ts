@@ -1,5 +1,7 @@
 import { sql } from "drizzle-orm";
 
+import { notifyOrders } from "@/notifications/runtime";
+
 import { xmlText } from "./documents";
 import type { FulfilEnv } from "./env";
 import { receiveSupplierOrder } from "./fulfilment";
@@ -36,10 +38,13 @@ export async function dispatchFulfilment(env: FulfilEnv, origin = "auto"): Promi
       // Dropped: see above.
     }
   }
-  for (const xml of env.invoiceQueue?.splice(0) ?? []) {
+  const invoices = env.invoiceQueue?.splice(0) ?? [];
+  for (const xml of invoices) {
     await record(env, origin, QUEUES.invoice, xmlText(xml, "OrderId") ?? "", xml);
   }
-  for (const orderId of env.completedOrderQueue.splice(0)) {
+  const completed = env.completedOrderQueue.splice(0);
+  for (const orderId of completed) {
     await record(env, origin, QUEUES.completed, orderId, orderId);
   }
+  await notifyOrders(env.db, { invoices, completed }); // best-effort: never throws
 }
