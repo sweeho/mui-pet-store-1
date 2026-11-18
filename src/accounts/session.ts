@@ -27,7 +27,7 @@ export function createCart({ language }: { language: string }): Cart {
 
 /** A same-site path to go to after sign-on; anything else goes home. */
 export function safeReturnTo(returnTo: string | null | undefined): string {
-  return returnTo && returnTo.startsWith("/") && !returnTo.startsWith("//") ? returnTo : "/";
+  return returnTo && /^\/(?![/\\])/.test(returnTo) ? returnTo : "/";
 }
 
 const cookieHeader = (value: string, maxAge: number) =>
