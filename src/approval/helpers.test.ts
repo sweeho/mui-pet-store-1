@@ -81,3 +81,9 @@ export function approvalXml(entries: [number, "APPROVED" | "DENIED"][]): string 
     .join("");
   return `<OrderApproval>${orders}</OrderApproval>`;
 }
+
+test("approvalXml writes one Order entry per decision", () => {
+  expect(approvalXml([[1, "APPROVED"]])).toBe(
+    "<OrderApproval><Order><OrderId>1</OrderId><OrderStatus>APPROVED</OrderStatus></Order></OrderApproval>",
+  );
+});

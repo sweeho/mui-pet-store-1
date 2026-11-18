@@ -1,7 +1,7 @@
 /** @jest-environment node */
 import { processApprovalMessage } from "./handler";
 import { getOrderStatus } from "./orders";
-import { approvalXml, makeEnv, seedOrder, type TestEnv } from "./helpers.test-util";
+import { approvalXml, makeEnv, seedOrder, type TestEnv } from "./helpers.test";
 
 let t: TestEnv;
 beforeEach(async () => {

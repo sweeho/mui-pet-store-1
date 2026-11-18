@@ -1,6 +1,6 @@
 /** @jest-environment node */
 import { ORDER_STATUSES, getOrderStatus, recordOrderStatus } from "./orders";
-import { makeEnv, type TestEnv } from "./helpers.test-util";
+import { makeEnv, type TestEnv } from "./helpers.test";
 
 let t: TestEnv;
 beforeEach(async () => {

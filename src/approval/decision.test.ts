@@ -1,6 +1,6 @@
 /** @jest-environment node */
 import { forwardDecision } from "./decision";
-import { makeEnv, type TestEnv } from "./helpers.test-util";
+import { makeEnv, type TestEnv } from "./helpers.test";
 
 let t: TestEnv;
 beforeEach(async () => {
