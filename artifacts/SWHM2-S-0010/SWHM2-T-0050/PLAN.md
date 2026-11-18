@@ -37,7 +37,15 @@ This covers every task in `tasks.md`, groups 1 to 5, in order.
    plus the project spec `e2e/admin.spec.ts`. No CI change.
 
 **Locked cases C-0240 and C-0243.** These fail in the harness's own setup: it inserts catalog
-columns that do not exist (SD2). Planning has filed the `target: "test"` amendment for both.
+columns that do not exist (SD2). As your first action, file one `target: "test"` dispute on
+SWHM2-C-0243 with `case_keys` [C-0240, C-0243], `path`
+`tests/acceptance/admin-order-management/harness.ts` and `line` 81. Ask for this amendment:
+- `insertItem` seeds `category(catid)`, `product(productid, catid)`, `item(itemid, productid)`
+  and `item_details(itemid, 'en_US', list_price, unit_cost, image, descn)`.
+- `resetData` also clears `item_details` before `item`.
+- The expectations stay unchanged.
+
+Planning could not file it, because a dispute must come from the ticket that owns the cases.
 Code `reports.ts` to the real schema, cover it with your own `reports.test.ts`, and do not edit
 the locked files or add schema to fit them.
 
