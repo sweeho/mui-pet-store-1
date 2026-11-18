@@ -89,6 +89,10 @@ site. Forms post to route handlers, which set cookies and answer with redirects.
 
 Admin pages (`/admin/**` other than `/admin/login` and `/admin/login/error`) call
 `requireAdmin()` from `src/admin/session.ts`, which redirects to `/admin/login` on the server.
+`src/proxy.ts` also answers `/admin`, `/admin/orders` and `/admin/reports` with a 307 to
+`/admin/login` when the `admin_session` cookie is absent, before the page streams: a redirect
+from a streamed page made Chromium abort the navigation. It checks only that the cookie exists;
+the page's `requireAdmin()` still checks the session row, so protection stays on the page.
 Admin API routes answer 401 without an admin session. A sign-in lands on the admin home `/admin`
 (a failure on `/admin/login/error`), and logout deletes the `admin_session` row, so the next
 request asks for sign-in again. An admin session has no idle timeout of its own. A protected page may have a navigation entry only because the
