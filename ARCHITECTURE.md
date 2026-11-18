@@ -87,9 +87,11 @@ ended on its next request. A page that needs a customer calls `requireSignOn(pat
 `/signon?returnTo=<path>`. After sign-on the visitor returns to that path, which must be on this
 site. Forms post to route handlers, which set cookies and answer with redirects.
 
-Admin pages (`/admin/**` other than `/admin/login`) call `requireAdmin()` from
-`src/admin/session.ts`, which redirects to `/admin/login` on the server. Admin API routes answer
-401 without an admin session. A protected page may have a navigation entry only because the
+Admin pages (`/admin/**` other than `/admin/login` and `/admin/login/error`) call
+`requireAdmin()` from `src/admin/session.ts`, which redirects to `/admin/login` on the server.
+Admin API routes answer 401 without an admin session. A sign-in lands on the admin home `/admin`
+(a failure on `/admin/login/error`), and logout deletes the `admin_session` row, so the next
+request asks for sign-in again. An admin session has no idle timeout of its own. A protected page may have a navigation entry only because the
 redirect happens on the server: the shell's locked navigation check visits every entry and must
 land on a page inside the shell (`/admin/inventory` lands on `/admin/login`).
 
@@ -111,6 +113,14 @@ land on a page inside the shell (`/admin/inventory` lands on `/admin/login`).
   `NOTIFY_COMPLETED`) and the sender (`MAIL_FROM`) are deployment settings, all off by default.
   No mail server is configured yet, so a send is logged and dropped. The approval and fulfilment
   dispatchers notify after they write the outbox, so a mail failure never reaches an order.
+- **Admin rich-client protocol**: `POST /api/admin/appl` takes a flat XML `<Request>` whose
+  `<Type>` is GETORDERS, UPDATESTATUS, REVENUE or ORDERS and answers XML, reusing the admin
+  libraries in `src/admin/` that the web screens call. Without an admin session it answers with
+  the "Session Timed Out" message and does nothing. `POST /api/admin/process` with
+  `currentScreen=manageorders` returns a Java Web Start descriptor naming this server, its port
+  and the session id. No desktop client ships with this repository; whether one is kept is open
+  for the Business Owner. Behaviour: `openspec/specs/admin-order-management/` once change
+  `swhm2-i-0009-administration-of-orders` is archived.
 - **Supplier endpoint**: `POST /api/supplier/purchase-orders` accepts a SupplierOrder XML document
   and `GET /api/supplier/purchase-orders/{id}` reports its status. Neither requires a sign-in, as
   the spec of record states; whether that stays is open for the Business Owner.
@@ -147,7 +157,10 @@ does.
   `swhm2-i-0002-catalog-browsing-and-search` (design.md, P1, P9). Localisation reads these
   tables directly (an item's name is its product's `product_details.name`); no `item_detail`
   table or view exists, and the locked i18n test is amended to match. Authored in change
-  `swhm2-s-0009-bugfix-improvement-swhm2-t` (design.md, D3).
+  `swhm2-s-0009-bugfix-improvement-swhm2-t` (design.md, D3). The same rule covers every locked
+  harness that writes legacy catalog columns (`category_id`, `item.list_price`): the code reads
+  the real catalog (prices from `item_details`) and the harness is amended, never mirrored in the
+  schema. Authored in change `swhm2-i-0009-administration-of-orders` (design.md, P6, SD2).
 - **Sessions live in the database; protection lives on the page.** The browser holds only a random
   session id; idle timeout, language and sign-on state are in `web_session`, and each protected
   page calls `requireSignOn` rather than a URL list in a proxy. Rationale: server components can
