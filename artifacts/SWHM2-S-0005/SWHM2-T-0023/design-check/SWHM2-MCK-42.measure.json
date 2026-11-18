@@ -1,0 +1,1467 @@
+{
+  "key": "SWHM2-MCK-42",
+  "mockup": "artifacts/SWHM2-S-0005/design/mockup-checkout-shipping-and-contact-mobile.html",
+  "url": "http://localhost:3000/checkout",
+  "width": 390,
+  "at": "2026-11-18T03:14:05.546Z",
+  "pixelDifference": 0.1608,
+  "pageHeights": {
+    "mockup": 1487,
+    "built": 1572
+  },
+  "fonts": {
+    "mockup": {
+      "Inter": "loaded",
+      "JetBrains Mono": "loaded"
+    },
+    "built": {
+      "Arial": "loaded",
+      "Inter Variable": "loaded",
+      "monospace": "loaded"
+    },
+    "builtNotLoaded": []
+  },
+  "differences": [
+    {
+      "kind": "missing",
+      "text": "Pet Store",
+      "mockup": "a at -280,0"
+    },
+    {
+      "kind": "missing",
+      "text": "Close menu",
+      "mockup": "button at -44,10"
+    },
+    {
+      "kind": "missing",
+      "text": "Shop",
+      "mockup": "div at -268,72"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "34x15"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "position",
+      "mockup": "-268,107",
+      "built": "16,80"
+    },
+    {
+      "kind": "missing",
+      "text": "Catalog",
+      "mockup": "a at -268,157"
+    },
+    {
+      "kind": "missing",
+      "text": "Search",
+      "mockup": "a at -268,207"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart 6",
+      "mockup": "a at -268,257"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "color",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "background",
+      "mockup": "rgb(79, 70, 229)",
+      "built": "rgb(255, 255, 255)"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "position",
+      "mockup": "-226,273",
+      "built": "70,80"
+    },
+    {
+      "kind": "missing",
+      "text": "6",
+      "mockup": "span at -31,273"
+    },
+    {
+      "kind": "missing",
+      "text": "Account",
+      "mockup": "div at -268,307"
+    },
+    {
+      "kind": "missing",
+      "text": "My account",
+      "mockup": "a at -268,342"
+    },
+    {
+      "kind": "missing",
+      "text": "Operations",
+      "mockup": "div at -268,392"
+    },
+    {
+      "kind": "missing",
+      "text": "Inventory",
+      "mockup": "a at -268,427"
+    },
+    {
+      "kind": "missing",
+      "text": "Admin",
+      "mockup": "div at -268,477"
+    },
+    {
+      "kind": "missing",
+      "text": "Orders",
+      "mockup": "a at -268,512"
+    },
+    {
+      "kind": "missing",
+      "text": "Sales reports",
+      "mockup": "a at -268,562"
+    },
+    {
+      "kind": "missing",
+      "text": "Signed on as j2ee Sign out",
+      "mockup": "div at -280,783"
+    },
+    {
+      "kind": "style",
+      "text": "j2ee",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "j2ee",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "j2ee",
+      "prop": "weight",
+      "mockup": "700",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "j2ee",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "j2ee",
+      "prop": "position",
+      "mockup": "-184,806",
+      "built": "266,133"
+    },
+    {
+      "kind": "missing",
+      "text": "Sign out",
+      "mockup": "a at -108,796"
+    },
+    {
+      "kind": "missing",
+      "text": "Open menu",
+      "mockup": "button at 4,6"
+    },
+    {
+      "kind": "missing",
+      "text": "Language: English",
+      "mockup": "button at 290,6"
+    },
+    {
+      "kind": "style",
+      "text": "Back to cart",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Back to cart",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Back to cart",
+      "prop": "weight",
+      "mockup": "400",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Back to cart",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Back to cart",
+      "prop": "radius",
+      "mockup": "0px",
+      "built": "4px"
+    },
+    {
+      "kind": "style",
+      "text": "Back to cart",
+      "prop": "box",
+      "mockup": "14x17",
+      "built": "118x37"
+    },
+    {
+      "kind": "style",
+      "text": "Back to cart",
+      "prop": "position",
+      "mockup": "16,72",
+      "built": "256,104"
+    },
+    {
+      "kind": "style",
+      "text": "/",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "/",
+      "prop": "position",
+      "mockup": "67,73",
+      "built": "58,81"
+    },
+    {
+      "kind": "style",
+      "text": "Checkout",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Checkout",
+      "prop": "position",
+      "mockup": "77,73",
+      "built": "115,81"
+    },
+    {
+      "kind": "missing",
+      "text": "Where should we send your pets?",
+      "mockup": "p at 16,127"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "position",
+      "mockup": "16,160",
+      "built": "16,197"
+    },
+    {
+      "kind": "style",
+      "text": "Shipping and contact",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Shipping and contact",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Shipping and contact",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Shipping and contact",
+      "prop": "box",
+      "mockup": "119x15",
+      "built": "148x17"
+    },
+    {
+      "kind": "style",
+      "text": "Shipping and contact",
+      "prop": "position",
+      "mockup": "46,165",
+      "built": "48,201"
+    },
+    {
+      "kind": "style",
+      "text": "2",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "2",
+      "prop": "position",
+      "mockup": "246,160",
+      "built": "261,197"
+    },
+    {
+      "kind": "style",
+      "text": "3",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "3",
+      "prop": "position",
+      "mockup": "350,160",
+      "built": "350,197"
+    },
+    {
+      "kind": "missing",
+      "text": "Order summary $112.00",
+      "mockup": "summary at 17,201"
+    },
+    {
+      "kind": "style",
+      "text": "$112.00",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "$112.00",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "$112.00",
+      "prop": "position",
+      "mockup": "277,216",
+      "built": "298,1328"
+    },
+    {
+      "kind": "style",
+      "text": "Contact",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Contact",
+      "prop": "box",
+      "mockup": "324x20",
+      "built": "324x36"
+    },
+    {
+      "kind": "style",
+      "text": "Contact",
+      "prop": "position",
+      "mockup": "33,283",
+      "built": "33,262"
+    },
+    {
+      "kind": "missing",
+      "text": "For order e-mails and delivery questions.",
+      "mockup": "p at 33,307"
+    },
+    {
+      "kind": "style",
+      "text": "Given name",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Given name",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Given name",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Given name",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Given name",
+      "prop": "box",
+      "mockup": "324x15",
+      "built": "58x15"
+    },
+    {
+      "kind": "style",
+      "text": "Given name",
+      "prop": "position",
+      "mockup": "33,340",
+      "built": "47,321"
+    },
+    {
+      "kind": "style",
+      "text": "Ana",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Ana",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Ana",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "Ana",
+      "prop": "box",
+      "mockup": "324x44",
+      "built": "324x37"
+    },
+    {
+      "kind": "style",
+      "text": "Ana",
+      "prop": "position",
+      "mockup": "33,359",
+      "built": "33,330"
+    },
+    {
+      "kind": "style",
+      "text": "Family name",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Family name",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Family name",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Family name",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Family name",
+      "prop": "box",
+      "mockup": "324x15",
+      "built": "62x15"
+    },
+    {
+      "kind": "style",
+      "text": "Family name",
+      "prop": "position",
+      "mockup": "33,415",
+      "built": "47,374"
+    },
+    {
+      "kind": "style",
+      "text": "Okafor",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Okafor",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Okafor",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "Okafor",
+      "prop": "box",
+      "mockup": "324x44",
+      "built": "324x37"
+    },
+    {
+      "kind": "style",
+      "text": "Okafor",
+      "prop": "position",
+      "mockup": "33,434",
+      "built": "33,383"
+    },
+    {
+      "kind": "style",
+      "text": "Email",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Email",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Email",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Email",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Email",
+      "prop": "box",
+      "mockup": "324x15",
+      "built": "26x15"
+    },
+    {
+      "kind": "style",
+      "text": "Email",
+      "prop": "position",
+      "mockup": "33,490",
+      "built": "47,428"
+    },
+    {
+      "kind": "style",
+      "text": "ana.okafor@example.com",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "ana.okafor@example.com",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "ana.okafor@example.com",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "ana.okafor@example.com",
+      "prop": "box",
+      "mockup": "324x44",
+      "built": "324x37"
+    },
+    {
+      "kind": "style",
+      "text": "ana.okafor@example.com",
+      "prop": "position",
+      "mockup": "33,509",
+      "built": "33,437"
+    },
+    {
+      "kind": "style",
+      "text": "Phone",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Phone",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Phone",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Phone",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Phone",
+      "prop": "box",
+      "mockup": "324x15",
+      "built": "31x15"
+    },
+    {
+      "kind": "style",
+      "text": "Phone",
+      "prop": "position",
+      "mockup": "33,565",
+      "built": "47,481"
+    },
+    {
+      "kind": "style",
+      "text": "+1 650 555 0142",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "+1 650 555 0142",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "+1 650 555 0142",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "+1 650 555 0142",
+      "prop": "box",
+      "mockup": "324x44",
+      "built": "324x37"
+    },
+    {
+      "kind": "style",
+      "text": "+1 650 555 0142",
+      "prop": "position",
+      "mockup": "33,584",
+      "built": "33,490"
+    },
+    {
+      "kind": "style",
+      "text": "Shipping address",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Shipping address",
+      "prop": "box",
+      "mockup": "324x20",
+      "built": "324x36"
+    },
+    {
+      "kind": "style",
+      "text": "Shipping address",
+      "prop": "position",
+      "mockup": "33,678",
+      "built": "33,577"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 1, city, state, zip code and country are required.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 1, city, state, zip code and country are required.",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 1, city, state, zip code and country are required.",
+      "prop": "box",
+      "mockup": "324x34",
+      "built": "324x40"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 1, city, state, zip code and country are required.",
+      "prop": "position",
+      "mockup": "33,702",
+      "built": "33,613"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 1",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 1",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 1",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 1",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 1",
+      "prop": "box",
+      "mockup": "324x15",
+      "built": "57x15"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 1",
+      "prop": "position",
+      "mockup": "33,752",
+      "built": "47,656"
+    },
+    {
+      "kind": "style",
+      "text": "1600 Amphitheatre Pkwy",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "1600 Amphitheatre Pkwy",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "1600 Amphitheatre Pkwy",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "1600 Amphitheatre Pkwy",
+      "prop": "box",
+      "mockup": "324x44",
+      "built": "324x37"
+    },
+    {
+      "kind": "style",
+      "text": "1600 Amphitheatre Pkwy",
+      "prop": "position",
+      "mockup": "33,771",
+      "built": "33,665"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 2 (optional)",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 2 (optional)",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 2 (optional)",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 2 (optional)",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 2 (optional)",
+      "prop": "box",
+      "mockup": "324x15",
+      "built": "109x15"
+    },
+    {
+      "kind": "style",
+      "text": "Street line 2 (optional)",
+      "prop": "position",
+      "mockup": "33,827",
+      "built": "47,709"
+    },
+    {
+      "kind": "missing",
+      "text": "(optional)",
+      "mockup": "span at 104,827"
+    },
+    {
+      "kind": "style",
+      "text": "Unit 4B",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Unit 4B",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Unit 4B",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "Unit 4B",
+      "prop": "box",
+      "mockup": "324x44",
+      "built": "324x37"
+    },
+    {
+      "kind": "style",
+      "text": "Unit 4B",
+      "prop": "position",
+      "mockup": "33,846",
+      "built": "33,718"
+    },
+    {
+      "kind": "style",
+      "text": "City",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "City",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "City",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "City",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "City",
+      "prop": "box",
+      "mockup": "324x15",
+      "built": "20x15"
+    },
+    {
+      "kind": "style",
+      "text": "City",
+      "prop": "position",
+      "mockup": "33,902",
+      "built": "47,762"
+    },
+    {
+      "kind": "missing",
+      "text": "City is required",
+      "mockup": "span at 33,969"
+    },
+    {
+      "kind": "style",
+      "text": "State",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "State",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "State",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "State",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "State",
+      "prop": "box",
+      "mockup": "324x15",
+      "built": "26x15"
+    },
+    {
+      "kind": "style",
+      "text": "State",
+      "prop": "position",
+      "mockup": "33,996",
+      "built": "47,815"
+    },
+    {
+      "kind": "style",
+      "text": "CA",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "CA",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "CA",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "CA",
+      "prop": "box",
+      "mockup": "324x44",
+      "built": "324x37"
+    },
+    {
+      "kind": "style",
+      "text": "CA",
+      "prop": "position",
+      "mockup": "33,1015",
+      "built": "33,824"
+    },
+    {
+      "kind": "style",
+      "text": "Zip code",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Zip code",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Zip code",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Zip code",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Zip code",
+      "prop": "box",
+      "mockup": "324x15",
+      "built": "44x15"
+    },
+    {
+      "kind": "style",
+      "text": "Zip code",
+      "prop": "position",
+      "mockup": "33,1071",
+      "built": "47,868"
+    },
+    {
+      "kind": "style",
+      "text": "94043",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "94043",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "94043",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "94043",
+      "prop": "box",
+      "mockup": "324x44",
+      "built": "324x37"
+    },
+    {
+      "kind": "style",
+      "text": "94043",
+      "prop": "position",
+      "mockup": "33,1090",
+      "built": "33,877"
+    },
+    {
+      "kind": "style",
+      "text": "Country",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Country",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Country",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Country",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(91, 96, 179)"
+    },
+    {
+      "kind": "style",
+      "text": "Country",
+      "prop": "box",
+      "mockup": "324x15",
+      "built": "39x15"
+    },
+    {
+      "kind": "style",
+      "text": "Country",
+      "prop": "position",
+      "mockup": "33,1146",
+      "built": "47,921"
+    },
+    {
+      "kind": "style",
+      "text": "USA",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "USA",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "USA",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "USA",
+      "prop": "box",
+      "mockup": "324x44",
+      "built": "324x37"
+    },
+    {
+      "kind": "style",
+      "text": "USA",
+      "prop": "position",
+      "mockup": "33,1165",
+      "built": "33,930"
+    },
+    {
+      "kind": "missing",
+      "text": "US orders under $500.00 are approved straight away; larger orders wait for an administrator.",
+      "mockup": "div at 65,1255"
+    },
+    {
+      "kind": "style",
+      "text": "$500.00",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "$500.00",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "$500.00",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "$500.00",
+      "prop": "position",
+      "mockup": "176,1255",
+      "built": "57,1442"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "box",
+      "mockup": "99x15",
+      "built": "90x30"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "position",
+      "mockup": "16,1433",
+      "built": "24,1530"
+    },
+    {
+      "kind": "missing",
+      "text": "Prices in US$",
+      "mockup": "span at 131,1433"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "box",
+      "mockup": "236x15",
+      "built": "236x30"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "position",
+      "mockup": "16,1456",
+      "built": "130,1530"
+    },
+    {
+      "kind": "missing",
+      "text": "Continue to billing",
+      "mockup": "button at 16,788"
+    },
+    {
+      "kind": "extra",
+      "text": "Open the menu",
+      "built": "button at 16,119"
+    },
+    {
+      "kind": "extra",
+      "text": "Sign off",
+      "built": "button at 307,126"
+    },
+    {
+      "kind": "extra",
+      "text": "Where should we send your pets, and how can we reach you?",
+      "built": "p at 16,140"
+    },
+    {
+      "kind": "extra",
+      "text": "Used for order e-mails and delivery questions.",
+      "built": "p at 33,298"
+    },
+    {
+      "kind": "extra",
+      "text": "Mountain View",
+      "built": "input at 33,771"
+    },
+    {
+      "kind": "extra",
+      "text": "Cancel",
+      "built": "a at 16,1000"
+    },
+    {
+      "kind": "extra",
+      "text": "Continue to billing and payment",
+      "built": "button at 109,1000"
+    },
+    {
+      "kind": "extra",
+      "text": "Order summary",
+      "built": "h3 at 33,1102"
+    },
+    {
+      "kind": "extra",
+      "text": "Edit cart",
+      "built": "a at 310,1102"
+    },
+    {
+      "kind": "extra",
+      "text": "Bulldog",
+      "built": "p at 33,1150"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-6 · Male Adult · Qty 2 × $18.50",
+      "built": "span at 33,1169"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-6",
+      "built": "span at 33,1171"
+    },
+    {
+      "kind": "extra",
+      "text": "$18.50",
+      "built": "span at 191,1171"
+    },
+    {
+      "kind": "extra",
+      "text": "$37.00",
+      "built": "p at 307,1150"
+    },
+    {
+      "kind": "extra",
+      "text": "Manx",
+      "built": "p at 33,1205"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-14 · Tailless · Qty 1 × $58.50",
+      "built": "span at 33,1224"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-14",
+      "built": "span at 33,1226"
+    },
+    {
+      "kind": "extra",
+      "text": "$58.50",
+      "built": "span at 180,1226"
+    },
+    {
+      "kind": "extra",
+      "text": "Goldfish",
+      "built": "p at 33,1260"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-20 · Adult · Qty 3 × $5.50",
+      "built": "span at 33,1279"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-20",
+      "built": "span at 33,1281"
+    },
+    {
+      "kind": "extra",
+      "text": "$5.50",
+      "built": "span at 167,1281"
+    },
+    {
+      "kind": "extra",
+      "text": "$16.50",
+      "built": "p at 307,1260"
+    },
+    {
+      "kind": "extra",
+      "text": "Subtotal · 6 items",
+      "built": "p at 33,1328"
+    },
+    {
+      "kind": "extra",
+      "text": "Order total",
+      "built": "p at 33,1353"
+    },
+    {
+      "kind": "extra",
+      "text": "$112.00 USD",
+      "built": "p at 238,1353"
+    },
+    {
+      "kind": "extra",
+      "text": "Your order total decides approval. US orders under $500.00 are approved straight away; larger orders wait for an administrator.",
+      "built": "p at 57,1425"
+    }
+  ]
+}
