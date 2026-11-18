@@ -41,6 +41,8 @@ test.describe("Shopping cart", () => {
     page,
   }) => {
     await addEst1(page);
+    // Disabled once the page is interactive: the Empty cart popover needs the script.
+    await expect(page.getByRole("button", { name: "Update cart" })).toBeDisabled();
     await page.getByRole("button", { name: "Empty cart" }).click();
     await page
       .getByRole("dialog", { name: "Empty cart" })
