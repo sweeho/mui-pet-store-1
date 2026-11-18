@@ -23,9 +23,12 @@ renders inside it:
   once, the current page filled in. Fixed on a large screen; on a small screen it folds behind a
   menu button in the header. Add an area by adding an entry to `MENU_ITEMS` in
   `src/shell/menu.ts`; the landing page's tiles are drawn from the same list.
-- **Header** (top): controls on the right only (language, and Sign on / Create account when
-  signed out). Header controls stay visible on a small screen.
-- **Footer** (bottom): the copyright line and nothing else.
+- **Header** (top): controls on the right only. Signed out: the language control, a
+  "Signed out" status, and Sign on / Create account. Signed on: the language control, the user
+  name, and Sign off. The layout reads the session on the server and hands it to the header as a
+  prop. Header controls stay visible on a small screen.
+- **Footer** (bottom): the copyright line and standing notices for the whole site (the session
+  timeout), nothing page-specific.
 
 ## Shared state frames
 
@@ -38,6 +41,18 @@ Every page shows "nothing here", "this failed" and "loading" the same way, using
 - **Loading**: shown while a page's data is on its way. A route's `loading.tsx` renders it.
 
 A page never draws its own empty, error or loading state.
+
+## Forms and outcome pages
+
+- A form is a plain HTML `POST` to a route handler that answers with a redirect, so it works
+  without client JavaScript. Every field has a visible label; a hint under it states the limits
+  (for example "Up to 25 characters. No % or \*.").
+- A failed submission lands on its own **outcome page** (for example `/signon/error`): a short
+  heading saying what did not happen, one sentence saying nothing was changed, a primary action
+  to try again and a secondary way out. It never shows which field was wrong when that would
+  reveal account data.
+- Forms and outcome cards are a single column inside the page's content width, as each
+  approved mockup draws them.
 
 ## Components
 
