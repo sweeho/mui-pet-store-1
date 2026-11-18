@@ -25,5 +25,5 @@ In a production configuration, an anonymous call to the populate endpoint is ref
 
 ## Definition of Done
 
-- AC-1 to AC-5 met; AC-1 to AC-4 are covered by the route test, and AC-5 by the catalog views test or a new assertion in it.
+- AC-1 to AC-4 met; AC-1 to AC-3 are covered by the route test, and AC-4 by an assertion in the catalog views test.
 - The locked catalog-browsing acceptance e2e passes unchanged.

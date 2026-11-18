@@ -143,7 +143,10 @@ does.
 - **Locale-keyed details tables.** Translatable catalog content goes in `*_details` rows keyed by
   `(id, locale)`, never in columns per language. Locale strings use the `en_US` form. Rationale:
   internationalisation and batch loads build on the same rows. Authored in change
-  `swhm2-i-0002-catalog-browsing-and-search` (design.md, P1, P9).
+  `swhm2-i-0002-catalog-browsing-and-search` (design.md, P1, P9). Localisation reads these
+  tables directly (an item's name is its product's `product_details.name`); no `item_detail`
+  table or view exists, and the locked i18n test is amended to match. Authored in change
+  `swhm2-s-0009-bugfix-improvement-swhm2-t` (design.md, D3).
 - **Sessions live in the database; protection lives on the page.** The browser holds only a random
   session id; idle timeout, language and sign-on state are in `web_session`, and each protected
   page calls `requireSignOn` rather than a URL list in a proxy. Rationale: server components can
