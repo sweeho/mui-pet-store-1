@@ -45,4 +45,6 @@ No spec file ran none of its tests; skipped count is 0.
 
 Re-run of that spec alone: pass (13.9s), pass (8.3s). Disagreement across runs means flaky; recorded and filed as future-sprint DEFECT SWHM2-T-0047 rather than re-run further.
 
+Second full run after the merge gate returned the ticket with a red CI run (`npm run test:e2e`, exit 0): `21 passed (18.3s)`, 0 failed, 0 skipped. The suite now disagrees across full runs (1 failed, then 0 failed), which supports the flake finding for SWHM2-T-0047. The marker below stays on the first run, the one that recorded the failure.
+
 E2E-RESULT: chromium 20 passed, 1 failed, 0 skipped
