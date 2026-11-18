@@ -50,3 +50,8 @@ export async function requireAdmin(): Promise<void> {
   const id = (await cookies()).get(ADMIN_COOKIE)?.value;
   if (!(await isAdminSession(await getDb(), id))) redirect("/admin/login");
 }
+
+/** End an administrator session: its row is deleted. */
+export async function endAdminSession(_db: Exec, _id: string | undefined): Promise<void> {
+  throw new Error("VortexNotImplemented");
+}
