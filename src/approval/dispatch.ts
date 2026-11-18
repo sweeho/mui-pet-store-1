@@ -1,5 +1,7 @@
 import { sql } from "drizzle-orm";
 
+import { notifyOrders } from "@/notifications/runtime";
+
 import { dispatchFulfilment } from "@/fulfilment/dispatch";
 import { newFulfilEnv, type Db } from "@/fulfilment/env";
 
@@ -42,7 +44,9 @@ export async function dispatchApprovals(env: ApprovalEnv): Promise<void> {
     fulfil.supplierQueue.push(...supplier);
     await dispatchFulfilment(fulfil, env.origin ?? "auto");
   }
-  for (const orderId of env.notifyList.splice(0)) {
+  const notified = env.notifyList.splice(0);
+  for (const orderId of notified) {
     await record(env, QUEUES.notification, orderId, orderId);
   }
+  await notifyOrders(env.db, { statuses: notified }); // best-effort: never throws
 }
