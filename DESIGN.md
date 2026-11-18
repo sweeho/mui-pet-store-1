@@ -7,6 +7,10 @@ There is one MUI theme, `src/theme/theme.ts`. Its palette, typography and shape 
 tokens; a design system replaces that file. Components never carry their own colours: they use the
 theme through MUI props (`color="primary"`, `sx={{ color: "text.secondary" }}`).
 
+The tokens follow the approved mockups: an indigo primary, slate text, and the Inter typeface at a
+4px corner radius. A typeface named in the tokens must also be loaded: Inter comes from the pinned
+`@fontsource-variable/inter` package, imported once in `src/app/layout.tsx`.
+
 ## Layout grid
 
 - Global navigation: 240px wide.
