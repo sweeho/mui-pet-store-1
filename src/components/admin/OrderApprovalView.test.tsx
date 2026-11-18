@@ -82,3 +82,44 @@ test("[SWHM2-C-0029] choosing Denied sends nothing before Commit", () => {
   fireEvent.click(screen.getByRole("button", { name: /discard changes/i }));
   expect(screen.getByRole("button", { name: /^commit$/i })).toBeDisabled();
 });
+
+const refreshButton = () => {
+  const b = screen.queryByRole("button", { name: /^refresh$/i });
+  expect(b).not.toBeNull();
+  return b as HTMLElement;
+};
+
+describe("Refresh", () => {
+  const confirmMock = jest.fn();
+  beforeEach(() => {
+    confirmMock.mockReset();
+    window.confirm = confirmMock;
+  });
+
+  test("[SWHM2-C-0232] with no held changes Refresh reloads without asking", () => {
+    render(<OrderApprovalView orders={orders} />);
+    fireEvent.click(refreshButton());
+    expect(confirmMock).not.toHaveBeenCalled();
+    expect(refresh).toHaveBeenCalledTimes(1);
+  });
+
+  test("[SWHM2-C-0232] with held changes Refresh warns, and Cancel keeps them", () => {
+    confirmMock.mockReturnValue(false);
+    render(<OrderApprovalView orders={orders} />);
+    fireEvent.click(within(row("1001")).getByRole("button", { name: /^approved$/i }));
+    fireEvent.click(refreshButton());
+    expect(confirmMock).toHaveBeenCalledTimes(1);
+    expect(confirmMock.mock.calls[0][0]).toMatch(/uncommitted|discard/i);
+    expect(refresh).not.toHaveBeenCalled();
+    expect(screen.getByText("1 unsent change")).toBeInTheDocument();
+  });
+
+  test("[SWHM2-C-0232] OK discards the held changes and refreshes", () => {
+    confirmMock.mockReturnValue(true);
+    render(<OrderApprovalView orders={orders} />);
+    fireEvent.click(within(row("1001")).getByRole("button", { name: /^approved$/i }));
+    fireEvent.click(refreshButton());
+    expect(refresh).toHaveBeenCalledTimes(1);
+    expect(screen.getByText("No unsent changes")).toBeInTheDocument();
+  });
+});

@@ -1,0 +1,748 @@
+{
+  "key": "SWHM2-MCK-60",
+  "mockup": "artifacts/SWHM2-S-0010/design/mockup-sales-reports-mobile.html",
+  "url": "http://localhost:3300/admin/reports?start=10/01/2026&end=10/31/2026&type=REVENUE",
+  "width": 390,
+  "at": "2026-11-18T13:08:27.501Z",
+  "pixelDifference": 0.1959,
+  "pageHeights": {
+    "mockup": 1415,
+    "built": 900
+  },
+  "fonts": {
+    "mockup": {
+      "Inter": "loaded",
+      "JetBrains Mono": "loaded"
+    },
+    "built": {
+      "Arial": "loaded",
+      "Inter Variable": "loaded",
+      "JetBrains Mono Variable": "loaded"
+    },
+    "builtNotLoaded": []
+  },
+  "differences": [
+    {
+      "kind": "missing",
+      "text": "Pet Store",
+      "mockup": "a at -280,0"
+    },
+    {
+      "kind": "missing",
+      "text": "Shop",
+      "mockup": "div at -268,72"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "34x15"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "position",
+      "mockup": "-268,107",
+      "built": "16,81"
+    },
+    {
+      "kind": "missing",
+      "text": "Catalog",
+      "mockup": "a at -268,157"
+    },
+    {
+      "kind": "missing",
+      "text": "Search",
+      "mockup": "a at -268,207"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart 0",
+      "mockup": "a at -268,257"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart",
+      "mockup": "span at -226,273"
+    },
+    {
+      "kind": "missing",
+      "text": "0",
+      "mockup": "span at -31,273"
+    },
+    {
+      "kind": "missing",
+      "text": "Account",
+      "mockup": "div at -268,307"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(255, 255, 255)"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "background",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgb(79, 70, 229)"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "88x31"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "position",
+      "mockup": "-268,342",
+      "built": "286,13"
+    },
+    {
+      "kind": "missing",
+      "text": "Operations",
+      "mockup": "div at -268,392"
+    },
+    {
+      "kind": "missing",
+      "text": "Inventory",
+      "mockup": "a at -268,427"
+    },
+    {
+      "kind": "missing",
+      "text": "Admin",
+      "mockup": "div at -268,477"
+    },
+    {
+      "kind": "missing",
+      "text": "Orders",
+      "mockup": "a at -268,512"
+    },
+    {
+      "kind": "style",
+      "text": "Sales reports",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "24px"
+    },
+    {
+      "kind": "style",
+      "text": "Sales reports",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Sales reports",
+      "prop": "color",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Sales reports",
+      "prop": "background",
+      "mockup": "rgb(79, 70, 229)",
+      "built": "rgb(255, 255, 255)"
+    },
+    {
+      "kind": "style",
+      "text": "Sales reports",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "Sales reports",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "358x32"
+    },
+    {
+      "kind": "style",
+      "text": "Sales reports",
+      "prop": "position",
+      "mockup": "-268,562",
+      "built": "16,104"
+    },
+    {
+      "kind": "missing",
+      "text": "Signed in as jps_admin · Log out",
+      "mockup": "div at -280,859"
+    },
+    {
+      "kind": "missing",
+      "text": "jps_admin",
+      "mockup": "b at -193,872"
+    },
+    {
+      "kind": "missing",
+      "text": "Log out",
+      "mockup": "a at -121,872"
+    },
+    {
+      "kind": "missing",
+      "text": "Open navigation",
+      "mockup": "button at 4,6"
+    },
+    {
+      "kind": "missing",
+      "text": "English",
+      "mockup": "button at 261,10"
+    },
+    {
+      "kind": "style",
+      "text": "/",
+      "prop": "position",
+      "mockup": "56,72",
+      "built": "58,81"
+    },
+    {
+      "kind": "style",
+      "text": "Revenue or quantity sold between two dates, by category or by item.",
+      "prop": "position",
+      "mockup": "16,125",
+      "built": "16,140"
+    },
+    {
+      "kind": "style",
+      "text": "Start date",
+      "prop": "position",
+      "mockup": "33,192",
+      "built": "33,215"
+    },
+    {
+      "kind": "style",
+      "text": "10/01/2026",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "JetBrains Mono Variable"
+    },
+    {
+      "kind": "style",
+      "text": "10/01/2026",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "10/01/2026",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "10/01/2026",
+      "prop": "box",
+      "mockup": "324x44",
+      "built": "324x37"
+    },
+    {
+      "kind": "style",
+      "text": "10/01/2026",
+      "prop": "position",
+      "mockup": "33,213",
+      "built": "33,235"
+    },
+    {
+      "kind": "style",
+      "text": "MM/dd/yyyy",
+      "prop": "position",
+      "mockup": "33,263",
+      "built": "33,277"
+    },
+    {
+      "kind": "style",
+      "text": "End date",
+      "prop": "position",
+      "mockup": "33,294",
+      "built": "33,307"
+    },
+    {
+      "kind": "missing",
+      "text": "2026-10-31",
+      "mockup": "input at 33,315"
+    },
+    {
+      "kind": "missing",
+      "text": "Enter the date as MM/dd/yyyy, for example 10/31/2026.",
+      "mockup": "div at 33,365"
+    },
+    {
+      "kind": "style",
+      "text": "Report",
+      "prop": "box",
+      "mockup": "324x15",
+      "built": "160x15"
+    },
+    {
+      "kind": "style",
+      "text": "Report",
+      "prop": "position",
+      "mockup": "33,411",
+      "built": "33,399"
+    },
+    {
+      "kind": "style",
+      "text": "Revenue",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Revenue",
+      "prop": "color",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Revenue",
+      "prop": "background",
+      "mockup": "rgb(79, 70, 229)",
+      "built": "rgba(15, 23, 42, 0.08)"
+    },
+    {
+      "kind": "style",
+      "text": "Revenue",
+      "prop": "radius",
+      "mockup": "0px",
+      "built": "4px 0px 0px 4px"
+    },
+    {
+      "kind": "style",
+      "text": "Revenue",
+      "prop": "box",
+      "mockup": "162x42",
+      "built": "72x39"
+    },
+    {
+      "kind": "style",
+      "text": "Revenue",
+      "prop": "position",
+      "mockup": "34,433",
+      "built": "33,420"
+    },
+    {
+      "kind": "style",
+      "text": "Quantity",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Quantity",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgba(0, 0, 0, 0.54)"
+    },
+    {
+      "kind": "style",
+      "text": "Quantity",
+      "prop": "box",
+      "mockup": "161x42",
+      "built": "70x39"
+    },
+    {
+      "kind": "style",
+      "text": "Quantity",
+      "prop": "position",
+      "mockup": "196,433",
+      "built": "104,420"
+    },
+    {
+      "kind": "style",
+      "text": "Category",
+      "prop": "box",
+      "mockup": "324x15",
+      "built": "180x15"
+    },
+    {
+      "kind": "style",
+      "text": "Category",
+      "prop": "position",
+      "mockup": "33,492",
+      "built": "33,474"
+    },
+    {
+      "kind": "style",
+      "text": "All categories Birds Cats Dogs Fish Reptiles",
+      "prop": "text",
+      "mockup": "All categories Birds Cats Dogs Fish Reptiles",
+      "built": "All categories BIRDS CATS DOGS FISH REPTILES"
+    },
+    {
+      "kind": "style",
+      "text": "All categories Birds Cats Dogs Fish Reptiles",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "All categories Birds Cats Dogs Fish Reptiles",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(0, 0, 0)"
+    },
+    {
+      "kind": "style",
+      "text": "All categories Birds Cats Dogs Fish Reptiles",
+      "prop": "box",
+      "mockup": "324x44",
+      "built": "180x40"
+    },
+    {
+      "kind": "style",
+      "text": "All categories Birds Cats Dogs Fish Reptiles",
+      "prop": "position",
+      "mockup": "33,513",
+      "built": "33,495"
+    },
+    {
+      "kind": "style",
+      "text": "Pick one to see its items",
+      "prop": "box",
+      "mockup": "324x15",
+      "built": "180x15"
+    },
+    {
+      "kind": "style",
+      "text": "Pick one to see its items",
+      "prop": "position",
+      "mockup": "33,563",
+      "built": "33,539"
+    },
+    {
+      "kind": "style",
+      "text": "Run report",
+      "prop": "box",
+      "mockup": "324x44",
+      "built": "106x37"
+    },
+    {
+      "kind": "style",
+      "text": "Run report",
+      "prop": "position",
+      "mockup": "33,594",
+      "built": "229,502"
+    },
+    {
+      "kind": "style",
+      "text": "Revenue by category",
+      "prop": "box",
+      "mockup": "324x20",
+      "built": "237x36"
+    },
+    {
+      "kind": "style",
+      "text": "Revenue by category",
+      "prop": "position",
+      "mockup": "33,688",
+      "built": "33,611"
+    },
+    {
+      "kind": "missing",
+      "text": "10/01/2026 – 10/31/2026 · last successful run",
+      "mockup": "div at 33,710"
+    },
+    {
+      "kind": "style",
+      "text": "10/31/2026",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "10/31/2026",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "10/31/2026",
+      "prop": "box",
+      "mockup": "70x16",
+      "built": "324x37"
+    },
+    {
+      "kind": "style",
+      "text": "10/31/2026",
+      "prop": "position",
+      "mockup": "115,710",
+      "built": "33,328"
+    },
+    {
+      "kind": "style",
+      "text": "Bar",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Bar",
+      "prop": "color",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Bar",
+      "prop": "background",
+      "mockup": "rgb(79, 70, 229)",
+      "built": "rgba(15, 23, 42, 0.08)"
+    },
+    {
+      "kind": "style",
+      "text": "Bar",
+      "prop": "radius",
+      "mockup": "0px",
+      "built": "4px 0px 0px 4px"
+    },
+    {
+      "kind": "style",
+      "text": "Bar",
+      "prop": "box",
+      "mockup": "55x42",
+      "built": "37x39"
+    },
+    {
+      "kind": "style",
+      "text": "Bar",
+      "prop": "position",
+      "mockup": "34,739",
+      "built": "286,617"
+    },
+    {
+      "kind": "style",
+      "text": "Pie",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Pie",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgba(0, 0, 0, 0.54)"
+    },
+    {
+      "kind": "style",
+      "text": "Pie",
+      "prop": "box",
+      "mockup": "53x42",
+      "built": "35x39"
+    },
+    {
+      "kind": "style",
+      "text": "Pie",
+      "prop": "position",
+      "mockup": "89,739",
+      "built": "322,617"
+    },
+    {
+      "kind": "missing",
+      "text": "Dogs",
+      "mockup": "div at 33,823"
+    },
+    {
+      "kind": "missing",
+      "text": "$48,210.40",
+      "mockup": "div at 265,823"
+    },
+    {
+      "kind": "missing",
+      "text": "Cats",
+      "mockup": "div at 33,863"
+    },
+    {
+      "kind": "missing",
+      "text": "$31,865.00",
+      "mockup": "div at 265,863"
+    },
+    {
+      "kind": "missing",
+      "text": "Fish",
+      "mockup": "div at 33,903"
+    },
+    {
+      "kind": "missing",
+      "text": "$12,940.75",
+      "mockup": "div at 265,903"
+    },
+    {
+      "kind": "missing",
+      "text": "Birds",
+      "mockup": "div at 33,943"
+    },
+    {
+      "kind": "missing",
+      "text": "$9,320.50",
+      "mockup": "div at 265,943"
+    },
+    {
+      "kind": "missing",
+      "text": "Reptiles",
+      "mockup": "div at 33,983"
+    },
+    {
+      "kind": "missing",
+      "text": "$6,105.25",
+      "mockup": "div at 265,983"
+    },
+    {
+      "kind": "missing",
+      "text": "Share",
+      "mockup": "th at 288,1023"
+    },
+    {
+      "kind": "missing",
+      "text": "44.5%",
+      "mockup": "td at 288,1063"
+    },
+    {
+      "kind": "missing",
+      "text": "29.4%",
+      "mockup": "td at 288,1107"
+    },
+    {
+      "kind": "missing",
+      "text": "11.9%",
+      "mockup": "td at 288,1151"
+    },
+    {
+      "kind": "missing",
+      "text": "8.6%",
+      "mockup": "td at 288,1195"
+    },
+    {
+      "kind": "missing",
+      "text": "5.6%",
+      "mockup": "td at 288,1239"
+    },
+    {
+      "kind": "missing",
+      "text": "Grand total",
+      "mockup": "b at 33,1297"
+    },
+    {
+      "kind": "missing",
+      "text": "$108,441.90",
+      "mockup": "b at 184,1296"
+    },
+    {
+      "kind": "missing",
+      "text": "100%",
+      "mockup": "td at 288,1283"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "box",
+      "mockup": "99x15",
+      "built": "90x30"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "position",
+      "mockup": "16,1361",
+      "built": "24,854"
+    },
+    {
+      "kind": "missing",
+      "text": "Prices in US$",
+      "mockup": "span at 297,1361"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "box",
+      "mockup": "236x15",
+      "built": "236x30"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "position",
+      "mockup": "16,1384",
+      "built": "130,854"
+    },
+    {
+      "kind": "extra",
+      "text": "Open the menu",
+      "built": "button at 16,6"
+    },
+    {
+      "kind": "extra",
+      "text": "Administration of orders",
+      "built": "a at 70,81"
+    },
+    {
+      "kind": "extra",
+      "text": "Reports",
+      "built": "p at 226,81"
+    },
+    {
+      "kind": "extra",
+      "text": "10/01/2026 – 10/31/2026",
+      "built": "p at 33,647"
+    },
+    {
+      "kind": "extra",
+      "text": "No sales in this period.",
+      "built": "p at 33,678"
+    }
+  ]
+}

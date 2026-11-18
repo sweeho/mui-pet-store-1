@@ -6,7 +6,8 @@ test("an administrator approves one order and sees the after-Commit summary", as
   await page.getByLabel(/^user id$/i).fill("j2ee");
   await page.getByLabel(/^password$/i).fill("j2ee");
   await page.getByRole("button", { name: "Sign in" }).click();
-  await expect(page).toHaveURL(/\/admin\/orders$/);
+  await expect(page).toHaveURL(/\/admin$/);
+  await page.goto("/admin/orders");
 
   const row = page.locator('tr[data-order-id][data-status="PENDING"]').first();
   const id = (await row.getAttribute("data-order-id"))!;

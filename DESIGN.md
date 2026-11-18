@@ -72,7 +72,12 @@ A page never draws its own empty, error or loading state.
   each choice on the page until an explicit **Commit**. A changed row is marked and the change
   count is shown next to Commit, outside the button's name. Discard changes resets them. Rows
   that cannot change show their value as text, with no control. After Commit, a summary names
-  what was sent. Only changed rows are sent.
+  what was sent. Only changed rows are sent. **Refresh** with held changes asks first, through
+  the browser's own confirm, naming how many changes it would discard; cancelling keeps them.
+- **Report charts.** A report shows its figures as a bar or pie chart (a toggle, bar first) above
+  a table of the same rows with a grand total. Chart colours come from the theme palette in a
+  fixed order, and the table, not the chart, carries the exact values, so a chart is never the
+  only way to read a figure.
 
 ## Components
 

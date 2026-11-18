@@ -9,7 +9,7 @@ next-env.d.ts
 
 # Tests and reports
 coverage/
-reports/
+/reports/
 .stryker-tmp/
 playwright-report/
 test-results/
