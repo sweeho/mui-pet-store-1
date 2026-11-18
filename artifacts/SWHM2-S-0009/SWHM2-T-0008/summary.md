@@ -4,4 +4,4 @@
 - No repository code, table or view changed. Locked test untouched.
 - AC-1: dispute filed. AC-2: `grep -rniE "item_detail\b" src drizzle` finds nothing.
 - The i18n suite still fails until SWHM2-I-0010 builds src/i18n/.
-- CODE-REVIEW: self-review — no code in the diff; only artifacts.
+CODE-REVIEW: self-review — no code in the diff (artifacts only) so a sub-agent review has nothing to review; no findings.
