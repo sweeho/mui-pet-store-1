@@ -37,7 +37,7 @@ export function CategoryListView({
             message={
               pageNumber > 1
                 ? "There are no categories on this page."
-                : "No categories have been loaded yet. Load the sample data with POST /api/catalog/populate."
+                : "No categories have been loaded yet. An administrator can load the sample data."
             }
             action={
               pageNumber > 1 ? (
