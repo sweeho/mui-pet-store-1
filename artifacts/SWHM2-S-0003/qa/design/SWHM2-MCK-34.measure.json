@@ -1,0 +1,413 @@
+{
+  "key": "SWHM2-MCK-34",
+  "mockup": "artifacts/SWHM2-S-0003/design/mockup-user-creation-error-mobile.html",
+  "url": "http://localhost:3200/accounts/create-error",
+  "width": 390,
+  "at": "2026-11-18T01:20:09.368Z",
+  "pixelDifference": 0.1617,
+  "pageHeights": {
+    "mockup": 900,
+    "built": 900
+  },
+  "fonts": {
+    "mockup": {
+      "Inter": "loaded",
+      "JetBrains Mono": "loaded"
+    },
+    "built": {
+      "Arial": "loaded",
+      "Inter Variable": "loaded"
+    },
+    "builtNotLoaded": []
+  },
+  "differences": [
+    {
+      "kind": "missing",
+      "text": "Pet Store",
+      "mockup": "a at -280,0"
+    },
+    {
+      "kind": "missing",
+      "text": "Close menu",
+      "mockup": "button at -44,10"
+    },
+    {
+      "kind": "missing",
+      "text": "Shop",
+      "mockup": "div at -268,72"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "34x15"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "position",
+      "mockup": "-268,107",
+      "built": "16,81"
+    },
+    {
+      "kind": "missing",
+      "text": "Catalog",
+      "mockup": "a at -268,157"
+    },
+    {
+      "kind": "missing",
+      "text": "Search",
+      "mockup": "a at -268,207"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart 2",
+      "mockup": "a at -268,257"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart",
+      "mockup": "span at -226,273"
+    },
+    {
+      "kind": "missing",
+      "text": "2",
+      "mockup": "span at -31,273"
+    },
+    {
+      "kind": "missing",
+      "text": "Account",
+      "mockup": "div at -268,307"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "88x31"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "position",
+      "mockup": "-268,342",
+      "built": "286,13"
+    },
+    {
+      "kind": "missing",
+      "text": "Operations",
+      "mockup": "div at -268,392"
+    },
+    {
+      "kind": "missing",
+      "text": "Inventory",
+      "mockup": "a at -268,427"
+    },
+    {
+      "kind": "missing",
+      "text": "Admin",
+      "mockup": "div at -268,477"
+    },
+    {
+      "kind": "missing",
+      "text": "Orders",
+      "mockup": "a at -268,512"
+    },
+    {
+      "kind": "missing",
+      "text": "Sales reports",
+      "mockup": "a at -268,562"
+    },
+    {
+      "kind": "missing",
+      "text": "Open menu",
+      "mockup": "button at 4,6"
+    },
+    {
+      "kind": "missing",
+      "text": "Language: English",
+      "mockup": "button at 322,6"
+    },
+    {
+      "kind": "style",
+      "text": "We couldn’t create your account",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "We couldn’t create your account",
+      "prop": "size",
+      "mockup": "22px",
+      "built": "24px"
+    },
+    {
+      "kind": "style",
+      "text": "We couldn’t create your account",
+      "prop": "box",
+      "mockup": "358x26",
+      "built": "358x64"
+    },
+    {
+      "kind": "style",
+      "text": "We couldn’t create your account",
+      "prop": "position",
+      "mockup": "16,72",
+      "built": "16,104"
+    },
+    {
+      "kind": "missing",
+      "text": "Pick another user ID, or sign on if the account is yours.",
+      "mockup": "p at 16,102"
+    },
+    {
+      "kind": "style",
+      "text": "Account not created",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Account not created",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Account not created",
+      "prop": "position",
+      "mockup": "89,152",
+      "built": "97,255"
+    },
+    {
+      "kind": "style",
+      "text": "That user ID may already belong to someone, or we couldn’t save your account just now. No account was created.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "That user ID may already belong to someone, or we couldn’t save your account just now. No account was created.",
+      "prop": "position",
+      "mockup": "89,182",
+      "built": "97,283"
+    },
+    {
+      "kind": "style",
+      "text": "Try a different user ID",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Try a different user ID",
+      "prop": "box",
+      "mockup": "268x44",
+      "built": "181x37"
+    },
+    {
+      "kind": "style",
+      "text": "Try a different user ID",
+      "prop": "position",
+      "mockup": "89,266",
+      "built": "97,367"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on instead",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on instead",
+      "prop": "box",
+      "mockup": "268x44",
+      "built": "140x37"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on instead",
+      "prop": "position",
+      "mockup": "89,318",
+      "built": "97,412"
+    },
+    {
+      "kind": "style",
+      "text": "Choosing a user ID",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Choosing a user ID",
+      "prop": "position",
+      "mockup": "33,412",
+      "built": "33,506"
+    },
+    {
+      "kind": "style",
+      "text": "Each user ID belongs to one account only.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Each user ID belongs to one account only.",
+      "prop": "position",
+      "mockup": "51,437",
+      "built": "51,531"
+    },
+    {
+      "kind": "style",
+      "text": "Use up to 25 characters, without % or *.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Use up to 25 characters, without % or *.",
+      "prop": "position",
+      "mockup": "51,461",
+      "built": "51,555"
+    },
+    {
+      "kind": "style",
+      "text": "If this is your user ID, sign on instead.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "If this is your user ID, sign on instead.",
+      "prop": "position",
+      "mockup": "51,485",
+      "built": "51,579"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "box",
+      "mockup": "99x15",
+      "built": "90x30"
+    },
+    {
+      "kind": "missing",
+      "text": "Prices in US$",
+      "mockup": "span at 131,846"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "box",
+      "mockup": "236x15",
+      "built": "236x30"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "position",
+      "mockup": "16,869",
+      "built": "130,854"
+    },
+    {
+      "kind": "extra",
+      "text": "Open the menu",
+      "built": "button at 16,6"
+    },
+    {
+      "kind": "extra",
+      "text": "/",
+      "built": "li at 58,81"
+    },
+    {
+      "kind": "extra",
+      "text": "Accounts",
+      "built": "a at 70,81"
+    },
+    {
+      "kind": "extra",
+      "text": "Create-error",
+      "built": "p at 143,81"
+    },
+    {
+      "kind": "extra",
+      "text": "Pick another user ID and try again, or sign on if you already have an account.",
+      "built": "p at 16,172"
+    }
+  ]
+}
