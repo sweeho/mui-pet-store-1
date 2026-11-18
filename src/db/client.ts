@@ -65,7 +65,7 @@ async function open(): Promise<Db> {
     // Starting stock (design.md P10): every catalog item at 10000 when there is no inventory yet.
     // Batch operations loads the real inventory.
     if ((await db.all(sql`SELECT 1 FROM inventory LIMIT 1`)).length === 0) {
-      await db.run(sql`INSERT INTO inventory (item_id, quantity) SELECT itemid, 10000 FROM item`);
+      await db.run(sql`INSERT OR IGNORE INTO inventory (item_id, quantity) SELECT itemid, 10000 FROM item`);
     }
     return db;
   }
