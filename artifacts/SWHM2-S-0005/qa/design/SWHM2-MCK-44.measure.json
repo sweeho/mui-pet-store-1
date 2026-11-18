@@ -1,0 +1,1378 @@
+{
+  "key": "SWHM2-MCK-44",
+  "mockup": "artifacts/SWHM2-S-0005/design/mockup-order-confirmation-mobile.html",
+  "url": "http://localhost:3000/checkout",
+  "width": 390,
+  "at": "2026-11-18T03:28:52.198Z",
+  "pixelDifference": 0.1446,
+  "pageHeights": {
+    "mockup": 1288,
+    "built": 1784
+  },
+  "fonts": {
+    "mockup": {
+      "Inter": "loaded",
+      "JetBrains Mono": "loaded"
+    },
+    "built": {
+      "Arial": "loaded",
+      "Inter Variable": "loaded",
+      "monospace": "loaded"
+    },
+    "builtNotLoaded": []
+  },
+  "differences": [
+    {
+      "kind": "missing",
+      "text": "Pet Store",
+      "mockup": "a at -280,0"
+    },
+    {
+      "kind": "missing",
+      "text": "Close menu",
+      "mockup": "button at -44,10"
+    },
+    {
+      "kind": "missing",
+      "text": "Shop",
+      "mockup": "div at -268,72"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "34x15"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "position",
+      "mockup": "-268,107",
+      "built": "16,81"
+    },
+    {
+      "kind": "missing",
+      "text": "Catalog",
+      "mockup": "a at -268,157"
+    },
+    {
+      "kind": "missing",
+      "text": "Search",
+      "mockup": "a at -268,207"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart 6",
+      "mockup": "a at -268,257"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart",
+      "mockup": "span at -226,273"
+    },
+    {
+      "kind": "missing",
+      "text": "6",
+      "mockup": "span at -31,273"
+    },
+    {
+      "kind": "missing",
+      "text": "Account",
+      "mockup": "div at -268,307"
+    },
+    {
+      "kind": "missing",
+      "text": "My account",
+      "mockup": "a at -268,342"
+    },
+    {
+      "kind": "missing",
+      "text": "Operations",
+      "mockup": "div at -268,392"
+    },
+    {
+      "kind": "missing",
+      "text": "Inventory",
+      "mockup": "a at -268,427"
+    },
+    {
+      "kind": "missing",
+      "text": "Admin",
+      "mockup": "div at -268,477"
+    },
+    {
+      "kind": "style",
+      "text": "Orders",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Orders",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Orders",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Orders",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Orders",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "Orders",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "39x15"
+    },
+    {
+      "kind": "style",
+      "text": "Orders",
+      "prop": "position",
+      "mockup": "-268,512",
+      "built": "145,81"
+    },
+    {
+      "kind": "missing",
+      "text": "Sales reports",
+      "mockup": "a at -268,562"
+    },
+    {
+      "kind": "missing",
+      "text": "Signed on as j2ee Sign out",
+      "mockup": "div at -280,839"
+    },
+    {
+      "kind": "missing",
+      "text": "j2ee",
+      "mockup": "b at -184,862"
+    },
+    {
+      "kind": "missing",
+      "text": "Sign out",
+      "mockup": "a at -108,852"
+    },
+    {
+      "kind": "missing",
+      "text": "Open menu",
+      "mockup": "button at 4,6"
+    },
+    {
+      "kind": "missing",
+      "text": "Language: English",
+      "mockup": "button at 290,6"
+    },
+    {
+      "kind": "style",
+      "text": "3",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "3",
+      "prop": "position",
+      "mockup": "269,72",
+      "built": "267,231"
+    },
+    {
+      "kind": "style",
+      "text": "Confirmation",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Confirmation",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Confirmation",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Confirmation",
+      "prop": "position",
+      "mockup": "299,77",
+      "built": "299,234"
+    },
+    {
+      "kind": "missing",
+      "text": "Your order is placed",
+      "mockup": "h1 at 16,180"
+    },
+    {
+      "kind": "missing",
+      "text": "Order 10011 · 17 Nov 2026, 14:32",
+      "mockup": "p at 16,210"
+    },
+    {
+      "kind": "missing",
+      "text": "10011",
+      "mockup": "b at 125,210"
+    },
+    {
+      "kind": "missing",
+      "text": "Approved",
+      "mockup": "span at 152,240"
+    },
+    {
+      "kind": "missing",
+      "text": "US orders under $500.00 are approved automatically.",
+      "mockup": "p at 16,270"
+    },
+    {
+      "kind": "missing",
+      "text": "$500.00",
+      "mockup": "span at 138,270"
+    },
+    {
+      "kind": "style",
+      "text": "Items",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Items",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "16px"
+    },
+    {
+      "kind": "style",
+      "text": "Items",
+      "prop": "box",
+      "mockup": "324x17",
+      "built": "372x60"
+    },
+    {
+      "kind": "style",
+      "text": "Items",
+      "prop": "position",
+      "mockup": "33,319",
+      "built": "17,398"
+    },
+    {
+      "kind": "missing",
+      "text": "Male Adult Bulldog",
+      "mockup": "div at 85,350"
+    },
+    {
+      "kind": "missing",
+      "text": "EST-6 · 2 × $18.50",
+      "mockup": "div at 85,367"
+    },
+    {
+      "kind": "style",
+      "text": "EST-6",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "EST-6",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "EST-6",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "EST-6",
+      "prop": "box",
+      "mockup": "35x16",
+      "built": "74x52"
+    },
+    {
+      "kind": "style",
+      "text": "EST-6",
+      "prop": "position",
+      "mockup": "85,367",
+      "built": "17,522"
+    },
+    {
+      "kind": "missing",
+      "text": "2",
+      "mockup": "span at 129,367"
+    },
+    {
+      "kind": "style",
+      "text": "$18.50",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "$18.50",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "$18.50",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "$18.50",
+      "prop": "box",
+      "mockup": "42x16",
+      "built": "74x52"
+    },
+    {
+      "kind": "style",
+      "text": "$18.50",
+      "prop": "position",
+      "mockup": "150,367",
+      "built": "240,522"
+    },
+    {
+      "kind": "missing",
+      "text": "$37.00",
+      "mockup": "div at 309,350"
+    },
+    {
+      "kind": "missing",
+      "text": "Tailless Manx",
+      "mockup": "div at 85,411"
+    },
+    {
+      "kind": "missing",
+      "text": "EST-14 · 1 × $58.50",
+      "mockup": "div at 85,428"
+    },
+    {
+      "kind": "style",
+      "text": "EST-14",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "EST-14",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "EST-14",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "EST-14",
+      "prop": "box",
+      "mockup": "42x16",
+      "built": "74x52"
+    },
+    {
+      "kind": "style",
+      "text": "EST-14",
+      "prop": "position",
+      "mockup": "85,428",
+      "built": "17,574"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "box",
+      "mockup": "7x16",
+      "built": "48x52"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "position",
+      "mockup": "136,428",
+      "built": "192,522"
+    },
+    {
+      "kind": "style",
+      "text": "$58.50",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "$58.50",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "$58.50",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "$58.50",
+      "prop": "box",
+      "mockup": "42x16",
+      "built": "74x52"
+    },
+    {
+      "kind": "style",
+      "text": "$58.50",
+      "prop": "position",
+      "mockup": "157,428",
+      "built": "240,574"
+    },
+    {
+      "kind": "missing",
+      "text": "Adult Male Goldfish",
+      "mockup": "div at 85,472"
+    },
+    {
+      "kind": "missing",
+      "text": "EST-20 · 3 × $5.50",
+      "mockup": "div at 85,489"
+    },
+    {
+      "kind": "style",
+      "text": "EST-20",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "EST-20",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "EST-20",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "EST-20",
+      "prop": "box",
+      "mockup": "42x16",
+      "built": "74x52"
+    },
+    {
+      "kind": "style",
+      "text": "EST-20",
+      "prop": "position",
+      "mockup": "85,489",
+      "built": "17,626"
+    },
+    {
+      "kind": "style",
+      "text": "$5.50",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "$5.50",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "$5.50",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "$5.50",
+      "prop": "box",
+      "mockup": "35x16",
+      "built": "74x52"
+    },
+    {
+      "kind": "style",
+      "text": "$5.50",
+      "prop": "position",
+      "mockup": "157,489",
+      "built": "240,626"
+    },
+    {
+      "kind": "missing",
+      "text": "$16.50",
+      "mockup": "div at 309,472"
+    },
+    {
+      "kind": "style",
+      "text": "Order total",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Order total",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Order total",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Order total",
+      "prop": "box",
+      "mockup": "82x21",
+      "built": "298x59"
+    },
+    {
+      "kind": "style",
+      "text": "Order total",
+      "prop": "position",
+      "mockup": "33,539",
+      "built": "17,678"
+    },
+    {
+      "kind": "missing",
+      "text": "$112.00 USD",
+      "mockup": "span at 247,539"
+    },
+    {
+      "kind": "style",
+      "text": "Order details",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Order details",
+      "prop": "box",
+      "mockup": "324x17",
+      "built": "340x28"
+    },
+    {
+      "kind": "style",
+      "text": "Order details",
+      "prop": "position",
+      "mockup": "33,618",
+      "built": "33,1146"
+    },
+    {
+      "kind": "style",
+      "text": "Order ID",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Order ID",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Order ID",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Order ID",
+      "prop": "box",
+      "mockup": "96x18",
+      "built": "56x17"
+    },
+    {
+      "kind": "style",
+      "text": "Order ID",
+      "prop": "position",
+      "mockup": "33,647",
+      "built": "33,1186"
+    },
+    {
+      "kind": "style",
+      "text": "User ID",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "User ID",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "User ID",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "User ID",
+      "prop": "box",
+      "mockup": "96x18",
+      "built": "56x17"
+    },
+    {
+      "kind": "style",
+      "text": "User ID",
+      "prop": "position",
+      "mockup": "33,673",
+      "built": "33,1211"
+    },
+    {
+      "kind": "style",
+      "text": "Locale",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Locale",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Locale",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Locale",
+      "prop": "box",
+      "mockup": "96x18",
+      "built": "56x17"
+    },
+    {
+      "kind": "style",
+      "text": "Locale",
+      "prop": "position",
+      "mockup": "33,699",
+      "built": "33,1260"
+    },
+    {
+      "kind": "style",
+      "text": "en_US",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "en_US",
+      "prop": "box",
+      "mockup": "212x18",
+      "built": "276x17"
+    },
+    {
+      "kind": "style",
+      "text": "en_US",
+      "prop": "position",
+      "mockup": "145,699",
+      "built": "97,1260"
+    },
+    {
+      "kind": "style",
+      "text": "Contact",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Contact",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Contact",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Contact",
+      "prop": "box",
+      "mockup": "96x51",
+      "built": "340x28"
+    },
+    {
+      "kind": "style",
+      "text": "Contact",
+      "prop": "position",
+      "mockup": "33,725",
+      "built": "33,1352"
+    },
+    {
+      "kind": "missing",
+      "text": "Ana Okafor ana.okafor@example.com +1 650 555 0142",
+      "mockup": "dd at 145,725"
+    },
+    {
+      "kind": "missing",
+      "text": "ana.okafor@example.com",
+      "mockup": "span at 145,742"
+    },
+    {
+      "kind": "style",
+      "text": "Ship to",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Ship to",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Ship to",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Ship to",
+      "prop": "box",
+      "mockup": "96x69",
+      "built": "340x36"
+    },
+    {
+      "kind": "style",
+      "text": "Ship to",
+      "prop": "position",
+      "mockup": "33,784",
+      "built": "33,772"
+    },
+    {
+      "kind": "missing",
+      "text": "1600 Amphitheatre Pkwy Unit 4B Mountain View, CA 94043 USA",
+      "mockup": "dd at 145,784"
+    },
+    {
+      "kind": "style",
+      "text": "94043",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "94043",
+      "prop": "position",
+      "mockup": "273,818",
+      "built": "161,864"
+    },
+    {
+      "kind": "style",
+      "text": "Bill to",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Bill to",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Bill to",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Bill to",
+      "prop": "box",
+      "mockup": "96x52",
+      "built": "340x36"
+    },
+    {
+      "kind": "style",
+      "text": "Bill to",
+      "prop": "position",
+      "mockup": "33,861",
+      "built": "33,955"
+    },
+    {
+      "kind": "missing",
+      "text": "500 Oracle Pkwy Redwood City, CA 94065 USA",
+      "mockup": "dd at 145,861"
+    },
+    {
+      "kind": "missing",
+      "text": "94065",
+      "mockup": "span at 268,878"
+    },
+    {
+      "kind": "style",
+      "text": "Payment card on order",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Payment card on order",
+      "prop": "box",
+      "mockup": "324x17",
+      "built": "340x28"
+    },
+    {
+      "kind": "style",
+      "text": "Payment card on order",
+      "prop": "position",
+      "mockup": "33,963",
+      "built": "33,1509"
+    },
+    {
+      "kind": "style",
+      "text": "Card",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Card",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Card",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Card",
+      "prop": "box",
+      "mockup": "96x18",
+      "built": "41x17"
+    },
+    {
+      "kind": "style",
+      "text": "Card",
+      "prop": "position",
+      "mockup": "33,992",
+      "built": "33,1549"
+    },
+    {
+      "kind": "style",
+      "text": "1234-2334",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "1234-2334",
+      "prop": "box",
+      "mockup": "212x18",
+      "built": "291x17"
+    },
+    {
+      "kind": "style",
+      "text": "1234-2334",
+      "prop": "position",
+      "mockup": "145,992",
+      "built": "82,1549"
+    },
+    {
+      "kind": "style",
+      "text": "Type",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Type",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Type",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Type",
+      "prop": "box",
+      "mockup": "96x17",
+      "built": "41x17"
+    },
+    {
+      "kind": "style",
+      "text": "Type",
+      "prop": "position",
+      "mockup": "33,1018",
+      "built": "33,1574"
+    },
+    {
+      "kind": "style",
+      "text": "Duke Express",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Duke Express",
+      "prop": "box",
+      "mockup": "212x17",
+      "built": "291x17"
+    },
+    {
+      "kind": "style",
+      "text": "Duke Express",
+      "prop": "position",
+      "mockup": "145,1018",
+      "built": "82,1574"
+    },
+    {
+      "kind": "style",
+      "text": "Expiry",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Expiry",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Expiry",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Expiry",
+      "prop": "box",
+      "mockup": "96x18",
+      "built": "41x17"
+    },
+    {
+      "kind": "style",
+      "text": "Expiry",
+      "prop": "position",
+      "mockup": "33,1043",
+      "built": "33,1599"
+    },
+    {
+      "kind": "style",
+      "text": "10/2001",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "10/2001",
+      "prop": "box",
+      "mockup": "212x18",
+      "built": "291x17"
+    },
+    {
+      "kind": "style",
+      "text": "10/2001",
+      "prop": "position",
+      "mockup": "145,1043",
+      "built": "82,1599"
+    },
+    {
+      "kind": "style",
+      "text": "Store placeholder card. Your own card was not charged.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Store placeholder card. Your own card was not charged.",
+      "prop": "box",
+      "mockup": "324x15",
+      "built": "340x20"
+    },
+    {
+      "kind": "style",
+      "text": "Store placeholder card. Your own card was not charged.",
+      "prop": "position",
+      "mockup": "33,1073",
+      "built": "33,1628"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "position",
+      "mockup": "16,1234",
+      "built": "24,1706"
+    },
+    {
+      "kind": "missing",
+      "text": "Prices in US$",
+      "mockup": "span at 131,1234"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "position",
+      "mockup": "16,1257",
+      "built": "146,1706"
+    },
+    {
+      "kind": "style",
+      "text": "Continue shopping",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Continue shopping",
+      "prop": "color",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Continue shopping",
+      "prop": "background",
+      "mockup": "rgb(79, 70, 229)",
+      "built": "rgb(255, 255, 255)"
+    },
+    {
+      "kind": "style",
+      "text": "Continue shopping",
+      "prop": "box",
+      "mockup": "358x44",
+      "built": "165x37"
+    },
+    {
+      "kind": "style",
+      "text": "Continue shopping",
+      "prop": "position",
+      "mockup": "16,844",
+      "built": "225,104"
+    },
+    {
+      "kind": "extra",
+      "text": "Open the menu",
+      "built": "button at 16,6"
+    },
+    {
+      "kind": "extra",
+      "text": "qmwlkaq94",
+      "built": "a at 230,20"
+    },
+    {
+      "kind": "extra",
+      "text": "Sign off",
+      "built": "button at 323,13"
+    },
+    {
+      "kind": "extra",
+      "text": "/",
+      "built": "li at 58,81"
+    },
+    {
+      "kind": "extra",
+      "text": "Checkout",
+      "built": "a at 70,81"
+    },
+    {
+      "kind": "extra",
+      "text": "10016",
+      "built": "p at 204,81"
+    },
+    {
+      "kind": "extra",
+      "text": "Thank you, your order is placed",
+      "built": "h1 at 16,104"
+    },
+    {
+      "kind": "extra",
+      "text": "Order 10016 · placed 18 Nov 2026, 03:28",
+      "built": "p at 16,172"
+    },
+    {
+      "kind": "extra",
+      "text": "Order status: Submitted — awaiting approval",
+      "built": "p at 89,296"
+    },
+    {
+      "kind": "extra",
+      "text": "Submitted — awaiting approval",
+      "built": "span at 89,295"
+    },
+    {
+      "kind": "extra",
+      "text": "Your order has been recorded. You will be told when it is approved.",
+      "built": "p at 89,330"
+    },
+    {
+      "kind": "extra",
+      "text": "Item ID",
+      "built": "th at 17,458"
+    },
+    {
+      "kind": "extra",
+      "text": "Description",
+      "built": "th at 91,458"
+    },
+    {
+      "kind": "extra",
+      "text": "Qty",
+      "built": "th at 192,458"
+    },
+    {
+      "kind": "extra",
+      "text": "Unit price",
+      "built": "th at 240,458"
+    },
+    {
+      "kind": "extra",
+      "text": "Line total",
+      "built": "th at 315,458"
+    },
+    {
+      "kind": "extra",
+      "text": "Bulldog, Male Adult",
+      "built": "td at 91,522"
+    },
+    {
+      "kind": "extra",
+      "text": "Manx, Tailless",
+      "built": "td at 91,574"
+    },
+    {
+      "kind": "extra",
+      "text": "Goldfish, Adult",
+      "built": "td at 91,626"
+    },
+    {
+      "kind": "extra",
+      "text": "$82.50 USD",
+      "built": "td at 315,678"
+    },
+    {
+      "kind": "extra",
+      "text": "Ana",
+      "built": "div at 33,816"
+    },
+    {
+      "kind": "extra",
+      "text": "1 Main St",
+      "built": "div at 33,838"
+    },
+    {
+      "kind": "extra",
+      "text": "Mountain View, CA 94043",
+      "built": "div at 33,860"
+    },
+    {
+      "kind": "extra",
+      "text": "USA",
+      "built": "div at 33,883"
+    },
+    {
+      "kind": "extra",
+      "text": "Date",
+      "built": "dt at 33,1236"
+    },
+    {
+      "kind": "extra",
+      "text": "18 Nov 2026",
+      "built": "dd at 97,1236"
+    },
+    {
+      "kind": "extra",
+      "text": "Total",
+      "built": "dt at 33,1285"
+    },
+    {
+      "kind": "extra",
+      "text": "$82.50",
+      "built": "dd at 97,1285"
+    },
+    {
+      "kind": "extra",
+      "text": "Name",
+      "built": "dt at 33,1392"
+    },
+    {
+      "kind": "extra",
+      "text": "Email",
+      "built": "dt at 33,1417"
+    },
+    {
+      "kind": "extra",
+      "text": "—",
+      "built": "dd at 82,1417"
+    },
+    {
+      "kind": "extra",
+      "text": "Phone",
+      "built": "dt at 33,1442"
+    }
+  ]
+}
