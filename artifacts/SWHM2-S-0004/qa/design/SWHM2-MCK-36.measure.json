@@ -1,0 +1,820 @@
+{
+  "key": "SWHM2-MCK-36",
+  "mockup": "artifacts/SWHM2-S-0004/design/mockup-cart-mobile.html",
+  "url": "http://localhost:3300/cart",
+  "width": 390,
+  "at": "2026-11-18T02:26:35.650Z",
+  "pixelDifference": 0.1746,
+  "pageHeights": {
+    "mockup": 1029,
+    "built": 1103
+  },
+  "fonts": {
+    "mockup": {
+      "Inter": "loaded",
+      "JetBrains Mono": "loaded"
+    },
+    "built": {
+      "Arial": "loaded",
+      "Inter Variable": "loaded",
+      "monospace": "loaded"
+    },
+    "builtNotLoaded": []
+  },
+  "differences": [
+    {
+      "kind": "missing",
+      "text": "Pet Store",
+      "mockup": "a at -280,0"
+    },
+    {
+      "kind": "missing",
+      "text": "Close navigation",
+      "mockup": "button at -52,10"
+    },
+    {
+      "kind": "missing",
+      "text": "Shop",
+      "mockup": "div at -268,72"
+    },
+    {
+      "kind": "missing",
+      "text": "Home",
+      "mockup": "a at -268,107"
+    },
+    {
+      "kind": "missing",
+      "text": "Catalog & search",
+      "mockup": "a at -268,157"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart 4",
+      "mockup": "a at -268,207"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "24px"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "color",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "background",
+      "mockup": "rgb(79, 70, 229)",
+      "built": "rgb(255, 255, 255)"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "box",
+      "mockup": "28x18",
+      "built": "147x32"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "position",
+      "mockup": "-226,222",
+      "built": "16,81"
+    },
+    {
+      "kind": "missing",
+      "text": "4",
+      "mockup": "span at -31,223"
+    },
+    {
+      "kind": "missing",
+      "text": "Account",
+      "mockup": "div at -268,257"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(255, 255, 255)"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "background",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgb(79, 70, 229)"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "88x31"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "position",
+      "mockup": "-268,292",
+      "built": "286,13"
+    },
+    {
+      "kind": "missing",
+      "text": "Operations",
+      "mockup": "div at -268,342"
+    },
+    {
+      "kind": "missing",
+      "text": "Order fulfilment and invoicing",
+      "mockup": "a at -268,377"
+    },
+    {
+      "kind": "missing",
+      "text": "Admin",
+      "mockup": "div at -268,427"
+    },
+    {
+      "kind": "missing",
+      "text": "Administration of orders",
+      "mockup": "a at -268,462"
+    },
+    {
+      "kind": "missing",
+      "text": "Create account",
+      "mockup": "a at -264,788"
+    },
+    {
+      "kind": "missing",
+      "text": "Open navigation",
+      "mockup": "button at 4,6"
+    },
+    {
+      "kind": "missing",
+      "text": "EN",
+      "mockup": "button at 247,10"
+    },
+    {
+      "kind": "missing",
+      "text": "4 items. Set a quantity to 0 to remove it.",
+      "mockup": "p at 16,105"
+    },
+    {
+      "kind": "missing",
+      "text": "4 items",
+      "mockup": "span at 16,105"
+    },
+    {
+      "kind": "style",
+      "text": "Angelfish",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Angelfish",
+      "prop": "position",
+      "mockup": "33,151",
+      "built": "29,234"
+    },
+    {
+      "kind": "missing",
+      "text": "Large · Fish",
+      "mockup": "div at 33,172"
+    },
+    {
+      "kind": "missing",
+      "text": "EST-1 · FI-SW-01",
+      "mockup": "div at 33,189"
+    },
+    {
+      "kind": "style",
+      "text": "2",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "2",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "2",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "2",
+      "prop": "box",
+      "mockup": "72x44",
+      "built": "72x37"
+    },
+    {
+      "kind": "style",
+      "text": "2",
+      "prop": "position",
+      "mockup": "33,213",
+      "built": "29,291"
+    },
+    {
+      "kind": "missing",
+      "text": "× $16.50 each",
+      "mockup": "span at 113,227"
+    },
+    {
+      "kind": "style",
+      "text": "$33.00",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "$33.00",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "$33.00",
+      "prop": "box",
+      "mockup": "48x18",
+      "built": "67x54"
+    },
+    {
+      "kind": "style",
+      "text": "$33.00",
+      "prop": "position",
+      "mockup": "257,226",
+      "built": "195,283"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Angelfish, Large from cart",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Arial"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Angelfish, Large from cart",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "18px"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Angelfish, Large from cart",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgba(0, 0, 0, 0.54)"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Angelfish, Large from cart",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "50%"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Angelfish, Large from cart",
+      "prop": "box",
+      "mockup": "44x44",
+      "built": "26x26"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Angelfish, Large from cart",
+      "prop": "position",
+      "mockup": "313,213",
+      "built": "274,291"
+    },
+    {
+      "kind": "style",
+      "text": "Bulldog",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Bulldog",
+      "prop": "position",
+      "mockup": "33,282",
+      "built": "29,344"
+    },
+    {
+      "kind": "missing",
+      "text": "Male Adult · Dogs",
+      "mockup": "div at 33,303"
+    },
+    {
+      "kind": "missing",
+      "text": "EST-6 · K9-BD-01",
+      "mockup": "div at 33,320"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "box",
+      "mockup": "72x44",
+      "built": "72x37"
+    },
+    {
+      "kind": "style",
+      "text": "1",
+      "prop": "position",
+      "mockup": "33,344",
+      "built": "29,401"
+    },
+    {
+      "kind": "missing",
+      "text": "× $18.50 each",
+      "mockup": "span at 113,358"
+    },
+    {
+      "kind": "style",
+      "text": "$18.50",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "$18.50",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "$18.50",
+      "prop": "box",
+      "mockup": "48x18",
+      "built": "67x54"
+    },
+    {
+      "kind": "style",
+      "text": "$18.50",
+      "prop": "position",
+      "mockup": "257,357",
+      "built": "195,393"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Bulldog, Male Adult from cart",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Arial"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Bulldog, Male Adult from cart",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "18px"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Bulldog, Male Adult from cart",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgba(0, 0, 0, 0.54)"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Bulldog, Male Adult from cart",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "50%"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Bulldog, Male Adult from cart",
+      "prop": "box",
+      "mockup": "44x44",
+      "built": "26x26"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Bulldog, Male Adult from cart",
+      "prop": "position",
+      "mockup": "313,344",
+      "built": "274,401"
+    },
+    {
+      "kind": "style",
+      "text": "Manx",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Manx",
+      "prop": "position",
+      "mockup": "33,413",
+      "built": "29,454"
+    },
+    {
+      "kind": "missing",
+      "text": "Tailless · Cats",
+      "mockup": "div at 33,434"
+    },
+    {
+      "kind": "missing",
+      "text": "EST-14 · FL-DSH-01",
+      "mockup": "div at 33,451"
+    },
+    {
+      "kind": "missing",
+      "text": "× $58.50 each",
+      "mockup": "span at 113,489"
+    },
+    {
+      "kind": "style",
+      "text": "$58.50",
+      "prop": "font",
+      "mockup": "JetBrains Mono",
+      "built": "monospace"
+    },
+    {
+      "kind": "style",
+      "text": "$58.50",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "$58.50",
+      "prop": "box",
+      "mockup": "48x18",
+      "built": "67x54"
+    },
+    {
+      "kind": "style",
+      "text": "$58.50",
+      "prop": "position",
+      "mockup": "257,488",
+      "built": "195,502"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Manx, Tailless from cart",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Arial"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Manx, Tailless from cart",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "18px"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Manx, Tailless from cart",
+      "prop": "color",
+      "mockup": "rgb(100, 116, 139)",
+      "built": "rgba(0, 0, 0, 0.54)"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Manx, Tailless from cart",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "50%"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Manx, Tailless from cart",
+      "prop": "box",
+      "mockup": "44x44",
+      "built": "26x26"
+    },
+    {
+      "kind": "style",
+      "text": "Remove Manx, Tailless from cart",
+      "prop": "position",
+      "mockup": "313,475",
+      "built": "274,510"
+    },
+    {
+      "kind": "missing",
+      "text": "Amazon Parrot",
+      "mockup": "a at 33,544"
+    },
+    {
+      "kind": "missing",
+      "text": "Adult Male · Birds",
+      "mockup": "div at 33,565"
+    },
+    {
+      "kind": "missing",
+      "text": "EST-18 · AV-CB-01",
+      "mockup": "div at 33,582"
+    },
+    {
+      "kind": "missing",
+      "text": "× $193.50 each",
+      "mockup": "span at 113,620"
+    },
+    {
+      "kind": "missing",
+      "text": "$193.50",
+      "mockup": "span at 249,619"
+    },
+    {
+      "kind": "missing",
+      "text": "Remove Amazon Parrot, Adult Male from cart",
+      "mockup": "button at 313,606"
+    },
+    {
+      "kind": "style",
+      "text": "Continue shopping",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Continue shopping",
+      "prop": "box",
+      "mockup": "175x44",
+      "built": "169x37"
+    },
+    {
+      "kind": "style",
+      "text": "Continue shopping",
+      "prop": "position",
+      "mockup": "16,675",
+      "built": "16,703"
+    },
+    {
+      "kind": "style",
+      "text": "Empty cart",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Empty cart",
+      "prop": "box",
+      "mockup": "132x44",
+      "built": "110x37"
+    },
+    {
+      "kind": "style",
+      "text": "Empty cart",
+      "prop": "position",
+      "mockup": "242,675",
+      "built": "29,641"
+    },
+    {
+      "kind": "style",
+      "text": "Items",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Items",
+      "prop": "position",
+      "mockup": "33,760",
+      "built": "33,836"
+    },
+    {
+      "kind": "style",
+      "text": "Subtotal",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Subtotal",
+      "prop": "position",
+      "mockup": "33,798",
+      "built": "33,885"
+    },
+    {
+      "kind": "missing",
+      "text": "$303.50",
+      "mockup": "span at 287,796"
+    },
+    {
+      "kind": "style",
+      "text": "You'll sign on before checkout. Your cart is kept for this visit — it ends after 15 minutes of inactivity.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "You'll sign on before checkout. Your cart is kept for this visit — it ends after 15 minutes of inactivity.",
+      "prop": "position",
+      "mockup": "55,832",
+      "built": "55,917"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "box",
+      "mockup": "390x128",
+      "built": "90x30"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "position",
+      "mockup": "0,901",
+      "built": "24,1060"
+    },
+    {
+      "kind": "style",
+      "text": "Proceed to checkout",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Proceed to checkout",
+      "prop": "box",
+      "mockup": "269x44",
+      "built": "195x37"
+    },
+    {
+      "kind": "style",
+      "text": "Proceed to checkout",
+      "prop": "position",
+      "mockup": "105,788",
+      "built": "179,81"
+    },
+    {
+      "kind": "extra",
+      "text": "Open the menu",
+      "built": "button at 16,6"
+    },
+    {
+      "kind": "extra",
+      "text": "3 items in your cart. Change a quantity and choose Update cart, or set it to 0 to remove the item.",
+      "built": "p at 16,117"
+    },
+    {
+      "kind": "extra",
+      "text": "Large · EST-1",
+      "built": "div at 29,252"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-1",
+      "built": "span at 71,256"
+    },
+    {
+      "kind": "extra",
+      "text": "× $16.50",
+      "built": "td at 113,283"
+    },
+    {
+      "kind": "extra",
+      "text": "×",
+      "built": "span at 125,291"
+    },
+    {
+      "kind": "extra",
+      "text": "Male Adult · EST-6",
+      "built": "div at 29,362"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-6",
+      "built": "span at 98,366"
+    },
+    {
+      "kind": "extra",
+      "text": "× $18.50",
+      "built": "td at 113,393"
+    },
+    {
+      "kind": "extra",
+      "text": "Tailless · EST-14",
+      "built": "div at 29,472"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-14",
+      "built": "span at 80,476"
+    },
+    {
+      "kind": "extra",
+      "text": "× $58.50",
+      "built": "td at 113,502"
+    },
+    {
+      "kind": "extra",
+      "text": "Update cart",
+      "built": "button at 29,569"
+    },
+    {
+      "kind": "extra",
+      "text": "A quantity that isn't a whole number counts as 0.",
+      "built": "span at 29,613"
+    },
+    {
+      "kind": "extra",
+      "text": "Summary",
+      "built": "h2 at 33,780"
+    },
+    {
+      "kind": "extra",
+      "text": "3",
+      "built": "p at 349,836"
+    },
+    {
+      "kind": "extra",
+      "text": "$110.00",
+      "built": "p at 273,881"
+    },
+    {
+      "kind": "extra",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "built": "span at 130,1060"
+    }
+  ]
+}

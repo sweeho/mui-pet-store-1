@@ -1,0 +1,539 @@
+{
+  "key": "SWHM2-MCK-37",
+  "mockup": "artifacts/SWHM2-S-0004/design/mockup-cart-empty.html",
+  "url": "http://localhost:3300/cart",
+  "width": 1440,
+  "at": "2026-11-18T02:11:49.131Z",
+  "pixelDifference": 0.0332,
+  "pageHeights": {
+    "mockup": 900,
+    "built": 900
+  },
+  "fonts": {
+    "mockup": {
+      "Inter": "loaded",
+      "JetBrains Mono": "loaded"
+    },
+    "built": {
+      "Inter Variable": "loaded"
+    },
+    "builtNotLoaded": []
+  },
+  "differences": [
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "size",
+      "mockup": "16px",
+      "built": "21px"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "weight",
+      "mockup": "700",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(79, 70, 229)"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "box",
+      "mockup": "239x64",
+      "built": "92x26"
+    },
+    {
+      "kind": "style",
+      "text": "Pet Store",
+      "prop": "position",
+      "mockup": "0,0",
+      "built": "24,22"
+    },
+    {
+      "kind": "style",
+      "text": "Shop",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Shop",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Shop",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Shop",
+      "prop": "position",
+      "mockup": "12,72",
+      "built": "24,70"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "8px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "box",
+      "mockup": "215x40",
+      "built": "191x41"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "position",
+      "mockup": "12,107",
+      "built": "24,102"
+    },
+    {
+      "kind": "style",
+      "text": "Catalog & search",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Catalog & search",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Catalog & search",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "8px"
+    },
+    {
+      "kind": "style",
+      "text": "Catalog & search",
+      "prop": "box",
+      "mockup": "215x40",
+      "built": "191x41"
+    },
+    {
+      "kind": "style",
+      "text": "Catalog & search",
+      "prop": "position",
+      "mockup": "12,149",
+      "built": "24,147"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart 0",
+      "mockup": "a at 12,191"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "box",
+      "mockup": "28x18",
+      "built": "191x41"
+    },
+    {
+      "kind": "style",
+      "text": "Cart",
+      "prop": "position",
+      "mockup": "54,202",
+      "built": "24,192"
+    },
+    {
+      "kind": "missing",
+      "text": "0",
+      "mockup": "span at 208,203"
+    },
+    {
+      "kind": "style",
+      "text": "Account",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Account",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Account",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Account",
+      "prop": "position",
+      "mockup": "12,233",
+      "built": "24,237"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "8px"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "box",
+      "mockup": "215x40",
+      "built": "191x41"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "position",
+      "mockup": "12,268",
+      "built": "24,269"
+    },
+    {
+      "kind": "style",
+      "text": "Operations",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Operations",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Operations",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Operations",
+      "prop": "position",
+      "mockup": "12,310",
+      "built": "24,314"
+    },
+    {
+      "kind": "style",
+      "text": "Order fulfilment and invoicing",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Order fulfilment and invoicing",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Order fulfilment and invoicing",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "8px"
+    },
+    {
+      "kind": "style",
+      "text": "Order fulfilment and invoicing",
+      "prop": "box",
+      "mockup": "215x48",
+      "built": "191x58"
+    },
+    {
+      "kind": "style",
+      "text": "Order fulfilment and invoicing",
+      "prop": "position",
+      "mockup": "12,345",
+      "built": "24,346"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "size",
+      "mockup": "12px",
+      "built": "14px"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "box",
+      "mockup": "215x35",
+      "built": "191x32"
+    },
+    {
+      "kind": "style",
+      "text": "Admin",
+      "prop": "position",
+      "mockup": "12,395",
+      "built": "24,408"
+    },
+    {
+      "kind": "style",
+      "text": "Administration of orders",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Administration of orders",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Administration of orders",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "8px"
+    },
+    {
+      "kind": "style",
+      "text": "Administration of orders",
+      "prop": "box",
+      "mockup": "215x48",
+      "built": "191x58"
+    },
+    {
+      "kind": "style",
+      "text": "Administration of orders",
+      "prop": "position",
+      "mockup": "12,430",
+      "built": "24,440"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "background",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgba(15, 23, 42, 0.08)"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "box",
+      "mockup": "121x36",
+      "built": "61x39"
+    },
+    {
+      "kind": "style",
+      "text": "English",
+      "prop": "position",
+      "mockup": "1021,14",
+      "built": "1038,15"
+    },
+    {
+      "kind": "style",
+      "text": "Create account",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Create account",
+      "prop": "box",
+      "mockup": "139x36",
+      "built": "118x31"
+    },
+    {
+      "kind": "style",
+      "text": "Create account",
+      "prop": "position",
+      "mockup": "1154,14",
+      "built": "1202,19"
+    },
+    {
+      "kind": "style",
+      "text": "0 items in your cart.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "0 items in your cart.",
+      "prop": "position",
+      "mockup": "264,121",
+      "built": "264,130"
+    },
+    {
+      "kind": "style",
+      "text": "Your cart is empty",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Your cart is empty",
+      "prop": "position",
+      "mockup": "747,283",
+      "built": "747,300"
+    },
+    {
+      "kind": "style",
+      "text": "Find a pet in the catalog and add it to your cart. Items you add stay here for this visit.",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Find a pet in the catalog and add it to your cart. Items you add stay here for this visit.",
+      "prop": "box",
+      "mockup": "420x42",
+      "built": "420x34"
+    },
+    {
+      "kind": "style",
+      "text": "Find a pet in the catalog and add it to your cart. Items you add stay here for this visit.",
+      "prop": "position",
+      "mockup": "606,307",
+      "built": "606,327"
+    },
+    {
+      "kind": "style",
+      "text": "Back to home",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "Back to home",
+      "prop": "position",
+      "mockup": "844,365",
+      "built": "842,385"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "font",
+      "mockup": "Inter",
+      "built": "Inter Variable"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "box",
+      "mockup": "99x15",
+      "built": "900x15"
+    },
+    {
+      "kind": "extra",
+      "text": "日本語",
+      "built": "button at 1098,15"
+    },
+    {
+      "kind": "extra",
+      "text": "中文",
+      "built": "button at 1152,15"
+    },
+    {
+      "kind": "extra",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "built": "span at 1180,869"
+    }
+  ]
+}

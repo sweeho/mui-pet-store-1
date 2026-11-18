@@ -176,3 +176,11 @@ export const webSession = sqliteTable("web_session", {
   cartLanguage: text("cart_language").notNull(),
   lastAccess: integer("last_access").notNull(),
 });
+
+// One row per shopper visit (design.md P2, P3): the item id to quantity map as JSON. The browser
+// holds only the random cart id; the 15-minute idle rule is applied on read.
+export const shoppingCart = sqliteTable("shopping_cart", {
+  cartId: text("cart_id").primaryKey(),
+  contents: text("contents").notNull(),
+  lastAccess: integer("last_access").notNull(),
+});
