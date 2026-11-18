@@ -23,7 +23,9 @@ The tokens follow the approved mockups: an indigo primary, slate text, and the I
 - Global navigation: 240px wide.
 - Gutter: 24px around and between content blocks.
 - Page title: 24px, semibold, with an optional one-line description under it.
-- Breadcrumbs sit above the page title, and only on pages more than one level deep.
+- Breadcrumbs sit above the page title, and only on pages more than one level deep. A crumb links
+  only to a path that has a page; any other segment is plain secondary text. Catalog pages draw
+  their own "Catalog path" trail, so the shell trail is hidden there.
 
 ## The shell
 

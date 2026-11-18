@@ -97,7 +97,8 @@ land on a page inside the shell (`/admin/inventory` lands on `/admin/login`).
 
 - **Sample data**: `POST /api/catalog/populate` loads `data/catalog/sample-catalog.xml` into the
   catalog tables, idempotently. It is the catalog's only write path until batch operations ships an
-  inventory load.
+  inventory load. With `NODE_ENV=production` it requires an administrator session (401 otherwise);
+  development and test leave it open (change `swhm2-s-0009-bugfix-improvement-swhm2-t`, design D2).
 
 - **Order queues**: stages hand work on through queues, not direct calls. A library function
   pushes onto an array on its env (`ApprovalEnv`), and `dispatchApprovals` (`src/approval/`)
