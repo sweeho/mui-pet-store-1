@@ -1,0 +1,395 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "f2ab10eb-e6de-447c-b66c-9942f311801c",
+  "prevId": "81ee50c0-8146-4d01-9128-86e7e5488915",
+  "tables": {
+    "category": {
+      "name": "category",
+      "columns": {
+        "catid": {
+          "name": "catid",
+          "type": "text(10)",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "category_details": {
+      "name": "category_details",
+      "columns": {
+        "catid": {
+          "name": "catid",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "locale": {
+          "name": "locale",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "category_details_catid_category_catid_fk": {
+          "name": "category_details_catid_category_catid_fk",
+          "tableFrom": "category_details",
+          "tableTo": "category",
+          "columnsFrom": [
+            "catid"
+          ],
+          "columnsTo": [
+            "catid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "category_details_catid_locale_pk": {
+          "columns": [
+            "catid",
+            "locale"
+          ],
+          "name": "category_details_catid_locale_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "item": {
+      "name": "item",
+      "columns": {
+        "itemid": {
+          "name": "itemid",
+          "type": "text(10)",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "productid": {
+          "name": "productid",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "item_productid_idx": {
+          "name": "item_productid_idx",
+          "columns": [
+            "productid"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "item_productid_product_productid_fk": {
+          "name": "item_productid_product_productid_fk",
+          "tableFrom": "item",
+          "tableTo": "product",
+          "columnsFrom": [
+            "productid"
+          ],
+          "columnsTo": [
+            "productid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "item_details": {
+      "name": "item_details",
+      "columns": {
+        "itemid": {
+          "name": "itemid",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "locale": {
+          "name": "locale",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "list_price": {
+          "name": "list_price",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "unit_cost": {
+          "name": "unit_cost",
+          "type": "real",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "descn": {
+          "name": "descn",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "attr1": {
+          "name": "attr1",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "attr2": {
+          "name": "attr2",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "attr3": {
+          "name": "attr3",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "attr4": {
+          "name": "attr4",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "attr5": {
+          "name": "attr5",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "item_details_itemid_item_itemid_fk": {
+          "name": "item_details_itemid_item_itemid_fk",
+          "tableFrom": "item_details",
+          "tableTo": "item",
+          "columnsFrom": [
+            "itemid"
+          ],
+          "columnsTo": [
+            "itemid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "item_details_itemid_locale_pk": {
+          "columns": [
+            "itemid",
+            "locale"
+          ],
+          "name": "item_details_itemid_locale_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "product": {
+      "name": "product",
+      "columns": {
+        "productid": {
+          "name": "productid",
+          "type": "text(10)",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "catid": {
+          "name": "catid",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "product_catid_idx": {
+          "name": "product_catid_idx",
+          "columns": [
+            "catid"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "product_catid_category_catid_fk": {
+          "name": "product_catid_category_catid_fk",
+          "tableFrom": "product",
+          "tableTo": "category",
+          "columnsFrom": [
+            "catid"
+          ],
+          "columnsTo": [
+            "catid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "product_details": {
+      "name": "product_details",
+      "columns": {
+        "productid": {
+          "name": "productid",
+          "type": "text(10)",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "locale": {
+          "name": "locale",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "image": {
+          "name": "image",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "descn": {
+          "name": "descn",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "product_details_productid_product_productid_fk": {
+          "name": "product_details_productid_product_productid_fk",
+          "tableFrom": "product_details",
+          "tableTo": "product",
+          "columnsFrom": [
+            "productid"
+          ],
+          "columnsTo": [
+            "productid"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "product_details_productid_locale_pk": {
+          "columns": [
+            "productid",
+            "locale"
+          ],
+          "name": "product_details_productid_locale_pk"
+        }
+      },
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    },
+    "users": {
+      "name": "users",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "columns": [
+            "email"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "checkConstraints": {}
+    }
+  },
+  "views": {},
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  },
+  "internal": {
+    "indexes": {}
+  }
+}

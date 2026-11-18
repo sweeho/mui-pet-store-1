@@ -19,7 +19,7 @@ test.describe("Landing page", () => {
   });
 
   test("a placeholder area shows the shared empty frame inside the shell", async ({ page }) => {
-    await page.goto("/catalog");
+    await page.goto("/cart");
 
     await expect(page.getByTestId("empty-frame")).toContainText("not available yet");
     await expect(
