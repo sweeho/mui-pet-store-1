@@ -1,5 +1,8 @@
 import { sql } from "drizzle-orm";
 
+import { dispatchFulfilment } from "@/fulfilment/dispatch";
+import { newFulfilEnv, type Db } from "@/fulfilment/env";
+
 import type { ApprovalEnv } from "./env";
 import { parseApprovalXml } from "./documents";
 import { processApprovalMessage } from "./handler";
@@ -28,8 +31,16 @@ export async function dispatchApprovals(env: ApprovalEnv): Promise<void> {
     await record(env, QUEUES.approval, parseApprovalXml(msg)[0]?.orderId ?? "", msg);
     await processApprovalMessage(env, msg);
   }
-  for (const body of env.supplierQueue.splice(0)) {
+  const supplier = env.supplierQueue.splice(0);
+  for (const body of supplier) {
     await record(env, QUEUES.supplier, orderIdOf(body), body);
+  }
+  if (supplier.length > 0) {
+    // Hand each supplier purchase order to fulfilment (design.md P6).
+    const fulfil = newFulfilEnv(env.db as Db);
+    fulfil.now = env.now;
+    fulfil.supplierQueue.push(...supplier);
+    await dispatchFulfilment(fulfil, env.origin ?? "auto");
   }
   for (const orderId of env.notifyList.splice(0)) {
     await record(env, QUEUES.notification, orderId, orderId);

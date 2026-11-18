@@ -20,7 +20,8 @@ answers JSON. The browser calls the API with `withBasePath()`, so the app works 
 preview's path prefix (`NEXT_BASE_PATH`).
 
 `getDb()` (`src/db/client.ts`) connects once per process, applies the migrations in `drizzle/` and
-seeds two demo users when the table is empty.
+seeds what an empty database needs: the demo users, the sample catalog, the approval demo orders
+and a starting stock for every catalog item.
 
 Domain logic lives in one folder per capability under `src/` (`src/catalog/` first). Pages and API
 routes call those modules with the db from `getDb()`. The modules take the db as their first
@@ -58,14 +59,21 @@ The schema is `src/db/schema.ts`; migrations are generated into `drizzle/`.
   name followed by its count. Behaviour: `openspec/specs/checkout-and-payment/` once change
   `swhm2-i-0005-checkout-and-payment-detail` is archived.
 - **Order processing**: `purchase_order` (one row per order handed to approval: id, user, time,
-  locale, total, latest status), `order_line` (its lines, keyed by order and line number) and
-  `order_manager` (the process-manager status: PENDING, APPROVED, DENIED or COMPLETED, checked in
-  code). Checkout writes the same order id here after `checkout_order`. Approval, fulfilment,
+  locale, total, latest status; indexed on user and time), `order_line` (its lines, keyed by order
+  and line number, with the quantity shipped) and `order_manager` (the process-manager status,
+  checked in code; indexed on status). The view `v_order_status` joins an order to its status.
+  Checkout writes the same order id here after `checkout_order`. Approval, fulfilment,
   administration and batch jobs all read these tables. Behaviour: `openspec/specs/order-approval/`
   once change `swhm2-i-0006-order-approval` is archived.
+- **Supplier fulfilment**: `supplier_order` (one row per order sent to the supplier: id, date,
+  status, shipping contact), `supplier_order_line` (its lines, with the quantity shipped),
+  `contact_info` (the shipping contact, address included), `inventory` (one stock quantity per
+  item, never below zero), `order_status` (one status per order id) and `counter` (named integer
+  counters for identifiers). Behaviour: `openspec/specs/order-fulfilment/` once change
+  `swhm2-i-0007-order-fulfilment-and-invoic` is archived.
 - **Message outbox**: `message_outbox` holds every message one stage hands to the next (queues
-  `order-approval`, `supplier-purchase-order`, `customer-notification`), with its origin and
-  order id.
+  `order-approval`, `supplier-purchase-order`, `customer-notification`, `supplier-invoice`,
+  `completed-order`), with its origin and order id.
 - **Admin sessions**: `admin_session` holds one row per administrator sign-in; the
   `admin_session` cookie carries only its id.
 - **Demo users**: the template's `users` table. Customers do not use it; it stays only for the
@@ -81,8 +89,9 @@ site. Forms post to route handlers, which set cookies and answer with redirects.
 
 Admin pages (`/admin/**` other than `/admin/login`) call `requireAdmin()` from
 `src/admin/session.ts`, which redirects to `/admin/login` on the server. Admin API routes answer
-401 without an admin session. Protected pages are not added to the navigation, because the shell's
-locked navigation check visits every entry.
+401 without an admin session. A protected page may have a navigation entry only because the
+redirect happens on the server: the shell's locked navigation check visits every entry and must
+land on a page inside the shell (`/admin/inventory` lands on `/admin/login`).
 
 ## Integration points
 
@@ -93,8 +102,12 @@ locked navigation check visits every entry.
 - **Order queues**: stages hand work on through queues, not direct calls. A library function
   pushes onto an array on its env (`ApprovalEnv`), and `dispatchApprovals` (`src/approval/`)
   consumes the order-approval queue in-process and writes everything it produced to
-  `message_outbox`. Checkout and the admin Commit route both go through it. Fulfilment and
-  notifications read their queues from the outbox.
+  `message_outbox`. Checkout and the admin Commit route both go through it. Each supplier
+  purchase order it records is handed to fulfilment (`src/fulfilment/`), which ships what stock
+  allows and records invoices and completed orders in the outbox for notifications.
+- **Supplier endpoint**: `POST /api/supplier/purchase-orders` accepts a SupplierOrder XML document
+  and `GET /api/supplier/purchase-orders/{id}` reports its status. Neither requires a sign-in, as
+  the spec of record states; whether that stays is open for the Business Owner.
 
 ## Deployment
 
@@ -158,3 +171,9 @@ does.
   the columns and indexes it reads, and `order_manager` has no unique key. Rationale: four locked
   suites insert into the same tables with different column subsets. Authored in change
   `swhm2-i-0006-order-approval` (design.md, P1).
+- **Supplier orders are their own records; the customer order follows them.** Fulfilment works
+  only on `supplier_order` and its lines. When a supplier order completes, it records COMPLETED
+  on the customer order of the same id and queues a completed-order message. It never edits the
+  approval tables otherwise. Rationale: the legacy supplier and order centre were separate
+  systems, and the locked suites test each one on its own tables. Authored in change
+  `swhm2-i-0007-order-fulfilment-and-invoic` (design.md, P3, P6).

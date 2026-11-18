@@ -237,19 +237,30 @@ const orderIdColumn = customType<{ data: string; driverData: string | number }>(
   dataType: () => "numeric",
 });
 
-export const purchaseOrder = sqliteTable("purchase_order", {
-  orderId: orderIdColumn("order_id").primaryKey(),
-  userName: text("user_name").notNull(),
-  orderTime: integer("order_time").notNull(),
-  locale: text("locale").notNull(),
-  totalPrice: real("total_price").notNull(),
-  status: text("status").notNull(),
-});
+export const purchaseOrder = sqliteTable(
+  "purchase_order",
+  {
+    orderId: orderIdColumn("order_id").primaryKey(),
+    userName: text("user_name").notNull(),
+    orderTime: integer("order_time").notNull(),
+    locale: text("locale").notNull(),
+    totalPrice: real("total_price").notNull(),
+    status: text("status").notNull(),
+  },
+  (t) => [
+    index("purchase_order_user_name_idx").on(t.userName),
+    index("purchase_order_order_time_idx").on(t.orderTime),
+  ],
+);
 
-export const orderManager = sqliteTable("order_manager", {
-  orderId: orderIdColumn("order_id").notNull(),
-  status: text("status").notNull(),
-});
+export const orderManager = sqliteTable(
+  "order_manager",
+  {
+    orderId: orderIdColumn("order_id").notNull(),
+    status: text("status").notNull(),
+  },
+  (t) => [index("order_manager_status_idx").on(t.status)],
+);
 
 export const orderLine = sqliteTable(
   "order_line",
@@ -261,8 +272,84 @@ export const orderLine = sqliteTable(
     itemId: text("item_id").notNull(),
     quantity: integer("quantity").notNull(),
     unitPrice: real("unit_price"),
+    quantityShipped: integer("quantity_shipped").notNull().default(0),
   },
-  (t) => [primaryKey({ columns: [t.orderId, t.lineNum] })],
+  (t) => [
+    primaryKey({ columns: [t.orderId, t.lineNum] }),
+    check("order_line_quantity_positive", sql`${t.quantity} > 0`),
+    check("order_line_shipped_within_quantity", sql`${t.quantityShipped} <= ${t.quantity}`),
+  ],
+);
+
+// Order fulfilment (SWHM2-I-0007, design.md P1). Every contact column but the key is nullable:
+// batch operations inserts only `order_id` and `email`. Supplier order ids are text because they
+// arrive in XML; there is no CHECK on `supplier_order.status` (SD1), the five values are checked
+// in code.
+export const contactInfo = sqliteTable("contact_info", {
+  contactId: integer("contact_id").primaryKey({ autoIncrement: true }),
+  orderId: text("order_id"),
+  name: text("name"),
+  address: text("address"),
+  email: text("email"),
+  phone: text("phone"),
+});
+
+export const supplierOrder = sqliteTable("supplier_order", {
+  orderId: text("order_id").primaryKey(),
+  orderDate: integer("order_date").notNull(),
+  status: text("status").notNull(),
+  contactId: integer("contact_id")
+    .notNull()
+    .references(() => contactInfo.contactId),
+});
+
+export const supplierOrderLine = sqliteTable(
+  "supplier_order_line",
+  {
+    orderId: text("order_id").notNull(),
+    lineNum: integer("line_num").notNull(),
+    categoryId: text("category_id"),
+    productId: text("product_id"),
+    itemId: text("item_id").notNull(),
+    quantity: integer("quantity").notNull(),
+    unitPrice: real("unit_price"),
+    quantityShipped: integer("quantity_shipped").notNull().default(0),
+  },
+  (t) => [
+    primaryKey({ columns: [t.orderId, t.lineNum] }),
+    check("supplier_order_line_quantity_positive", sql`${t.quantity} > 0`),
+    check(
+      "supplier_order_line_shipped_within_quantity",
+      sql`${t.quantityShipped} <= ${t.quantity}`,
+    ),
+  ],
+);
+
+export const inventory = sqliteTable(
+  "inventory",
+  {
+    itemId: text("item_id").primaryKey(),
+    quantity: integer("quantity").notNull(),
+  },
+  (t) => [check("inventory_quantity_floor", sql`${t.quantity} >= 0`)],
+);
+
+export const counter = sqliteTable(
+  "counter",
+  {
+    name: text("name").primaryKey(),
+    value: integer("value").notNull(),
+  },
+  (t) => [check("counter_value_integer", sql`typeof(${t.value}) = 'integer'`)],
+);
+
+export const orderStatus = sqliteTable(
+  "order_status",
+  {
+    orderId: text("order_id").primaryKey(),
+    status: text("status").notNull(),
+  },
+  (t) => [check("order_status_length", sql`length(${t.status}) <= 20`)],
 );
 
 // The persisted queues (design.md P3): approval messages, supplier purchase orders and
