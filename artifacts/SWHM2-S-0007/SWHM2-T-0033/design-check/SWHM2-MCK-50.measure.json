@@ -1,0 +1,954 @@
+{
+  "key": "SWHM2-MCK-50",
+  "mockup": "artifacts/SWHM2-S-0007/design/mockup-inventory-mobile.html",
+  "url": "http://localhost:3500/admin/inventory?updated=2",
+  "width": 390,
+  "at": "2026-11-18T05:52:10.348Z",
+  "pixelDifference": 0.1016,
+  "pageHeights": {
+    "mockup": 2240,
+    "built": 4178
+  },
+  "fonts": {
+    "mockup": {
+      "Inter": "loaded",
+      "JetBrains Mono": "loaded",
+      "Arial": "loaded"
+    },
+    "built": {
+      "Arial": "loaded",
+      "Inter Variable": "loaded",
+      "JetBrains Mono Variable": "loaded"
+    },
+    "builtNotLoaded": []
+  },
+  "differences": [
+    {
+      "kind": "missing",
+      "text": "Pet Store",
+      "mockup": "a at -280,0"
+    },
+    {
+      "kind": "missing",
+      "text": "Close menu",
+      "mockup": "button at -44,10"
+    },
+    {
+      "kind": "missing",
+      "text": "Shop",
+      "mockup": "div at -268,72"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "12px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "400"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(100, 116, 139)"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "34x15"
+    },
+    {
+      "kind": "style",
+      "text": "Home",
+      "prop": "position",
+      "mockup": "-268,107",
+      "built": "16,81"
+    },
+    {
+      "kind": "missing",
+      "text": "Catalog",
+      "mockup": "a at -268,157"
+    },
+    {
+      "kind": "missing",
+      "text": "Search",
+      "mockup": "a at -268,207"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart 0",
+      "mockup": "a at -268,257"
+    },
+    {
+      "kind": "missing",
+      "text": "Cart",
+      "mockup": "span at -226,273"
+    },
+    {
+      "kind": "missing",
+      "text": "0",
+      "mockup": "span at -31,273"
+    },
+    {
+      "kind": "missing",
+      "text": "Account",
+      "mockup": "div at -268,307"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "color",
+      "mockup": "rgb(15, 23, 42)",
+      "built": "rgb(255, 255, 255)"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "background",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgb(79, 70, 229)"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "88x31"
+    },
+    {
+      "kind": "style",
+      "text": "Sign on",
+      "prop": "position",
+      "mockup": "-268,342",
+      "built": "286,13"
+    },
+    {
+      "kind": "missing",
+      "text": "Operations",
+      "mockup": "div at -268,392"
+    },
+    {
+      "kind": "style",
+      "text": "Inventory",
+      "prop": "size",
+      "mockup": "14px",
+      "built": "22px"
+    },
+    {
+      "kind": "style",
+      "text": "Inventory",
+      "prop": "weight",
+      "mockup": "500",
+      "built": "600"
+    },
+    {
+      "kind": "style",
+      "text": "Inventory",
+      "prop": "color",
+      "mockup": "rgb(255, 255, 255)",
+      "built": "rgb(15, 23, 42)"
+    },
+    {
+      "kind": "style",
+      "text": "Inventory",
+      "prop": "background",
+      "mockup": "rgb(79, 70, 229)",
+      "built": "rgb(255, 255, 255)"
+    },
+    {
+      "kind": "style",
+      "text": "Inventory",
+      "prop": "radius",
+      "mockup": "4px",
+      "built": "0px"
+    },
+    {
+      "kind": "style",
+      "text": "Inventory",
+      "prop": "box",
+      "mockup": "256x48",
+      "built": "358x32"
+    },
+    {
+      "kind": "style",
+      "text": "Inventory",
+      "prop": "position",
+      "mockup": "-268,427",
+      "built": "16,119"
+    },
+    {
+      "kind": "missing",
+      "text": "Admin",
+      "mockup": "div at -268,477"
+    },
+    {
+      "kind": "missing",
+      "text": "Orders",
+      "mockup": "a at -268,512"
+    },
+    {
+      "kind": "missing",
+      "text": "Sales reports",
+      "mockup": "a at -268,562"
+    },
+    {
+      "kind": "missing",
+      "text": "Open menu",
+      "mockup": "button at 4,6"
+    },
+    {
+      "kind": "missing",
+      "text": "EN",
+      "mockup": "button at 243,10"
+    },
+    {
+      "kind": "style",
+      "text": "/",
+      "prop": "position",
+      "mockup": "56,72",
+      "built": "58,81"
+    },
+    {
+      "kind": "style",
+      "text": "Enter a new quantity and tick Update for each item to change. Blank or negative values are ignored.",
+      "prop": "position",
+      "mockup": "16,125",
+      "built": "16,154"
+    },
+    {
+      "kind": "style",
+      "text": "EST-1",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "EST-1",
+      "prop": "box",
+      "mockup": "40x18",
+      "built": "156x50"
+    },
+    {
+      "kind": "style",
+      "text": "EST-1",
+      "prop": "position",
+      "mockup": "33,201",
+      "built": "33,347"
+    },
+    {
+      "kind": "style",
+      "text": "Update",
+      "prop": "box",
+      "mockup": "95x44",
+      "built": "49x44"
+    },
+    {
+      "kind": "style",
+      "text": "Update",
+      "prop": "position",
+      "mockup": "262,188",
+      "built": "308,347"
+    },
+    {
+      "kind": "style",
+      "text": "on",
+      "prop": "position",
+      "mockup": "274,199",
+      "built": "278,358"
+    },
+    {
+      "kind": "missing",
+      "text": "Existing",
+      "mockup": "div at 33,232"
+    },
+    {
+      "kind": "missing",
+      "text": "10,000",
+      "mockup": "span at 33,262"
+    },
+    {
+      "kind": "missing",
+      "text": "New quantity",
+      "mockup": "div at 201,232"
+    },
+    {
+      "kind": "style",
+      "text": "New quantity for EST-1",
+      "prop": "position",
+      "mockup": "201,251",
+      "built": "201,417"
+    },
+    {
+      "kind": "style",
+      "text": "EST-2",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "EST-2",
+      "prop": "box",
+      "mockup": "40x18",
+      "built": "156x50"
+    },
+    {
+      "kind": "style",
+      "text": "EST-2",
+      "prop": "position",
+      "mockup": "33,333",
+      "built": "33,1742"
+    },
+    {
+      "kind": "missing",
+      "text": "9,998",
+      "mockup": "span at 33,394"
+    },
+    {
+      "kind": "style",
+      "text": "New quantity for EST-2",
+      "prop": "position",
+      "mockup": "201,383",
+      "built": "201,1812"
+    },
+    {
+      "kind": "style",
+      "text": "EST-3",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "EST-3",
+      "prop": "box",
+      "mockup": "40x18",
+      "built": "156x50"
+    },
+    {
+      "kind": "style",
+      "text": "EST-3",
+      "prop": "position",
+      "mockup": "33,465",
+      "built": "33,3137"
+    },
+    {
+      "kind": "missing",
+      "text": "4",
+      "mockup": "span at 33,526"
+    },
+    {
+      "kind": "missing",
+      "text": "40",
+      "mockup": "input at 201,515"
+    },
+    {
+      "kind": "style",
+      "text": "EST-4",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "EST-4",
+      "prop": "box",
+      "mockup": "40x18",
+      "built": "156x50"
+    },
+    {
+      "kind": "style",
+      "text": "EST-4",
+      "prop": "position",
+      "mockup": "33,597",
+      "built": "33,3276"
+    },
+    {
+      "kind": "missing",
+      "text": "Out of stock",
+      "mockup": "span at 53,658"
+    },
+    {
+      "kind": "missing",
+      "text": "25",
+      "mockup": "input at 201,647"
+    },
+    {
+      "kind": "style",
+      "text": "EST-5",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "EST-5",
+      "prop": "box",
+      "mockup": "40x18",
+      "built": "156x50"
+    },
+    {
+      "kind": "style",
+      "text": "EST-5",
+      "prop": "position",
+      "mockup": "33,729",
+      "built": "33,3416"
+    },
+    {
+      "kind": "missing",
+      "text": "9,997",
+      "mockup": "span at 33,790"
+    },
+    {
+      "kind": "style",
+      "text": "New quantity for EST-5",
+      "prop": "position",
+      "mockup": "201,779",
+      "built": "201,3486"
+    },
+    {
+      "kind": "style",
+      "text": "EST-6",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "EST-6",
+      "prop": "box",
+      "mockup": "40x18",
+      "built": "156x50"
+    },
+    {
+      "kind": "style",
+      "text": "EST-6",
+      "prop": "position",
+      "mockup": "33,861",
+      "built": "33,3555"
+    },
+    {
+      "kind": "missing",
+      "text": "312",
+      "mockup": "span at 33,922"
+    },
+    {
+      "kind": "missing",
+      "text": "300",
+      "mockup": "input at 201,911"
+    },
+    {
+      "kind": "missing",
+      "text": "Not ticked — this row won’t change",
+      "mockup": "div at 33,959"
+    },
+    {
+      "kind": "style",
+      "text": "EST-7",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "EST-7",
+      "prop": "box",
+      "mockup": "40x18",
+      "built": "156x50"
+    },
+    {
+      "kind": "style",
+      "text": "EST-7",
+      "prop": "position",
+      "mockup": "33,1012",
+      "built": "33,3695"
+    },
+    {
+      "kind": "missing",
+      "text": "8",
+      "mockup": "span at 33,1073"
+    },
+    {
+      "kind": "missing",
+      "text": "-3",
+      "mockup": "input at 201,1062"
+    },
+    {
+      "kind": "missing",
+      "text": "Must be a whole number, 0 or more — this row won’t change",
+      "mockup": "div at 33,1110"
+    },
+    {
+      "kind": "style",
+      "text": "EST-8",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "EST-8",
+      "prop": "box",
+      "mockup": "40x18",
+      "built": "156x50"
+    },
+    {
+      "kind": "style",
+      "text": "EST-8",
+      "prop": "position",
+      "mockup": "33,1178",
+      "built": "33,3834"
+    },
+    {
+      "kind": "missing",
+      "text": "1,250",
+      "mockup": "span at 33,1239"
+    },
+    {
+      "kind": "style",
+      "text": "New quantity for EST-8",
+      "prop": "position",
+      "mockup": "201,1228",
+      "built": "201,3904"
+    },
+    {
+      "kind": "missing",
+      "text": "EST-9",
+      "mockup": "span at 33,1310"
+    },
+    {
+      "kind": "missing",
+      "text": "New quantity for EST-9",
+      "mockup": "input at 201,1360"
+    },
+    {
+      "kind": "style",
+      "text": "EST-10",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "EST-10",
+      "prop": "box",
+      "mockup": "48x18",
+      "built": "156x50"
+    },
+    {
+      "kind": "style",
+      "text": "EST-10",
+      "prop": "position",
+      "mockup": "33,1442",
+      "built": "33,486"
+    },
+    {
+      "kind": "missing",
+      "text": "2,480",
+      "mockup": "span at 33,1503"
+    },
+    {
+      "kind": "style",
+      "text": "New quantity for EST-10",
+      "prop": "position",
+      "mockup": "201,1492",
+      "built": "201,556"
+    },
+    {
+      "kind": "style",
+      "text": "EST-11",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "EST-11",
+      "prop": "box",
+      "mockup": "48x18",
+      "built": "156x50"
+    },
+    {
+      "kind": "style",
+      "text": "EST-11",
+      "prop": "position",
+      "mockup": "33,1574",
+      "built": "33,626"
+    },
+    {
+      "kind": "missing",
+      "text": "17",
+      "mockup": "span at 33,1635"
+    },
+    {
+      "kind": "style",
+      "text": "New quantity for EST-11",
+      "prop": "position",
+      "mockup": "201,1624",
+      "built": "201,696"
+    },
+    {
+      "kind": "style",
+      "text": "EST-12",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "EST-12",
+      "prop": "box",
+      "mockup": "48x18",
+      "built": "156x50"
+    },
+    {
+      "kind": "style",
+      "text": "EST-12",
+      "prop": "position",
+      "mockup": "33,1706",
+      "built": "33,765"
+    },
+    {
+      "kind": "missing",
+      "text": "640",
+      "mockup": "span at 33,1767"
+    },
+    {
+      "kind": "style",
+      "text": "New quantity for EST-12",
+      "prop": "position",
+      "mockup": "201,1756",
+      "built": "201,835"
+    },
+    {
+      "kind": "style",
+      "text": "EST-13",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "EST-13",
+      "prop": "box",
+      "mockup": "48x18",
+      "built": "156x50"
+    },
+    {
+      "kind": "style",
+      "text": "EST-13",
+      "prop": "position",
+      "mockup": "33,1838",
+      "built": "33,905"
+    },
+    {
+      "kind": "missing",
+      "text": "9,999",
+      "mockup": "span at 33,1899"
+    },
+    {
+      "kind": "style",
+      "text": "New quantity for EST-13",
+      "prop": "position",
+      "mockup": "201,1888",
+      "built": "201,975"
+    },
+    {
+      "kind": "style",
+      "text": "EST-14",
+      "prop": "weight",
+      "mockup": "600",
+      "built": "500"
+    },
+    {
+      "kind": "style",
+      "text": "EST-14",
+      "prop": "box",
+      "mockup": "48x18",
+      "built": "156x50"
+    },
+    {
+      "kind": "style",
+      "text": "EST-14",
+      "prop": "position",
+      "mockup": "33,1970",
+      "built": "33,1044"
+    },
+    {
+      "kind": "missing",
+      "text": "56",
+      "mockup": "span at 33,2031"
+    },
+    {
+      "kind": "style",
+      "text": "New quantity for EST-14",
+      "prop": "position",
+      "mockup": "201,2020",
+      "built": "201,1114"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "box",
+      "mockup": "99x15",
+      "built": "90x30"
+    },
+    {
+      "kind": "style",
+      "text": "© 2026 Pet Store",
+      "prop": "position",
+      "mockup": "16,2110",
+      "built": "24,4132"
+    },
+    {
+      "kind": "missing",
+      "text": "Prices in US$",
+      "mockup": "span at 131,2110"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "box",
+      "mockup": "236x15",
+      "built": "236x30"
+    },
+    {
+      "kind": "style",
+      "text": "Sessions end after 15 minutes of inactivity",
+      "prop": "position",
+      "mockup": "16,2133",
+      "built": "130,4132"
+    },
+    {
+      "kind": "missing",
+      "text": "2 items will change",
+      "mockup": "span at 16,802"
+    },
+    {
+      "kind": "style",
+      "text": "Update inventory",
+      "prop": "position",
+      "mockup": "221,788",
+      "built": "33,4034"
+    },
+    {
+      "kind": "extra",
+      "text": "Open the menu",
+      "built": "button at 16,6"
+    },
+    {
+      "kind": "extra",
+      "text": "Administration of orders",
+      "built": "a at 70,81"
+    },
+    {
+      "kind": "extra",
+      "text": "Order fulfilment and invoicing",
+      "built": "p at 16,96"
+    },
+    {
+      "kind": "extra",
+      "text": "Stock updated for 2 items",
+      "built": "b at 68,218"
+    },
+    {
+      "kind": "extra",
+      "text": "Pending orders were reprocessed against the new stock. Lines with enough stock have shipped.",
+      "built": "span at 68,236"
+    },
+    {
+      "kind": "extra",
+      "text": "Dismiss",
+      "built": "button at 286,218"
+    },
+    {
+      "kind": "extra",
+      "text": "10000",
+      "built": "span at 33,430"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-15",
+      "built": "td at 33,1184"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-15",
+      "built": "input at 201,1254"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-16",
+      "built": "td at 33,1323"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-16",
+      "built": "input at 201,1393"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-18",
+      "built": "td at 33,1463"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-18",
+      "built": "input at 201,1533"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-19",
+      "built": "td at 33,1602"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-19",
+      "built": "input at 201,1672"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-20",
+      "built": "td at 33,1881"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-20",
+      "built": "input at 201,1951"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-21",
+      "built": "td at 33,2021"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-21",
+      "built": "input at 201,2091"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-22",
+      "built": "td at 33,2160"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-22",
+      "built": "input at 201,2230"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-23",
+      "built": "td at 33,2300"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-23",
+      "built": "input at 201,2370"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-24",
+      "built": "td at 33,2439"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-24",
+      "built": "input at 201,2509"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-25",
+      "built": "td at 33,2579"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-25",
+      "built": "input at 201,2649"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-26",
+      "built": "td at 33,2718"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-26",
+      "built": "input at 201,2788"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-27",
+      "built": "td at 33,2858"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-27",
+      "built": "input at 201,2928"
+    },
+    {
+      "kind": "extra",
+      "text": "EST-28",
+      "built": "td at 33,2997"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-28",
+      "built": "input at 201,3067"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-3",
+      "built": "input at 201,3207"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-4",
+      "built": "input at 201,3346"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-6",
+      "built": "input at 201,3625"
+    },
+    {
+      "kind": "extra",
+      "text": "New quantity for EST-7",
+      "built": "input at 201,3765"
+    },
+    {
+      "kind": "extra",
+      "text": "0 items will change",
+      "built": "span at 33,3974"
+    },
+    {
+      "kind": "extra",
+      "text": "Blank or negative quantities are ignored.",
+      "built": "span at 33,4003"
+    }
+  ]
+}

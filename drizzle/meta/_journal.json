@@ -43,6 +43,13 @@
       "when": 1794976927520,
       "tag": "0005_faithful_crystal",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1794980517451,
+      "tag": "0006_demonic_roulette",
+      "breakpoints": true
     }
   ]
 }

@@ -15,6 +15,15 @@ beforeAll(async () => {
   db = await useIsolatedDatabase();
 });
 
+const stockOf = async (item: string) =>
+  Number(
+    (
+      (await db.all(sql`SELECT quantity FROM inventory WHERE item_id = ${item}`)) as {
+        quantity: number;
+      }[]
+    )[0].quantity,
+  );
+
 const postJson = (body: unknown, cookie?: string) =>
   POST(
     new Request("http://localhost/api/checkout/orders", {
@@ -82,12 +91,37 @@ describe("/api/checkout/orders", () => {
     expect(order.totalPrice).toBe(16.5);
   });
 
-  it("a small en_US order is handed to approval: APPROVED, with a supplier order in the outbox", async () => {
+  it("a small en_US order is approved, reaches the supplier and, with stock, ends COMPLETED", async () => {
+    const before = await stockOf("EST-1");
     const { orderId } = (await (await postJson({ items: ["EST-1"] })).json()) as {
       orderId: string;
     };
     const status = await db.all(sql`SELECT status FROM purchase_order WHERE order_id = ${orderId}`);
+    expect(status).toEqual([{ status: "COMPLETED" }]);
+    expect(await stockOf("EST-1")).toBe(before - 1);
+    const queues = (await db.all(
+      sql`SELECT queue FROM message_outbox WHERE order_id = ${orderId} ORDER BY id`,
+    )) as { queue: string }[];
+    expect(queues.map((q) => q.queue)).toEqual([
+      "order-approval",
+      "supplier-purchase-order",
+      "supplier-invoice",
+      "completed-order",
+      "customer-notification",
+    ]);
+  });
+
+  it("an approved order with no stock waits: APPROVED, its supplier order PENDING, no invoice", async () => {
+    await db.run(sql`UPDATE inventory SET quantity = 0 WHERE item_id = 'EST-2'`);
+    const { orderId } = (await (await postJson({ items: ["EST-2"] })).json()) as {
+      orderId: string;
+    };
+    const status = await db.all(sql`SELECT status FROM purchase_order WHERE order_id = ${orderId}`);
     expect(status).toEqual([{ status: "APPROVED" }]);
+    const supplier = await db.all(
+      sql`SELECT status FROM supplier_order WHERE order_id = ${orderId}`,
+    );
+    expect(supplier).toEqual([{ status: "PENDING" }]);
     const queues = (await db.all(
       sql`SELECT queue FROM message_outbox WHERE order_id = ${orderId} ORDER BY id`,
     )) as { queue: string }[];

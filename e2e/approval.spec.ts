@@ -16,9 +16,10 @@ test("an administrator approves one order and sees the after-Commit summary", as
 
   await expect(page.getByText("1 change sent.")).toBeVisible();
   await expect(page.getByRole("status").or(page.getByRole("alert")).first()).toContainText(id);
+  // An approved order with stock is shipped at once, so it may already be COMPLETED.
   await expect(page.locator(`tr[data-order-id="${id}"]`)).toHaveAttribute(
     "data-status",
-    "APPROVED",
+    /^(APPROVED|COMPLETED)$/,
   );
 });
 

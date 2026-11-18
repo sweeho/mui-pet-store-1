@@ -17,7 +17,14 @@ beforeAll(async () => {
   cookie = `admin_session=${await createAdminSession()}`;
 });
 beforeEach(async () => {
-  for (const t of ["order_manager", "order_line", "purchase_order", "message_outbox"]) {
+  // No stock: these tests are about approval, and stock would ship the approved orders.
+  for (const t of [
+    "order_manager",
+    "order_line",
+    "purchase_order",
+    "message_outbox",
+    "inventory",
+  ]) {
     await db.run(sql.raw(`DELETE FROM ${t}`));
   }
 });
