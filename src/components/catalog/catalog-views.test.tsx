@@ -114,13 +114,23 @@ describe("ItemListView", () => {
 });
 
 describe("ItemDetailView", () => {
-  it("shows price, unit cost and the present attributes, without an add-to-cart", () => {
+  it("shows price, unit cost and the present attributes", () => {
     render(<ItemDetailView item={item} categoryName="Dogs" />);
     expect(screen.getByText("Unit cost")).toBeInTheDocument();
     expect(screen.getByText("$160.00")).toBeInTheDocument();
     expect(screen.getByText("Attribute 2")).toBeInTheDocument();
     expect(screen.queryByText("Attribute 3")).not.toBeInTheDocument();
-    expect(screen.queryByRole("button", { name: /add to cart/i })).not.toBeInTheDocument();
+  });
+
+  it("[SWHM2-C-0077] has an Add to cart form that posts the item id without a quantity", () => {
+    render(<ItemDetailView item={item} categoryName="Dogs" />);
+    const button = screen.getByRole("button", { name: /add to cart/i });
+    const form = button.closest("form") as HTMLFormElement;
+    expect(form.getAttribute("action")).toMatch(/\/api\/cart$/);
+    expect(form.method).toBe("post");
+    expect(form.querySelector('input[name="action"]')).toHaveValue("add");
+    expect(form.querySelector('input[name="itemId"]')).toHaveValue(item.itemId);
+    expect(form.querySelector('input[name="quantity"]')).toBeNull();
   });
 });
 
