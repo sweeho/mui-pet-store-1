@@ -55,3 +55,22 @@ describe("DashboardShell", () => {
     }
   });
 });
+
+describe("DashboardShell session state", () => {
+  it("offers Sign on and Create account when signed out", () => {
+    render(<DashboardShell>x</DashboardShell>);
+    expect(screen.getAllByRole("link", { name: "Sign on" })[1]).toHaveAttribute("href", "/signon");
+    expect(screen.getByRole("link", { name: "Create account" })).toHaveAttribute(
+      "href",
+      "/accounts/create",
+    );
+    expect(screen.getByRole("contentinfo")).toHaveTextContent("15 minutes of inactivity");
+  });
+
+  it("shows the user name and Sign off when signed on", () => {
+    render(<DashboardShell username="jsmith">x</DashboardShell>);
+    expect(screen.getByRole("link", { name: "jsmith" })).toHaveAttribute("href", "/account");
+    expect(screen.getByRole("button", { name: "Sign off" })).toBeInTheDocument();
+    expect(screen.getByRole("banner")).not.toHaveTextContent("Create account");
+  });
+});

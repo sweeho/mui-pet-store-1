@@ -15,6 +15,13 @@
       "when": 1794958283302,
       "tag": "0001_free_boom_boom",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1794963281576,
+      "tag": "0002_daily_donald_blake",
+      "breakpoints": true
     }
   ]
 }
