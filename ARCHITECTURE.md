@@ -105,6 +105,11 @@ land on a page inside the shell (`/admin/inventory` lands on `/admin/login`).
   `message_outbox`. Checkout and the admin Commit route both go through it. Each supplier
   purchase order it records is handed to fulfilment (`src/fulfilment/`), which ships what stock
   allows and records invoices and completed orders in the outbox for notifications.
+- **Outbound e-mail**: order notifications (`src/notifications/`) send through an injected mail
+  transport. The three order e-mail switches (`NOTIFY_STATUS_CHANGE`, `NOTIFY_INVOICE`,
+  `NOTIFY_COMPLETED`) and the sender (`MAIL_FROM`) are deployment settings, all off by default.
+  No mail server is configured yet, so a send is logged and dropped. The approval and fulfilment
+  dispatchers notify after they write the outbox, so a mail failure never reaches an order.
 - **Supplier endpoint**: `POST /api/supplier/purchase-orders` accepts a SupplierOrder XML document
   and `GET /api/supplier/purchase-orders/{id}` reports its status. Neither requires a sign-in, as
   the spec of record states; whether that stays is open for the Business Owner.
@@ -177,3 +182,8 @@ does.
   approval tables otherwise. Rationale: the legacy supplier and order centre were separate
   systems, and the locked suites test each one on its own tables. Authored in change
   `swhm2-i-0007-order-fulfilment-and-invoic` (design.md, P3, P6).
+- **Notifications are best-effort and never fail an order.** A mail is sent once, after the change
+  behind it is saved. A failed send is logged and dropped, never retried, and never raised to
+  the caller. Rationale: the spec of record drops undeliverable mail, and every order-handling
+  capability calls the notifier. Authored in change `swhm2-i-0008-order-notifications`
+  (design.md, P4, P8).
