@@ -51,6 +51,12 @@ The schema is `src/db/schema.ts`; migrations are generated into `drizzle/`.
   exists before sign-on and survives it. A cart idle for 15 minutes reads as empty. Rules live in
   `src/cart/`; behaviour: `openspec/specs/shopping-cart/` once change `swhm2-i-0004-shopping-cart`
   is archived.
+- **Orders**: `checkout_order` holds one row per placed order: id, user, e-mail, date, locale,
+  total, the ship-to and bill-to contacts as snapshots, and the card the order carries;
+  `checkout_order_line` holds its lines and goes with it on delete. The card the customer typed is
+  kept separately in `payment_card`. `sequence` holds named counters; order ids are the sequence
+  name followed by its count. Behaviour: `openspec/specs/checkout-and-payment/` once change
+  `swhm2-i-0005-checkout-and-payment-detail` is archived.
 - **Demo users**: the template's `users` table. Customers do not use it; it stays only for the
   template's `/api/users` routes.
 
@@ -108,6 +114,14 @@ does.
   in-memory object; storage only loads and saves it in `shopping_cart`, keyed by its own cookie,
   independent of `web_session`. Rationale: anonymous shoppers have no session row, and checkout
   reads the same model. Authored in change `swhm2-i-0004-shopping-cart` (design.md, P1–P3).
+- **An order is a snapshot.** `checkout_order` copies contact, addresses and card into its own
+  row, with no foreign keys into `address`, `contact` or `credit_card`. Rationale: a later edit
+  to a customer never rewrites a placed order, and approval, fulfilment and notifications read
+  one row. Authored in change `swhm2-i-0005-checkout-and-payment-detail` (design.md, P2).
+- **Each acceptance test file has its own database.** The acceptance Jest run copies the prepared
+  database per test file. Rationale: locked suites reset shared tables and cannot be edited, so
+  isolation must come from the runner. Authored in change
+  `swhm2-i-0005-checkout-and-payment-detail` (design.md, P10).
 - **Address and card storage belong to checkout.** `src/checkout/store.ts` owns `address` and
   `credit_card`, and customer-accounts calls it. Rationale: both locked suites fix those
   functions there, and checkout extends them. Authored in change
