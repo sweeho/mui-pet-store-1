@@ -1,4 +1,4 @@
-import type { Exec } from "./types";
+import type { Exec } from "./store";
 
 export const REMEMBER_COOKIE = "remember_user";
 export const IDLE_LIMIT_MS = 15 * 60_000;

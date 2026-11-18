@@ -1,4 +1,4 @@
-import type { Exec } from "@/accounts/types";
+import type { Exec } from "@/accounts/store";
 
 export type AddressInput = {
   street1: string;

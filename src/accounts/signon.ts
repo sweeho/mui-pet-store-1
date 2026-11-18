@@ -1,4 +1,4 @@
-import type { Exec } from "./types";
+import type { Exec } from "./store";
 
 /** True when the user name exists and the password equals the stored one exactly. */
 export async function authenticate(

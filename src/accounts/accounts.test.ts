@@ -7,6 +7,7 @@ import { registerUser } from "@/accounts/registration";
 import { createCart, createSession, signOn, touchSession } from "@/accounts/session";
 import { authenticate } from "@/accounts/signon";
 import {
+  type Db,
   getAccount,
   getProfile,
   storeAccount,
@@ -16,16 +17,42 @@ import {
   storeSignOn,
 } from "@/accounts/store";
 import { sql } from "drizzle-orm";
-import {
-  ADDRESS,
-  CARD,
-  ERROR_PAGE,
-  PERSON,
-  REMEMBER_COOKIE,
-  type Db,
-  count,
-  resetData,
-} from "./test-helpers";
+
+const REMEMBER_COOKIE = "remember_user";
+const ERROR_PAGE = "/accounts/create-error";
+
+const TABLES = ["customer", "account", "profile", "contact", "sign_on", "credit_card", "address"];
+
+/** Empty the account tables (a table that does not exist yet is skipped). */
+async function resetData(db: Db): Promise<void> {
+  for (const t of TABLES) {
+    try {
+      await db.run(sql.raw(`DELETE FROM ${t}`));
+    } catch {
+      // not migrated yet
+    }
+  }
+}
+
+async function count(db: Db, table: string): Promise<number> {
+  const rows = (await db.all(sql.raw(`SELECT COUNT(*) AS n FROM ${table}`))) as { n: number }[];
+  return Number(rows[0].n);
+}
+
+const ADDRESS = {
+  street1: "1 Main St",
+  city: "Springfield",
+  state: "CA",
+  zip: "90000",
+  country: "US",
+};
+const CARD = { cardNumber: "4111111111111111", cardType: "Visa", expiryDate: "04/2008" };
+const PERSON = {
+  familyName: "Lee",
+  givenName: "Ann",
+  telephone: "555-0100",
+  email: "ann@example.com",
+};
 
 let db: Db;
 

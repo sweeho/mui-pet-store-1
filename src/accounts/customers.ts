@@ -1,4 +1,4 @@
-import type { Preferences, ContactInput, CardDetails, Db, Exec } from "./types";
+import type { Preferences, ContactInput, CardDetails, Db, Exec } from "./store";
 
 export type CustomerInput = {
   userId: string;

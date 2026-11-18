@@ -1,5 +1,5 @@
 import type { ProfileSubmission } from "./profile";
-import type { Db } from "./types";
+import type { Db } from "./store";
 
 export const CREATE_ERROR_PAGE = "/accounts/create-error";
 
