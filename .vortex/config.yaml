@@ -103,7 +103,6 @@ testEvidence:
       "jest.config.mjs",
       "jest.acceptance.config.mjs",
       "jest.setup.ts",
-      "next.config.ts",
       "playwright.config.ts",
       "playwright.acceptance.config.ts",
       "stryker.config.json",
