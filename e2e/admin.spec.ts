@@ -10,6 +10,8 @@ async function signIn(page: Page, password = "j2ee"): Promise<void> {
   await page.getByLabel(/^user id$/i).fill("j2ee");
   await page.getByLabel(/^password$/i).fill(password);
   await page.getByRole("button", { name: "Sign in" }).click();
+  // Wait for the sign-in to finish: a goto now would abort the POST before the cookie is set.
+  await expect(page).toHaveURL(password === "j2ee" ? /\/admin$/ : /\/admin\/login\/error$/);
 }
 
 test("[SWHM2-C-0234] a wrong password shows the error page, which links back to sign-in", async ({
