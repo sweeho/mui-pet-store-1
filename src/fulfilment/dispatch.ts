@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm";
 
-import { decodeXml, xmlText } from "./documents";
+import { xmlText } from "./documents";
 import type { FulfilEnv } from "./env";
 import { receiveSupplierOrder } from "./fulfilment";
 
@@ -37,7 +37,7 @@ export async function dispatchFulfilment(env: FulfilEnv, origin = "auto"): Promi
     }
   }
   for (const xml of env.invoiceQueue?.splice(0) ?? []) {
-    await record(env, origin, QUEUES.invoice, decodeXml(xmlText(xml, "OrderId") ?? ""), xml);
+    await record(env, origin, QUEUES.invoice, xmlText(xml, "OrderId") ?? "", xml);
   }
   for (const orderId of env.completedOrderQueue.splice(0)) {
     await record(env, origin, QUEUES.completed, orderId, orderId);

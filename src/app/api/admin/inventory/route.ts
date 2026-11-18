@@ -28,7 +28,12 @@ export async function POST(request: Request): Promise<Response> {
     });
   }
   const env = newFulfilEnv(await getDb());
-  const { applied } = await updateInventory(env, changes);
-  await dispatchFulfilment(env, "admin");
+  let applied: number;
+  try {
+    ({ applied } = await updateInventory(env, changes));
+  } finally {
+    // Record what the orders that did ship produced, even if a later order failed.
+    await dispatchFulfilment(env, "admin");
+  }
   return seeOther(`/admin/inventory?updated=${applied}`);
 }

@@ -2,7 +2,7 @@ import { sql } from "drizzle-orm";
 
 import { recordOrderStatus } from "@/approval/orders";
 
-import { decodeXml, xmlText, type LineItem, type LineRow, type Shipping } from "./documents";
+import { xmlText, type LineItem, type LineRow, type Shipping } from "./documents";
 import { inTransaction, type FulfilEnv, type TxEnv } from "./env";
 
 // The five statuses of a supplier order (design.md P3, SD1). Approval keeps its own four-value set.
@@ -321,7 +321,7 @@ export function parseSupplierOrderMessage(
   }
   if (lines.length === 0) throw new Error("the order has no line item");
   return {
-    orderId: decodeXml(orderId),
+    orderId,
     date: parseDate(xmlText(xml, "OrderDate"), options.now ?? (() => new Date())),
     shipping: {
       name: xmlText(info, "Name") ?? "",

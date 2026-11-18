@@ -25,10 +25,12 @@ async function shipLine(env: TxEnv, orderId: string, lineNum: number): Promise<b
   )) as LineSql[];
   if (rows.length === 0) throw new Error(`order ${orderId} has no line ${lineNum}`);
   const line = rows[0];
-  if (Number(line.quantity_shipped) >= Number(line.quantity)) return false;
+  // Only what an earlier invoice has not shipped is taken from stock.
+  const remaining = Number(line.quantity) - Number(line.quantity_shipped);
+  if (remaining <= 0) return false;
   const taken = await env.db.all(
-    sql`UPDATE inventory SET quantity = quantity - ${line.quantity}
-        WHERE item_id = ${line.item_id} AND quantity >= ${line.quantity} RETURNING item_id`,
+    sql`UPDATE inventory SET quantity = quantity - ${remaining}
+        WHERE item_id = ${line.item_id} AND quantity >= ${remaining} RETURNING item_id`,
   );
   if (taken.length === 0) return false;
   await env.db.run(
@@ -67,6 +69,10 @@ export async function processOrder(
   orderId: string,
 ): Promise<{ invoice: string | null; status: string }> {
   const order = await getSupplierOrder(env, orderId);
+  // Only an order still waiting to ship is processed; a DENIED or COMPLETED one is left alone.
+  if (!["PENDING", "APPROVED", "SHIPPED_PART"].includes(order.status)) {
+    return { invoice: null, status: order.status };
+  }
   try {
     const run = await inTransaction(env, async (tx) => {
       const shipped: LineItem[] = [];
@@ -75,7 +81,9 @@ export async function processOrder(
           (x) => x.lineNum === l.lineNum,
         );
         if (current && current.quantityShipped < current.quantity) {
-          if (await shipLine(tx, orderId, l.lineNum)) shipped.push(current);
+          if (await shipLine(tx, orderId, l.lineNum)) {
+            shipped.push({ ...current, quantity: current.quantity - current.quantityShipped });
+          }
         }
       }
       let invoice: string | null = null;
@@ -92,18 +100,18 @@ export async function processOrder(
           lines: shipped,
         });
       }
-      let status = order.status;
+      let status = (await getSupplierOrder(tx, orderId)).status;
+      let completedNow = false;
       if ((await unshippedCount(tx, orderId)) === 0 && status !== "COMPLETED") {
         await setSupplierStatus(tx, orderId, "COMPLETED");
         status = "COMPLETED";
+        completedNow = true;
       }
-      return { invoice, status };
+      return { invoice, status, completedNow };
     });
     if (run.invoice !== null) env.invoiceQueue?.push(run.invoice);
-    if (run.status === "COMPLETED" && order.status !== "COMPLETED") {
-      env.completedOrderQueue.push(orderId);
-    }
-    return run;
+    if (run.completedNow) env.completedOrderQueue.push(orderId);
+    return { invoice: run.invoice, status: run.status };
   } catch (e) {
     if (e instanceof InvoiceFailure) return { invoice: null, status: order.status };
     throw e;

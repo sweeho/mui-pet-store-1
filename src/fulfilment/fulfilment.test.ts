@@ -148,4 +148,15 @@ describe("fulfilment", () => {
     expect(await stockOf(t.db, "EST-1")).toBe(3);
     expect(await stockOf(t.db, "EST-2")).toBe(2);
   });
+
+  it("takes only the unshipped remainder from stock after a partial invoice", async () => {
+    await seedOrder("S1", [line(1, "EST-1", 10)]);
+    await setStock(t.db, "EST-1", 4);
+    await processInvoice(t.env, { orderId: "S1", lines: [{ lineNum: 1, shipped: 6 }] });
+    expect((await getSupplierOrder(t.env, "S1")).status).toBe("SHIPPED_PART");
+    const { invoice } = await processOrder(t.env, "S1");
+    expect(await stockOf(t.db, "EST-1")).toBe(0);
+    expect(invoice).toContain("<Quantity>4</Quantity>");
+    expect((await getSupplierOrder(t.env, "S1")).status).toBe("COMPLETED");
+  });
 });
